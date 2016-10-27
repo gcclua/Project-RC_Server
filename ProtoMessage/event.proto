@@ -1,0 +1,382 @@
+//start import 开始到结束部分为为自动生成 
+
+//end import
+
+
+
+message UserLogin_Req {
+	required int32 siteid = 1;
+	required string platform_id = 2;
+	required string name = 3;
+	required string profile_link = 4;
+	required int32 gender = 5;
+	required bool is_yellow_dmd = 6;
+	required bool is_yellow_dmd_year = 7;
+	required int32 yellow_dmd_lv = 8;
+	repeated string friends_platid = 9; // plat_id
+	required int32 webfd = 10;
+	required string sid = 11;
+	optional int32 mydb_ret   = 12[default = 0];	//读取老用户的返回值，返回值： 0:无此用户 1：查找成功 -1：读取错误
+	optional int32 mydb_oldid = 13[default = 0];
+}
+
+
+message UserLogin_Rsp {
+	required int64 uid = 1;
+	required string secret = 2;
+	required string server = 3;
+	required int32 port = 4;
+	required int32 port1 = 5;
+	required int32 webfd = 6;
+	required string sid =7;
+} 
+
+message SendGift{
+	 required int64 uid = 1; 
+	 repeated string friends_platid = 2; 
+	 required string sid = 3; 
+	 required int32 fd = 4; 
+	 optional bool  succ  = 5;
+}
+
+message SendGiftToPlatid{
+	 required int64 uid = 1; 
+	 required string platid = 2;           
+}  
+
+message WG_UserLeave {
+	required int32 fd = 1;
+}
+
+message WorkingStatus_Req {
+	required int32 gid = 1;
+	required bool finish = 2;
+}
+
+message UserAuth_Req {
+	required int64 uid = 1;
+	required int64 secret = 2;
+	required int32 sockfd = 3;
+}
+
+message UserAuth_Rsp {
+	required bool pass = 1;
+}
+
+message SendRemoteUser_Req {
+	required int64 uid = 1;
+	required int32 cmd = 2;
+	required string text = 3;
+}
+
+message ForwardInfo
+{
+    optional int64 uid = 1     [default = -1];
+    optional string platid = 2 [default = "0"];
+}
+
+message GWG_CheckAttack
+{
+    optional int64 attackID = 1     [default = -1];
+    optional int64 recoveryID = 2     [default = -1];
+  	optional bool  isattacked = 3 	[default = true];	    
+}
+
+message Admin_Profile_Req {
+		required int32 cmd = 1;
+}
+     
+message Admin_AddExp_Req {
+		required int64 uid =1;
+		required int32 exp = 2;
+		required int32 gid = 3 [default = 0];
+		required int32 adminfd = 4;
+		optional string sid = 5;
+		optional bool fromweb = 6 [default = false];
+}
+
+message Admin_AddExp_Rsp {
+		required int64 uid =1;
+		required int32 oldlevel = 2;
+		required int32 oldexp = 3;
+		required int32 newlevel = 4;
+		required int32 newexp = 5;
+		required int32 gid = 6;
+		required int32 adminfd = 7;
+		optional string sid = 8 ;
+		optional bool fromweb = 9 [default = false];
+}
+
+message Admin_CanAttack_Req {
+		required int64 uid =1;
+		optional string platid = 2;
+		required int32 gid = 4 [default = 0];
+		required int32 adminfd = 5;
+		optional string sid = 6 ;
+		optional bool fromweb = 7 [default = false];
+}
+
+message Admin_CanAttack_Rsp {
+		required int64 uid =1;
+		optional string platid = 2;		
+		required int32 gid = 5;
+		required int32 adminfd = 6;
+		optional string sid = 7 ;
+		optional bool fromweb = 8 [default = false];
+}
+
+message Admin_AddCredit_Req {
+		required int64 uid =1;
+		optional string platid = 2;
+		required int32 credit = 3;
+		required int32 gid = 4 [default = 0];
+		required int32 adminfd = 5;
+		required int32   type = 6[default = 0];	//0：管理员加勋章，1：web购买勋章	
+		optional string sid = 7 ;
+		optional bool   fromweb = 9 [default = false];
+}
+
+message Admin_AddCredit_Rsp {
+		required int64 uid =1;
+		optional string platid = 2;		
+		required int64 oldcredit = 3;
+		required int64 newcredit = 4;
+		required int32 gid = 5;
+		required int32 adminfd = 6;
+		required int32   type = 7[default = 0];	//0：管理员加勋章，1：web购买勋章	
+		optional string  sid = 8;
+		optional bool    fromweb = 9 [default = false];
+}
+
+
+message Admin_AdminOpt_Req {
+		required int64 uid 			= 1;
+		optional int32 optType 	= 2;	//操作类型
+		optional string admin 	= 3;	//操作类型
+		optional int64 res1 		= 4;
+		optional int64 res2   	= 5;	
+		optional int32 count 		= 6[default = 0];
+		optional int32 armytype = 7[default = 0];
+		optional int32 bldtype 	= 8[default = 0];
+		optional int32 bldid 		= 9[default = 0];
+		optional int32 level 		= 10[default = 0];	//0：管理员加勋章，1：web购买勋章	
+		optional int32 npcid 		= 11 ;
+		optional int32 gid 			= 12 [default = 0];
+		optional int32 adminfd  =	13;
+		optional string sid 		= 14 ;
+		optional bool   fromweb = 15 [default = false];
+}
+
+message Admin_AdminOpt_Rsp {
+		required int64 uid 		= 1;
+		optional int32 optType= 2;	//操作类型
+		optional string admin = 3;	//操作类型
+		optional int32 level 	= 4;
+		optional int64 res1 	= 5;
+		optional int64 res2   = 6;
+		optional int64 credit = 7;
+		optional bool  succ		= 8;
+		optional int32 gid 	  = 9 [default = 0];
+		optional int32 adminfd= 10;
+		optional string sid   = 11;
+		optional bool fromweb = 12 [default = false];
+}
+
+message Admin_SetLevel_Req {
+		required int64 uid =1;
+		required int32 level = 2;
+		required int32 gid = 3 [default = 0];
+		required int32 adminfd = 4;
+		optional string sid = 5;
+		optional bool fromweb = 6 [default = false];
+}
+
+message Admin_SetLevel_Rsp {
+		required int64 uid =1;
+		required int32 oldlevel = 2;
+		required int32 newlevel = 3;
+		required int32 gid = 4;
+		required int32 adminfd = 5;
+		optional string sid = 6 ;
+		optional bool fromweb = 7 [default = false];
+}
+
+message Admin_BanChat_Req {
+		required int64 uid = 1;
+		required bool  isban = 2;
+		required int32 time = 3;
+		required int32 gid = 4 [default = 0];
+		required int32 adminfd = 5;
+		optional string sid = 6 ;
+		optional bool fromweb = 7 [default = false];
+}
+
+message Admin_BanChat_Rsp {
+		required int64 uid = 1;
+		required bool  isban = 2;
+		required int32 time = 3;
+		required int32 gid = 4;
+		required int32 adminfd = 5;
+		optional string sid = 6 ;
+		optional bool fromweb = 7 [default = false];
+}
+
+message Admin_BanLogin_Req {
+		required int64 uid = 1;
+		required bool  isban = 2;
+		required int32 time = 3;
+		required int32 gid = 4 [default = 0];
+		required int32 adminfd = 5;
+		optional string sid = 6;
+		optional bool fromweb = 7 [default = false];
+}
+
+message Admin_BanLogin_Rsp {
+		required int64 uid = 1;
+		required bool  isban = 2;
+		required int32 time = 3;
+		required int32 gid = 4;
+		required int32 adminfd = 5;
+		optional string sid = 6;
+		optional bool fromweb = 7 [default = false];
+}
+
+message Admin_Reload_Req {
+		required int32 gid = 1 [default = 0];
+		required int32 adminfd = 2;
+		optional string sid = 3;
+		optional bool fromweb = 4 [default = false];
+}
+
+message Admin_Reload_Rsp {
+		required int32 gid = 1;
+		required int32 adminfd = 2;
+		optional string sid = 3;
+		optional bool fromweb = 4 [default = false];
+}
+
+message Admin_BandWGUser_Req {
+		required int32 gid = 1 [default = 0];
+		required int32 adminfd = 2;
+		optional string sid = 3;
+		optional bool fromweb = 4 [default = false];
+		optional int32 banduser = 5[default = 20];
+}
+
+message Admin_BandWGUser_Rsp {
+		required int32 gid = 1;
+		required int32 adminfd = 2;
+		optional string sid = 3;
+		optional bool fromweb = 4 [default = false];
+		optional int32 banduser = 5[default = 20];
+}
+
+message InviteFriend
+{
+    optional string invitePlatID       = 1;
+    optional string invitedPlatID      = 2;
+    optional int64	invitedUid	    	 = 3;
+    optional string invitedName    		 = 4;
+    optional string sid             	 = 5;
+    optional int32  fd              	 = 6;
+}
+
+message PhotoNum{
+	 required int64 uid = 1; 
+	 required int32  type   = 2;
+	 required string sid = 3; 
+	 required int32 fd = 4; 
+	 optional int32 value = 5;
+}
+
+message Msg_StarUser
+{
+	required int32     		level            = 1 [default = 0] ;
+	optional int32        type             = 2 [default = 0];
+}
+
+message callbackFriend{
+	 required int64 uid = 1; 
+	 repeated string friends_platid = 2; 
+	 required string sid = 3; 
+	 required int32 fd = 4; 
+	 optional bool  succ  = 5;
+}
+
+message callbackFriendToPlatid{
+	 required int64 uid = 1; 
+	 required string platid = 2;           
+}
+
+message Admin_AddHonor_Req {
+		required int64 uid =1;
+		required int64 honor = 2;
+		required int32 gid = 3 [default = 0];
+		required int32 adminfd = 4;
+		optional string sid = 5;
+		optional bool   fromweb = 6 [default = false];
+}
+
+message Admin_AddHonor_Rsp {
+		required int64 uid =1;	
+		required int64 oldhonor = 2;
+		required int64 newhonor = 3;
+		required int32 gid = 4;
+		required int32 adminfd = 5;
+		optional string  sid = 6;
+		optional bool    fromweb = 7 [default = false];
+}
+
+//该文件中event数据结构手写的部分，必须在*****start Event auto*******的上面，否则将被覆盖掉！！！
+message Event {
+	required int32 cmd = 1;
+	required int32 state = 2;
+	required int64 time = 3;
+	optional int64 uid = 4;
+	optional int32 fromworld_fd = 5;	
+	optional WorkingStatus_Req workingStatus_req = 6;
+	optional UserLogin_Req userLogin_req = 7;
+	optional UserLogin_Rsp userLogin_rsp = 8;
+	optional UserAuth_Req userAuth_req = 9;
+	optional UserAuth_Rsp userAuth_rsp = 10;
+	optional SendRemoteUser_Req sendRemoteUser_req = 11;
+	optional WG_UserLeave wg_UserLeave = 12;
+	optional ForwardInfo        forwardinfo = 14;
+	optional int32 starSrvID  = 15;	//该项记录卫星服务器ID，而不是socketID
+	optional GWG_CheckAttack checkAttack = 17;
+	optional int32 transferSrvID  = 18;	//该项记录老用户数据转换服务器ID，而不是socketID
+	
+	optional Admin_Profile_Req adminProfile_req = 32;
+	optional Admin_AddExp_Req adminAddExp_req = 33;
+	optional Admin_AddExp_Rsp adminAddExp_rsp = 34;
+	optional Admin_AddCredit_Req adminAddCredit_req = 35;
+	optional Admin_AddCredit_Rsp adminAddCredit_rsp = 36;
+	optional Admin_SetLevel_Req adminSetLevel_req = 37;
+	optional Admin_SetLevel_Rsp adminSetLevel_rsp = 38;
+  optional Admin_BanChat_Req adminBanChat_req = 39;
+  optional Admin_BanChat_Rsp adminBanChat_rsp = 40;
+  optional Admin_BanLogin_Req adminBanLogin_req = 41;
+  optional Admin_BanLogin_Rsp adminBanLogin_rsp = 42;
+	optional Admin_Reload_Req adminReload_req = 43;
+	optional Admin_Reload_Rsp adminReload_rsp = 44;
+	optional InviteFriend inviteFriend = 45;
+	optional Admin_CanAttack_Req adminCanAttack_req = 46;
+	optional Admin_CanAttack_Rsp adminCanAttack_rsp = 47;   
+	optional SendGift            sendgift = 48; 
+	optional SendGiftToPlatid    sendgiftplatid = 49;
+	optional Admin_BandWGUser_Req adminbandwguser_req = 50;
+	optional Admin_BandWGUser_Rsp adminbandwguser_rsp = 51;
+	optional Admin_AdminOpt_Req	adminOpt_req = 52;
+	optional Admin_AdminOpt_Rsp adminOpt_rsp = 53;
+	optional PhotoNum           webphotonum  = 54;
+	optional callbackFriend     callbackfriend = 55;
+	optional callbackFriendToPlatid	callbackfriendtoplatid = 56;
+	optional Admin_AddHonor_Req adminaddhonor_req = 57;
+	optional Admin_AddHonor_Rsp adminaddhonor_rsp = 58;
+	optional Msg_StarUser starUser = 100;	//卫星信息
+	
+	
+	//auto start key = 200,500; //注：key的值必须填写，系统会根据key的值自动+1,逗号前面为Sce起始key，后面为Sse起始key
+	//start Event auto 从start开始自动生成，
+	
+}

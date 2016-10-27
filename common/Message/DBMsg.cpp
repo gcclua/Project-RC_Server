@@ -1,0 +1,16 @@
+#include "DBMsg.h"
+
+MESSAGE_IMPL(DBAssignTaskMsg)
+MESSAGE_IMPL(DBCheckConnectMsg)
+MESSAGE_IMPL(DBLoadUserMsg)
+MESSAGE_IMPL(DBRetLoadUserMsg)
+MESSAGE_IMPL(DBSaveUserMsg)
+MESSAGE_IMPL(DBRetSaveUserMsg)
+MESSAGE_IMPL(DBCreateCharMsg)
+MESSAGE_IMPL(DBRetCreateCharMsg)
+MESSAGE_IMPL(DBOpRetMsg)
+MESSAGE_IMPL(DBReqLoadTileDataMsg)
+MESSAGE_IMPL(DBRetLoadTileDataMsg)
+MESSAGE_IMPL(DBReqSaveTileDataMsg)
+MESSAGE_IMPL(DBRetSaveTileDataMsg)
+MESSAGE_IMPL(DBReqSaveCityDataMsg)

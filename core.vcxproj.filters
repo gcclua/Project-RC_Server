@@ -1,0 +1,840 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Source Files\json">
+      <UniqueIdentifier>{5fcaf1cf-1147-42e4-9727-c6df4a4196ed}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\event_auto">
+      <UniqueIdentifier>{6c859f61-0bfe-4039-9eed-63ba359ce94b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\event">
+      <UniqueIdentifier>{feb2fc26-0a2f-4733-9221-30a12d71decb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\log">
+      <UniqueIdentifier>{02a32e9b-16d3-4128-ae20-bf5a9179204f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\net">
+      <UniqueIdentifier>{d1ad5085-b2ca-46c9-ba54-3163096cb7dc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\util">
+      <UniqueIdentifier>{0af2924e-13f7-41bb-9637-c6f16601cca8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\xml">
+      <UniqueIdentifier>{6e21a591-c7b4-487f-824e-96714912860e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DBStruct">
+      <UniqueIdentifier>{6b28caa4-6699-4092-ae23-b16b4accc58a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\database">
+      <UniqueIdentifier>{288aae58-33c5-4659-a2d1-13601e859609}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Service">
+      <UniqueIdentifier>{63e81190-0192-463f-a46c-1b055653e502}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Message">
+      <UniqueIdentifier>{378ffc16-f795-4a2e-9f04-11082812714d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\packet">
+      <UniqueIdentifier>{f3be16da-00bd-4a74-a42a-972884181077}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\common">
+      <UniqueIdentifier>{164f1727-8763-452c-97d1-1a4b3b3733c1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\worldmap">
+      <UniqueIdentifier>{82d1f29d-52a0-4ca4-bd0f-d69ae7ac4fd1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\city">
+      <UniqueIdentifier>{d05c2ef7-28ea-400d-88a2-0fbf6347e2b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\user">
+      <UniqueIdentifier>{e9d79086-2703-4970-bf0f-a74dafe63b54}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\building">
+      <UniqueIdentifier>{c4ec057b-3ca3-4533-b657-c15373ebdd4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\troop">
+      <UniqueIdentifier>{710a8eb4-a060-47ad-bdbf-6fbc155c6c15}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\hero">
+      <UniqueIdentifier>{6fd6bafa-97dd-4bd0-a870-ae48e69058dd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\skill">
+      <UniqueIdentifier>{48837974-aa05-4f48-958e-44b3ae29869b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\scene">
+      <UniqueIdentifier>{3054ff93-cb88-43b9-b1a5-1dbbb26f16bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\combat">
+      <UniqueIdentifier>{fc6aaf9b-fb18-443b-aefe-d592180a2ac6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\impact">
+      <UniqueIdentifier>{a04ecb9c-a8c0-4689-a23d-e1cc6f8d73bf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\chat">
+      <UniqueIdentifier>{471f74c0-00b9-43dd-b884-e263aa007322}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\loadspeaker">
+      <UniqueIdentifier>{afb093f2-a8d3-4669-b1c0-4bda0369bb88}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\table">
+      <UniqueIdentifier>{c16bdf01-3685-430f-bc43-1cb83db233bc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\march">
+      <UniqueIdentifier>{60f88656-ecc4-49ff-9596-0acd26a591b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\packet\Packet">
+      <UniqueIdentifier>{0e9e65ad-bc1a-4ddc-9286-b709d7bdc232}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\packet\PacketHandler">
+      <UniqueIdentifier>{e3da44e2-49fa-4e5b-8126-8a2d39fce1b2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\serverPlayer">
+      <UniqueIdentifier>{f86f4af0-a09c-4a96-ad09-adecfd5b0ca5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\DictionaryFormat">
+      <UniqueIdentifier>{66d95565-7e68-48d7-9926-5853665dc514}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="common\json\autolink.h">
+      <Filter>Source Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="common\json\config.h">
+      <Filter>Source Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="common\json\features.h">
+      <Filter>Source Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="common\json\forwards.h">
+      <Filter>Source Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="common\json-util.h">
+      <Filter>Source Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="common\json\json.h">
+      <Filter>Source Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="common\json\json_batchallocator.h">
+      <Filter>Source Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="common\json\reader.h">
+      <Filter>Source Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="common\json\value.h">
+      <Filter>Source Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="common\json\writer.h">
+      <Filter>Source Files\json</Filter>
+    </ClInclude>
+    <ClInclude Include="event\EventDefine.h">
+      <Filter>Source Files\event</Filter>
+    </ClInclude>
+    <ClInclude Include="net\NetCache.h">
+      <Filter>Source Files\net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\NetHandler.h">
+      <Filter>Source Files\net</Filter>
+    </ClInclude>
+    <ClInclude Include="net\ProtocolHandler.h">
+      <Filter>Source Files\net</Filter>
+    </ClInclude>
+    <ClInclude Include="common\coredump.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\distribution.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Ini.h">
+      <Filter>Source Files\util</Filter>
+    </ClInclude>
+    <ClInclude Include="common\xml\tinystr.h">
+      <Filter>Source Files\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="common\xml\tinyxml.h">
+      <Filter>Source Files\xml</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DataBase\SqlTemplate.h">
+      <Filter>Source Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DataBase\ODBCBase.h">
+      <Filter>Source Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DataBase\ODBCInterface.h">
+      <Filter>Source Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_User.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DataBase\LibMemInterface.h">
+      <Filter>Source Files\database</Filter>
+    </ClInclude>
+    <ClInclude Include="common\service\BaseService.h">
+      <Filter>Source Files\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="common\service\Message.h">
+      <Filter>Source Files\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="common\service\Service.h">
+      <Filter>Source Files\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="common\service\Invoker.h">
+      <Filter>Source Files\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="common\service\TimeInfo.h">
+      <Filter>Source Files\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="common\service\ServiceDefine.h">
+      <Filter>Source Files\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="common\service\ServiceCell.h">
+      <Filter>Source Files\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="common\service\ServiceManager.h">
+      <Filter>Source Files\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Message\DBMsg.h">
+      <Filter>Source Files\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="common\service\MessageOp.h">
+      <Filter>Source Files\Service</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Message\LoginMsg.h">
+      <Filter>Source Files\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\Base.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\BaseLib.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\BaseType.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\BaseUtility.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\Clock.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\Exception.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\Misc.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\Pool.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\ServerConfig.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\string-util.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\SysLog.h">
+      <Filter>Source Files\log</Filter>
+    </ClInclude>
+    <ClInclude Include="common\SysLogNet.h">
+      <Filter>Source Files\log</Filter>
+    </ClInclude>
+    <ClInclude Include="common\worldmap\GameDefine_WorldMap.h">
+      <Filter>Source Files\worldmap</Filter>
+    </ClInclude>
+    <ClInclude Include="common\worldmap\GameStruct_WorldMap.h">
+      <Filter>Source Files\worldmap</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_WordMap.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\city\GameDefine_City.h">
+      <Filter>Source Files\city</Filter>
+    </ClInclude>
+    <ClInclude Include="common\city\GameStruct_City.h">
+      <Filter>Source Files\city</Filter>
+    </ClInclude>
+    <ClInclude Include="common\user\GameDefine_User.h">
+      <Filter>Source Files\user</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_City.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\building\GameDefine_Building.h">
+      <Filter>Source Files\building</Filter>
+    </ClInclude>
+    <ClInclude Include="common\building\GameStruct_Building.h">
+      <Filter>Source Files\building</Filter>
+    </ClInclude>
+    <ClInclude Include="common\troop\GameDefine_Troop.h">
+      <Filter>Source Files\troop</Filter>
+    </ClInclude>
+    <ClInclude Include="common\troop\GameStruct_Troop.h">
+      <Filter>Source Files\troop</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_Troop.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\hero\GameDefine_Hero.h">
+      <Filter>Source Files\hero</Filter>
+    </ClInclude>
+    <ClInclude Include="common\hero\GameStruct_Hero.h">
+      <Filter>Source Files\hero</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_Hero.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\skill\GameDefine_Skill.h">
+      <Filter>Source Files\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="common\skill\GameStruct_Skill.h">
+      <Filter>Source Files\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\FLSeque.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\FLString.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Message\SceneMsg.h">
+      <Filter>Source Files\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_Cooldown.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Scene\GameDefine_Obstacle.h">
+      <Filter>Source Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Scene\GameDefine_Scene.h">
+      <Filter>Source Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Scene\GameInterface_Scene.h">
+      <Filter>Source Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Scene\GameInterface_SceneActivation.h">
+      <Filter>Source Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Scene\GameStruct_Obstacle.h">
+      <Filter>Source Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Scene\GameStruct_Scene.h">
+      <Filter>Source Files\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameDefine_CombatAttr.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameDefine_PK.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameDefine_Threat.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameStruct_CombatAttr.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameStruct_PK.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameStruct_Threat.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\ImpactStruct\GameDefine_Impact.h">
+      <Filter>Source Files\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="common\ImpactStruct\GameStruct_Impact.h">
+      <Filter>Source Files\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_PK.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_Impact.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Message\WorldUserMsg.h">
+      <Filter>Source Files\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Message\ChatMsg.h">
+      <Filter>Source Files\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Chat\GameDefine_Chat.h">
+      <Filter>Source Files\chat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Chat\GameStruct_TextChat.h">
+      <Filter>Source Files\chat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\LoudSpeaker\GameDefine_LoudSpeaker.h">
+      <Filter>Source Files\loadspeaker</Filter>
+    </ClInclude>
+    <ClInclude Include="common\LoudSpeaker\GameStruct_LoudSpeaker.h">
+      <Filter>Source Files\loadspeaker</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_NpcSkillStrategy.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\DBCTable.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_Impact.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_NpcOptionalSkill.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\march\GameDefine_March.h">
+      <Filter>Source Files\march</Filter>
+    </ClInclude>
+    <ClInclude Include="common\march\GameStruct_March.h">
+      <Filter>Source Files\march</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_March.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_CoolDownTime.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SkillBase.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SkillEx.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\Random.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SnareObjBuffInfo.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SnareObjInfo.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\ServerPlayer\ServerPlayer.h">
+      <Filter>Source Files\serverPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="common\ServerPlayer\ServerPlayerDefine.h">
+      <Filter>Source Files\serverPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="common\ServerPlayer\ServerPlayerManager.h">
+      <Filter>Source Files\serverPlayer</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\LibNetwork.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_CONNECTED_HEARTBEAT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_LOGIN_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_REQ_NEAR_LIST_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_CONNECTED_HEARTBEAT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_LOGIN_RET_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_NEAR_MARCHLIST_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\PacketDefine.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\PBMessage.pb.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SceneNpc.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_CHAT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_CHAT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DictionaryFormat\DictionaryFormat.h">
+      <Filter>Source Files\DictionaryFormat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_NOTICE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_NameFilter.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Message\TransportMsg.h">
+      <Filter>Source Files\Message</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_UPDATE_SCENE_INSTACTIVATION_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GS_CONNECTED_HEARTBEAT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\SG_CONNECTED_HEARTBEAT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_CopyScene.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SceneClass.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_MOVE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_STOP_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_MOVE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_TELEMOVE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_CopySceneRule.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_RET_USE_SKILL_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_UPDATE_ANIMATION_STATE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_ATTACKFLY_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_DELETE_OBJ_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_FORCE_SETPOS_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_PLAY_EFFECT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_UPDATE_NEEDIMPACTINFO_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_REMOVEEFFECT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_PatrolPoint.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="common\json\json_internalarray.inl">
+      <Filter>Source Files\json</Filter>
+    </None>
+    <None Include="common\json\json_internalmap.inl">
+      <Filter>Source Files\json</Filter>
+    </None>
+    <None Include="common\json\json_valueiterator.inl">
+      <Filter>Source Files\json</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="common\json\json_reader.cpp">
+      <Filter>Source Files\json</Filter>
+    </ClCompile>
+    <ClCompile Include="common\json\json_value.cpp">
+      <Filter>Source Files\json</Filter>
+    </ClCompile>
+    <ClCompile Include="common\json\json_writer.cpp">
+      <Filter>Source Files\json</Filter>
+    </ClCompile>
+    <ClCompile Include="net\NetCache.cpp">
+      <Filter>Source Files\net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\NetHandler.cpp">
+      <Filter>Source Files\net</Filter>
+    </ClCompile>
+    <ClCompile Include="net\ProtocolHandler.cpp">
+      <Filter>Source Files\net</Filter>
+    </ClCompile>
+    <ClCompile Include="common\coredump.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\distribution.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Ini.cpp">
+      <Filter>Source Files\util</Filter>
+    </ClCompile>
+    <ClCompile Include="common\xml\tinystr.cpp">
+      <Filter>Source Files\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="common\xml\tinyxml.cpp">
+      <Filter>Source Files\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="common\xml\tinyxmlerror.cpp">
+      <Filter>Source Files\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="common\xml\tinyxmlparser.cpp">
+      <Filter>Source Files\xml</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DataBase\SqlTemplate.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DataBase\ODBCBase.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DataBase\ODBCInterface.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_User.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DataBase\LibMemInterface.cpp">
+      <Filter>Source Files\database</Filter>
+    </ClCompile>
+    <ClCompile Include="common\service\BaseService.cpp">
+      <Filter>Source Files\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="common\service\Message.cpp">
+      <Filter>Source Files\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="common\service\Invoker.cpp">
+      <Filter>Source Files\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="common\service\TimeInfo.cpp">
+      <Filter>Source Files\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="common\service\Service.cpp">
+      <Filter>Source Files\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="common\service\ServiceCell.cpp">
+      <Filter>Source Files\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="common\service\ServiceManager.cpp">
+      <Filter>Source Files\Service</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Message\DBMsg.cpp">
+      <Filter>Source Files\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Message\LoginMsg.cpp">
+      <Filter>Source Files\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\BaseLib.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\BaseUtility.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\Clock.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\Exception.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\Misc.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\pool.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\ServerConfig.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\string-util.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\SysLog.cpp">
+      <Filter>Source Files\log</Filter>
+    </ClCompile>
+    <ClCompile Include="common\SysLogNet.cpp">
+      <Filter>Source Files\log</Filter>
+    </ClCompile>
+    <ClCompile Include="common\worldmap\GameStruct_WorldMap.cpp">
+      <Filter>Source Files\worldmap</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_WordMap.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\city\GameStruct_City.cpp">
+      <Filter>Source Files\city</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_City.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\building\GameStruct_Building.cpp">
+      <Filter>Source Files\building</Filter>
+    </ClCompile>
+    <ClCompile Include="common\troop\GameStruct_Troop.cpp">
+      <Filter>Source Files\troop</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_Troop.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\hero\GameStruct_Hero.cpp">
+      <Filter>Source Files\hero</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_Hero.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\skill\GameStruct_Skill.cpp">
+      <Filter>Source Files\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Message\SceneMsg.cpp">
+      <Filter>Source Files\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_Cooldown.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Scene\GameInterface_Scene.cpp">
+      <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Scene\GameInterface_SceneActivation.cpp">
+      <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Scene\GameStruct_Obstacle.cpp">
+      <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Scene\GameStruct_Scene.cpp">
+      <Filter>Source Files\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="common\CombatStruct\GameStruct_CombatAttr.cpp">
+      <Filter>Source Files\combat</Filter>
+    </ClCompile>
+    <ClCompile Include="common\CombatStruct\GameStruct_PK.cpp">
+      <Filter>Source Files\combat</Filter>
+    </ClCompile>
+    <ClCompile Include="common\CombatStruct\GameStruct_Threat.cpp">
+      <Filter>Source Files\combat</Filter>
+    </ClCompile>
+    <ClCompile Include="common\ImpactStruct\GameStruct_Impact.cpp">
+      <Filter>Source Files\impact</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_PK.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_Impact.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Message\WorldUserMsg.cpp">
+      <Filter>Source Files\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Message\ChatMsg.cpp">
+      <Filter>Source Files\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Chat\GameStruct_TextChat.cpp">
+      <Filter>Source Files\chat</Filter>
+    </ClCompile>
+    <ClCompile Include="common\LoudSpeaker\GameStruct_LoudSpeaker.cpp">
+      <Filter>Source Files\loadspeaker</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_NpcSkillStrategy.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\DBCTable.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_Impact.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_NpcOptionalSkill.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\march\GameStruct_March.cpp">
+      <Filter>Source Files\march</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_March.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_CoolDownTime.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SkillBase.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SkillEx.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\Random.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SnareObjBuffInfo.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SnareObjInfo.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\PacketHandler\CG_Common_Handler.cpp">
+      <Filter>Source Files\packet\PacketHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\PacketHandler\GC_Common_Handler.cpp">
+      <Filter>Source Files\packet\PacketHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="common\ServerPlayer\ServerPlayer.cpp">
+      <Filter>Source Files\serverPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="common\ServerPlayer\ServerPlayerDefine.cpp">
+      <Filter>Source Files\serverPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="common\ServerPlayer\ServerPlayerManager.cpp">
+      <Filter>Source Files\serverPlayer</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\LibNetwork.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\Packet\CG_Common_PAK.cpp">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\Packet\GC_Common_PAK.cpp">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\Packet\PacketDefine.cpp">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\Packet\PacketFactoryManager.cpp">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\Packet\PBMessage.pb.cc">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SceneNpc.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DictionaryFormat\DictionaryFormat.cpp">
+      <Filter>Source Files\DictionaryFormat</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_NameFilter.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Message\TransportMsg.cpp">
+      <Filter>Source Files\Message</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\Packet\GS_Common_PAK.cpp">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\Packet\SG_Common_PAK.cpp">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\PacketHandler\GS_Common_Handler.cpp">
+      <Filter>Source Files\packet\PacketHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="common\packet\PacketHandler\SG_Common_Handler.cpp">
+      <Filter>Source Files\packet\PacketHandler</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_CopyScene.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SceneClass.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_CopySceneRule.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_PatrolPoint.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

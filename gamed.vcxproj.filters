@@ -1,0 +1,501 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Source Files\event_auto_handle">
+      <UniqueIdentifier>{f35af84d-b27b-4d21-b71e-4f9babe44a4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\data">
+      <UniqueIdentifier>{9395c8cd-9f1f-4c12-9d30-fe9a0ece16bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\main">
+      <UniqueIdentifier>{971fbc02-c514-45b3-bf59-bb25a8e64bba}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\protocol">
+      <UniqueIdentifier>{21c7bfb1-f309-4e9c-a35a-6cc65bbf6b36}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic">
+      <UniqueIdentifier>{97b1e879-573a-4387-aae0-84932bae2c43}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\event_handle">
+      <UniqueIdentifier>{64c6934f-fce4-4e79-89a2-a0e941172d92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\badwords">
+      <UniqueIdentifier>{1a001da9-ffbe-4bf9-88cb-b01fee1030b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\inventory">
+      <UniqueIdentifier>{c4f68896-b008-4474-9a7e-a206e6e2fe44}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\battle">
+      <UniqueIdentifier>{2026bfe0-0f1b-412f-8fcd-c567c1d67997}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\config">
+      <UniqueIdentifier>{1dccc2e9-9597-409c-9ac4-e608c4fea059}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\player">
+      <UniqueIdentifier>{f4112979-5f46-49a6-b8e8-6c40726cc261}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\data\DBTask">
+      <UniqueIdentifier>{c29355ff-39f0-46c3-a8ec-e601a662a113}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\data\database">
+      <UniqueIdentifier>{78809dae-d1e2-4b2a-9fe3-b5a0805e906e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\login">
+      <UniqueIdentifier>{aa172851-06dc-4a96-92b0-5f49f74e1de9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\wordmap">
+      <UniqueIdentifier>{f28f4012-fa61-44cb-8b7a-381117dd9fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\user">
+      <UniqueIdentifier>{d5502b8f-12dc-4314-a9d8-541e0a166cc8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\user\hero">
+      <UniqueIdentifier>{4cac7340-9194-4465-82f1-0abac107ba86}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\user\city">
+      <UniqueIdentifier>{deede3e9-49c5-4c95-9903-083b12a29760}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\scene">
+      <UniqueIdentifier>{f32a85fa-5747-4f50-b261-6753ce5bbcfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\scene\impact">
+      <UniqueIdentifier>{a0a4bdae-aa51-469a-a10b-471e8d96c0b4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\scene\obj">
+      <UniqueIdentifier>{75d44bd6-c62e-47e3-934a-1377945ffeb5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\scene\skill">
+      <UniqueIdentifier>{7fa99a22-13c0-45bd-a51a-efd6acac9592}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\scene\scene">
+      <UniqueIdentifier>{ed1bd591-958f-4b72-843b-30cf39a787e0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\scene\sceneclass">
+      <UniqueIdentifier>{7ad4fa87-1641-4c18-b47c-eb569ec8cd3f}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="gamed\Daemon.cpp">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="gamed\GameEventAutoCreate.cpp">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="gamed\GameNetHandler.cpp">
+      <Filter>Source Files\main</Filter>
+    </ClCompile>
+    <ClCompile Include="gamed\AdminHandler.cpp">
+      <Filter>Source Files\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="gamed\PolicyHandler.cpp">
+      <Filter>Source Files\protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\GameServerConfig.cpp">
+      <Filter>Source Files\logic\config</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\player\Player.cpp">
+      <Filter>Source Files\logic\player</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\badwords\badwordsTbl.cpp">
+      <Filter>Source Files\logic\badwords</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\battle\BattleManager.cpp">
+      <Filter>Source Files\logic\battle</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\battle\BattleTaskTbl.cpp">
+      <Filter>Source Files\logic\battle</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBBaseTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBUserTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBService.cpp">
+      <Filter>Source Files\data</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBServiceExec.cpp">
+      <Filter>Source Files\data</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\Login\LoginService.cpp">
+      <Filter>Source Files\logic\login</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\Login\Obj_Login.cpp">
+      <Filter>Source Files\logic\login</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\player\PlayerManager.cpp">
+      <Filter>Source Files\logic\player</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\player\LoginPlayerManager.cpp">
+      <Filter>Source Files\logic\player</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\player\GamePlayerManager.cpp">
+      <Filter>Source Files\logic\player</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\worldmap\WorldMapService.cpp">
+      <Filter>Source Files\logic\wordmap</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBWorldMapTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCCharFullData.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCTileData.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\user\User.cpp">
+      <Filter>Source Files\logic\user</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\user\WorldUserService.cpp">
+      <Filter>Source Files\logic\user</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\user\city\CityManager.cpp">
+      <Filter>Source Files\logic\user\city</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\user\hero\HeroManager.cpp">
+      <Filter>Source Files\logic\user\hero</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\impact\ImpactBaseLogic.cpp">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\impact\ImpactLogic_000.cpp">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\impact\ImpactLogic_001.cpp">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\impact\ImpactLogic_002.cpp">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\impact\ImpactLogic_003.cpp">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\impact\ImpactLogic_004.cpp">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\impact\ImpactLogic_005.cpp">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\impact\ImpactLogic_006.cpp">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\impact\ImpactLogic_007.cpp">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\sceneClass\CopySceneClass.cpp">
+      <Filter>Source Files\logic\scene\sceneclass</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\sceneClass\SceneClass.cpp">
+      <Filter>Source Files\logic\scene\sceneclass</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\scene\CopyScene.cpp">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\scene\ScanOperator.cpp">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\scene\Scene.cpp">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\scene\Scene_BroadCast.cpp">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\scene\Scene_Message.cpp">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\scene\Scene_Obj.cpp">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\scene\Scene_Scan.cpp">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\skill\SkillBaseLogic.cpp">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\skill\SL_AutoRepeat.cpp">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\skill\SL_EffectToSelf.cpp">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\skill\SL_GongSu.cpp">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\skill\SL_ShunFa.cpp">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\skill\SL_TeleMove.cpp">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Action.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Character.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Character_Attr.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Character_Combat.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Character_Damage.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Character_Impact.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Character_Move.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Character_Skill.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Dynamic.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Npc.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Npc_AI.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\SceneService.cpp">
+      <Filter>Source Files\logic\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_March.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Hero.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Soldier.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\skill\SL_ZhiXian.cpp">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\skill\SL_ChongFeng.cpp">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\skill\SL_Snare.cpp">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Snare.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\scene\MainScene.cpp">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\sceneClass\MainSceneClass.cpp">
+      <Filter>Source Files\logic\scene\sceneclass</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="gamed\Daemon.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="gamed\GameNetHandler.h">
+      <Filter>Source Files\main</Filter>
+    </ClInclude>
+    <ClInclude Include="gamed\AdminHandler.h">
+      <Filter>Source Files\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="gamed\PolicyHandler.h">
+      <Filter>Source Files\protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\GameServerConfig.h">
+      <Filter>Source Files\logic\config</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\player\Player.h">
+      <Filter>Source Files\logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\badwords\badwordsTbl.h">
+      <Filter>Source Files\logic\badwords</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\battle\BattleManager.h">
+      <Filter>Source Files\logic\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\battle\BattleTaskTbl.h">
+      <Filter>Source Files\logic\battle</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBBaseTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBUserTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBService.h">
+      <Filter>Source Files\data</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBServiceExec.h">
+      <Filter>Source Files\data</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\player\PlayerDefine.h">
+      <Filter>Source Files\logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\Login\LoginService.h">
+      <Filter>Source Files\logic\login</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\Login\Obj_Login.h">
+      <Filter>Source Files\logic\login</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\player\PlayerManager.h">
+      <Filter>Source Files\logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\player\LoginPlayerManager.h">
+      <Filter>Source Files\logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\player\GamePlayerManager.h">
+      <Filter>Source Files\logic\player</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\worldmap\WorldMapService.h">
+      <Filter>Source Files\logic\wordmap</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBWorldMapTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCCharFullData.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCTileData.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\user\User.h">
+      <Filter>Source Files\logic\user</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\user\WorldUserService.h">
+      <Filter>Source Files\logic\user</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\user\city\CityManager.h">
+      <Filter>Source Files\logic\user\city</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\user\BaseManager.h">
+      <Filter>Source Files\logic\user</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\user\hero\HeroManager.h">
+      <Filter>Source Files\logic\user\hero</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\impact\ImpactBaseLogic.h">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\impact\ImpactLogic_000.h">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\impact\ImpactLogic_001.h">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\impact\ImpactLogic_002.h">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\impact\ImpactLogic_003.h">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\impact\ImpactLogic_004.h">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\impact\ImpactLogic_005.h">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\impact\ImpactLogic_006.h">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\impact\ImpactLogic_007.h">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\sceneClass\CopySceneClass.h">
+      <Filter>Source Files\logic\scene\sceneclass</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\sceneClass\SceneClass.h">
+      <Filter>Source Files\logic\scene\sceneclass</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\scene\CopyScene.h">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\scene\ScanOperator.h">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\scene\Scene.h">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\skill\SkillBaseLogic.h">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\skill\SL_AutoRepeat.h">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\skill\SL_EffectToSelf.h">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\skill\SL_GongSu.h">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\skill\SL_ShunFa.h">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\skill\SL_TeleMove.h">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\obj\Obj.h">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\obj\Obj_Action.h">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\obj\Obj_Character.h">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\obj\Obj_Dynamic.h">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\obj\Obj_Npc.h">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\SceneService.h">
+      <Filter>Source Files\logic\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\obj\Obj_March.h">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\obj\Obj_Hero.h">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\obj\Obj_Soldier.h">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\skill\SL_ZhiXian.h">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\skill\SL_ChongFeng.h">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\skill\SL_Snare.h">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\obj\Obj_Snare.h">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\scene\MainScene.h">
+      <Filter>Source Files\logic\scene\scene</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\sceneClass\MainSceneClass.h">
+      <Filter>Source Files\logic\scene\sceneclass</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="logic\scene\impact\Buff配置说明.txt">
+      <Filter>Source Files\logic\scene\impact</Filter>
+    </Text>
+    <Text Include="logic\scene\skill\Skill逻辑说明.txt">
+      <Filter>Source Files\logic\scene\skill</Filter>
+    </Text>
+  </ItemGroup>
+</Project>

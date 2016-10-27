@@ -1,0 +1,244 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{0B23221B-0D23-4A97-A847-283B3C30DEDE}</ProjectGuid>
+    <RootNamespace>gamed</RootNamespace>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v110</PlatformToolset>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup>
+    <_ProjectFileVersion>11.0.61030.0</_ProjectFileVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)_$(ProjectName)\</OutDir>
+    <IntDir>$(Configuration)_gamed\</IntDir>
+    <LinkIncremental>true</LinkIncremental>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <IntDir>$(Configuration)\</IntDir>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>event\;windows\include;logic;common;windows\include\boost;common\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <StringPooling>true</StringPooling>
+      <MinimalRebuild>true</MinimalRebuild>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ProgramDataBaseFileName>$(IntDir)vc90-gamed.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>pthreadVC2.lib;libconfig++d.lib;libprotobufd.lib;bgd.lib;ws2_32.lib;libprotoc.lib;libmemcached.lib;cored.lib;libboost_system-vc120-mt-gd-1_60.lib;libboost_thread-vc120-mt-gd-1_60.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <OutputFile>./DebugPath/$(ProjectName).exe</OutputFile>
+      <AdditionalLibraryDirectories>Debug;windows\lib;wsock32.lib ws2_32.lib;bgd.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OptimizeReferences>false</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <StackReserveSize>10000000</StackReserveSize>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>include\gd\include; include\protobuf\src;include\libconfig\include;include\pthread\include;include\log4cxx\include;include\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <ProgramDataBaseFileName>$(IntDir)vc90-gamed.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251;4275;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Link>
+      <AdditionalDependencies>$(IntDir)core.lib;log4cxx.lib;pthreadVC2.lib;libconfig++.lib;libprotobuf.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>include\protobuf\lib;include\libconfig\lib;include\pthread\lib;include\log4cxx\lib; wsock32.lib ws2_32.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <ImportLibrary>$(IntDir)log4cxx.lib</ImportLibrary>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="DBManage\DBService.cpp" />
+    <ClCompile Include="DBManage\DBServiceExec.cpp" />
+    <ClCompile Include="DBManage\DBTask\DBBaseTask.cpp" />
+    <ClCompile Include="DBManage\DBTask\DBUserTask.cpp" />
+    <ClCompile Include="DBManage\DBTask\DBWorldMapTask.cpp" />
+    <ClCompile Include="DBManage\ODBCData\ODBCCharFullData.cpp" />
+    <ClCompile Include="DBManage\ODBCData\ODBCTileData.cpp" />
+    <ClCompile Include="gamed\Daemon.cpp" />
+    <ClCompile Include="gamed\GameEventAutoCreate.cpp" />
+    <ClCompile Include="gamed\GameNetHandler.cpp" />
+    <ClCompile Include="gamed\AdminHandler.cpp" />
+    <ClCompile Include="gamed\PolicyHandler.cpp" />
+    <ClCompile Include="logic\badwords\badwordsTbl.cpp" />
+    <ClCompile Include="logic\battle\BattleManager.cpp" />
+    <ClCompile Include="logic\battle\BattleTaskTbl.cpp" />
+    <ClCompile Include="logic\GameServerConfig.cpp" />
+    <ClCompile Include="logic\Login\LoginService.cpp" />
+    <ClCompile Include="logic\Login\Obj_Login.cpp" />
+    <ClCompile Include="logic\player\GamePlayerManager.cpp" />
+    <ClCompile Include="logic\player\LoginPlayerManager.cpp" />
+    <ClCompile Include="logic\player\Player.cpp" />
+    <ClCompile Include="logic\player\PlayerManager.cpp" />
+    <ClCompile Include="logic\scene\impact\ImpactBaseLogic.cpp" />
+    <ClCompile Include="logic\scene\impact\ImpactLogic_000.cpp" />
+    <ClCompile Include="logic\scene\impact\ImpactLogic_001.cpp" />
+    <ClCompile Include="logic\scene\impact\ImpactLogic_002.cpp" />
+    <ClCompile Include="logic\scene\impact\ImpactLogic_003.cpp" />
+    <ClCompile Include="logic\scene\impact\ImpactLogic_004.cpp" />
+    <ClCompile Include="logic\scene\impact\ImpactLogic_005.cpp" />
+    <ClCompile Include="logic\scene\impact\ImpactLogic_006.cpp" />
+    <ClCompile Include="logic\scene\impact\ImpactLogic_007.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Action.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Character.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Character_Attr.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Character_Combat.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Character_Damage.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Character_Impact.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Character_Move.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Character_Skill.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Dynamic.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Hero.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_March.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Npc.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Npc_AI.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Snare.cpp" />
+    <ClCompile Include="logic\scene\obj\Obj_Soldier.cpp" />
+    <ClCompile Include="logic\scene\sceneClass\CopySceneClass.cpp" />
+    <ClCompile Include="logic\scene\sceneClass\MainSceneClass.cpp" />
+    <ClCompile Include="logic\scene\sceneClass\SceneClass.cpp" />
+    <ClCompile Include="logic\scene\SceneService.cpp" />
+    <ClCompile Include="logic\scene\scene\CopyScene.cpp" />
+    <ClCompile Include="logic\scene\scene\MainScene.cpp" />
+    <ClCompile Include="logic\scene\scene\ScanOperator.cpp" />
+    <ClCompile Include="logic\scene\scene\Scene.cpp" />
+    <ClCompile Include="logic\scene\scene\Scene_BroadCast.cpp" />
+    <ClCompile Include="logic\scene\scene\Scene_Message.cpp" />
+    <ClCompile Include="logic\scene\scene\Scene_Obj.cpp" />
+    <ClCompile Include="logic\scene\scene\Scene_Scan.cpp" />
+    <ClCompile Include="logic\scene\skill\SkillBaseLogic.cpp" />
+    <ClCompile Include="logic\scene\skill\SL_AutoRepeat.cpp" />
+    <ClCompile Include="logic\scene\skill\SL_ChongFeng.cpp" />
+    <ClCompile Include="logic\scene\skill\SL_EffectToSelf.cpp" />
+    <ClCompile Include="logic\scene\skill\SL_GongSu.cpp" />
+    <ClCompile Include="logic\scene\skill\SL_ShunFa.cpp" />
+    <ClCompile Include="logic\scene\skill\SL_Snare.cpp" />
+    <ClCompile Include="logic\scene\skill\SL_TeleMove.cpp" />
+    <ClCompile Include="logic\scene\skill\SL_ZhiXian.cpp" />
+    <ClCompile Include="logic\user\city\CityManager.cpp" />
+    <ClCompile Include="logic\user\hero\HeroManager.cpp" />
+    <ClCompile Include="logic\user\User.cpp" />
+    <ClCompile Include="logic\user\WorldUserService.cpp" />
+    <ClCompile Include="logic\worldmap\WorldMapService.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="DBManage\DBService.h" />
+    <ClInclude Include="DBManage\DBServiceExec.h" />
+    <ClInclude Include="DBManage\DBTask\DBBaseTask.h" />
+    <ClInclude Include="DBManage\DBTask\DBUserTask.h" />
+    <ClInclude Include="DBManage\DBTask\DBWorldMapTask.h" />
+    <ClInclude Include="DBManage\ODBCData\ODBCCharFullData.h" />
+    <ClInclude Include="DBManage\ODBCData\ODBCTileData.h" />
+    <ClInclude Include="gamed\Daemon.h" />
+    <ClInclude Include="gamed\GameNetHandler.h" />
+    <ClInclude Include="gamed\AdminHandler.h" />
+    <ClInclude Include="gamed\PolicyHandler.h" />
+    <ClInclude Include="logic\badwords\badwordsTbl.h" />
+    <ClInclude Include="logic\battle\BattleManager.h" />
+    <ClInclude Include="logic\battle\BattleTaskTbl.h" />
+    <ClInclude Include="logic\GameServerConfig.h" />
+    <ClInclude Include="logic\Login\LoginService.h" />
+    <ClInclude Include="logic\Login\Obj_Login.h" />
+    <ClInclude Include="logic\player\GamePlayerManager.h" />
+    <ClInclude Include="logic\player\LoginPlayerManager.h" />
+    <ClInclude Include="logic\player\Player.h" />
+    <ClInclude Include="logic\player\PlayerDefine.h" />
+    <ClInclude Include="logic\player\PlayerManager.h" />
+    <ClInclude Include="logic\scene\impact\ImpactBaseLogic.h" />
+    <ClInclude Include="logic\scene\impact\ImpactLogic_000.h" />
+    <ClInclude Include="logic\scene\impact\ImpactLogic_001.h" />
+    <ClInclude Include="logic\scene\impact\ImpactLogic_002.h" />
+    <ClInclude Include="logic\scene\impact\ImpactLogic_003.h" />
+    <ClInclude Include="logic\scene\impact\ImpactLogic_004.h" />
+    <ClInclude Include="logic\scene\impact\ImpactLogic_005.h" />
+    <ClInclude Include="logic\scene\impact\ImpactLogic_006.h" />
+    <ClInclude Include="logic\scene\impact\ImpactLogic_007.h" />
+    <ClInclude Include="logic\scene\obj\Obj.h" />
+    <ClInclude Include="logic\scene\obj\Obj_Action.h" />
+    <ClInclude Include="logic\scene\obj\Obj_Character.h" />
+    <ClInclude Include="logic\scene\obj\Obj_Dynamic.h" />
+    <ClInclude Include="logic\scene\obj\Obj_Hero.h" />
+    <ClInclude Include="logic\scene\obj\Obj_March.h" />
+    <ClInclude Include="logic\scene\obj\Obj_Npc.h" />
+    <ClInclude Include="logic\scene\obj\Obj_Snare.h" />
+    <ClInclude Include="logic\scene\obj\Obj_Soldier.h" />
+    <ClInclude Include="logic\scene\sceneClass\CopySceneClass.h" />
+    <ClInclude Include="logic\scene\sceneClass\MainSceneClass.h" />
+    <ClInclude Include="logic\scene\sceneClass\SceneClass.h" />
+    <ClInclude Include="logic\scene\SceneService.h" />
+    <ClInclude Include="logic\scene\scene\CopyScene.h" />
+    <ClInclude Include="logic\scene\scene\MainScene.h" />
+    <ClInclude Include="logic\scene\scene\ScanOperator.h" />
+    <ClInclude Include="logic\scene\scene\Scene.h" />
+    <ClInclude Include="logic\scene\skill\SkillBaseLogic.h" />
+    <ClInclude Include="logic\scene\skill\SL_AutoRepeat.h" />
+    <ClInclude Include="logic\scene\skill\SL_ChongFeng.h" />
+    <ClInclude Include="logic\scene\skill\SL_EffectToSelf.h" />
+    <ClInclude Include="logic\scene\skill\SL_GongSu.h" />
+    <ClInclude Include="logic\scene\skill\SL_ShunFa.h" />
+    <ClInclude Include="logic\scene\skill\SL_Snare.h" />
+    <ClInclude Include="logic\scene\skill\SL_TeleMove.h" />
+    <ClInclude Include="logic\scene\skill\SL_ZhiXian.h" />
+    <ClInclude Include="logic\user\BaseManager.h" />
+    <ClInclude Include="logic\user\city\CityManager.h" />
+    <ClInclude Include="logic\user\hero\HeroManager.h" />
+    <ClInclude Include="logic\user\User.h" />
+    <ClInclude Include="logic\user\WorldUserService.h" />
+    <ClInclude Include="logic\worldmap\WorldMapService.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="logic\scene\impact\Buff配置说明.txt" />
+    <Text Include="logic\scene\skill\Skill逻辑说明.txt" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
