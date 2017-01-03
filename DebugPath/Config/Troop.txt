@@ -1,0 +1,9 @@
+Id	Desc	ModelID	Portrait	ModelSize	Size	ActionId	VonetyID	Type	DataID1	DataID2	DataID3	DataID4	DataID5	DataID6	DataID7	DataID8	DataID9	DataID10	SoldierCpunt
+INT	STRING	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT
+#MAX_ID=20;MAX_RECORD=20;TableType=Index;																			
+#陷阱ID	描述	模型	头像	模型大小	体积大小	动作映射	变种ID	类型	NPC关联数据	NPC关联数据	NPC关联数据	NPC关联数据	NPC关联数据	NPC关联数据	NPC关联数据	NPC关联数据	NPC关联数据	NPC关联数据	单支部队的士兵数量
+#此行必须有!!客户端确定是否需要读到内存	规则																		
+1	步兵	1	0	1	1	0	107	1	1										18
+2	弓箭手	15	0	1	1	0	-1	-1	2										18
+3	骑兵	15	0	1	1	0	193	-1											10
+4	火炮	15	0	1	1	0	188	-1											

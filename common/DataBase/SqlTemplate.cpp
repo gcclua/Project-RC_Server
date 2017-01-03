@@ -4,25 +4,32 @@
 /*
  *	角色基本信息
  */
-const char*		LoadCharFullData	=
-"select \
-charguid,charname,title,sex,createtime,level,enegry,exp,vmoney,pw,\
-haircolor,facecolor,hairmodel,facemodel,scene,xpos,zpos,logintime,logouttime,dbversion,\
-camp,menpai,hp,mp,strikepoint,str,spr,con,ipr,dex,points,settings,\
-shopinfo,carrypet,guldid,teamid,headid,erecover,vigor,maxvigor,vrecover,energymax,\
-pwdeltime,dietime,bankmoney,bankend,bkscene,bkxpos,bkzpos,rage \
-from %s where charguid = %d and isvalid = 1";
+const tchar*	LoadCharFullData	=  	"call load_char_info(%lld);";
+const tchar*	UpdateCharFullData	=	"call update_char_info(%lld,\'%s\',\'%s\',%d,%d,%d,\'%s\',\'%s\',%d,%d,%d);";
 
+const char*     LoadTileData = "call loadtile()";
+const char*     UpdateTileData = "call ";
 
+const tchar*	CreateChar			=	"call createchar(%lld,\'%s\',\'%s\',%d,%d)";
 
-const char*		UpdateCharFullData	=	
-"update \
-%s  set title=\'%s\',sex=%d,level=%d,enegry=%d,exp=%d,vmoney=%d,pw=\'%s\',\
-haircolor=%d,facecolor=%d,hairmodel=%d,facemodel=%d,scene=%d,xpos=%d,zpos=%d,logintime=%d,logouttime=%d, \
-camp=\'%s\',menpai=%d,hp=%d,mp=%d,strikepoint=%d,str=%d,spr=%d,con=%d,ipr=%d,dex=%d,points=%d,settings=\'%s\', \
-shopinfo = \'%s\',carrypet = \'%s\' ,guldid= %d,teamid =%d,headid=%d,erecover=%d,vigor=%d,maxvigor=%d,vrecover=%d,energymax=%d, \
-pwdeltime=%d,dietime=%d,bankmoney=%d,bankend=%d,bkscene=%d,bkxpos=%d,bkzpos=%d,rage=%d,dbversion=%d  \
-where charguid = %d and isvalid = 1";
+const tchar*    SaveGuidData		=	"call saveguid(%d,%lld)";
 
-const char*     LoadTileData = "select * from %s";
-const char*     UpdateTileData = "update %s set posx=%d,posy=%d,block=%d,type=%d where tileId=%d";
+const tchar*	LoadCharList		=	"call loadcharlist(\'%s\')";
+const tchar*	LoadRandomName		=	 "call loadrandomname()";
+
+const tchar*    CreateCity          =  "call createcity(%lld,%lld,%d,%d,%d,%d,%lld,%lld,%lld,%lld);";
+const tchar*    LoadCity            =  "call loadcity(%lld)";
+const tchar*    UpdateCity          =  "call updatecity(lld,%d,%d,%d,%d,%lld,%lld,%lld,%lld)";
+
+const tchar*    LoadBuilding        =  "call loadbuilding(%lld)";
+const tchar*    UpdateBuilding      =  "call updatebuilding(%lld,%lld,%d,%d,%d);";
+const tchar*    LoadMapMarch        =  "call LoadMapMarch()";
+
+const tchar*    LoadMarch           =  "call loadcitymarch(%lld)";
+const tchar*    UpdateMarch         =  "call updatemarch(%lld,%lld,%lld,%lld,%lld,%d,%d,%lld,%lld,%d);";
+
+const tchar*    LoadHero            =  "call loadcityhero(%lld)";
+const tchar*    UpdateHero          =  "call updatehero(%lld,%lld,%lld,%d,%d,%d,%d,%d,%d,%d,%d);";
+
+const tchar*    UpdateTroop         =   "call updatetroop(%lld,%lld,%d,%d,%d,%d,%d)";
+const tchar*    LoadMarchTroop      =   "call loadmarchtroop(%lld)";

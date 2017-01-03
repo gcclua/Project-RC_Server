@@ -5,9 +5,6 @@
       <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
       <Extensions>h;hpp;hxx;hm;inl;inc;xsd</Extensions>
     </Filter>
-    <Filter Include="Source Files\json">
-      <UniqueIdentifier>{5fcaf1cf-1147-42e4-9727-c6df4a4196ed}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\event_auto">
       <UniqueIdentifier>{6c859f61-0bfe-4039-9eed-63ba359ce94b}</UniqueIdentifier>
     </Filter>
@@ -16,9 +13,6 @@
     </Filter>
     <Filter Include="Source Files\log">
       <UniqueIdentifier>{02a32e9b-16d3-4128-ae20-bf5a9179204f}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\net">
-      <UniqueIdentifier>{d1ad5085-b2ca-46c9-ba54-3163096cb7dc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\util">
       <UniqueIdentifier>{0af2924e-13f7-41bb-9637-c6f16601cca8}</UniqueIdentifier>
@@ -68,9 +62,6 @@
     <Filter Include="Source Files\scene">
       <UniqueIdentifier>{3054ff93-cb88-43b9-b1a5-1dbbb26f16bc}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\combat">
-      <UniqueIdentifier>{fc6aaf9b-fb18-443b-aefe-d592180a2ac6}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\impact">
       <UniqueIdentifier>{a04ecb9c-a8c0-4689-a23d-e1cc6f8d73bf}</UniqueIdentifier>
     </Filter>
@@ -92,63 +83,24 @@
     <Filter Include="Source Files\packet\PacketHandler">
       <UniqueIdentifier>{e3da44e2-49fa-4e5b-8126-8a2d39fce1b2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\serverPlayer">
-      <UniqueIdentifier>{f86f4af0-a09c-4a96-ad09-adecfd5b0ca5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\DictionaryFormat">
       <UniqueIdentifier>{66d95565-7e68-48d7-9926-5853665dc514}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\combat">
+      <UniqueIdentifier>{567e13fc-62bb-4c1a-afbb-c8a01714300f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\login">
+      <UniqueIdentifier>{3d49470f-87f7-482b-8da9-34d2795f96f4}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="common\json\autolink.h">
-      <Filter>Source Files\json</Filter>
-    </ClInclude>
-    <ClInclude Include="common\json\config.h">
-      <Filter>Source Files\json</Filter>
-    </ClInclude>
-    <ClInclude Include="common\json\features.h">
-      <Filter>Source Files\json</Filter>
-    </ClInclude>
-    <ClInclude Include="common\json\forwards.h">
-      <Filter>Source Files\json</Filter>
-    </ClInclude>
-    <ClInclude Include="common\json-util.h">
-      <Filter>Source Files\json</Filter>
-    </ClInclude>
-    <ClInclude Include="common\json\json.h">
-      <Filter>Source Files\json</Filter>
-    </ClInclude>
-    <ClInclude Include="common\json\json_batchallocator.h">
-      <Filter>Source Files\json</Filter>
-    </ClInclude>
-    <ClInclude Include="common\json\reader.h">
-      <Filter>Source Files\json</Filter>
-    </ClInclude>
-    <ClInclude Include="common\json\value.h">
-      <Filter>Source Files\json</Filter>
-    </ClInclude>
-    <ClInclude Include="common\json\writer.h">
-      <Filter>Source Files\json</Filter>
-    </ClInclude>
     <ClInclude Include="event\EventDefine.h">
       <Filter>Source Files\event</Filter>
-    </ClInclude>
-    <ClInclude Include="net\NetCache.h">
-      <Filter>Source Files\net</Filter>
-    </ClInclude>
-    <ClInclude Include="net\NetHandler.h">
-      <Filter>Source Files\net</Filter>
-    </ClInclude>
-    <ClInclude Include="net\ProtocolHandler.h">
-      <Filter>Source Files\net</Filter>
     </ClInclude>
     <ClInclude Include="common\coredump.h">
       <Filter>Source Files\util</Filter>
     </ClInclude>
     <ClInclude Include="common\distribution.h">
-      <Filter>Source Files\util</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Ini.h">
       <Filter>Source Files\util</Filter>
     </ClInclude>
     <ClInclude Include="common\xml\tinystr.h">
@@ -220,9 +172,6 @@
     <ClInclude Include="common\common\BaseUtility.h">
       <Filter>Source Files\common</Filter>
     </ClInclude>
-    <ClInclude Include="common\common\Clock.h">
-      <Filter>Source Files\common</Filter>
-    </ClInclude>
     <ClInclude Include="common\common\Exception.h">
       <Filter>Source Files\common</Filter>
     </ClInclude>
@@ -237,12 +186,6 @@
     </ClInclude>
     <ClInclude Include="common\common\string-util.h">
       <Filter>Source Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="common\SysLog.h">
-      <Filter>Source Files\log</Filter>
-    </ClInclude>
-    <ClInclude Include="common\SysLogNet.h">
-      <Filter>Source Files\log</Filter>
     </ClInclude>
     <ClInclude Include="common\worldmap\GameDefine_WorldMap.h">
       <Filter>Source Files\worldmap</Filter>
@@ -325,24 +268,6 @@
     <ClInclude Include="common\Scene\GameStruct_Scene.h">
       <Filter>Source Files\scene</Filter>
     </ClInclude>
-    <ClInclude Include="common\CombatStruct\GameDefine_CombatAttr.h">
-      <Filter>Source Files\combat</Filter>
-    </ClInclude>
-    <ClInclude Include="common\CombatStruct\GameDefine_PK.h">
-      <Filter>Source Files\combat</Filter>
-    </ClInclude>
-    <ClInclude Include="common\CombatStruct\GameDefine_Threat.h">
-      <Filter>Source Files\combat</Filter>
-    </ClInclude>
-    <ClInclude Include="common\CombatStruct\GameStruct_CombatAttr.h">
-      <Filter>Source Files\combat</Filter>
-    </ClInclude>
-    <ClInclude Include="common\CombatStruct\GameStruct_PK.h">
-      <Filter>Source Files\combat</Filter>
-    </ClInclude>
-    <ClInclude Include="common\CombatStruct\GameStruct_Threat.h">
-      <Filter>Source Files\combat</Filter>
-    </ClInclude>
     <ClInclude Include="common\ImpactStruct\GameDefine_Impact.h">
       <Filter>Source Files\impact</Filter>
     </ClInclude>
@@ -373,17 +298,8 @@
     <ClInclude Include="common\LoudSpeaker\GameStruct_LoudSpeaker.h">
       <Filter>Source Files\loadspeaker</Filter>
     </ClInclude>
-    <ClInclude Include="common\Table\Table_NpcSkillStrategy.h">
-      <Filter>Source Files\table</Filter>
-    </ClInclude>
     <ClInclude Include="common\common\DBCTable.h">
       <Filter>Source Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Table\Table_Impact.h">
-      <Filter>Source Files\table</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Table\Table_NpcOptionalSkill.h">
-      <Filter>Source Files\table</Filter>
     </ClInclude>
     <ClInclude Include="common\march\GameDefine_March.h">
       <Filter>Source Files\march</Filter>
@@ -394,32 +310,8 @@
     <ClInclude Include="common\DBStruct\DBStruct_March.h">
       <Filter>Source Files\DBStruct</Filter>
     </ClInclude>
-    <ClInclude Include="common\Table\Table_CoolDownTime.h">
-      <Filter>Source Files\table</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Table\Table_SkillBase.h">
-      <Filter>Source Files\table</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Table\Table_SkillEx.h">
-      <Filter>Source Files\table</Filter>
-    </ClInclude>
     <ClInclude Include="common\common\Random.h">
       <Filter>Source Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Table\Table_SnareObjBuffInfo.h">
-      <Filter>Source Files\table</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Table\Table_SnareObjInfo.h">
-      <Filter>Source Files\table</Filter>
-    </ClInclude>
-    <ClInclude Include="common\ServerPlayer\ServerPlayer.h">
-      <Filter>Source Files\serverPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="common\ServerPlayer\ServerPlayerDefine.h">
-      <Filter>Source Files\serverPlayer</Filter>
-    </ClInclude>
-    <ClInclude Include="common\ServerPlayer\ServerPlayerManager.h">
-      <Filter>Source Files\serverPlayer</Filter>
     </ClInclude>
     <ClInclude Include="common\common\LibNetwork.h">
       <Filter>Source Files\common</Filter>
@@ -448,9 +340,6 @@
     <ClInclude Include="common\packet\Packet\PBMessage.pb.h">
       <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="common\Table\Table_SceneNpc.h">
-      <Filter>Source Files\table</Filter>
-    </ClInclude>
     <ClInclude Include="common\packet\Packet\CG_CHAT_PAK.h">
       <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
@@ -463,26 +352,11 @@
     <ClInclude Include="common\packet\Packet\GC_NOTICE_PAK.h">
       <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="common\Table\Table_NameFilter.h">
-      <Filter>Source Files\table</Filter>
-    </ClInclude>
     <ClInclude Include="common\Message\TransportMsg.h">
       <Filter>Source Files\Message</Filter>
     </ClInclude>
     <ClInclude Include="common\packet\Packet\GC_UPDATE_SCENE_INSTACTIVATION_PAK.h">
       <Filter>Source Files\packet\Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="common\packet\Packet\GS_CONNECTED_HEARTBEAT_PAK.h">
-      <Filter>Source Files\packet\Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="common\packet\Packet\SG_CONNECTED_HEARTBEAT_PAK.h">
-      <Filter>Source Files\packet\Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Table\Table_CopyScene.h">
-      <Filter>Source Files\table</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Table\Table_SceneClass.h">
-      <Filter>Source Files\table</Filter>
     </ClInclude>
     <ClInclude Include="common\packet\Packet\GC_MOVE_PAK.h">
       <Filter>Source Files\packet\Packet</Filter>
@@ -495,9 +369,6 @@
     </ClInclude>
     <ClInclude Include="common\packet\Packet\GC_TELEMOVE_PAK.h">
       <Filter>Source Files\packet\Packet</Filter>
-    </ClInclude>
-    <ClInclude Include="common\Table\Table_CopySceneRule.h">
-      <Filter>Source Files\table</Filter>
     </ClInclude>
     <ClInclude Include="common\packet\Packet\GC_RET_USE_SKILL_PAK.h">
       <Filter>Source Files\packet\Packet</Filter>
@@ -523,47 +394,192 @@
     <ClInclude Include="common\packet\Packet\GC_REMOVEEFFECT_PAK.h">
       <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
+    <ClInclude Include="common\common\Config.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\IniFile.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\log\Log.h">
+      <Filter>Source Files\log</Filter>
+    </ClInclude>
+    <ClInclude Include="common\log\LogDefine.h">
+      <Filter>Source Files\log</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameDefine_CombatAttr.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameDefine_PK.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameDefine_Threat.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameStruct_CombatAttr.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameStruct_PK.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\CombatStruct\GameStruct_Threat.h">
+      <Filter>Source Files\combat</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\TimeManager.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_FIGHT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_LEAVE_COPYSCENE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_ROBOT_OPEN_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_ROBOT_OPEN_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_ASSIGN_HERO_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_ASSIGN_HERO_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_SEND_MARCH_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_SEND_MARCH_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\GuidDefine.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\GuidGenerator.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\common\GuidLoader.h">
+      <Filter>Source Files\common</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_CREATEROLE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_CREATEROLE_RET_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_LOGIN_QUEUE_STATUS_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_SELECTROLE_RET_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Login\GameInterface_Login.h">
+      <Filter>Source Files\login</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_CharList.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_RandomName.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\DBStruct\DBStruct_CityCreate.h">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_SKILL_USE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_BATTLEINFOR_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_ArrangeSelectTarget.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_Building.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_CityBuildingDefault.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_CityBuildingLevel.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_CityBuildingSlot.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_CoolDownTime.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_CopyScene.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_CopySceneNpc.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_CopySceneRule.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_Hero.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_Impact.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_InitialCombatAttr.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_NameFilter.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_NpcOptionalSkill.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_NpcSkillStrategy.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
     <ClInclude Include="common\Table\Table_PatrolPoint.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_PublicConfig.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_RoleBaseAttr.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SceneClass.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SceneNpc.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_ServerConfigList.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SkillActive.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SkillBase.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SkillEx.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SnareObjBuffInfo.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_SnareObjInfo.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\Table_Troop.h">
+      <Filter>Source Files\table</Filter>
+    </ClInclude>
+    <ClInclude Include="common\Table\TableManager.h">
       <Filter>Source Files\table</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="common\json\json_internalarray.inl">
-      <Filter>Source Files\json</Filter>
-    </None>
-    <None Include="common\json\json_internalmap.inl">
-      <Filter>Source Files\json</Filter>
-    </None>
-    <None Include="common\json\json_valueiterator.inl">
-      <Filter>Source Files\json</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="common\json\json_reader.cpp">
-      <Filter>Source Files\json</Filter>
-    </ClCompile>
-    <ClCompile Include="common\json\json_value.cpp">
-      <Filter>Source Files\json</Filter>
-    </ClCompile>
-    <ClCompile Include="common\json\json_writer.cpp">
-      <Filter>Source Files\json</Filter>
-    </ClCompile>
-    <ClCompile Include="net\NetCache.cpp">
-      <Filter>Source Files\net</Filter>
-    </ClCompile>
-    <ClCompile Include="net\NetHandler.cpp">
-      <Filter>Source Files\net</Filter>
-    </ClCompile>
-    <ClCompile Include="net\ProtocolHandler.cpp">
-      <Filter>Source Files\net</Filter>
-    </ClCompile>
     <ClCompile Include="common\coredump.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
     <ClCompile Include="common\distribution.cpp">
-      <Filter>Source Files\util</Filter>
-    </ClCompile>
-    <ClCompile Include="common\Ini.cpp">
       <Filter>Source Files\util</Filter>
     </ClCompile>
     <ClCompile Include="common\xml\tinystr.cpp">
@@ -629,9 +645,6 @@
     <ClCompile Include="common\common\BaseUtility.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="common\common\Clock.cpp">
-      <Filter>Source Files\common</Filter>
-    </ClCompile>
     <ClCompile Include="common\common\Exception.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
@@ -646,12 +659,6 @@
     </ClCompile>
     <ClCompile Include="common\common\string-util.cpp">
       <Filter>Source Files\common</Filter>
-    </ClCompile>
-    <ClCompile Include="common\SysLog.cpp">
-      <Filter>Source Files\log</Filter>
-    </ClCompile>
-    <ClCompile Include="common\SysLogNet.cpp">
-      <Filter>Source Files\log</Filter>
     </ClCompile>
     <ClCompile Include="common\worldmap\GameStruct_WorldMap.cpp">
       <Filter>Source Files\worldmap</Filter>
@@ -701,15 +708,6 @@
     <ClCompile Include="common\Scene\GameStruct_Scene.cpp">
       <Filter>Source Files\scene</Filter>
     </ClCompile>
-    <ClCompile Include="common\CombatStruct\GameStruct_CombatAttr.cpp">
-      <Filter>Source Files\combat</Filter>
-    </ClCompile>
-    <ClCompile Include="common\CombatStruct\GameStruct_PK.cpp">
-      <Filter>Source Files\combat</Filter>
-    </ClCompile>
-    <ClCompile Include="common\CombatStruct\GameStruct_Threat.cpp">
-      <Filter>Source Files\combat</Filter>
-    </ClCompile>
     <ClCompile Include="common\ImpactStruct\GameStruct_Impact.cpp">
       <Filter>Source Files\impact</Filter>
     </ClCompile>
@@ -731,17 +729,8 @@
     <ClCompile Include="common\LoudSpeaker\GameStruct_LoudSpeaker.cpp">
       <Filter>Source Files\loadspeaker</Filter>
     </ClCompile>
-    <ClCompile Include="common\Table\Table_NpcSkillStrategy.cpp">
-      <Filter>Source Files\table</Filter>
-    </ClCompile>
     <ClCompile Include="common\common\DBCTable.cpp">
       <Filter>Source Files\common</Filter>
-    </ClCompile>
-    <ClCompile Include="common\Table\Table_Impact.cpp">
-      <Filter>Source Files\table</Filter>
-    </ClCompile>
-    <ClCompile Include="common\Table\Table_NpcOptionalSkill.cpp">
-      <Filter>Source Files\table</Filter>
     </ClCompile>
     <ClCompile Include="common\march\GameStruct_March.cpp">
       <Filter>Source Files\march</Filter>
@@ -749,38 +738,14 @@
     <ClCompile Include="common\DBStruct\DBStruct_March.cpp">
       <Filter>Source Files\DBStruct</Filter>
     </ClCompile>
-    <ClCompile Include="common\Table\Table_CoolDownTime.cpp">
-      <Filter>Source Files\table</Filter>
-    </ClCompile>
-    <ClCompile Include="common\Table\Table_SkillBase.cpp">
-      <Filter>Source Files\table</Filter>
-    </ClCompile>
-    <ClCompile Include="common\Table\Table_SkillEx.cpp">
-      <Filter>Source Files\table</Filter>
-    </ClCompile>
     <ClCompile Include="common\common\Random.cpp">
       <Filter>Source Files\common</Filter>
-    </ClCompile>
-    <ClCompile Include="common\Table\Table_SnareObjBuffInfo.cpp">
-      <Filter>Source Files\table</Filter>
-    </ClCompile>
-    <ClCompile Include="common\Table\Table_SnareObjInfo.cpp">
-      <Filter>Source Files\table</Filter>
     </ClCompile>
     <ClCompile Include="common\packet\PacketHandler\CG_Common_Handler.cpp">
       <Filter>Source Files\packet\PacketHandler</Filter>
     </ClCompile>
     <ClCompile Include="common\packet\PacketHandler\GC_Common_Handler.cpp">
       <Filter>Source Files\packet\PacketHandler</Filter>
-    </ClCompile>
-    <ClCompile Include="common\ServerPlayer\ServerPlayer.cpp">
-      <Filter>Source Files\serverPlayer</Filter>
-    </ClCompile>
-    <ClCompile Include="common\ServerPlayer\ServerPlayerDefine.cpp">
-      <Filter>Source Files\serverPlayer</Filter>
-    </ClCompile>
-    <ClCompile Include="common\ServerPlayer\ServerPlayerManager.cpp">
-      <Filter>Source Files\serverPlayer</Filter>
     </ClCompile>
     <ClCompile Include="common\common\LibNetwork.cpp">
       <Filter>Source Files\common</Filter>
@@ -800,40 +765,136 @@
     <ClCompile Include="common\packet\Packet\PBMessage.pb.cc">
       <Filter>Source Files\packet\Packet</Filter>
     </ClCompile>
-    <ClCompile Include="common\Table\Table_SceneNpc.cpp">
-      <Filter>Source Files\table</Filter>
-    </ClCompile>
     <ClCompile Include="common\DictionaryFormat\DictionaryFormat.cpp">
       <Filter>Source Files\DictionaryFormat</Filter>
-    </ClCompile>
-    <ClCompile Include="common\Table\Table_NameFilter.cpp">
-      <Filter>Source Files\table</Filter>
     </ClCompile>
     <ClCompile Include="common\Message\TransportMsg.cpp">
       <Filter>Source Files\Message</Filter>
     </ClCompile>
-    <ClCompile Include="common\packet\Packet\GS_Common_PAK.cpp">
-      <Filter>Source Files\packet\Packet</Filter>
+    <ClCompile Include="common\common\Config.cpp">
+      <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="common\packet\Packet\SG_Common_PAK.cpp">
-      <Filter>Source Files\packet\Packet</Filter>
+    <ClCompile Include="common\common\IniFile.cpp">
+      <Filter>Source Files\common</Filter>
     </ClCompile>
-    <ClCompile Include="common\packet\PacketHandler\GS_Common_Handler.cpp">
-      <Filter>Source Files\packet\PacketHandler</Filter>
+    <ClCompile Include="common\log\Log.cpp">
+      <Filter>Source Files\log</Filter>
     </ClCompile>
-    <ClCompile Include="common\packet\PacketHandler\SG_Common_Handler.cpp">
-      <Filter>Source Files\packet\PacketHandler</Filter>
+    <ClCompile Include="common\log\LogDefine.cpp">
+      <Filter>Source Files\log</Filter>
+    </ClCompile>
+    <ClCompile Include="common\CombatStruct\GameStruct_CombatAttr.cpp">
+      <Filter>Source Files\combat</Filter>
+    </ClCompile>
+    <ClCompile Include="common\CombatStruct\GameStruct_PK.cpp">
+      <Filter>Source Files\combat</Filter>
+    </ClCompile>
+    <ClCompile Include="common\CombatStruct\GameStruct_Threat.cpp">
+      <Filter>Source Files\combat</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\TimeManager.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\GuidDefine.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\GuidGenerator.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\common\GuidLoader.cpp">
+      <Filter>Source Files\common</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Login\GameInterface_Login.cpp">
+      <Filter>Source Files\login</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_CharList.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_RandomName.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\DBStruct\DBStruct_CityCreate.cpp">
+      <Filter>Source Files\DBStruct</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_ArrangeSelectTarget.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_Building.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_CityBuildingDefault.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_CityBuildingLevel.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_CityBuildingSlot.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_CoolDownTime.cpp">
+      <Filter>Source Files\table</Filter>
     </ClCompile>
     <ClCompile Include="common\Table\Table_CopyScene.cpp">
       <Filter>Source Files\table</Filter>
     </ClCompile>
-    <ClCompile Include="common\Table\Table_SceneClass.cpp">
+    <ClCompile Include="common\Table\Table_CopySceneNpc.cpp">
       <Filter>Source Files\table</Filter>
     </ClCompile>
     <ClCompile Include="common\Table\Table_CopySceneRule.cpp">
       <Filter>Source Files\table</Filter>
     </ClCompile>
+    <ClCompile Include="common\Table\Table_Hero.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_Impact.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_InitialCombatAttr.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_NameFilter.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_NpcOptionalSkill.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_NpcSkillStrategy.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
     <ClCompile Include="common\Table\Table_PatrolPoint.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_PublicConfig.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_RoleBaseAttr.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SceneClass.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SceneNpc.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_ServerConfigList.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SkillActive.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SkillBase.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SkillEx.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SnareObjBuffInfo.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_SnareObjInfo.cpp">
+      <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\Table\Table_Troop.cpp">
       <Filter>Source Files\table</Filter>
     </ClCompile>
   </ItemGroup>

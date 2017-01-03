@@ -32,10 +32,9 @@ public:
 	{
 		TYPE_INVALID	= 0,
 		SELF =1, //自身 
-		TEAMMEM =2,//队友 
-		ENEMY =4,//敌人(敌对和中立) 
-		FRIND =8,//友方
-		OWNER =16,//主人(夥伴專用)
+		FRIND =2,//队友 
+		ENEMY =4,//敌人(敌对和中立)
+		FRINDEXSELF=8,//友方但不能是自己
 	};
 
 };
@@ -70,8 +69,7 @@ public:
 		INITIATIVE=1,//主动技
 		PASSIVITY=2,//被动技
 		AUTOREPEAT=4,//自动连续技
-		XP=8,//XP技
-		CHONGFENG=16,//冲锋技
+		CHONGFENG=8,//冲锋技
 	};
 };
 //技能使用失败的原因

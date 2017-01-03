@@ -14,6 +14,8 @@ public:
 	virtual int GetRunState(void);
 public:
 	virtual void Tick(const TimeInfo &rTimeInfo);
+private:
+	virtual void Tick_Logic(const TimeInfo & rTimeInfo);
 public:
 	virtual InvokerPtr InitMyself(void);
 
@@ -23,8 +25,12 @@ protected:
 protected:
 	enum
 	{
-		STATUS_READY = 0,
-		STATUS_OPENED,
+		STATUS_OPENED = 0,
+		STATUS_READY = 1, // 交战双方进入,
+		STATUS_LINE, // 布阵
+		STATUS_SELECTTARGET,//选择目标
+		STATUS_MARCH, // 行军
+		STATUS_COMBAT, // 冲锋
 		STATUS_CLOSED,
 	};
 protected:
@@ -43,31 +49,37 @@ public:
 	virtual void OnObjLeave(int nID);
 	virtual void OnObjEnterCombat(int nID);
 	virtual void OnObjLeaveCombat(int nID);
-	virtual void OnScriptSkillStart(int nID,int nSkillId);
-	virtual void OnScriptSkillBreak(int nID,int nSkillId);
-	virtual void OnScriptSkillFininsh(int nID,int nSkillId);
-	virtual bool OnScriptCheckUseSkill(int nID,int nSkillId);
 	virtual void OnObjDie(int nID,int nKillerId);
-	virtual bool OnObjBeforeHPChange(int nID, int nHP, int& nSpecialHP);
-	virtual bool OnObjBeforeMPChange(int nID, int nMP, int& nSpecialMP);
-	virtual void OnClientObjEnterOK(int nID);
 	virtual bool IsCopyScene(void) const {return true;}
 	virtual bool IsCanEnterByGuid(const int64 &rGuid);
-	virtual int GetCopyScenePlayType(void) const { return GetPlayType(); }
 	virtual int GetCopySceneDifficulty(void) const { return GetDifficulty(); }
 	virtual int GetCopySceneTier(void) const { return m_nTier; }
 	virtual void SetCopySceneTier(int val) { m_nTier = val; }
-	virtual void OnObjTeleportChangeScene(int nID);
 
 private:
-	void CleanUpPlayersGuid(void);
+	void CleanUpObjList(void);
+
 private:
-	bsarray<int64, COPYSCENEMAXPLAYERCOUNT> m_PlayersGuid;
+	bsarray<tint32, MAX_ARRANGE_COUNT> m_lstAttack; // 攻击方的成员列表
+	bsarray<tint32, MAX_ARRANGE_COUNT> m_lstDefence; // 攻击方的成员列表
+private:
+	void InitMarchObj(const March& rMarch);
+	void InitAttackObj(const March& rMarch);
+	void InitDefenceObj(const March& rMarch);
+	void SetAttackMarchLine();
+	void SetDefenceMarchLine();
+	void StartAttachMarch();
+	void StartDefenceMarch();
+	//void InitNpcObj();
+
+public:
+	tint32 GetSceneArrangeSelectTarget(tint32 nArrangeId,bool bAttack);
 
 protected:
 	void Tick_Close(const TimeInfo &rTimeInfo);
 protected:
 	int m_nTimeClose;
+
 
 protected:
 	void Open(int nPlayType, int nDifficulty, int nLevel);
@@ -77,14 +89,9 @@ protected:
 	int CalcExistTime(void);
 
 public:
-	int GetPlayType(void) const { return m_nPlayType; }
-	void SetPlayType(int val) { m_nPlayType = val; }
+
 	int GetDifficulty(void) const { return m_nDifficulty; }
 	void SetDifficulty(int val) { m_nDifficulty = val; }
-	int GetScore(void) const { return m_nScore; }
-	void SetScore(int val) { m_nScore = val; }
-	int GetCarom(void) const { return m_nCarom; }
-	void SetCarom(int val) { m_nCarom = val; }
 	int GetStartTime(void) const { return m_nStartTime; }
 	void SetStartTime(int val) { m_nStartTime = val; }
 	int GetStar(void) const { return m_nStar; }
@@ -95,37 +102,38 @@ public:
 	void SetDieCount(int val) { m_DieCount = val; }
 	virtual int GetLevel(void) const { return m_nLevel; }
 	virtual void SetLevel(int val) { m_nLevel = val; }
-	int GetSweepLevel(void) const { return m_nSweepLevel; }
-	void SetSweepLevel(int val) { m_nSweepLevel = val; }
 private:
 	int m_nDifficulty;		//难度 1,2,3
-	int m_nPlayType;			//单人或多人
-	int m_nScore;			//评分
-	int m_nCarom;			//最高连击
 	int m_nStartTime;		//副本开始时间
 	int m_nStar;				//星级
 	int m_DieCount;			//记录死亡总次数
 	int m_nResult;			//结果，0失败1胜利2平局
 	int m_nTier;				//层次，用于计算副本npc属性
 	int m_nLevel;			//副本自适应等级
-	int m_nSweepLevel;			//副本可扫荡等级 0（不可扫荡） 1（可扫荡普通） 2（可扫荡普通+困难） 3（普通+困难+挑战全部可以扫荡）
 	int m_nExistTime;
 
+	March m_AttackMarch;
+	March m_DefenceMarch;
 
 protected:
-	int m_nDemandMin;
-	int m_nDemandMax;
 	int m_nWaitCloseTime;
 	int m_nHeartbeatTime;
 
 public:
 	virtual void HandleMessage(const MarchEnterSceneMsg &rMsg);
+	virtual void HandleMessage(const UserSkillMsg &rMsg);
+	virtual void HandleMessage(const ReqBattleInfoMsg &rMsg);
+	virtual void HandleMessage(const ReqObjListMsg &rMsg);
+public:
+	// 战斗相关的消息包
+	virtual void HandleMessage(const ReqSetRobotOpenMsg& rMsg);
+
 public:
 	int GetCopySceneLevel( );
 };
 
 POOLDEF_DECL(CopyScene);
-
+BSARRAY_ASSIGN_DECL(tint32, MAX_ARRANGE_COUNT);
 typedef GeneralInvoker<CopyScene, 125, 30000> GeneralCopySceneInvoker;
 
 #endif

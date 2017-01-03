@@ -15,7 +15,6 @@ class GC_NOTICE_PAK:public Packet
  GC_NOTICE_PAK():Packet(m_PacketData){}
  virtual ~GC_NOTICE_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_GC_NOTICE_PAK;}
  public:
  ::GC_NOTICE m_PacketData;
@@ -32,7 +31,6 @@ class GC_NOTICE_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::GC_NOTICE_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::GC_NOTICE_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

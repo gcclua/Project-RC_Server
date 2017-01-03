@@ -131,11 +131,11 @@ void Obj_Character::StopMove(bool bNotifyClient, bool bNotifyEvent)
 		if (bNotifyClient && IsSceneValid())
 		{
 			MarchStopMsgPtr MsgPtr = POOLDEF_NEW(MarchStopMsg);
-			MsgPtr->m_fX = GetScenePos().m_fX;
-			MsgPtr->m_fZ = GetScenePos().m_fZ;
+			MsgPtr->m_nX = GetScenePos().m_nX;
+			MsgPtr->m_nZ = GetScenePos().m_nZ;
 			MsgPtr->m_nSerial = m_PathCont[0].m_nSerial;
-			MsgPtr->m_serverId = GetID();
-
+			MsgPtr->m_nObjId = GetID();
+			MsgPtr->m_nSceneId = GetSceneInstID();
 			GetScene().BroadCast_InSight_Include(MsgPtr, GetID());
 		}
 
@@ -170,8 +170,9 @@ void Obj_Character::SendMoveStatus(Obj_March &rMarch)
 	{
 		RetMarchMoveMsgPtr MsgPtr = POOLDEF_NEW(RetMarchMoveMsg);
 		AssertEx(MsgPtr,"");
-		MsgPtr->m_serverId = GetID();
+		MsgPtr->m_nObjId = GetID();
 		MsgPtr->m_nPosCount = nbs;
+		MsgPtr->m_nSceneId  = GetSceneInstID();
 
 		int nSize = m_PathCont.Size();
 		for (int i = 0; i < nSize; i++)
@@ -180,8 +181,8 @@ void Obj_Character::SendMoveStatus(Obj_March &rMarch)
 			if (rPathNode.m_bBroadcast)
 			{
 				MsgPtr->m_nSerial.push_back(rPathNode.m_nSerial);
-				MsgPtr->m_nPosX.push_back(static_cast<int>(rPathNode.m_EndPos.m_fX * 100.0f));
-				MsgPtr->m_nPosX.push_back(static_cast<int>(rPathNode.m_EndPos.m_fZ * 100.0f));
+				MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nX );
+				MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nZ );
 			}
 		}
 
@@ -208,8 +209,9 @@ void Obj_Character::BroadcastMoveStatus(void)
 	{
 		RetMarchMoveMsgPtr MsgPtr = POOLDEF_NEW(RetMarchMoveMsg);
 		AssertEx(MsgPtr,"");
-		MsgPtr->m_serverId = GetID();
+		MsgPtr->m_nObjId = GetID();
 		MsgPtr->m_nPosCount = nubs;
+		MsgPtr->m_nSceneId  = GetSceneInstID();
 
 		int nSize = m_PathCont.Size();
 		for (int i = 0; i < nSize; i++)
@@ -218,8 +220,8 @@ void Obj_Character::BroadcastMoveStatus(void)
 			if (rPathNode.m_bBroadcast)
 			{
 				MsgPtr->m_nSerial.push_back(rPathNode.m_nSerial);
-				MsgPtr->m_nPosX.push_back(static_cast<int>(rPathNode.m_EndPos.m_fX * 100.0f));
-				MsgPtr->m_nPosX.push_back(static_cast<int>(rPathNode.m_EndPos.m_fZ * 100.0f));
+				MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nX );
+				MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nZ );
 			}
 		}
 
@@ -276,8 +278,8 @@ void Obj_Character::Moving(const TimeInfo &rTimeInfo)
 	else
 	{
 		ScenePos NewPos;
-		NewPos.m_fX = CurPos.m_fX + fMoveDistance * ::cos(fDirection);
-		NewPos.m_fZ = CurPos.m_fZ + fMoveDistance * ::sin(fDirection);
+		NewPos.m_nX = (int)(CurPos.m_nX + fMoveDistance * ::cos(fDirection));
+		NewPos.m_nZ = (int)(CurPos.m_nZ + fMoveDistance * ::sin(fDirection));
 		SetScenePos(NewPos);
 		m_fDistanceCompensate = 0.0f;
 	}
@@ -300,28 +302,6 @@ void Obj_Character::Stopping(void)
 	}
 
 	__LEAVE_FUNCTION
-}
-
-ScenePos Obj_Character::GetFollowPos(void)
-{
-	float fAngle = _PI*(float)(7.0f/4.0f);
-	int nDist = 1;
-
-	ScenePos myPos = GetScenePos();
-	ScenePos retPos;
-	//不考虑人物坐标时 计算伙伴坐标
-	retPos.m_fX = nDist*cos(fAngle);
-	retPos.m_fZ = nDist*sin(fAngle);
-	//加入朝向影响 旋转坐标
-	float fFaceDir = GetFaceDir();
-	float x = retPos.m_fX*cos(fFaceDir) - retPos.m_fZ*sin(fFaceDir);
-	float z = retPos.m_fZ*cos(fFaceDir) + retPos.m_fX*sin(fFaceDir);
-	retPos.m_fX = x;
-	retPos.m_fZ = z;
-	//平移
-	retPos.m_fX += myPos.m_fX;
-	retPos.m_fZ += myPos.m_fZ;
-	return retPos;
 }
 
 void Obj_Character::TeleMoveTo(const ScenePos &targetrPos)
@@ -354,9 +334,9 @@ void Obj_Character::UpdateTeleMoveToClient(const ScenePos &targetrPos,bool isNee
 	RetMarchTeleMoveMsgPtr MsgPtr = POOLDEF_NEW(RetMarchTeleMoveMsg);
 	AssertEx(MsgPtr,"");
 	MsgPtr->m_nObjId = GetID();
-	MsgPtr->m_nPosX  = (int)(targetrPos.m_fX*100);
-	MsgPtr->m_nPoxZ  = (int)(targetrPos.m_fZ*100);
-
+	MsgPtr->m_nPosX  = targetrPos.m_nX;
+	MsgPtr->m_nPoxZ  = targetrPos.m_nZ;
+	MsgPtr->m_nSceneId = GetSceneInstID();
 	
 	rScene.BroadCast_InSight_Include(MsgPtr,GetID());
 }

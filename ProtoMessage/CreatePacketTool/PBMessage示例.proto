@@ -1,0 +1,23 @@
+//#test message
+//@CG
+message CG_Test
+{
+	required string name = 1;	//名字
+	enum TYPE 
+	{
+  	TYPE_INVALID = 0;
+  	TYPE_1 = 1;
+  	TYPE_2 = 2;
+  	TYPE_3 = 3;
+  }
+	required int32 type = 2; //TYPE类型的数据
+	required string testData = 3;	//数据
+}
+
+//#client ask login
+//@CG
+message CG_LOGIN
+{
+	required string account = 1;	//账户名
+	required string password = 2;	//密码
+}

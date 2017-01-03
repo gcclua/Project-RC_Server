@@ -6,6 +6,8 @@
 #include "sceneClass/MainSceneClass.h"
 #include "service/MessageOp.h"
 #include "Table/Table_SceneClass.h"
+#include "Message/DBMsg.h"
+#include "Config.h"
 
 
 #define CHANGENAME_COOLDOWN (20)
@@ -38,6 +40,18 @@ void SceneService::Init( void )
 	__LEAVE_FUNCTION
 }
 
+
+void SceneService::Openup(void)
+{
+	__ENTER_FUNCTION
+		//OpenupOk();
+		DBReqLoadMapMarchMsgPtr MsgPtr = POOLDEF_NEW(DBReqLoadMapMarchMsg);
+	AssertEx(MsgPtr,"");
+	SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
+
+	__LEAVE_FUNCTION
+}
+
 void SceneService::Shutdown(void)
 {
 	__ENTER_FUNCTION
@@ -60,10 +74,6 @@ void SceneService::Tick( const TimeInfo &rTimeInfo )
 	Tick_OnlineLog(rTimeInfo);
 
 	Tick_Shutdown(rTimeInfo);
-
-	Tick_ChangeNameCoolDown(rTimeInfo);
-
-
 	__LEAVE_FUNCTION
 }
 
@@ -73,10 +83,8 @@ void SceneService::Tick_OnlineLog(const TimeInfo &rTimeInfo)
 
 	if (rTimeInfo.m_bDiffMinute)
 	{
-		//AuditLog(LOGDEF_INST(Audit_Online), "ScenePlaying", invalid_int64,
-			//"Count=%d", static_cast<int>(m_MarchInfoMap.size()));
-		//CacheLog(LOGDEF_INST(Scene), "cachedmsg size(%d)",
-			//static_cast<int>(m_CachedMsgList.size()));
+		CacheLog(LOGDEF_INST(Scene), "cachedmsg size(%d)",
+			static_cast<int>(m_CachedMsgList.size()));
 	}
 
 	__LEAVE_FUNCTION
@@ -90,8 +98,8 @@ void SceneService::Tick_Shutdown(const TimeInfo &rTimeInfo)
 	{
 		int nScenePlaying = static_cast<int>(m_MarchInfoMap.size());
 
-		//CacheLog(LOGDEF_INST(ServerStatus), "SceneService::Tick_Shutdown, nScenePlaying(%d)",
-			//nScenePlaying);
+		CacheLog(LOGDEF_INST(ServerStatus), "SceneService::Tick_Shutdown, nScenePlaying(%d)",
+			nScenePlaying);
 
 		if (nScenePlaying == 0)
 		{
@@ -110,15 +118,182 @@ void SceneService::Tick_Shutdown(const TimeInfo &rTimeInfo)
 	__LEAVE_FUNCTION
 }
 
+void SceneService::LoadMarch(const DBMarchData& rData)
+{
+	__ENTER_FUNCTION
+		if (rData.m_pData == null_ptr)
+		{
+			return;
+		}
 
-void SceneService::HandleMessage( const MarchEnterSceneMsg &rMsg )
+		//AssertEx(rData.m_Count < MAX_TILE_NUM,"");
+		for (int i = 0; i< rData.m_Count; i++)
+		{
+			March rMarch;
+			rMarch.SerializeFromDB(rData.m_pData[i]);
+			MarchInfo ui;
+			rMarch.FillMarchBaseInfo(ui.m_MarchBaseInfo);
+			ui.m_MarchSceneInfo.m_nState = MarchSceneInfo::SCENEPLAYING;
+			//tempTile->SerializeFromDB(rData.m_pData[i]);
+			ui.m_MarchSceneInfo.m_SceneID = EnterTo(rMarch);
+			AddMarchInfo(ui);
+
+		}
+		__LEAVE_FUNCTION
+}
+
+void SceneService::HandleMessage(const DBRetLoadMapMarchMsg &rMsg)
+{
+	__ENTER_FUNCTION
+	AssertEx(rMsg.m_nResult == DBMsgResult::RESULT_SUCCESS,"");
+	AssertEx(rMsg.m_DataPtr,"");
+
+	LoadMarch(*rMsg.m_DataPtr);
+	OpenupOk();
+	__LEAVE_FUNCTION
+}
+
+void SceneService::HandleMessage(const MarchReqFightMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		if (rMsg.m_nAtttackId == 0)
+		{
+			return;
+		}
+
+		if (rMsg.m_nDefenceId >0)
+		{
+			MarchInfoMap::iterator itAttacker = m_MarchInfoMap.find(rMsg.m_nAtttackId);
+			if (itAttacker == m_MarchInfoMap.end())
+			{
+				return;
+			}
+			MarchInfo& rAttackMachInfo = itAttacker->second;
+
+			// 检测是不是自己发的报，避免外挂
+			if (rMsg.m_ReceiverGuid != rAttackMachInfo.m_MarchBaseInfo.m_OwnGuid)
+			{
+				return;
+			}
+
+			MarchInfoMap::iterator itDefencer = m_MarchInfoMap.find(rMsg.m_nDefenceId);
+			if (itDefencer == m_MarchInfoMap.end())
+			{
+				return;
+			}
+
+			MarchInfo& rDefenceMachInfo = itDefencer->second;
+
+			if (rAttackMachInfo.m_MarchSceneInfo.m_nState != MarchSceneInfo::SCENEPLAYING)
+			{
+				return;
+			}
+			
+			// 不能自己攻击自己
+			if (rDefenceMachInfo.m_MarchBaseInfo.m_OwnGuid == rAttackMachInfo.m_MarchBaseInfo.m_OwnGuid)
+			{
+				return;
+			}
+
+			if (rDefenceMachInfo.m_MarchSceneInfo.m_nState != MarchSceneInfo::SCENEPLAYING)
+			{
+				return;
+			}
+
+			if ((*itDefencer).second.m_MarchSceneInfo.m_SceneID.m_nInstID != (*itAttacker).second.m_MarchSceneInfo.m_SceneID.m_nInstID)
+			{
+				return;
+			}
+
+			MarchOpenCopySceneMsgPtr MsgPtr= POOLDEF_NEW(MarchOpenCopySceneMsg);
+			AssertEx(MsgPtr,"");
+			MsgPtr->m_nAtttackId  = rMsg.m_nAtttackId;
+			MsgPtr->m_DestSceneID = rMsg.m_DestSceneID;
+			MsgPtr->m_nDefenceId  = rMsg.m_nDefenceId;
+			MsgPtr->m_nType       = rMsg.m_nType;
+			
+			SceneID rScene(1,rMsg.m_nSceneId);
+			SendMessage2March(rMsg.m_nAtttackId,MsgPtr);
+		}
+
+	__LEAVE_FUNCTION
+}
+
+void SceneService::HandleMessage(const MarchReqChangeSceneMsg &rMsg)
+{
+	__ENTER_FUNCTION
+
+		int64 guid = rMsg.m_guid;
+		SceneID curSceneID = rMsg.m_CurSceneID;
+		SceneID destSceneID = rMsg.m_DestSceneID;
+
+		if (guid == invalid_guid64)
+		{
+			return;
+		}
+
+		SceneClassPtrMap::iterator itCur = m_SceneClassPtrMap.find(curSceneID.m_nClassID);
+		if (itCur == m_SceneClassPtrMap.end())
+		{
+			return;
+		}
+		AssertEx((*itCur).second, "");
+		if (!((*itCur).second->ChangeFromCheck(curSceneID, guid)))
+		{
+			return;
+		}
+
+		SceneClassPtrMap::iterator itDest = m_SceneClassPtrMap.find(destSceneID.m_nClassID);
+		if (itDest == m_SceneClassPtrMap.end())
+		{
+			return;
+		}
+		AssertEx(itDest->second, "");
+		SceneClass &scnClass = *itDest->second;
+		if (!scnClass.ChangeToCheck(destSceneID, guid))
+		{
+			if (scnClass.GetSceneType() == SceneType::MAIN)
+			{
+				if (destSceneID.m_nInstID > invalid_id)
+				{
+					SceneInterface::SendNoticeToUser(guid, "#{2351}");
+				}
+			}
+			return;
+		}
+
+		UpdateMarchInfo(guid, MarchSceneInfo::SCENECHANGING);
+		MarchAcceptChangeSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchAcceptChangeSceneMsg);
+		AssertEx(MsgPtr, "");
+		MsgPtr->m_guid = guid;
+		MsgPtr->m_DestSceneID = destSceneID;
+		SendMessage2Scene(curSceneID, MsgPtr);
+
+	__LEAVE_FUNCTION
+}
+
+void SceneService::HandleMessage(MarchChangeSceneMsg rMsg)
 {
 	__ENTER_FUNCTION
 
 	MarchInfo ui;
-	rMsg.m_MarchPtr->FillMarchBaseInfo(ui.m_MarchBaseInfo);
+	rMsg.m_March.FillMarchBaseInfo(ui.m_MarchBaseInfo);
 	ui.m_MarchSceneInfo.m_nState = MarchSceneInfo::SCENEPLAYING;
-	ui.m_MarchSceneInfo.m_SceneID = EnterTo(rMsg.m_MarchPtr);
+	ui.m_MarchSceneInfo.m_SceneID = ChangeTo(rMsg.m_March, rMsg.m_DestSceneID);
+	UpdateMarchInfo(ui);
+	DistributeCachedMsg(ui.m_MarchBaseInfo.m_Guid);
+
+	__LEAVE_FUNCTION
+}
+
+void SceneService::HandleMessage( MarchEnterSceneMsg rMsg )
+{
+	__ENTER_FUNCTION
+
+	MarchInfo ui;
+	rMsg.m_March.FillMarchBaseInfo(ui.m_MarchBaseInfo);
+	ui.m_MarchSceneInfo.m_nState = MarchSceneInfo::SCENEPLAYING;
+	ui.m_MarchSceneInfo.m_SceneID = EnterTo(rMsg.m_March);
 
 	AddMarchInfo(ui);
 
@@ -147,12 +322,20 @@ void SceneService::HandleMessage(const UpdateMarchBaseInfoMsg& rMsg)
 	__LEAVE_FUNCTION
 }
 
-SceneID SceneService::EnterTo(Obj_MarchPtr ptr)
+SceneID SceneService::EnterTo(const March& rMarch)
 {
 	__ENTER_FUNCTION
-		if (!ptr)
+		SceneClassID nOriginalSceneClassID = _GameConfig().m_nDefaultSceneId;
+
+		SceneClassPtrMap::iterator it = m_SceneClassPtrMap.find(nOriginalSceneClassID);
+		if (it != m_SceneClassPtrMap.end())
 		{
-			return SceneID();
+			AssertEx(it->second, "");
+			SceneClass::EnterResult ret = it->second->EnterTo(rMarch);
+			if (ret.first)
+			{
+				return ret.second;
+			}
 		}
 	return SceneID(invalid_id, invalid_id);
 
@@ -160,7 +343,23 @@ SceneID SceneService::EnterTo(Obj_MarchPtr ptr)
 	return SceneID(invalid_id, invalid_id);
 }
 
-SceneID SceneService::ChangeTo(Obj_MarchPtr ptr, const SceneID &rsid)
+SceneID SceneService::EnterToDefaultScene(const March& rMarch)
+{
+	__ENTER_FUNCTION
+
+		SceneClassPtrMap::iterator it = m_SceneClassPtrMap.find(_GameConfig().m_nDefaultSceneId);
+	AssertEx(it != m_SceneClassPtrMap.end(), "");
+	AssertEx(it->second, "");
+
+	SceneClass::ChangeResult Ret = it->second->EnterTo(rMarch);
+	AssertEx(Ret.first, "");
+	return Ret.second;
+
+	__LEAVE_FUNCTION
+		return SceneID(invalid_id, invalid_id);
+}
+
+SceneID SceneService::ChangeTo(const March& rMarch, const SceneID &rsid)
 {
 	__ENTER_FUNCTION
 
@@ -172,13 +371,13 @@ SceneID SceneService::ChangeTo(Obj_MarchPtr ptr, const SceneID &rsid)
 	AssertEx(it->second, "");
 
 	SceneClass &scnClass = *it->second;
-	SceneClass::ChangeResult ret = scnClass.ChangeTo(ptr, rsid.m_nInstID);
+	SceneClass::ChangeResult ret = scnClass.ChangeTo(rMarch, rsid.m_nInstID);
 	if (ret.first)
 	{
 		return ret.second;
 	}
 
-	ret = scnClass.ChangeTo(ptr);
+	ret = scnClass.ChangeTo(rMarch);
 	if (ret.first)
 	{
 		return ret.second;
@@ -218,8 +417,6 @@ void SceneService::InitSceneClass( void )
 					AssertEx(Ptr, "");
 					Ptr->SetSceneType(SceneType::MAIN);
 					Ptr->SetSceneClassID(rLine.GetSceneID());
-					Ptr->SetMaxPlayerCountA(rLine.GetPlayersMaxA());
-					Ptr->SetMaxPlayerCountB(rLine.GetPlayersMaxB());
 					Ptr->InitSceneObstacle(rLine.GetLength(), rLine.GetWidth(), rLine.GetObstacle());
 					Ptr->EnlargeScene();
 
@@ -235,8 +432,6 @@ void SceneService::InitSceneClass( void )
 					AssertEx(Ptr, "");
 					Ptr->SetSceneType(SceneType::COPY);
 					Ptr->SetSceneClassID(rLine.GetSceneID());
-					Ptr->SetMaxPlayerCountA(rLine.GetPlayersMaxA());
-					Ptr->SetMaxPlayerCountB(rLine.GetPlayersMaxB());
 					Ptr->InitSceneObstacle(rLine.GetLength(), rLine.GetWidth(), rLine.GetObstacle());
 
 					SceneClassPtr sp = boost::static_pointer_cast<SceneClass, CopySceneClass>(Ptr);
@@ -284,15 +479,15 @@ void SceneService::Tick_LogSceneClassStat(const TimeInfo &rTimeInfo)
 
 	if (rTimeInfo.m_bDiffMinute)
 	{
-		//CacheLog(LOGDEF_INST(Scene), "logsceneclassstat, begin");
+		CacheLog(LOGDEF_INST(Scene), "logsceneclassstat, begin");
 
 		for (SceneClassPtrMap::iterator it = m_SceneClassPtrMap.begin(); it != m_SceneClassPtrMap.end(); it++)
 		{
 			AssertEx(it->second, "");
-			//CacheLog(LOGDEF_INST(Scene), "%d:%d", it->second->GetSceneClassID(), it->second->GetSceneInstCount());
+			CacheLog(LOGDEF_INST(Scene), "%d:%d", it->second->GetSceneClassID(), it->second->GetSceneInstCount());
 		}
 
-		//CacheLog(LOGDEF_INST(Scene), "logsceneclassstat, end");
+		CacheLog(LOGDEF_INST(Scene), "logsceneclassstat, end");
 	}
 
 	__LEAVE_FUNCTION
@@ -473,8 +668,8 @@ void SceneService::DistributeCachedMsg(int64 guid)
 			}
 			if (nSendCount > 0)
 			{
-				//CacheLog(LOGDEF_INST(Scene), "cachedmsg send to user(%08X,%08X) count(%d)",
-					//guid.GetHigh32Value(), guid.GetLow32Value(), nSendCount);
+				CacheLog(LOGDEF_INST(Scene), "cachedmsg send to user(%08X) count(%d)",
+					guid, nSendCount);
 			}
 		}
 		else if (rusi.m_nState == MarchSceneInfo::SCENECHANGING)
@@ -540,6 +735,19 @@ void SceneService::HandleMessage(const TransportToSceneInst &rMsg)
 	__ENTER_FUNCTION
 
 		SendMessage(rMsg.m_SceneID, rMsg.m_mp);
+
+	__LEAVE_FUNCTION
+}
+
+void SceneService::HandleMessage(const ReqMarchStartMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		
+		ScenePos rPos = rMsg.m_Pos;
+		March    rMarch = rMsg.m_March;
+
+		EnterToDefaultScene(rMarch);
+
 
 	__LEAVE_FUNCTION
 }

@@ -8,7 +8,9 @@ TileInfo::TileInfo()
 	m_nBlock = 0; // 所属Block
 	m_nType = TILE_TYPE_INVALID;  // 地块类型
 	m_nCityId = 0;
-	m_nPlayerId = 0;
+	m_nUserId = 0;
+	m_lockTime  = 0;
+	m_nState    = TILE_STATE_IDLE;
 }
 
 TileInfo::~TileInfo()
@@ -24,8 +26,9 @@ void TileInfo::SerializeToDB(DBTile& rDest) const
 		rDest.m_nPosY  = m_nPosY;  // Y坐标
 		rDest.m_nBlock = m_nBlock; // 所属Block
 		rDest.m_nType  = m_nType;  // 地块类型
-		rDest.m_nPlayerId = m_nPlayerId; // 玩家ID
+		rDest.m_nUserId = m_nUserId; // 玩家ID
 		rDest.m_nCityId = m_nCityId; //城市ID
+		rDest.m_nState  = m_nState;
 	__LEAVE_FUNCTION
 }
 void TileInfo::SerializeFromDB(const DBTile& rSource)
@@ -37,6 +40,7 @@ void TileInfo::SerializeFromDB(const DBTile& rSource)
 		m_nBlock    = rSource.m_nBlock; // 所属Block
 		m_nType     = rSource.m_nType;  // 地块类型
 		m_nCityId   = rSource.m_nCityId;//城市ID
-		m_nPlayerId = rSource.m_nPlayerId;//玩家ID
+		m_nUserId   = rSource.m_nUserId;//玩家ID
+		m_nState    = rSource.m_nState;
 	__LEAVE_FUNCTION
 }

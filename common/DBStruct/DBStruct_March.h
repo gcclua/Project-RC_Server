@@ -6,8 +6,9 @@
 #include "DBStruct_Troop.h"
 #include "DBStruct_Hero.h"
 #include "Scene/GameStruct_Scene.h"
+#include  "march/GameDefine_March.h"
 
-// 玩家城市信息
+// 玩家March信息
 struct DBMarch
 {
 public:
@@ -16,6 +17,8 @@ public:
 
 	void CleanUp( );
 	void CopyFrom(const DBMarch& rSource);
+
+	void InitMarch(int64 userId,int64 cityId,int64 buildId);
 
 public:
 
@@ -29,13 +32,28 @@ public:
 	int64  m_nPlayerId;  // 玩家ID
 	int64  m_nCityId;    // 城市ID
 	int    m_nStatus;    // 状态
-
+	int64  m_nBuildId;   // 建筑ID
 	
 };
 
 typedef DBCommonData<DBMarch> DBMarchData;
+
+struct DBMapMarch
+{
+public:
+	DBMapMarch(){};
+	~DBMapMarch(){};
+
+	void CleanUp();
+	void CopyFrom(const DBMapMarch& rSource);
+
+	
+public:
+	bsvector< DBMarch> m_MarchList;
+
+};
+
+typedef DBCommonData<DBMarch> DBMarchData;
 typedef boost::shared_ptr<DBMarchData> DBMarchDataPtr;
-
-
 
 #endif

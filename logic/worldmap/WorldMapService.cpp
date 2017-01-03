@@ -1,8 +1,8 @@
 #include "WorldMapService.h"
 #include "DBStruct/DBStruct.h"
-#include "GameServerConfig.h"
 #include "service/MessageOp.h"
 #include "Message/DBMsg.h"
+#include "Message/LoginMsg.h"
 
 WorldMapService::WorldMapService()
 {
@@ -55,13 +55,13 @@ void WorldMapService::Tick_Save(const TimeInfo &rTimeInfo)
 				MsgPtr->m_DataPtr = DBTileDataPtr(new DBTileData);
 				AssertEx(MsgPtr->m_DataPtr,"");
 				Save(*(MsgPtr->m_DataPtr));
-				SendMessage2Srv(ServiceID::DBAGEMT,MsgPtr);
+				SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
 			}
 		}
 	__LEAVE_FUNCTION
 }
 
-void WorldMapService::Load(const DBTileData& rData)
+void WorldMapService::LoadTile(const DBTileData& rData)
 {
 	__ENTER_FUNCTION
 		if (rData.m_pData == null_ptr)
@@ -72,9 +72,9 @@ void WorldMapService::Load(const DBTileData& rData)
 		AssertEx(rData.m_Count < MAX_TILE_NUM,"");
 		for (int i = 0; i< rData.m_Count; i++)
 		{
-			TileInfo tempTile;
-			tempTile.SerializeFromDB(rData.m_pData[i]);
-			m_TileList.insert(std::make_pair(tempTile.GetID(),tempTile));
+			TileInfoPtr tempTile = TileInfoPtr(new TileInfo());
+			tempTile->SerializeFromDB(rData.m_pData[i]);
+			m_TileList.insert(std::make_pair(tempTile->GetID(),tempTile));
 
 		}
 		__LEAVE_FUNCTION
@@ -89,8 +89,7 @@ void WorldMapService::Save(DBTileData& rData)
 			int nDataIndex = 0;
 			for (SaveTileList::iterator it = m_lstSaveTile.begin(); it != m_lstSaveTile.end();it++)
 			{
-				int tileID = (*it);
-				TileInfo* pTile = GetTileInfo(tileID);
+				TileInfoPtr pTile = (*it).second;
 				AssertEx(pTile,"");
 				pTile->SerializeToDB(rData.m_pData[nDataIndex]);
 				
@@ -106,9 +105,11 @@ void WorldMapService::Save(DBTileData& rData)
 void WorldMapService::Openup(void)
 {
 	__ENTER_FUNCTION
+		//OpenupOk();
 		DBReqLoadTileDataMsgPtr MsgPtr = POOLDEF_NEW(DBReqLoadTileDataMsg);
 		AssertEx(MsgPtr,"");
-		SendMessage2Srv(ServiceID::DBAGEMT,MsgPtr);
+		SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
+
 	__LEAVE_FUNCTION
 }
 void WorldMapService::Shutdown(void)
@@ -119,12 +120,51 @@ void WorldMapService::Shutdown(void)
 		MsgPtr->m_DataPtr = DBTileDataPtr(new DBTileData);
 		AssertEx(MsgPtr->m_DataPtr,"");
 		Save(*(MsgPtr->m_DataPtr));
-		SendMessage2Srv(ServiceID::DBAGEMT,MsgPtr);
+		SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
 		ShutdownOk();
 	__LEAVE_FUNCTION
 }
 
-TileInfo* WorldMapService::GetTileInfo(int tileId)
+void WorldMapService::PushSaveList(TileInfoPtr Ptr)
+{
+	__ENTER_FUNCTION
+		bool bFind = false;
+		for (SaveTileList::iterator it = m_lstSaveTile.begin(); it != m_lstSaveTile.end();it++)
+		{
+			int nTileId = it->first;
+			if (nTileId == Ptr->GetID())
+			{
+				it->second = Ptr;
+				bFind = true;
+				break;
+			}
+		}
+		if (!bFind)
+		{
+			m_lstSaveTile.insert(std::make_pair(Ptr->GetID(),Ptr));
+		}
+	__LEAVE_FUNCTION
+}
+
+TileInfoPtr WorldMapService::GetPlainTile()
+{
+	__ENTER_FUNCTION
+		for (TileMap::iterator it = m_TileList.begin();it != m_TileList.end();it++)
+		{
+			TileInfoPtr pTileInfo = it->second;
+			if ( pTileInfo->GetState() ==  TILE_STATE_IDLE)
+			{
+				pTileInfo->SetState(TILE_STATE_LOCK);
+				PushSaveList(pTileInfo);
+				return pTileInfo;
+			}
+		}
+		return null_ptr;
+	__LEAVE_FUNCTION
+	return null_ptr;
+}
+
+TileInfoPtr WorldMapService::GetTileInfo(int tileId)
 {
 	__ENTER_FUNCTION
 		if (tileId<=0)
@@ -134,19 +174,58 @@ TileInfo* WorldMapService::GetTileInfo(int tileId)
 		TileMap::iterator it = m_TileList.find(tileId);
 		if (it != m_TileList.end())
 		{
-			return &((*it).second);
+			return ((*it).second);
 		}
 	__LEAVE_FUNCTION
 		return null_ptr;
 }
 
+void WorldMapService::HandleMessage(const ReqSetTileOwerMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		int tileId = rMsg.m_tileId;
+	TileMap::iterator it = m_TileList.find(tileId);
+	if (it != m_TileList.end())
+	{
+		TileInfoPtr Ptr = it->second;
+		Ptr->SetUserId(rMsg.m_userId);
+		Ptr->SetState(TILE_STATE_TAKE);
+	}
+	__LEAVE_FUNCTION
+}
+
 void WorldMapService::HandleMessage(const DBRetLoadTileDataMsg &rMsg)
 {
 	__ENTER_FUNCTION
-		AssertEx(rMsg.m_nResult == DBMsgResult::RESULT_SUCESS,"");
+		AssertEx(rMsg.m_nResult == DBMsgResult::RESULT_SUCCESS,"");
 	    AssertEx(rMsg.m_DataPtr,"");
 
-		Load(*rMsg.m_DataPtr);
+		LoadTile(*rMsg.m_DataPtr);
 		OpenupOk();
+	__LEAVE_FUNCTION
+}
+
+void WorldMapService::HandleMessage(const ReqIdleTileMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		RetIdleTileMsgPtr MsgPtr = POOLDEF_NEW(RetIdleTileMsg);
+		TileInfoPtr Ptr = GetPlainTile();
+		int tileId = INVALID_ID;
+		int nX = INVALID_ID;
+		int nY = INVALID_ID;
+		if (null_ptr != Ptr)
+		{
+			tileId = Ptr->GetID();
+			nX     = Ptr->GetPosX();
+			nY     = Ptr->GetPosY();
+		}
+		MsgPtr->m_tileId = tileId;
+		MsgPtr->m_posX   = nX;
+		MsgPtr->m_posY   = nY;
+		MsgPtr->m_userId = rMsg.m_userId;
+		MsgPtr->m_nPlayerID = rMsg.m_nPlayerID;
+
+		SendMessage2Srv(ServiceID::LOGIN,MsgPtr);
+
 	__LEAVE_FUNCTION
 }

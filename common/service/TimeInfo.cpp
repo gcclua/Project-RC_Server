@@ -1,9 +1,8 @@
 #include "TimeInfo.h"
-#include "Clock.h"
 
 TimeInfo::TimeInfo(void)
 {
-	m_uLastSysRunTime = (int)Clock::getCurrentSystemTime();
+	m_uLastSysRunTime = gTimeManager.SysRunTime();
 	m_nAnsiTime       = _ansitime();
 
 	tm ltm;
@@ -25,7 +24,7 @@ TimeInfo::~TimeInfo(void)
 void TimeInfo::Update()
 {
 	__ENTER_FUNCTION
-		int uSysRunTime = (int)Clock::getCurrentSystemTime();
+		tuint32 uSysRunTime = gTimeManager.SysRunTime();
 		m_nAnsiTime     = _ansitime();
 		tm ltm;
 		_localtime(m_nAnsiTime,ltm);

@@ -19,11 +19,11 @@ public:
 	};
 
 public:
-	Invoker(string szName,int nNormalInitDoingInterval,int nSlowlyInitDoingInterval);
+	Invoker(const tchar *szName,int nNormalInitDoingInterval,int nSlowlyInitDoingInterval);
 	virtual ~Invoker(void);
 
 private:
-	string m_szName;
+	FLString<64> m_szName;
 
 public:
 	// µ×²ãÊ¹ÓÃ£¬Âß¼­²ãºöÂÔ
@@ -76,7 +76,7 @@ template<typename _ServiceT,int _NormalInterval,int _SlowlyInterval>
 class GeneralInvoker : public Invoker
 {
 public:
-	explicit GeneralInvoker< _ServiceT, _NormalInterval,_SlowlyInterval>(_ServiceT &rService, string szName)
+	explicit GeneralInvoker< _ServiceT, _NormalInterval,_SlowlyInterval>(_ServiceT &rService, const tchar* szName)
 		:Invoker(szName,_NormalInterval,_SlowlyInterval)
 		,m_rService(rService)
 	{

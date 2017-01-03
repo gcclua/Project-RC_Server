@@ -10,6 +10,9 @@ void DBCity::CleanUp( )
 		m_nFood     = 0;
 		m_nStone    = 0;
 		m_nIron     = 0;
+		m_nPosX     = 0;
+		m_nPosZ     = 0;
+		m_nGold     = 0;
 		for (int i=0;i<MAX_CITY_CONSTRUCT_COUNT;i++)
 		{
 			m_ConstructList[i].CleanUp();
@@ -29,10 +32,11 @@ void DBCity::CleanUp( )
 			m_TechList[i].CleanUp();
 		}
 
-		for (int i=0;i<TROOPTYPE_MAX;i++)
-		{
-			m_TroopList[i].CleanUp();
-		}
+		//for (int i=0;i<TROOPTYPE_MAX;i++)
+		//{
+			//m_TroopList[i].CleanUp();
+		//}
+		
 	__LEAVE_FUNCTION
 }
 void DBCity::CopyFrom(const DBCity& rSource)
@@ -45,7 +49,9 @@ void DBCity::CopyFrom(const DBCity& rSource)
 		m_nFood     = rSource.m_nFood;
 		m_nStone    = rSource.m_nStone;
 		m_nIron     = rSource.m_nIron;
-
+		m_nPosX     = rSource.m_nPosX;
+		m_nPosZ     = rSource.m_nPosZ;
+		m_nGold     = rSource.m_nGold;
 		for (int i=0;i<MAX_CITY_CONSTRUCT_COUNT;i++)
 		{
 			m_ConstructList[i].CopyFrom(rSource.m_ConstructList[i]);
@@ -65,10 +71,10 @@ void DBCity::CopyFrom(const DBCity& rSource)
 			m_TechList[i].CopyFrom(rSource.m_TechList[i]);
 		}
 
-		for (int i=0;i<MAX_TROOP_QUEUE;i++)
-		{
-			m_TroopList[i].CopyFrom(rSource.m_TroopList[i]);
-		}
+		//for (int i=0;i<MAX_TROOP_QUEUE;i++)
+		//{
+			//m_TroopList[i].CopyFrom(rSource.m_TroopList[i]);
+		//}
 
 	__LEAVE_FUNCTION
 }
@@ -117,6 +123,7 @@ void DBBuilding::CleanUp( )
 	    m_nLevel = 0;
 	    m_nSlot  = 0;
 	    m_nType  = 0;
+		m_nCityID = 0;
 	__LEAVE_FUNCTION
 }
 void DBBuilding::CopyFrom(const DBBuilding& rSource)
@@ -126,6 +133,8 @@ void DBBuilding::CopyFrom(const DBBuilding& rSource)
 		m_nLevel    = rSource.m_nLevel;
 		m_nSlot     = rSource.m_nSlot;
 		m_nType     = rSource.m_nType;
+		m_nCityID   = rSource.m_nCityID;
+		m_ID        = rSource.m_ID;
 	__LEAVE_FUNCTION
 }
 

@@ -1,7 +1,7 @@
 /********************************************************************************
  *	文件名：	GameStruct_CombatAttr.h
  *	全路径：	\Server\Common\CombatStruct\GameStruct_CombatAttr.h
- *	创建人：	zz
+ *	创建人：	罗勇
  *	创建时间：2014-1-7
  *
  *	功能说明：战斗属性结构
@@ -26,7 +26,7 @@ public:
 	}
 	void CleanUp()
 	{
-		for (int i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
+		for (tint32 i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
 		{
 			m_RefixValue[i]=0;
 			m_RefixPer[i]=0.0f;
@@ -36,7 +36,7 @@ public:
 		m_BroadcastDirtyFlag.ClearAllBits();
 
 	}
-	int GetRefixValueByIndex(int index) const
+	tint32 GetRefixValueByIndex(tint32 index) const
 	{
 		if (index<0 || index>=COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -46,7 +46,7 @@ public:
 	}
 
 	//设置加成的具体数值
-	void SetRefixValueByIndex(int index,int nValue)
+	void SetRefixValueByIndex(tint32 index,int nValue)
 	{
 		if (index<0 || index>=COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -60,7 +60,7 @@ public:
 		SetBroadcastDirtyFlag(index,true);
 	}
 
-	float GetRefixPerByIndex(int index)const
+	tfloat32 GetRefixPerByIndex(tint32 index)const
 	{
 		if (index<0 || index>=COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -70,7 +70,7 @@ public:
 	}
 
 	//设置加成的百分比
-	void SetRefixPerByIndex(int index,float fPer)
+	void SetRefixPerByIndex(tint32 index,float fPer)
 	{
 		if (index<0 || index>=COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -92,19 +92,19 @@ public:
 	{
 		CombatAttr_Refix TotalRefix;
 		
-		for (int i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
+		for (tint32 i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
 		{
 			//计算加成数值之和
-			int nAddValue =AddObj.GetRefixValueByIndex(i);
-			int nValue =GetRefixValueByIndex(i);
-			int TotalValue =nAddValue+nValue;
+			tint32 nAddValue =AddObj.GetRefixValueByIndex(i);
+			tint32 nValue =GetRefixValueByIndex(i);
+			tint32 TotalValue =nAddValue+nValue;
 			TotalRefix.SetRefixValueByIndex(i,TotalValue);
 		
 			
 			//计算加成百分比之和
-			float fAddPer =AddObj.GetRefixPerByIndex(i);
-			float fPer =GetRefixPerByIndex(i);
-			float fTotalPer =fAddPer+fPer;
+			tfloat32 fAddPer =AddObj.GetRefixPerByIndex(i);
+			tfloat32 fPer =GetRefixPerByIndex(i);
+			tfloat32 fTotalPer =fAddPer+fPer;
 			TotalRefix.SetRefixPerByIndex(i,fTotalPer);
 		}
 		return TotalRefix;
@@ -113,26 +113,26 @@ public:
 	void operator+=(CombatAttr_Refix const& AddObj)
 	{
 		
-		for (int i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
+		for (tint32 i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
 		{
 			//计算加成数值之和
-			int nAddValue =AddObj.GetRefixValueByIndex(i);
-			int nValue =GetRefixValueByIndex(i);
-			int TotalValue =nAddValue+nValue;
+			tint32 nAddValue =AddObj.GetRefixValueByIndex(i);
+			tint32 nValue =GetRefixValueByIndex(i);
+			tint32 TotalValue =nAddValue+nValue;
 			SetRefixValueByIndex(i,TotalValue);
 		
 			
 			//计算加成百分比之和
-			float fAddPer =AddObj.GetRefixPerByIndex(i);
-			float fPer =GetRefixPerByIndex(i);
-			float fTotalPer =fAddPer+fPer;
+			tfloat32 fAddPer =AddObj.GetRefixPerByIndex(i);
+			tfloat32 fPer =GetRefixPerByIndex(i);
+			tfloat32 fTotalPer =fAddPer+fPer;
 			SetRefixPerByIndex(i,fTotalPer);
 		}
 	}
 	//重新计算 只要有一项有修改 全部重新计算
 	bool IsCalculationFlagDirty()const
 	{
-		for (int i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
+		for (tint32 i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
 		{
 			if (m_CalculationDirtyFlag.GetBit(i))
 			{
@@ -141,7 +141,7 @@ public:
 		}
 		return false;
 	}
-	bool IsCalculationFlagDirty(int nIndex)const
+	bool IsCalculationFlagDirty(tint32 nIndex)const
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -150,7 +150,7 @@ public:
 		}
 		return false;
 	}
-	void SetCalculationDirtyFlag(int nIndex,bool bDirty)
+	void SetCalculationDirtyFlag(tint32 nIndex,bool bDirty)
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -167,7 +167,7 @@ public:
 	}
 
 
-	bool IsSynFlagDirty(int nIndex)const
+	bool IsSynFlagDirty(tint32 nIndex)const
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -176,7 +176,7 @@ public:
 		}
 		return false;
 	}
-	void SetSynDirtyFlag(int nIndex,bool bDirty)
+	void SetSynDirtyFlag(tint32 nIndex,bool bDirty)
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -192,7 +192,7 @@ public:
 		m_SynDirtyFlag.MarkAllBits();
 	}
 
-	bool IsBroadcastFlagDirty(int nIndex)const
+	bool IsBroadcastFlagDirty(tint32 nIndex)const
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -201,7 +201,7 @@ public:
 		}
 		return false;
 	}
-	void SetBroadcastDirtyFlag(int nIndex,bool bDirty)
+	void SetBroadcastDirtyFlag(tint32 nIndex,bool bDirty)
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -218,8 +218,8 @@ public:
 	}
 private:
 	typedef BitSet<COMBATATTR_T::COMBATATTR_MAXNUM> DirtyFlag;
-	bsarray<int, COMBATATTR_T::COMBATATTR_MAXNUM> m_RefixValue;
-	bsarray<float, COMBATATTR_T::COMBATATTR_MAXNUM> m_RefixPer;
+	bsarray<tint32, COMBATATTR_T::COMBATATTR_MAXNUM> m_RefixValue;
+	bsarray<tfloat32, COMBATATTR_T::COMBATATTR_MAXNUM> m_RefixPer;
 	DirtyFlag m_CalculationDirtyFlag;//重新计算的脏标记
 	DirtyFlag m_SynDirtyFlag;//同步自身属性的脏标记
 	DirtyFlag m_BroadcastDirtyFlag;//广播自身属性的脏标记
@@ -253,11 +253,11 @@ public:
 	CombatAttr operator *(CombatAttr_Refix const& Addion)
 	{
 		CombatAttr ConstantAttr;
-		for (int i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
+		for (tint32 i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
 		{
-			int nAddValue =Addion.GetRefixValueByIndex(i);
-			float fAddPer =Addion.GetRefixPerByIndex(i);
-			int nCombatAttr =(int)((m_CombatAttr[i]+nAddValue)*(1+fAddPer));
+			tint32 nAddValue =Addion.GetRefixValueByIndex(i);
+			tfloat32 fAddPer =Addion.GetRefixPerByIndex(i);
+			tint32 nCombatAttr =(int)((m_CombatAttr[i]+nAddValue)*(1+fAddPer));
 			//统一使用set接口赋值
 			ConstantAttr.SetCombatAttrByIndex(i,nCombatAttr);
 		}
@@ -266,16 +266,16 @@ public:
 	//重载*=运算符
 	void operator *=(CombatAttr_Refix const& Addion)
 	{
-		for (int i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
+		for (tint32 i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
 		{
-			int nAddValue =Addion.GetRefixValueByIndex(i);
-			float fAddPer =Addion.GetRefixPerByIndex(i);
-			int nCombatAttr =(int)((m_CombatAttr[i]+nAddValue)*(1+fAddPer));
+			tint32 nAddValue =Addion.GetRefixValueByIndex(i);
+			tfloat32 fAddPer =Addion.GetRefixPerByIndex(i);
+			tint32 nCombatAttr =(int)((m_CombatAttr[i]+nAddValue)*(1+fAddPer));
 			//统一使用set接口赋值
 			SetCombatAttrByIndex(i,nCombatAttr);
 		}
 	}
-	int GetCombatAttrByIndex(int index)
+	tint32 GetCombatAttrByIndex(tint32 index)
 	{
 		if (index<0 || index>=COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -283,13 +283,12 @@ public:
 		}
 		return m_CombatAttr[index];
 	}
-	void SetCombatAttrByIndex(int index,int nValue)
+	void SetCombatAttrByIndex(tint32 index,int nValue)
 	{
 		if (index<0 || index>=COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
 			return;
 		}
-	
 		m_CombatAttr[index] =nValue;
 		//有修改 将脏标记置上
 		SetCalculationDirtyFlag(index,true);
@@ -300,7 +299,7 @@ public:
 	//重新计算时 只要有一项脏了 全部重新计算
 	bool IsCalculationFlagDirty()const
 	{
-		for (int i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
+		for (tint32 i=0;i<COMBATATTR_T::COMBATATTR_MAXNUM;i++)
 		{
 			if (m_CalculationDirtyFlag.GetBit(i))
 			{
@@ -309,7 +308,7 @@ public:
 		}
 		return false;
 	}
-	bool IsCalculationFlagDirty(int nIndex)const
+	bool IsCalculationFlagDirty(tint32 nIndex)const
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -318,7 +317,7 @@ public:
 		}
 		return false;
 	}
-	void SetCalculationDirtyFlag(int nIndex,bool bDirty)
+	void SetCalculationDirtyFlag(tint32 nIndex,bool bDirty)
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -335,7 +334,7 @@ public:
 	}
 
 
-	bool IsSynFlagDirty(int nIndex) const
+	bool IsSynFlagDirty(tint32 nIndex) const
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -344,7 +343,7 @@ public:
 		}
 		return false;
 	}
-	void SetSynDirtyFlag(int nIndex,bool bDirty)
+	void SetSynDirtyFlag(tint32 nIndex,bool bDirty)
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -360,7 +359,7 @@ public:
 		m_SynDirtyFlag.MarkAllBits();
 	}
 
-	bool IsBroadcastFlagDirty(int nIndex)
+	bool IsBroadcastFlagDirty(tint32 nIndex)
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -369,7 +368,7 @@ public:
 		}
 		return false;
 	}
-	void SetBroadcastDirtyFlag(int nIndex,bool bDirty)
+	void SetBroadcastDirtyFlag(tint32 nIndex,bool bDirty)
 	{
 		if (nIndex >=0 && nIndex<COMBATATTR_T::COMBATATTR_MAXNUM)
 		{
@@ -385,7 +384,7 @@ public:
 		m_BroadcastDirtyFlag.MarkAllBits();
 	}
 private:
-	bsarray<int, COMBATATTR_T::COMBATATTR_MAXNUM> m_CombatAttr;
+	bsarray<tint32, COMBATATTR_T::COMBATATTR_MAXNUM> m_CombatAttr;
 
 	typedef BitSet<COMBATATTR_T::COMBATATTR_MAXNUM> DirtyFlag;
 	
@@ -394,6 +393,30 @@ private:
 	DirtyFlag m_BroadcastDirtyFlag;//广播自身属性的脏标记
 };
 
+// 归属信息
+struct BelongInfo
+{
+	tint32 m_nTeamID;	//队伍ID		
+	tint32 m_nObjID;	//objID	
+	tint32 m_nHP;		//伤害
+	tint32 m_nScore;	//积分
+	BelongInfo(void) {
+		Clear();
+	}		
+	BelongInfo(tint32 nTeamID,tint32 nObjID,tint32 nHP) {
+		m_nHP = nHP;
+		m_nTeamID = nTeamID;
+		m_nObjID = nObjID;
+		m_nScore = 0;
+	}		
+	void Clear()
+	{
+		m_nTeamID = invalid_id;
+		m_nObjID = invalid_id;
+		m_nHP = 0;
+		m_nScore = 0;
+	}
+};
 
 
 #endif // !COMBATATTRSTRUCT_H

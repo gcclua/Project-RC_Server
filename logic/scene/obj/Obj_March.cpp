@@ -6,6 +6,9 @@
 #include "Message/SceneMsg.h"
 #include "service/MessageOp.h"
 #include "Table/Table_SceneClass.h"
+#include "Config.h"
+
+POOLDEF_IMPL(Obj_March);
 
 Obj_March::Obj_March( )
 {
@@ -28,16 +31,6 @@ void Obj_March::OnEnterScene(void)
 	SetScenePos(GetChangeScenePos());
 
 	__LEAVE_FUNCTION
-}
-
-ScenePos Obj_March::GetChangeScenePos(void) const
-{
-	return m_ChangeScenePos;
-}
-
-void Obj_March::SetChangeScenePos(const ScenePos &rPos)
-{
-	m_ChangeScenePos = rPos;
 }
 
 void Obj_March::OnLeaveScene(void)
@@ -83,9 +76,9 @@ void Obj_March::FillMarchBaseInfo(MarchBaseInfo &rInfo)
 	__ENTER_FUNCTION
 
 		rInfo.m_Guid = GetGuid();
-		rInfo.m_szName = GetName();
-		rInfo.m_nLevel = GetLevel();
-		rInfo.m_nCombatNum = 0;
+	rInfo.m_szName = GetName();
+	rInfo.m_nLevel = GetLevel();
+	rInfo.m_OwnGuid = 0;
 
 	__LEAVE_FUNCTION
 }
@@ -102,6 +95,103 @@ void Obj_March::UpdateMarchBaseInfoToSceneService()
 	__LEAVE_FUNCTION
 }
 
+void Obj_March::SetUserBitLocked(USER_BITLOCKTYPE bltType,tuint32 nContinuTime)
+{
+	m_BitLock.MarkBit(bltType);
+	if (bltType>=0 && bltType<USER_BITLOCK_NUM)
+	{
+		m_UserBitLockInfo[bltType].m_nStartLoackTime =gTimeManager.RunTime();
+		m_UserBitLockInfo[bltType].m_nContinuedTime =nContinuTime;
+	}
+}
+
+SceneID Obj_March::GetLastSceneID(void) const
+{
+	if (IsSceneValid())
+	{
+		return SceneID(GetSceneClassID(), GetSceneInstID());
+	}
+
+	return m_LastSceneID;
+}
+
+void Obj_March::SetLastSceneID(const SceneID &rSceneID)
+{
+	m_LastSceneID = rSceneID;
+}
+
+ScenePos Obj_March::GetLastScenePos(void) const
+{
+	if (IsSceneValid())
+	{
+		return GetScenePos();
+	}
+
+	return m_LastScenePos;
+}
+
+void Obj_March::SetLastScenePos(const ScenePos &rScenePos)
+{
+	m_LastScenePos = rScenePos;
+}
+
+void Obj_March::UpdateLastSceneIDAndScenePos(void)
+{
+	if (IsSceneValid())
+	{
+		SetLastSceneID(SceneID(GetSceneClassID(), GetSceneInstID()));
+		SetLastScenePos(GetScenePos());
+	}
+}
+
+SceneID Obj_March::GetLastNoneCopySceneID(void) const
+{
+	if (IsSceneValid())
+	{
+		if (!GetScene().IsCopyScene())
+		{
+			return SceneID(GetSceneClassID(), GetSceneInstID());
+		}
+	}
+
+	return m_LastNoneCopySceneID;
+}
+
+void Obj_March::SetLastNoneCopySceneID(const SceneID &rSceneID)
+{
+	m_LastNoneCopySceneID = rSceneID;
+}
+
+ScenePos Obj_March::GetLastNoneCopyScenePos(void) const
+{
+	if (IsSceneValid())
+	{
+		if (!GetScene().IsCopyScene())
+		{
+			return GetScenePos();
+		}
+	}
+
+	return m_LastNoneCopyScenePos;
+}
+
+void Obj_March::SetLastNoneCopyScenePos(const ScenePos &rScenePos)
+{
+	m_LastNoneCopyScenePos = rScenePos;
+}
+
+void Obj_March::UpdateLastNoneCopySceneIDAndScenePos(void)
+{
+	if (IsSceneValid())
+	{
+		if (!GetScene().IsCopyScene())
+		{
+			SetLastNoneCopySceneID(SceneID(GetSceneClassID(), GetSceneInstID()));
+			SetLastNoneCopyScenePos(GetScenePos());
+		}
+	}
+}
+
 //////////////////////////////////////////////////////////////////////////
 //处理附近玩家列表部分	-Begin
 //////////////////////////////////////////////////////////////////////////
@@ -113,6 +203,8 @@ void Obj_March::HandleMessage(const MarchReqNearListMsg &rMsg)
 	__LEAVE_FUNCTION
 }
 
+
+
 void Obj_March::HandleMessage(const MarchMoveMsg &rMsg)
 {
 	__ENTER_FUNCTION
@@ -121,10 +213,7 @@ void Obj_March::HandleMessage(const MarchMoveMsg &rMsg)
 		
 		for (tint32 i = 0; i < nCount; i++)
 		{
-			tfloat32 fPosX = static_cast<tfloat32>(rMsg.m_nPosX[i]) / 100.0f;
-			tfloat32 fPosZ = static_cast<tfloat32>(rMsg.m_nPoxZ[i]) / 100.0f;
-
-			MoveAppend(ScenePos(fPosX, fPosZ));
+			MoveAppend(ScenePos(rMsg.m_nPosX[i], rMsg.m_nPoxZ[i]));
 		}
 		CleanUpAllTrackPointFlag();
 
@@ -148,6 +237,25 @@ void Obj_March::MoveAppend(const ScenePos &rPos)
 		}
 
 		__LEAVE_FUNCTION
+}
+
+void Obj_March::Tick_Moving(const TimeInfo &rTimeInfo)
+{
+	__ENTER_FUNCTION
+
+		BroadcastMoveStatus();
+	Moving(rTimeInfo);
+
+	__LEAVE_FUNCTION
+}
+
+void Obj_March::OnScenePosChanged(void)
+{
+	__ENTER_FUNCTION
+
+	
+
+	__LEAVE_FUNCTION
 }
 
 
@@ -179,10 +287,10 @@ void Obj_March::SendSceneMarchListToClient(const MarchReqNearListMsg &rMsg)
 
 			MarchRetNearListMsgPtr MsgPtr = POOLDEF_NEW(MarchRetNearListMsg);
 			AssertEx(MsgPtr,"");
-			MsgPtr->m_marchId = rMsg.m_marchId;
+			MsgPtr->m_nObjId = GetID();
 			MsgPtr->m_ReceiverGuid = rMsg.m_ReceiverGuid;
 			MsgPtr->m_BaseMarchVec.resize(Cont.Size());
-
+			MsgPtr->m_nSceneId = GetSceneInstID();
 			tint32 nRealCount = 0;
 			for (tint32 i = 0; i < Cont.Size(); i++)
 			{
@@ -295,10 +403,6 @@ void Obj_March::Tick_View(const TimeInfo &rTimeInfo)
 	__LEAVE_FUNCTION
 }
 
-void Obj_March::SendMessage(MessagePtr MsgPtr)
-{
-	SendMessage2User(MsgPtr->m_ReceiverGuid,MsgPtr);
-}
 
 bool Obj_March::IsInSight(tint32 nObjID)
 {
@@ -325,7 +429,9 @@ void Obj_March::OnOutSight(tint32 nObjID)
 		{
 			Del_MarchMsgPtr MsgPtr = POOLDEF_NEW(Del_MarchMsg);
 			AssertEx(MsgPtr,"");
-			MsgPtr->m_nObjId = GetID();
+			MsgPtr->m_nObjId = nObjID;
+			MsgPtr->m_nSceneId = GetSceneInstID();
+			MsgPtr->m_nMarchObjId = GetID();
 			SendMessage2User(GetPlayerId(),MsgPtr);
 		}
 

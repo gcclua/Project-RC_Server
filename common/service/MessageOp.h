@@ -32,7 +32,7 @@ void SendMessage2Srv(int nServiceID,_MessagePtrT &rPtr)
 	rPtr.reset();
 }
 
-//将消息发送给一个用int64标识的玩家
+//将消息发送给一个用int64标识的March
 template<typename _MessagePtrT>
 void SendMessage2March(int64 guid, _MessagePtrT &rPtr)
 {
@@ -48,13 +48,13 @@ void SendMessage2March(int64 guid, _MessagePtrT &rPtr)
 
 	rPtr.reset();
 }
-
+//将消息发送给一个用int64标识的玩家
 template<typename _MessagePtrT>
 void SendMessage2User(int64 guid, _MessagePtrT &rPtr)
 {
 	AssertEx(rPtr, "");
 	AssertEx((rPtr->m_nCount)++ == 0, "");
-
+	rPtr->m_ReceiverGuid = guid;
 	ConstMessagePtr csp = boost::static_pointer_cast<const Message, typename _MessagePtrT::element_type>(rPtr);
 	gServiceManager.ReceiveMessage(ServiceID::WORLDUSER,csp);
 	rPtr.reset();

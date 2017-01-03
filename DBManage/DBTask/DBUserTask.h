@@ -21,14 +21,17 @@ public:
 public:
 	void                 SetUserGuid(const int64& val) {m_UserGuid = val;}
 	int64                GetUserGuid() const { return m_UserGuid;}
-	void                 SetUserName(const string& val){m_UserName = val;}
-	string               GetuserName() const {return m_UserName;}
+	void                 SetAccountName(const ACCOUNTNAME& val){m_AccountName = val;}
+	ACCOUNTNAME          GetAccountName() const {return m_AccountName;}
 
 	void                 SetImmediateSave(bool val){m_bImmediateSave=val;}
 	bool                 GetImmediateSave() const {return m_bImmediateSave;}
 
 	void                 SetFinalSave(bool val){m_bFinalSave = val;}
 	bool                 GetFinalSave() const {return m_bFinalSave;}
+
+	void                 SetPlayerId(int val){m_nPlayerID = val;}
+	int                  GetPlayerId() const {return m_nPlayerID;}
 
 public:
 
@@ -54,10 +57,11 @@ public:
 	
 private:
 	int64          m_UserGuid;        //玩家的uid
-	string         m_UserName;       // 玩家名称 
+	ACCOUNTNAME    m_AccountName;       // 玩家名称 
 	DBFullUserData m_UserData;      // 玩家的数据
 	bool           m_bImmediateSave;
 	bool           m_bFinalSave;
+	int            m_nPlayerID;
 
 };
 

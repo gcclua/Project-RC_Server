@@ -1,0 +1,12 @@
+Index	Desc	SkillId	Level	SKillIndex
+INT	STRING	INT	INT	INT
+#MAX_ID=50;MAX_RECORD=50;TableType=Index;				
+#本行程序不读 索引	描述	技能ID 	需求等级	技能编号
+#此行必须有!!客户端确定是否需要读到内存	规则为填写S则不读，否则就会读取到客户端			
+1	飞云普攻	11000	1	0
+2	飞云入魔	12000	16	1
+3	排云掌	13001	2	2
+4	霍家剑法	14004	5	3
+5	莫名剑法	15037	38	6
+6	圣灵剑法	16014	15	4
+7	云十剑	17024	25	5

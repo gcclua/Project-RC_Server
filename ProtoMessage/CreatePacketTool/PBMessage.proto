@@ -1,0 +1,332 @@
+//#client ask login
+//@CG
+message CG_LOGIN
+{
+	enum VALIDATETYPE
+	{
+		TEST = 0;																	//测试登录模式
+		CYOU = 1;																	//聚合SDK登陆模式
+	}
+
+	//登录基本数据
+	required int32	vtype							= 1;	//验证类型，见VALIDATETYPE枚举
+	required int32	gameversion						= 2;	//游戏大版本号
+	required int32	programversion					= 3;	//代码版本号
+	required int32	publicresourceversion			= 4;	//公共资源版本号
+	required int32	maxpacketid						= 5;	//最大消息包ID
+	required int32	forceenter						= 6;	//如果兼容是否强行登陆
+	required string	deviceid						= 7;	//设备ID
+	required string	devicetype						= 8;	//设备类型
+	required string	deviceversion					= 9;	//设备版本
+
+	//TEST登录数据
+	required string	account								= 10;	//登陆账号
+
+	//CYOU登录数据
+	required string	validateinfo					= 11;	//登陆验证信息
+	required string	channelid							= 12;	//channelid
+	required string	mediachannel					= 13;	//mediachannel
+	
+	//快速登录数据
+	required int32 rapidvalidatecode			= 14;	//快速登录校验
+
+	//预留字段
+	required int32	reservedint1					= 15;
+	required int32	reservedint2					= 16;
+	required int32	reservedint3					= 17;
+	required int32	reservedint4					= 18;
+	required string	reservedstring1				= 19;
+	required string	reservedstring2				= 20;
+	required string	reservedstring3				= 21;
+	required string	reservedstring4				= 22;
+}
+
+//#client login result
+//@GC
+message GC_LOGIN_RET
+{
+	enum LOGINRESULT
+	{
+		SUCCESS   			= 1;
+		ACCOUNTVERIFYFAIL	= 2;
+		READROLELISTFAIL	= 3;
+		ALREADYLOGIN		= 4;
+		QUEUEFULL		= 5;
+		NEEDFORCEENTER = 6;
+		PACKETNOTMATCH = 7;
+		VERSIONNOTMATCH = 8;
+	}
+	enum VALIDATERESULT
+	{
+		OK											= 0;
+		FAIL_VALIDATETYPEERROR	= 1;
+		FAIL_PERFORM						= 2;
+		FAIL_OPCODE							= 3;
+		FAIL_TAG								= 4;
+		FAIL_STATE							= 5;
+		FAIL_DATA_STATUS				= 6;
+		FAIL_CHANNELID					= 7;
+		FAIL_BLOCKED					= 8;
+	}
+
+	required int32 	result							= 1;
+	required int32 	validateresult			= 2;
+	required string userid 							= 3;
+	required string oid 								= 4;
+	required string accesstoken 				= 5;
+	required int32	rapidvalidatecode		= 6;
+
+	repeated uint64 roleGUIDList				= 7;
+	repeated int32 	roleTypeList				= 8;
+	repeated string playerNameList			= 9;
+	repeated int32	roleLevelList				= 10;
+	repeated int32  ModelVisualID				= 11;
+	repeated int32  WeaponID						= 12;
+	repeated int32  WeaponEffectGem			= 13;
+	repeated int32	HuanHuaWeaponModel 	= 14;
+}
+
+//#client connected heartbeat
+//@CG
+message CG_CONNECTED_HEARTBEAT
+{
+	required int32 isresponse = 1;
+}
+
+//#server connected heartbeat
+//@GC
+message GC_CONNECTED_HEARTBEAT
+{
+	required int32 serveransitime = 1;
+}
+//#client ask nearlist
+//@CG
+message CG_REQ_NEAR_LIST
+{
+	required int64 marchId = 1;
+}
+
+//#server send nearby player list to client
+//@GC
+message GC_NEAR_MARCHLIST
+{
+	//附近玩家信息
+	repeated uint64 Guid				= 1;	//队员GUID
+	repeated string Name				= 2;	//队员名字
+	repeated int32 Level				= 3;	//队员等级
+	repeated int32 CombatNum 	  = 4; //队员战斗力
+}
+
+//#Client send chat info
+//@CG
+message CG_CHAT
+{
+	enum CHATTYPE
+	{
+		CHAT_TYPE_INVALID				= 0;
+		CHAT_TYPE_NORMAL 				= 1;		// 附近频道
+		CHAT_TYPE_WORLD					= 2;		// 世界频道
+		CHAT_TYPE_SYSTEM				= 3;		// 系统频道
+		CHAT_TYPE_LOUDSPEAKER		= 4;		// 小喇叭
+		CHAT_TYPE_FRIEND				= 5;		// 好友频道
+	}
+	required int32 chattype			= 1;		// 聊天类型
+	required string chatinfo			= 2;		// 聊天内容
+	optional uint64 receiverguid	= 3;	// 密聊接收者GUID
+	optional string receivername = 4;		// 密聊接收者名字
+	optional int32 receiverlevel = 5;	// 密聊接收者等级
+}
+
+//#Server send chat info
+//@GC
+message GC_CHAT
+{
+	enum CHATTYPE
+	{
+		CHAT_TYPE_INVALID				= 0;
+		CHAT_TYPE_NORMAL 				= 1;		// 附近频道
+		CHAT_TYPE_WORLD					= 2;		// 世界频道
+		CHAT_TYPE_SYSTEM				= 3;		// 系统频道
+		CHAT_TYPE_LOUDSPEAKER		= 4;		// 小喇叭
+		CHAT_TYPE_FRIEND				= 5;		// 好友频道
+	}
+	required int32 chattype				= 1;	// 聊天类型
+	required string chatinfo			= 2;	// 聊天内容
+	optional uint64 senderguid		= 3;	// 发送者GUID
+	optional string sendername 		= 4;	// 发送者名字
+	optional int32 senderlevel		= 5;	//发送者 等级
+	optional uint64 receiverguid	= 6;	// 密聊接收者GUID
+	optional string receivername 	= 7;	// 密聊接收者名字
+}
+
+//#notice from server
+//@GC
+message GC_NOTICE
+{
+	required string notice = 1; //notice的内容
+	optional int32 filterRepeat = 2;	//是否过滤重复文字 1:是 0:否
+}
+
+//#Update Scene InstActivation
+//@GC
+message GC_UPDATE_SCENE_INSTACTIVATION
+{
+	required int32 sceneclassid		= 1;	//sceneclass
+	required int32 sceneinstcount	= 2;	//instcount
+	repeated int32 sceneactivation	= 3;	//激活inst下标
+}
+
+//#gameserver to server heartbeat
+//@GS
+message GS_CONNECTED_HEARTBEAT
+{
+	required int32 senderworldid		= 1;
+	required int32 receiverworldid	= 2;
+}
+
+//#server to gameserver heartbeat
+//@SG
+message SG_CONNECTED_HEARTBEAT
+{
+	required int32 senderworldid		= 1;
+	required int32 receiverworldid	= 2;
+}
+
+//#Player Move
+//@CG
+message CG_MOVE
+{
+	required int32 poscount = 1;	//点的个数
+	repeated int32 posx = 2;		//点的X坐标乘以100
+	repeated int32 posz = 3;		//点的Z坐标乘以100
+	required int32 ismoving =4;	//客户端是否依然在移动
+	required int64 marchid = 5; // marchId
+}
+
+//#Notify Character Move
+//@GC
+message GC_MOVE
+{
+	required int32 serverid = 1;	//objid
+	required int32 poscount = 2;		//点的个数
+	repeated int32 posserial = 3;	//路径序号
+	repeated int32 posx = 4;			//点的X坐标乘以100
+	repeated int32 posz = 5;			//点的Z坐标乘以100
+}
+
+//#Notify Character Stop
+//@GC
+message GC_STOP
+{
+	required int32 serverid = 1;	//objid
+	required int32 posserial = 2;	//路径序号
+	required int32 posx = 3;			//点的X坐标乘以100
+	required int32 posz = 4;			//点的Z坐标乘以100
+}
+
+//#TeleMove
+//@GC
+message GC_TELEMOVE
+{
+	required int32  objId 							=1;//目标ObjId
+	required int32  targetPosX 					=2;//目标X坐标
+	required int32  targetPosZ					=3;//目标Z坐标
+	required int32  needChangeFaceto 		=4;//是否需要修改朝向
+	optional int32  animaId 						=5;//附加的动作ID
+}
+
+//#Use Skill ret
+//@GC
+message GC_RET_USE_SKILL
+{
+	required int32 skillId =1;
+	required int32 senderId =2;
+	required int32 TargetId =3;
+	optional int32 skillfailType =4;//技能使用失败的原因
+	optional string skillname = 5;
+}
+
+//#Update Animation state
+//@GC
+message GC_UPDATE_ANIMATION_STATE
+{
+	required int32 objId = 1;		//obj ID
+	required int32 AnimationState = 2;	//动画状态
+	optional int32 verticalOffDis =3;//高度偏移
+	optional int32 horizontalOffDis =4;//水平偏移
+	optional int32 stateLastTime =5;//状态时间
+	optional int32 stateResortTime =6; // 滞空时间
+	optional int32 hitTimes =7; // 受击次数
+	optional int32 hitInterval =8; // 受击间隔
+}
+
+//#Delete Player
+//@GC
+message GC_DELETE_OBJ
+{
+	required int32 serverId = 1; //ServerID
+}
+
+//#Attak fly
+//@GC
+message GC_ATTACKFLY
+{
+	required int32 objId = 1;		//击飞的objId
+	required int32 Dis = 2;	//击飞水平位移
+	required int32 Hight =3;	//击飞高度
+	required int32 FlyTime =4;	//击飞时间
+}
+
+//#Server Force Set Player Pos
+//@GC
+message GC_FORCE_SETPOS
+{
+	required int32 ServerID = 1;	// ServerID
+  required int32 PosX = 2;			// 位置X float乘以100
+  required int32 PosZ = 3;			// 位置Y float乘以100
+}
+
+//#syn need Impact Info
+//@GC
+message GC_UPDATE_NEEDIMPACTINFO
+{
+	required int32 	objId						=1;//objId
+	repeated int32 	impactId    		=2;//Buff Id
+	repeated int32 	impactLogicId 	=3;//Buff 逻辑ID
+	repeated int32 	isForever 			=4;//Buff 是否永久
+	repeated int32 	remainTime 			=5;//Buff 剩余时间
+	repeated int32 	isAdd 					=6;//添加或删除 0删除 1添加
+}
+
+//#Server Send Player Use Tool
+//@GC
+message GC_PLAY_EFFECT
+{
+	required int32 ObjID		  = 1;		// 播放特效的ObjID
+	required int32 EffectID		=2;		// 通知客户端播放特效ID
+}
+
+//#remove Effect
+//@GC
+message GC_REMOVEEFFECT
+{
+	required int32 objId    = 1;		//特效拥有者的objId
+	required int32 effectId = 2;	//特效的Id
+}
+
+//#Send Open Fight Req to Server
+//@CG
+message CG_FIGHT
+{
+	required int32 SceneID	 = 1;		// 场景ID
+	required int32 Type      = 2;		// 战斗的类型
+	required int64 AttackId  = 3;		// 挑战方
+	optional int64 DefenceId = 4;   // 防守方
+}
+
+//# Client Leave Copyscene
+//@CG
+message CG_LEAVE_COPYSCENE
+{
+	required int32 noParam = 1; // 占位用
+}

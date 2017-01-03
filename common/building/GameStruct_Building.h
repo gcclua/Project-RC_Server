@@ -19,9 +19,10 @@ public:
 
 public:
 	virtual void OnLevelUp(){};
-	virtual int  GetGuildingType() {return 0;};
+	virtual int  GetGuildingType() {return m_nType;};
 	virtual void Tick(const TimeInfo& rTimeInfo){};
 	virtual void Init(){};
+	virtual void OnLogin(){};
 
 public:
 	void SerializeToDB(DBBuilding& rDest);
@@ -66,7 +67,7 @@ class FarmBuilding : public Building
 		BUILDIN_GTYPE = BUIDINGTYPE_FARM,
 	};
 public:
-	FarmBuilding();
+	FarmBuilding(City &rCity);
 	virtual ~FarmBuilding();
 public:
 	virtual void OnLevelUp() {};
@@ -81,7 +82,7 @@ class BarrackBuilding : public Building
 		BUILDIN_GTYPE = BUIDINGTYPE_BARRACKS,
 	};
 public:
-	BarrackBuilding();
+	BarrackBuilding(City &rCity);
 	virtual ~BarrackBuilding();
 
 public:
@@ -91,13 +92,8 @@ public:
 	virtual void OnLevelUp() {};
 	virtual int  GetBuildingType() {return BUILDIN_GTYPE;}
 	virtual void Tick(const TimeInfo& rTimeInfo){};
-	virtual void Init();
+	virtual void Init(){};
 
-
-
-private:
-	TroopPtr m_Troop[TROOP_QUEUE_MAX_COUNT];
-	int      m_Arrange[TROOP_ARRANGE_MAX_POSITION];
 };
 
 typedef boost::shared_ptr<BarrackBuilding> BarrackBuildingPtr;

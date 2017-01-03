@@ -15,7 +15,6 @@ class CG_REQ_NEAR_LIST_PAK:public Packet
  CG_REQ_NEAR_LIST_PAK():Packet(m_PacketData){}
  virtual ~CG_REQ_NEAR_LIST_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_CG_REQ_NEAR_LIST_PAK;}
  public:
  ::CG_REQ_NEAR_LIST m_PacketData;
@@ -32,7 +31,6 @@ class CG_REQ_NEAR_LIST_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::CG_REQ_NEAR_LIST_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::CG_REQ_NEAR_LIST_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

@@ -37,8 +37,8 @@ protected:
 public:
 	inline void   SetOperationType(int val){m_OperationType=val;}
 	inline int    GetOperationType() const{return m_OperationType;}
-	inline void   SetOptTime(int val){m_ReqOptTime=val;}
-	inline int    GetOptTime()const{return m_ReqOptTime;}
+	inline void   SetOptTime(tuint32 val){m_ReqOptTime=val;}
+	inline tuint32 GetOptTime()const{return m_ReqOptTime;}
 	inline void   SetKey(int64 val){m_key=val;}
 	inline int64  GetKey(){return m_key;}
 	inline bool   IsForLoad() const{return OPERATION_TYPE_LOAD==m_OperationType;}
@@ -48,16 +48,16 @@ public:
 	inline void   SetSaveFail(bool val) {m_SaveFail = val;}
 	inline bool   GetSaveFail() const {return m_SaveFail;}
 private:
-	int    m_OperationType; //操作类型
-	int    m_ReqOptTime;    // 操作时间
-	int    m_RetServieID;   // 需要把结果返回的ServiceID
-	int64  m_key;         // key
-	bool   m_SaveFail;     // Task是否存储失败
+	int      m_OperationType; //操作类型
+	tuint32  m_ReqOptTime;    // 操作时间
+	int      m_RetServieID;   // 需要把结果返回的ServiceID
+	int64    m_key;         // key
+	bool     m_SaveFail;     // Task是否存储失败
 };
 
 typedef boost::shared_ptr<DBBaseTask> DBBaseTaskPtr;
 typedef std::list<DBBaseTaskPtr>      DBBaseTaskPtrList;
 typedef std::map<int64,DBBaseTaskPtr> DBBaseTaskPtrMap;
-typedef std::map<int64,int>           DBLastSaveDBTimeMap;
+typedef std::map<int64,tuint32>       DBLastSaveDBTimeMap;
 
 #endif

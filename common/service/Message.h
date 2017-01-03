@@ -18,6 +18,7 @@ public:
 public:
 	int64 m_ReceiverGuid ; //接受逻辑的用户ＩＤ
 	int   m_nCount;
+	int   m_nReceiveObjId;        // 场景内的Obj;
 };
 
 typedef boost::shared_ptr<Message> MessagePtr;

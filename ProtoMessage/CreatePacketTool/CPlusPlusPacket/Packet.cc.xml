@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine Author:Wendy ,don't modify${N}</descript>
+  <dir>./tmp/cpp/Packet/</dir>
+  <filename>${option}.cpp</filename>
+  
+   <import>
+	#include "${option}.h"${N}
+   </import>
+
+   <common>   
+tuint32 Packets::${option}::Execute( Player* pPlayer )${N}
+{${N}
+	__ENTER_FUNCTION${N}
+	 return ${option}Handler::Execute(this,pPlayer);${N}
+	__LEAVE_FUNCTION${N}
+		return PACKET_EXE_ERROR;${N}
+}${N}
+
+tuint32 Packets::${option}::Execute( ServerPlayer* pServerPlayer )${N}
+{${N}
+	__ENTER_FUNCTION${N}
+	 return ${option}Handler::Execute(this,pServerPlayer);${N}
+	__LEAVE_FUNCTION${N}
+		return PACKET_EXE_ERROR;${N}
+}${N}
+
+  </common>
+
+  </pbbuffer>

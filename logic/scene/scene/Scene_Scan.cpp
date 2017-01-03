@@ -68,8 +68,8 @@ void Scene::Scan_All_Ray(ObjRefCont &Cont, ScenePos OriginalPos, float fDirectio
 	fLength = _MAX(fLength, 0.1f);
 	fScope = _MAX(fScope, 0.1f);
 
-	Scanner.m_af.m_DestinationPos.m_fX = Scanner.m_af.m_OriginalPos.m_fX + fLength * ::cos(fDirection);
-	Scanner.m_af.m_DestinationPos.m_fZ = Scanner.m_af.m_OriginalPos.m_fZ + fLength * ::sin(fDirection);
+	Scanner.m_af.m_DestinationPos.m_nX = (int)(Scanner.m_af.m_OriginalPos.m_nX + fLength * ::cos(fDirection));
+	Scanner.m_af.m_DestinationPos.m_nZ = (int)(Scanner.m_af.m_OriginalPos.m_nZ + fLength * ::sin(fDirection));
 
 	Scanner.m_af.m_fScope = fScope;
 
@@ -146,8 +146,8 @@ void Scene::Scan_Character_Ray(CharacterRefCont &Cont, ScenePos OriginalPos, flo
 	fLength = _MAX(fLength, 0.1f);
 	fScope = _MAX(fScope, 0.1f);
 
-	Scanner.m_af.m_DestinationPos.m_fX = Scanner.m_af.m_OriginalPos.m_fX + fLength * ::cos(fDirection);
-	Scanner.m_af.m_DestinationPos.m_fZ = Scanner.m_af.m_OriginalPos.m_fZ + fLength * ::sin(fDirection);
+	Scanner.m_af.m_DestinationPos.m_nX = (int)(Scanner.m_af.m_OriginalPos.m_nX + fLength * ::cos(fDirection));
+	Scanner.m_af.m_DestinationPos.m_nZ = (int)(Scanner.m_af.m_OriginalPos.m_nZ + fLength * ::sin(fDirection));
 
 	Scanner.m_af.m_fScope = fScope;
 
@@ -224,8 +224,8 @@ void Scene::Scan_March_Ray(MarchRefCont &Cont, ScenePos OriginalPos, float fDire
 	fLength = _MAX(fLength, 0.1f);
 	fScope = _MAX(fScope, 0.1f);
 
-	Scanner.m_af.m_DestinationPos.m_fX = Scanner.m_af.m_OriginalPos.m_fX + fLength * ::cos(fDirection);
-	Scanner.m_af.m_DestinationPos.m_fZ = Scanner.m_af.m_OriginalPos.m_fZ + fLength * ::sin(fDirection);
+	Scanner.m_af.m_DestinationPos.m_nX = (int)(Scanner.m_af.m_OriginalPos.m_nX + fLength * ::cos(fDirection));
+	Scanner.m_af.m_DestinationPos.m_nZ = (int)(Scanner.m_af.m_OriginalPos.m_nZ + fLength * ::sin(fDirection));
 
 	Scanner.m_af.m_fScope = fScope;
 
@@ -302,8 +302,8 @@ void Scene::Scan_Npc_Ray(NpcRefCont &Cont, ScenePos OriginalPos, float fDirectio
 	fLength = _MAX(fLength, 0.1f);
 	fScope = _MAX(fScope, 0.1f);
 
-	Scanner.m_af.m_DestinationPos.m_fX = Scanner.m_af.m_OriginalPos.m_fX + fLength * ::cos(fDirection);
-	Scanner.m_af.m_DestinationPos.m_fZ = Scanner.m_af.m_OriginalPos.m_fZ + fLength * ::sin(fDirection);
+	Scanner.m_af.m_DestinationPos.m_nX = (int)(Scanner.m_af.m_OriginalPos.m_nX + fLength * ::cos(fDirection));
+	Scanner.m_af.m_DestinationPos.m_nZ = (int)(Scanner.m_af.m_OriginalPos.m_nZ + fLength * ::sin(fDirection));
 
 	Scanner.m_af.m_fScope = fScope;
 
@@ -340,41 +340,6 @@ Obj_MarchPtr Scene::GetMarchByGuid(int64 guid)
 
 	__LEAVE_FUNCTION
 		return Obj_MarchPtr();
-}
-
-ObjPtr Scene::GetObjByID(tint32 nObjID)
-{
-	__ENTER_FUNCTION
-
-		ObjPtr PtrRet;
-	ObjPtrMap::iterator it = m_ObjPtrMap.find(nObjID);
-	if (it != m_ObjPtrMap.end())
-	{
-		AssertEx((*it).second, "");
-		if ((*it).second->GetActive())
-		{
-			PtrRet = (*it).second;
-		}
-	}
-	if (!PtrRet)
-	{
-		tint32 nCount = static_cast<tint32>(m_AddingCacheObjPtrVec.size());
-		for (tint32 i = 0; i < nCount; i++)
-		{
-			AssertEx(m_AddingCacheObjPtrVec[i], "");
-			if (nObjID == m_AddingCacheObjPtrVec[i]->GetID())
-			{
-				if (m_AddingCacheObjPtrVec[i]->GetActive())
-				{
-					PtrRet = m_AddingCacheObjPtrVec[i];
-				}
-			}
-		}
-	}
-	return PtrRet;
-
-	__LEAVE_FUNCTION
-		return ObjPtr();
 }
 
 Obj_MarchPtr Scene::GetMarchByID(int nObjID)

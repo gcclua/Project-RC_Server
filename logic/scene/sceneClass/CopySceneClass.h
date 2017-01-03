@@ -11,24 +11,21 @@ public:
 	virtual ~CopySceneClass(void);
 
 public:
-	virtual EnterResult EnterTo(Obj_MarchPtr Ptr, int nSceneInst);
-	virtual EnterResult EnterTo(Obj_MarchPtr Ptr);
-	virtual EnterResult FirstEnterTo(Obj_MarchPtr Ptr);
+	virtual EnterResult EnterTo(const March& rMarch, int nSceneInst);
+	virtual EnterResult EnterTo(const March& rMarch);
+	virtual EnterResult FirstEnterTo(const March& rMarch);
 
 public:
-	virtual ChangeResult ChangeTo(Obj_MarchPtr Ptr, int nSceneInst);
-	virtual ChangeResult ChangeTo(Obj_MarchPtr Ptr);
+	virtual ChangeResult ChangeTo(const March& rMarch, int nSceneInst);
+	virtual ChangeResult ChangeTo(const March& rMarch);
 public:
 	virtual bool ChangeFromCheck(const SceneID &rsid, const int64 &rGuid);
 	virtual bool ChangeToCheck(const SceneID &rsid, const int64 &rGuid);
 
-public:
-	virtual int RemainCapacityA(SceneInstID nSceneInst);
-	virtual int RemainCapacityB(SceneInstID nSceneInst);
-
 protected:
 	virtual int ReusingScene(void);
 	virtual int EnlargeScene(void);
+
 };
 POOLDEF_DECL(CopySceneClass);
 

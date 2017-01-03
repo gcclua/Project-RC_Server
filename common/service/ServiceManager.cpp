@@ -1,5 +1,4 @@
 #include "ServiceManager.h"
-#include "Clock.h"
 
 ServiceManager gServiceManager;
 extern bool gIsShouldShutdownBySignal;
@@ -20,7 +19,7 @@ ServiceManager::~ServiceManager(void)
 
 }
 
-void ServiceManager::Create(int nServiceCount,int nThreadCount)
+void ServiceManager::Create(int nServiceCount,tint32 nThreadCount)
 {
 	__ENTER_FUNCTION
 
@@ -73,10 +72,10 @@ void ServiceManager::RunOpenup(void)
 		m_nStatus = ServiceManagerStatus::OPENUP;
 		SetAllServiceStatus(ServiceStatus::OPENUP);
 
-		uint32 uLastTickTime = (uint32)Clock::getCurrentSystemTime();
+		uint32 uLastTickTime = gTimeManager.SysRunTime();
 		while(true)
 		{
-			uint32 uCurrentTime = (uint32)Clock::getCurrentSystemTime();
+			uint32 uCurrentTime = gTimeManager.SysRunTime();
 			int nElapse = static_cast<int>(uCurrentTime-uLastTickTime);
 			uLastTickTime = uCurrentTime;
 
@@ -100,11 +99,11 @@ void ServiceManager::RunMainLogic(void)
 		m_nStatus = ServiceManagerStatus::RUNNING;
 		SetAllServiceStatus(ServiceStatus::RUNNING);
 		
-		uint32 uLastTickTime = (uint32)Clock::getCurrentSystemTime();
+		uint32 uLastTickTime = gTimeManager.SysRunTime();
 		int    nShutdownCheckTime = 10000;
 		while (true)
 		{
-			uint32 uCurrentTime = (uint32)Clock::getCurrentSystemTime();
+			uint32 uCurrentTime = gTimeManager.SysRunTime();
 			int  nElapse      = static_cast<int>(uCurrentTime-uLastTickTime);
 			uLastTickTime = uCurrentTime;
 			Tick(nElapse);
@@ -131,10 +130,10 @@ void ServiceManager::RunShutdown( void )
 	__ENTER_FUNCTION
 		m_nStatus = ServiceManagerStatus::SHUTDOWN;
 	    SetAllServiceStatus(ServiceStatus::SHUTDOWN);
-		uint32 uLastTickTime = (uint32)Clock::getCurrentSystemTime();
+		uint32 uLastTickTime = gTimeManager.SysRunTime();
 		while(true)
 		{
-			uint32 uCurrentTime = (uint32)Clock::getCurrentSystemTime();
+			uint32 uCurrentTime = gTimeManager.SysRunTime();
 			int nElapse = static_cast<int>(uCurrentTime-uLastTickTime);
 			uLastTickTime = uCurrentTime;
 
@@ -156,10 +155,10 @@ void ServiceManager::RunFinalSave( void )
 	__ENTER_FUNCTION
 		m_nStatus = ServiceManagerStatus::FINALSAVE;
 	SetAllServiceStatus(ServiceStatus::FINALSAVE);
-	uint32 uLastTickTime = (uint32)Clock::getCurrentSystemTime();
+	uint32 uLastTickTime = gTimeManager.SysRunTime();
 	while(true)
 	{
-		uint32 uCurrentTime = (uint32)Clock::getCurrentSystemTime();
+		uint32 uCurrentTime = gTimeManager.SysRunTime();
 		int nElapse = static_cast<int>(uCurrentTime-uLastTickTime);
 		uLastTickTime = uCurrentTime;
 
@@ -208,6 +207,7 @@ bool ServiceManager::IsAllServiceStatusEqual(int nStatus)
 			AssertEx(m_ServicePtrVec[i],"");
 			if (m_ServicePtrVec[i]->GetStatus() != nStatus)
 			{
+				//int n = m_ServicePtrVec[i]->GetStatus();
 				return false;
 			}
 		}
@@ -246,7 +246,7 @@ bool ServiceManager::IsShoudShutdown(void)
 void ServiceManager::ReceiveMessage(int nServiceID,ConstMessagePtr ConstPtr)
 {
 	__ENTER_FUNCTION
-		if (nServiceID>0 && nServiceID <(int)m_ServicePtrVec.size())
+		if (nServiceID>=0 && nServiceID <(int)m_ServicePtrVec.size())
 		{
 			AssertEx(m_ServicePtrVec[nServiceID],"");
 			m_ServicePtrVec[nServiceID]->ReceiveMessage(ConstPtr);
@@ -257,7 +257,7 @@ void ServiceManager::ReceiveMessage(int nServiceID,ConstMessagePtr ConstPtr)
 void ServiceManager::Tick(int nElapse)
 {
 	__ENTER_FUNCTION
-
+		gTimeManager.SetTime();
 		UpdateAllService(nElapse);
 	    UpdateAllInvoker(nElapse);
 		UpdateInvokeMonitor(nElapse);

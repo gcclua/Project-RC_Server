@@ -82,7 +82,7 @@ bool ImpactBaseLogic::Tick(TimeInfo const&rTimeInfo,Obj_Character& rSelf)
 						nNeedOnIntervalTimes=m_ImpactStruct.m_nIntervalElapsed/m_ImpactStruct.m_nIntervalTime ;
 						if (rImpactData.GetIsForever() !=1)
 						{
-							int nElapseTime =(int)(Clock::getCurrentSystemTime()-m_ImpactStruct.m_nEffectTime);
+							int nElapseTime =(int)(gTimeManager.GetANSITime()-m_ImpactStruct.m_nEffectTime);
 							float fRemainTime =_MAX(m_ImpactStruct.m_fContinuTime-nElapseTime,0);
 							int nMaxNeedOnIntervalTimes =(int)((fRemainTime+1)*1000)/m_ImpactStruct.m_nIntervalTime;
 							nNeedOnIntervalTimes =_MIN(nNeedOnIntervalTimes,nMaxNeedOnIntervalTimes);
@@ -113,7 +113,7 @@ bool ImpactBaseLogic::Tick(TimeInfo const&rTimeInfo,Obj_Character& rSelf)
 				{
 					//BUFF流逝的时间
 					m_nContinueElapsedTime +=rTimeInfo.m_uTimeElapse;
-					int nElapseTime =(int)(Clock::getCurrentSystemTime()-m_ImpactStruct.m_nEffectTime);
+					int nElapseTime =(int)(gTimeManager.GetANSITime()-m_ImpactStruct.m_nEffectTime);
 					if (m_nContinueElapsedTime >=(int)(m_ImpactStruct.m_fContinuTime*1000) || //毫秒级检测(只支持在线情况)
 						nElapseTime >=(m_ImpactStruct.m_fContinuTime+1)|| //校验是否超过持续时间了(包含离线时间 做1s的容错 没下线的情况下以在线时间为准 GetANSITime 貌似是向上取整 )
 						nElapseTime<0  //超上限了
@@ -132,7 +132,7 @@ bool ImpactBaseLogic::Tick(TimeInfo const&rTimeInfo,Obj_Character& rSelf)
 			{
 				//先置为生效 状态
 				m_bIsEffect =true;
-				m_ImpactStruct.m_nEffectTime = Clock::getCurrentSystemTime();//记录下生效的时间
+				m_ImpactStruct.m_nEffectTime = gTimeManager.GetANSITime();//记录下生效的时间
 				StartEffect(rSelf);
 				//定时触发 生效的时候 做一次触发
 				if (IsContinue() && IsEffect() && IsIntervaled()) 
@@ -229,6 +229,7 @@ bool ImpactBaseLogic::OnActive(Obj_Character& rSelf)
 				Player_EffectMsgPtr MsgPtr = POOLDEF_NEW(Player_EffectMsg);
 				MsgPtr->m_nObjId = rSelf.GetID();
 				MsgPtr->m_nEffectId = rImpactData.GetEffectId();
+				MsgPtr->m_nSceneId  = rSelf.GetSceneInstID();
 				rScene.BroadCast_InSight_Include(MsgPtr,rSelf.GetID());
 			}
 		}
@@ -315,6 +316,7 @@ void ImpactBaseLogic::StartEffect(Obj_Character& rSelf)
 				Player_EffectMsgPtr MsgPtr = POOLDEF_NEW(Player_EffectMsg);
 				MsgPtr->m_nObjId = rSelf.GetID();
 				MsgPtr->m_nEffectId = rImpactData.GetEffectId();
+				MsgPtr->m_nSceneId  = rSelf.GetSceneInstID();
 				rScene.BroadCast_InSight_Include(MsgPtr,rSelf.GetID());
 			}
 		}
@@ -326,7 +328,8 @@ void ImpactBaseLogic::StartEffect(Obj_Character& rSelf)
 			MsgPtr->m_nImpactId.push_back(m_ImpactStruct.m_nImpactId);
 			MsgPtr->m_iImpactLogicId.push_back(rImpactData.GetLogicID());
 			MsgPtr->m_nIsForever.push_back(rImpactData.GetIsForever());
-			int nElaspeTime =(int)(Clock::getCurrentSystemTime()-m_ImpactStruct.m_nEffectTime);
+			MsgPtr->m_nSceneId = rSelf.GetSceneInstID();
+			int nElaspeTime =(int)(gTimeManager.GetANSITime()-m_ImpactStruct.m_nEffectTime);
 			int nRemainTime =(int)(m_ImpactStruct.m_fContinuTime -nElaspeTime);
 			MsgPtr->m_nRemainTime.push_back(nRemainTime);
 			MsgPtr->m_nIsAdd.push_back(1);
@@ -390,11 +393,11 @@ void ImpactBaseLogic::OnFadeOut(Obj_Character& rSelf)
 			MsgPtr->m_nImpactId.push_back(m_ImpactStruct.m_nImpactId);
 			MsgPtr->m_iImpactLogicId.push_back(rImpactData.GetLogicID());
 			MsgPtr->m_nIsForever.push_back(rImpactData.GetIsForever());
-			int nElaspeTime =(int)(Clock::getCurrentSystemTime()-m_ImpactStruct.m_nEffectTime);
+			int nElaspeTime =(int)(gTimeManager.GetANSITime()-m_ImpactStruct.m_nEffectTime);
 			int nRemainTime =(int)(m_ImpactStruct.m_fContinuTime -nElaspeTime);
 			MsgPtr->m_nRemainTime.push_back(nRemainTime);
 			MsgPtr->m_nIsAdd.push_back(0);
-
+			MsgPtr->m_nSceneId = rSelf.GetSceneInstID();
 			SendMessage2User(rSelf.GetPlayerId(),MsgPtr);
 
 		}
@@ -409,6 +412,7 @@ void ImpactBaseLogic::OnFadeOut(Obj_Character& rSelf)
 			AssertEx(MsgPtr,"");
 			MsgPtr->m_nObjId = rSelf.GetID();
 			MsgPtr->m_nEffectId = rImpactData.GetEffectId();
+			MsgPtr->m_nSceneId  = rSelf.GetScene().GetSceneInstID();
 			rScene.BroadCast_InSight_Include(MsgPtr,rSelf.GetID());
 			
 		}
@@ -416,7 +420,7 @@ void ImpactBaseLogic::OnFadeOut(Obj_Character& rSelf)
 		//还剩余叠加层数 在消散后 重新激活生效一次
 		if (tmpImpactStruct.m_nImpactWrapCnt>0)
 		{
-			tmpImpactStruct.m_nEffectTime = Clock::getCurrentSystemTime();//记录下生效的时间
+			tmpImpactStruct.m_nEffectTime = gTimeManager.GetANSITime();//记录下生效的时间
 			tmpImpactStruct.m_nIntervalElapsed =0;
 			//重置数据
 			InitImpactDataInfo(tmpImpactStruct);

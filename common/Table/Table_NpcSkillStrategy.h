@@ -12,8 +12,6 @@ class Table_NpcSkillStrategy:public DBC_Recorder_Loader<Table_NpcSkillStrategy,1
  INVLAID_INDEX=-1,
 ID_ID,
 ID_DEFAULTSKILLID=2,
-ID_DEFAULTSKILLWEIGHT,
-ID_ISHAVEOPTIONALSKILL,
 ID_SKILLID1,
 ID_SKILLID2,
 ID_SKILLID3,
@@ -34,19 +32,9 @@ private:
  tint32 GetDefaultSkillId() const { return m_DefaultSkillId; }
 
 private:
- tint32 m_DefaultSkillWeight;
- public:
- tint32 GetDefaultSkillWeight() const { return m_DefaultSkillWeight; }
-
-private:
  tint32 m_Id;
  public:
  tint32 GetId() const { return m_Id; }
-
-private:
- tint32 m_IsHaveOptionalSkill;
- public:
- tint32 GetIsHaveOptionalSkill() const { return m_IsHaveOptionalSkill; }
 
 public:
  tint32 getSkillIdCount() const { return 7; } 

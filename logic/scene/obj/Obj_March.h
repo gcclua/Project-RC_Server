@@ -4,14 +4,17 @@
 #include "Obj_Character.h"
 #include "Scene/GameStruct_Scene.h"
 #include "Service/TimeInfo.h"
-#include "hero/GameStruct_Hero.h"
-#include "troop/GameStruct_Troop.h"
+#include "march/GameStruct_March.h"
 #include "service/Message.h"
 
 class Player;
 class Packet;
 class MarchReqNearListMsg;
 class MarchMoveMsg;
+class MarchOpenCopySceneMsg;
+class MarchLeaveFightMsg;
+class AskJoinCopySceneMsg;
+
 
 class Obj_March : public Obj_Character
 {
@@ -52,8 +55,7 @@ private:
 	time_t m_CurLoginTime;			//本次登入时间
 	time_t m_CreateRoleTime;        //角色创建时间
 
-public:
-	void SendMessage(MessagePtr MsgPtr);
+
 
 public:
 	void FillMarchBaseInfo(MarchBaseInfo &rInfo);
@@ -67,7 +69,6 @@ private:
 	int64 m_Guid;
 
 public:
-	virtual void MoveTo(const ScenePos &rPos, float fStopDistance = 0.05f);
 	void MoveAppend(const ScenePos &rPos);
 public:
 	virtual void Tick_Moving(const TimeInfo &rTimeInfo);
@@ -134,6 +135,17 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 	// 玩家视野 end
 	//////////////////////////////////////////////////////////////////////////
+	// 切换场景 begin
+	//////////////////////////////////////////////////////////////////////////
+private:
+	void ChangeScene(const SceneID &rsid, const ScenePos &rpos=ScenePos(0, 0));
+	void DoChangeScene(const SceneID &rsid, const ScenePos &rpos);
+public:
+	void ChangeScene_General(tint32 nSceneClassID);
+	void ChangeScene_General(const tint32 nSceneClassID,const ScenePos& rPos);
+	void ChangeScene_OpenCopyScene(tint32 nSceneClassID);
+	void ChangeScene_JoinCopyScene(const SceneID &rsid);
+	void ChangeScene_ExitCopyScene(void);
 
 public:
 	ScenePos	GetChangeScenePos(void) const;
@@ -142,7 +154,47 @@ private:
 	void		UpdateChangeScenePosOnLogin(void);
 private:
 	ScenePos	m_ChangeScenePos;
+	//////////////////////////////////////////////////////////////////////////
+	// 切换场景 end
+	//////////////////////////////////////////////////////////////////////////
+	//////////////////////////////////////////////////////////////////////////
+	// 副本相关 begin
+	//////////////////////////////////////////////////////////////////////////
+public:
+	//tuint32 HandlePacket(::CG_OPEN_COPYSCENE &rPacket);
+	void HandleMessage(const MarchOpenCopySceneMsg &rMsg);
+	void HandleMessage(const MarchLeaveFightMsg &rMsg);
+	
+	//tuint32 HandlePacket(::CG_LEAVE_COPYSCENE &rPacket);
 
+public:
+	void HandleMessage(const AskJoinCopySceneMsg &rMsg);	//队长进入副本后召唤队员进入
+
+public:
+	//副本开启
+	void OpenCopyScene(tint32 nSceneClassID, tint32 nDifficulty,bool IsSingle,tint32 nEnterType = 1);
+	//检查副本规则
+	bool CanOpenCopyScene(tint32 nSceneClaseID,tint32 nDifficulty,bool IsSingle,tint32 nEnterType = 1);
+
+private:
+	void OpenSingleCopyScene(tint32 nSceneClassID, tint32 nDifficulty);
+	bool CanOpenSingleCopyScene(tint32 nSceneClassID, tint32 nDifficulty,tint32 nEnterType = 1);
+
+public:
+	tint32 GetCopySceneClassID(void) const { return m_nCopySceneClassID; }
+	void SetCopySceneClassID(tint32 val) { m_nCopySceneClassID = val; }
+private:
+	tint32 m_nCopySceneClassID;
+
+public:
+	tint32 GetCopySceneDifficulty(void) const { return m_nCopySceneDifficulty; }
+	void SetCopySceneDifficulty(tint32 val) { m_nCopySceneDifficulty = val; }
+private:
+	tint32 m_nCopySceneDifficulty;
+
+	//////////////////////////////////////////////////////////////////////////
+	// 副本相关 end
+	//////////////////////////////////////////////////////////////////////////
 	//////////////////////////////////////////////////////////////////////////
 	// 玩家位置相关 begin
 	//////////////////////////////////////////////////////////////////////////
@@ -184,53 +236,28 @@ private:
 	// 附近玩家列表相关 end
 	//////////////////////////////////////////////////////////////////////////
 
-	/////////////////////////////////////////////////////////////////////////
-	//军队相关的
-	//////////////////////////////////////////////////////////////////////////
-public:
-	void SetHero(const Hero& rHero){m_Hero = rHero;}
-	void SetTroop(const TroopList_T& rTroopList) {m_TroopList = rTroopList;}
-private:
-	// 领军的hero
-	Hero m_Hero;
-
-public:
-
-	// 获取每个队伍的数量
-	Troop GetQueueTroop(int nIndex);
-
-private:
-	TroopList_T m_TroopList;
-
 	/////////////////////////////////////////////////////////////////////////////
 	//march基本信息
 	/////////////////////////////////////////////////////////////////////////////
 public:
-	ScenePos  GetScenePosX() const {return m_ScenePos;}
-	void  SetScenePos(ScenePos nVal){m_ScenePos = nVal;}
+	ScenePos  GetScenePos() const {return m_rMarch.GetPos();}
+	void  SetScenePos(ScenePos nVal){m_rMarch.SetPos(nVal) ;}
 
 
-	int64 GetMarchId() const {return m_nMarchId;}
-	void  SetMarchId(int64 nVal) {m_nMarchId = nVal;}
+	int64 GetMarchId() const {return m_rMarch.GetMarchId();}
+	void  SetMarchId(int64 nVal) {m_rMarch.SetMarchId(nVal);}
 
-	int64 GetPlayerId() const {return m_nPlayerId;}
-	void  SetPlayerId(int64 nVal) {m_nPlayerId = nVal;}
+	int64 GetPlayerId() const {return m_rMarch.GetPlayerId();}
+	void  SetPlayerId(int64 nVal) {m_rMarch.SetPlayerId(nVal);}
 
-	int64 GetCityId() const {return m_nCityId;}
-	void  SetCityId(int64 nVal) {m_nCityId = nVal;}
+	HERONAME GetName() const {return m_rMarch.GetHero().GetName();}
 
-	HERONAME GetName() const {return m_Name;}
-	void   SetName(HERONAME szName) {m_Name=szName;}
-
-
+public:
+	March GetMarch() const {return m_rMarch;}
+	void  SetMarch(const March& val) {m_rMarch = val;}
 private:
-	ScenePos m_ScenePos;
-	int64  m_nMarchId;   // 唯一标示
-	int64  m_nPlayerId;  // 玩家ID
-	int64  m_nCityId;    // 城市ID
-	int    m_nSpeed;     // 速度
-	
-	HERONAME m_Name;        // 名称
+
+	March   m_rMarch;
 
 };
 

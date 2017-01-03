@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="gbk" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine Author:Wendy ,don't modify${N}${N}</descript>
+  <dir>./tmp/cpp/Packet/</dir>
+  <filename>PacketDefine.cpp</filename>
+
+    <common>
+      #include "PacketDefine.h"${N}
+      #include "Base.h"${N}
+      ${N}
+      namespace Packets${N}
+      {${N}
+      
+      typedef FLString${L}MAX_PACKET_NAME_SIZE${R} PACKETNAMESTR;${N}
+      PACKETNAMESTR g_PacketNameVector[PACKET_MAX];${N}
+			
+			void InitPacketNameVector()${N}
+			{${N}
+				g_PacketNameVector[PACKET_NONE] = "PACKET_NONE";${N}
+				g_PacketNameVector[PACKET_CG_LOGIN_PAK] = "PACKET_CG_LOGIN_PAK";${N}
+				g_PacketNameVector[PACKET_GC_LOGIN_RET_PAK] = "PACKET_GC_LOGIN_RET_PAK";${N}
+				${PACKETNAMEVECTOR}${N}
+			}${N}
+			
+			const tchar* GetPacketNameByID(tint32 nPacketID)${N}
+			{${N}
+					if(nPacketID${R}=0 ${C}${C} nPacketID${L}Packets::PACKET_MAX)${N}
+					{${N}
+						return g_PacketNameVector[nPacketID].GetCText();${N}
+					}${N}
+					return "";${N}
+			}${N}
+			
+      }${N}
+
+      </common>
+</pbbuffer>

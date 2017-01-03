@@ -3,4 +3,15 @@
   <PropertyGroup>
     <ShowAllFiles>false</ShowAllFiles>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LocalDebuggerCommand>D:\project\RealmConquerors\src\Server\server\DebugPath\gamed.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments>1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LocalDebuggerCommand>gamed.exe</LocalDebuggerCommand>
+    <LocalDebuggerCommandArguments>1</LocalDebuggerCommandArguments>
+    <DebuggerFlavor>WindowsLocalDebugger</DebuggerFlavor>
+    <LocalDebuggerWorkingDirectory>D:\project\RealmConquerors\src\Server\server\DebugPath\</LocalDebuggerWorkingDirectory>
+  </PropertyGroup>
 </Project>

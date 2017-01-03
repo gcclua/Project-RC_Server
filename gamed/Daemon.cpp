@@ -1,15 +1,22 @@
 #include "Daemon.h"
 #include <string.h>
 #include "../common/string-util.h"
-#include "../common/SysLog.h"
-#include "GameNetHandler.h"
 #include "../common/coredump.h"
 #include "Exception.h"
 #include "service/ServiceManager.h"
+#include "LibNetwork.h"
 #include "../DBManage/DBService.h"
-#include "../logic/GameServerConfig.h"
+#include "Log/LogService.h"
+#include "Login/LoginService.h"
+#include "scene/SceneService.h"
+#include "worldmap/WorldMapService.h"
+#include "user\WorldUserService.h"
+#include "Config.h"
+#include "Table/TableManager.h"
+#include "packet/Packet/PacketDefine.h"
+#include "ServerConfig.h"
 
-ServerConfig serverConfig("server.cfg");
+ServerConfig serverConfig("D:/project/RealmConquerors/src/Server/server/DebugPath/server.cfg");
 
 
 #include <string>
@@ -25,18 +32,18 @@ Daemon::Daemon(int nid)
 void Daemon::InitRuntimeFolder(int nGameId)
 {
 	__ENTER_FUNCTION
-		string szFolder;
-	    szFolder = "./RuntimeData";
-		AssertEx(InitFolder(szFolder.c_str()),"");
+		FLString<256> szFloder;
+		szFloder = "./RuntimeData";
+		AssertEx(InitFolder(szFloder.GetCText()), "");
 
-		szFolder += "/";
-		szFolder += nGameId;
-		AssertEx(InitFolder(szFolder.c_str()),"");
+		szFloder += "/";
+		szFloder += FLString<256>(nGameId);
+		AssertEx(InitFolder(szFloder.GetCText()), "");
 
-		string szFolderLog;
-		szFolderLog = szFolder;
-		szFolderLog += "/Log";
-		AssertEx(InitFolder(szFolderLog.c_str()),"");
+		FLString<256> szFloderLog;
+		szFloderLog = szFloder;
+		szFloderLog += "/Log";
+		AssertEx(InitFolder(szFloderLog.GetCText()), "");
 
 	__LEAVE_FUNCTION
 }
@@ -44,8 +51,15 @@ void Daemon::InitRuntimeFolder(int nGameId)
 void Daemon::RunServiceManager(void)
 {
 	__ENTER_FUNCTION
-		gServiceManager.Create(ServiceID::MAX,GameServerConfig::Instance().DBThreadCount());
+	gServiceManager.Create(ServiceID::MAX,_GameConfig().m_nDBThreadCount);
 	gServiceManager.Register(new DBService());
+	gServiceManager.Register(new LoginService(_GameConfig().m_uPortForClient));
+	gServiceManager.Register(new LogService());
+	//gServiceManager.Register(new DBTestService());
+	gServiceManager.Register(new SceneService());
+	gServiceManager.Register(new WorldUserService());
+	gServiceManager.Register(new WorldMapService());
+	
 	gServiceManager.InitAllService();
 	gServiceManager.Run();
 	__LEAVE_FUNCTION
@@ -53,7 +67,7 @@ void Daemon::RunServiceManager(void)
 
 void Daemon::InitStaticManager()
 {
-	
+	gPacketFactoryManager.Init();
 }
 
 
@@ -64,6 +78,10 @@ Daemon::~Daemon()
 
 void Daemon::start()
 {
+	//InitTable();
+	InitGameConfig();
+
+	Packets::InitPacketNameVector();
 	InitStaticManager();
 	RunServiceManager();
 }

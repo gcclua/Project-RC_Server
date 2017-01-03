@@ -10,7 +10,7 @@ class DBWorldMapTask : public DBBaseTask
 public:
 	enum 
 	{
-		TASK_TYPE = DB_TASK_TILE,
+		TASK_TYPE = DB_TASK_WORDMAP,
 	};
 
 public:

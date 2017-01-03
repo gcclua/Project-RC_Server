@@ -29,7 +29,7 @@ protected:
 	virtual void Shutdown(void);
 
 private:
-	 void Load(const DBTileData& rData);
+	 void LoadTile(const DBTileData& rData);
 	 void Save(DBTileData& rData);
 
 public:
@@ -38,16 +38,25 @@ public:
 	void Tick_Save(const TimeInfo &rTimeInfo);
 
 public:
+	TileInfoPtr GetPlainTile();
+
+public:
 	// 地块加载
 	virtual void HandleMessage(const DBRetLoadTileDataMsg &rMsg);
+	virtual void HandleMessage(const ReqIdleTileMsg &rMsg);
+	virtual void HandleMessage(const ReqSetTileOwerMsg &rMsg);
+
 
 private:
-	TileInfo* GetTileInfo(int tileId);
+	TileInfoPtr GetTileInfo(int tileId);
+
+private:
+	void PushSaveList(TileInfoPtr Ptr);
 
 private:
 
 	// 待存储的地块信息
-	typedef std::list<int> SaveTileList;
+	typedef std::map<int,TileInfoPtr> SaveTileList;
 	SaveTileList  m_lstSaveTile;
 
 	// 数据存储时间

@@ -1,0 +1,11 @@
+Id	Desc	ImpactId	DelayTime	ScanIntervalTime	MaxEffectTime	IsEffectByHit	ValidRadius	MaxValidNum
+INT	STRING	INT	INT	INT	INT	INT	INT	INT
+#MAX_ID=1000;MAX_RECORD=1000;TableType=Index;								
+#唯一标示 索引	描述，策划维护，此列程序不读	BUFFID	BUFF首次生效的延迟时间（单位:毫秒）	BUFF扫描间隔时间（单位:毫秒）(-1 表示只扫描1次)	BUFF最大生效次数(-1表示 无次数上限)	是否命中目标才算生效次数	BUFF扫描有效半径	BUFF最大作用目标数
+#此行必须有!!客户端确定是否需要读到内存	规则为填写S则不读，否则就会读取到客户端							
+1	雪暗天-锋边竹笠	37301	0	1000	1	0	2	10
+2	雪暗天-锋边竹笠	37302	0	1000	1	0	2	10
+3	温弩-巨魄擎天	27512	0	-1	1	0	3	10
+4	温弩-巨魄擎天	27513	0	-1	1	0	3	10
+5	火麒麟-火焰陷阱	7604	0	1000	-1	0	4	10
+6	龙龟-水泡	7605	0	1000	-1	0	4	10

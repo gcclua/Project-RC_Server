@@ -78,12 +78,20 @@ bool InitFolder(const char* szFolderPath)
 	__ENTER_FUNCTION
 		if (IsFolderExists(szFolderPath))
 		{
-			return false;
+			return true;
 		}
 		else
 		{
-#if defined(_WIN32)
-#else
+	#if defined(_WIN32)
+			if (_mkdir(szFolderPath) == 0)
+			{
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+	#else
 	if (mkdir(szFolderPath,0755) == 0)
 	{
 		return true;

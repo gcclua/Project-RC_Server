@@ -41,7 +41,7 @@ void Obj_Snare::Tick(const TimeInfo &rTimeInfo)
 			return;
 		}
 		Scene& rScene=GetScene();
-		tint32 nLifeTime =(tint32)(Clock::getCurrentSystemTime()-m_nCreateTime);
+		tint32 nLifeTime =(tint32)(gTimeManager.RunTime()-m_nCreateTime);
 		if (nLifeTime -m_nValidDelayTime <=0)//未激活
 		{
 			m_nCurState =Obj_Snare::STATE_NOACTIVATE;
@@ -81,7 +81,7 @@ void Obj_Snare::Tick(const TimeInfo &rTimeInfo)
 			//记下生效的时间
 			if (m_nCurState ==Obj_Snare::STATE_ACTIVATE)
 			{
-				m_nActiveTime = static_cast<tuint32>(Clock::getCurrentSystemTime());
+				m_nActiveTime = gTimeManager.RunTime();;
 			}
 		}
 		if (m_nCurState ==Obj_Snare::STATE_ACTIVATE) //激活状态
@@ -135,7 +135,7 @@ void Obj_Snare::BroadcastBuff(Obj_CharacterPtr OwnerPtr)
 		return ;
 	}
 	Scene& rScene=GetScene();
-	tint32 nActiveTime=(tint32)(Clock::getCurrentSystemTime()-m_nActiveTime);
+	tint32 nActiveTime=gTimeManager.RunTime()-m_nActiveTime;;
 	for (tint32 nBuffIndex=0;nBuffIndex<Obj_Snare::MAXBUFFNUM;nBuffIndex++)
 	{
 		if (m_ImpactInfo[nBuffIndex].m_nImpactId ==invalid_id)
@@ -148,7 +148,7 @@ void Obj_Snare::BroadcastBuff(Obj_CharacterPtr OwnerPtr)
 			continue;
 		}
 		bool isEffect =false;
-		tint32 nDiffInterTime = (tint32)(Clock::getCurrentSystemTime()-m_ImpactInfo[nBuffIndex].m_nLastScanTime);
+		tint32 nDiffInterTime =gTimeManager.RunTime()-m_ImpactInfo[nBuffIndex].m_nLastScanTime;
 		if (nDiffInterTime>=m_ImpactInfo[nBuffIndex].m_nScanIntervalTime)
 		{
 			CharacterRefCont objCharCont;
@@ -177,7 +177,7 @@ void Obj_Snare::BroadcastBuff(Obj_CharacterPtr OwnerPtr)
 			}
 			if (isEffect || m_ImpactInfo[nBuffIndex].m_bIsEffectByHit ==false)
 			{
-				m_ImpactInfo[nBuffIndex].m_nLastScanTime = static_cast<tuint32>(Clock::getCurrentSystemTime());;
+				m_ImpactInfo[nBuffIndex].m_nLastScanTime = gTimeManager.RunTime();;
 				m_ImpactInfo[nBuffIndex].m_nEffectTimes++;
 				//该BUFF 是否已经不需要了
 				if (m_ImpactInfo[nBuffIndex].m_nScanIntervalTime ==-1) //扫描间隔为-1 表示生效一次就不需要了

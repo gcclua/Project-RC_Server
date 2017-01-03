@@ -11,5 +11,25 @@ extern const char* UpdateCharFullData;
 
 extern const char*  LoadTileData;
 extern const char*  UpdateTileData;
+extern const tchar*	CreateChar;
+extern const tchar*	SaveGuidData;
+extern const tchar*	LoadCharList;
+extern const tchar* LoadRandomName;
 
+extern const tchar* CreateCity;
+extern const tchar* LoadCity;
+extern const tchar* UpdateCity;
+
+extern const tchar* LoadBuilding;
+extern const tchar* UpdateBuilding;
+
+extern const tchar* LoadMarch;
+extern const tchar* UpdateMarch;
+extern const tchar* LoadMapMarch;
+
+extern const tchar* LoadHero;
+extern const tchar* UpdateHero;
+
+extern const tchar* UpdateTroop;
+extern const tchar* LoadMarchTroop;
 #endif

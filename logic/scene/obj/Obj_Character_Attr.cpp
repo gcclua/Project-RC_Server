@@ -51,18 +51,7 @@ void Obj_Character::SetMaxHp(int nMaxHp)
 int Obj_Character::IncreaseHp( int nHP, Obj_Character& rSourceObj)
 {
 	__ENTER_FUNCTION
-
-		int nSpecialHP =0;
-		if (IsSceneValid())
-		{
-			bool isNormalHP = GetScene().OnObjBeforeHPChange(GetID(), nHP, nSpecialHP);
-			if (!isNormalHP)
-			{
-				nHP = nSpecialHP;
-			}
-		}
 		
-
 		int nCurHp = GetCurHp();
 		int nOldCurHpBak = nCurHp;
 		
@@ -309,12 +298,12 @@ void Obj_Character::BroadCastAnimState(int AnimState,
 			AnimState ==(int)ANIMATIONSTATE_T::STATE_HITBYDUANQING||
 			AnimState ==(int)ANIMATIONSTATE_T::STATE_HITBYMENGWU)
 		{
-			int nDiffTime =(int)(Clock::getCurrentSystemTime()-m_nLastBroadcastHitTime);
+			int nDiffTime =(int)(gTimeManager.RunTime()-m_nLastBroadcastHitTime);
 			if (nDiffTime <500)
 			{
 				return;
 			}
-			m_nLastBroadcastHitTime =static_cast<uint32>(Clock::getCurrentSystemTime());
+			m_nLastBroadcastHitTime =gTimeManager.RunTime();
 		}
 
 		Update_Animation_StatePtr MsgPtr = POOLDEF_NEW(Update_Animation_State);
@@ -326,6 +315,7 @@ void Obj_Character::BroadCastAnimState(int AnimState,
 		MsgPtr->m_nStateResortTime = resortTime;
 		MsgPtr->m_nHitTimes        = hitTimes;
 		MsgPtr->m_nHitInterval     = hitInterval;
+		MsgPtr->m_nSceneId         = GetSceneInstID();
 
 		rScene.BroadCast_InSight_Include(MsgPtr,GetID());
 		

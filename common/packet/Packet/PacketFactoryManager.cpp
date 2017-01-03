@@ -6,6 +6,15 @@
 #include"CG_REQ_NEAR_LIST_PAK.h"
 #include"CG_CHAT_PAK.h"
 #include"CG_MOVE_PAK.h"
+#include"CG_SKILL_USE_PAK.h"
+#include"CG_FIGHT_PAK.h"
+#include"CG_LEAVE_COPYSCENE_PAK.h"
+#include"CG_ROBOT_OPEN_PAK.h"
+#include"CG_ASSIGN_HERO_PAK.h"
+#include"CG_SEND_MARCH_PAK.h"
+#include"CG_CREATEROLE_PAK.h"
+#include"CG_BATTLEINFOR_PAK.h"
+#include"CG_OBJPOSLIST_PAK.h"
 #include"GC_LOGIN_RET_PAK.h"
 #include"GC_CONNECTED_HEARTBEAT_PAK.h"
 #include"GC_NEAR_MARCHLIST_PAK.h"
@@ -23,8 +32,17 @@
 #include"GC_UPDATE_NEEDIMPACTINFO_PAK.h"
 #include"GC_PLAY_EFFECT_PAK.h"
 #include"GC_REMOVEEFFECT_PAK.h"
-#include"GS_CONNECTED_HEARTBEAT_PAK.h"
-#include"SG_CONNECTED_HEARTBEAT_PAK.h"
+#include"GC_ROBOT_OPEN_PAK.h"
+#include"GC_ASSIGN_HERO_PAK.h"
+#include"GC_SEND_MARCH_PAK.h"
+#include"GC_CREATEROLE_RET_PAK.h"
+#include"GC_LOGIN_QUEUE_STATUS_PAK.h"
+#include"GC_OBJINFOR_PAK.h"
+#include"GC_BATTLEINFOR_PAK.h"
+#include"GC_OBJPOSLIST_PAK.h"
+#include"GC_OBJCOMMANDPURSUE_PAK.h"
+#include"GC_OBJPREPAREFORATTACK_PAK.h"
+#include"GC_OBJGETHURT_PAK.h"
 PacketFactoryManager gPacketFactoryManager;
  PacketFactoryManager::PacketFactoryManager( )
  {
@@ -135,6 +153,15 @@ AddFactory(new Packets::CG_CONNECTED_HEARTBEAT_PAKFactory());
 AddFactory(new Packets::CG_REQ_NEAR_LIST_PAKFactory());
 AddFactory(new Packets::CG_CHAT_PAKFactory());
 AddFactory(new Packets::CG_MOVE_PAKFactory());
+AddFactory(new Packets::CG_SKILL_USE_PAKFactory());
+AddFactory(new Packets::CG_FIGHT_PAKFactory());
+AddFactory(new Packets::CG_LEAVE_COPYSCENE_PAKFactory());
+AddFactory(new Packets::CG_ROBOT_OPEN_PAKFactory());
+AddFactory(new Packets::CG_ASSIGN_HERO_PAKFactory());
+AddFactory(new Packets::CG_SEND_MARCH_PAKFactory());
+AddFactory(new Packets::CG_CREATEROLE_PAKFactory());
+AddFactory(new Packets::CG_BATTLEINFOR_PAKFactory());
+AddFactory(new Packets::CG_OBJPOSLIST_PAKFactory());
  AddFactory(new Packets::GC_LOGIN_RET_PAKFactory());
 AddFactory(new Packets::GC_CONNECTED_HEARTBEAT_PAKFactory());
 AddFactory(new Packets::GC_NEAR_MARCHLIST_PAKFactory());
@@ -152,9 +179,18 @@ AddFactory(new Packets::GC_FORCE_SETPOS_PAKFactory());
 AddFactory(new Packets::GC_UPDATE_NEEDIMPACTINFO_PAKFactory());
 AddFactory(new Packets::GC_PLAY_EFFECT_PAKFactory());
 AddFactory(new Packets::GC_REMOVEEFFECT_PAKFactory());
- AddFactory(new Packets::GS_CONNECTED_HEARTBEAT_PAKFactory());
- AddFactory(new Packets::SG_CONNECTED_HEARTBEAT_PAKFactory());
-     return true ;
+AddFactory(new Packets::GC_ROBOT_OPEN_PAKFactory());
+AddFactory(new Packets::GC_ASSIGN_HERO_PAKFactory());
+AddFactory(new Packets::GC_SEND_MARCH_PAKFactory());
+AddFactory(new Packets::GC_CREATEROLE_RET_PAKFactory());
+AddFactory(new Packets::GC_LOGIN_QUEUE_STATUS_PAKFactory());
+AddFactory(new Packets::GC_OBJINFOR_PAKFactory());
+AddFactory(new Packets::GC_BATTLEINFOR_PAKFactory());
+AddFactory(new Packets::GC_OBJPOSLIST_PAKFactory());
+AddFactory(new Packets::GC_OBJCOMMANDPURSUE_PAKFactory());
+AddFactory(new Packets::GC_OBJPREPAREFORATTACK_PAKFactory());
+AddFactory(new Packets::GC_OBJGETHURT_PAKFactory());
+       return true ;
  __LEAVE_FUNCTION
  return false ;
  }

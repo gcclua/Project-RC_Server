@@ -14,7 +14,6 @@ ID_SKILLEXID,
 ID_BASEID=2,
 ID_SKILLDESC,
 ID_LEVEL,
-ID_COMBATVALUE,
 ID_SKILLLOGIC,
 ID_LOGICPARAM01,
 ID_LOGICPARAM02,
@@ -25,15 +24,8 @@ ID_RADIUS,
 ID_CDTIMEID,
 ID_SKILLDELAYTIME,
 ID_SKILLCONTINUETIME,
-ID_YINCHANGTIME,
-ID_DELTYPE_01,
-ID_DELNUM_01,
-ID_DELTYPE_02,
-ID_DELNUM_02,
-ID_GAINSTYPE_01,
-ID_GAINSNUM_01,
-ID_GAINSTYPE_02,
-ID_GAINSNUM_02,
+ID_DELTYPE,
+ID_DELNUM,
 ID_NEXTSKILLID,
 ID_IMPACT_01,
 ID_IMPACT_2,
@@ -92,53 +84,14 @@ private:
  tint32 GetCameraRockRate() const { return m_CameraRockRate; }
 
 private:
- tint32 m_CombatValue;
+ tint32 m_DelNum;
  public:
- tint32 GetCombatValue() const { return m_CombatValue; }
+ tint32 GetDelNum() const { return m_DelNum; }
 
-public:
- tint32 getDelNumCount() const { return 2; } 
- private:
- tint32 m_DelNum[2];
+private:
+ tint32 m_DelType;
  public:
- tint32 GetDelNumbyIndex(tint32 idx) const 
- {
- if(idx>=0 && idx<2) return m_DelNum[idx];
- return -1;
- }
-
-public:
- tint32 getDelTypeCount() const { return 2; } 
- private:
- tint32 m_DelType[2];
- public:
- tint32 GetDelTypebyIndex(tint32 idx) const 
- {
- if(idx>=0 && idx<2) return m_DelType[idx];
- return -1;
- }
-
-public:
- tint32 getGainsNumCount() const { return 2; } 
- private:
- tint32 m_GainsNum[2];
- public:
- tint32 GetGainsNumbyIndex(tint32 idx) const 
- {
- if(idx>=0 && idx<2) return m_GainsNum[idx];
- return -1;
- }
-
-public:
- tint32 getGainsTypeCount() const { return 2; } 
- private:
- tint32 m_GainsType[2];
- public:
- tint32 GetGainsTypebyIndex(tint32 idx) const 
- {
- if(idx>=0 && idx<2) return m_GainsType[idx];
- return -1;
- }
+ tint32 GetDelType() const { return m_DelType; }
 
 public:
  tint32 getImpactCount() const { return 6; } 
@@ -237,11 +190,6 @@ private:
  tint32 m_SkillLogic;
  public:
  tint32 GetSkillLogic() const { return m_SkillLogic; }
-
-private:
- tint32 m_YinChangTime;
- public:
- tint32 GetYinChangTime() const { return m_YinChangTime; }
 
 private:
  tint32 m_Level;

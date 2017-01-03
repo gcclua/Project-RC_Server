@@ -48,8 +48,8 @@ void SL_TeleMove::StarEffect(Obj_Character& rSelf)
 		//移动到目标点
 		ScenePos TargetPos;
 		float fRad =rSelf.GetFaceDir()+nAngle/180.0f*_PI;
-		TargetPos.m_fX =rSelf.GetScenePos().m_fX+cos(fRad)*fDis;
-		TargetPos.m_fZ =rSelf.GetScenePos().m_fZ+sin(fRad)*fDis;
+		TargetPos.m_nX =(int)(rSelf.GetScenePos().m_nX+cos(fRad)*fDis);
+		TargetPos.m_nZ =(int)(rSelf.GetScenePos().m_nZ+sin(fRad)*fDis);
 		ScenePos OldSelfPos =rSelf.GetScenePos();
 		rSelf.TeleMoveTo(TargetPos);
 		//修正真正的位移偏移

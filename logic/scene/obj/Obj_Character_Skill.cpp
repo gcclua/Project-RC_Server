@@ -246,7 +246,7 @@ void Obj_Character::ActivateSkill(SkillInfo_T& skillInfo)
 			BeforActiveSkill(skillInfo);
 		
 			//非连续技 加入公共CD 
-			if (IsMarch() && (rSkillBase.GetSkillClass()&SKILLCLASS::AUTOREPEAT)==0)
+			if (IsNpc() && (rSkillBase.GetSkillClass()&SKILLCLASS::AUTOREPEAT)==0)
 			{
 				if (false ==AddCoolDownToList(SKILLPUBLICCD))
 				{
@@ -264,14 +264,14 @@ void Obj_Character::ActivateSkill(SkillInfo_T& skillInfo)
 				StopMove(true,true);
 			}*/
 			//记录下使用技能的时间
-			m_nLastUseSkillTime = (int)Clock::getCurrentSystemTime();
+			m_nLastUseSkillTime = gTimeManager.RunTime();
 			// 发包给客户端 可以走技能了
 			RetUserSkillMsgPtr MsgPtr = POOLDEF_NEW(RetUserSkillMsg);
 			AssertEx(MsgPtr,"");
 			MsgPtr->m_nSkillId = skillInfo.m_nSkillId;
 			MsgPtr->m_nSenderId = GetID();
 			MsgPtr->m_nTargetId = skillInfo.m_nTargetId;
-			
+			MsgPtr->m_nSceneId  = GetSceneInstID();
 			//广播
 			
 			rScene.BroadCast_InSight_Include(MsgPtr,GetID());		
@@ -322,19 +322,7 @@ bool Obj_Character::SkillCheck(Table_SkillBase const& rSkillBase,Table_SkillEx c
 		{
 			return false;
 		}
-		//XP 技能判断 当前场景是否可以用
-		if ((rSkillBase.GetSkillClass()&SKILLCLASS::XP)!=0)
-		{
-			Table_SceneClass const* pSceneInfo =GetTable_SceneClassByID(rScene.GetSceneClassID());
-			if (pSceneInfo ==null_ptr)
-			{
-				return false;
-			}
-			if (pSceneInfo->GetIsCanUseXp() !=1)
-			{
-				return false;
-			}
-		}
+
 		//在使用技能
 		if (IsUsingSkill())
 		{
@@ -430,9 +418,9 @@ bool Obj_Character::TargetCheck_Activate(Table_SkillBase const&  rSkillBase, Tab
 			}
 			ESkillTarCheckRet bRet = Skill_IsWantedUnit(rSkillBase, rSkillEx, *targetPtr);
 			//玩家 
-			if (bRet != E_Skill_Tar_Effect && IsMarch())
+			if (bRet != E_Skill_Tar_Effect && IsNpc())
 			{
-				Obj_March& rMarch = dynamic_cast<Obj_March&>(*this);
+				Obj_Npc& rNpc = dynamic_cast<Obj_Npc&>(*this);
 				
 				if (E_Skill_Tar_Dis_Err == bRet)
 				{
@@ -442,8 +430,8 @@ bool Obj_Character::TargetCheck_Activate(Table_SkillBase const&  rSkillBase, Tab
 					MsgPtr->m_nSenderId = GetID();
 					MsgPtr->m_nTargetId = targetPtr->GetID();
 					MsgPtr->m_nSkillFailType = SKILLFAILTYPE::DISTANCE;
-				
-					SendMessage2User(rMarch.GetPlayerId(),MsgPtr);
+					MsgPtr->m_nSceneId  = GetSceneInstID();
+					SendMessage2User(rNpc.GetPlayerId(),MsgPtr);
 
 				}
 			}
@@ -569,32 +557,19 @@ SkillBaseLogicPtr Obj_Character::CreateSkillInstanceById(int nLogicId)
 bool Obj_Character::CanDeplete(Table_SkillBase const& rSkillBase,Table_SkillEx const& rSkillEx)
 {
 	__ENTER_FUNCTION
-		int nDelCount =rSkillEx.getDelNumCount();
-		bool bRet =true;
 		//检测是否 需要的消耗满足
-		for (int i=0;i<nDelCount;i++)
-		{
-			int nDelType =rSkillEx.GetDelTypebyIndex(i);
-			int nDelValue =rSkillEx.GetDelNumbyIndex(i);
-			if (nDelType ==-1)
-			{
-				continue;
-			}
-			bool bIsEnough= IsDepleteEnough(nDelType,nDelValue);
-			if (false ==bIsEnough)
-			{
-				bRet =false;
-			}
-		}
+		int nDelType = rSkillEx.GetDelType();
+		int nDelValue =rSkillEx.GetDelNum();
+	
+		return IsDepleteEnough(nDelType,nDelValue);
 		
-		return bRet;
 	__LEAVE_FUNCTION
 		return false;
 }
 void Obj_Character::SkillGain(Table_SkillBase const& rSkillBase,Table_SkillEx const& rSkillEx)
 {
 	__ENTER_FUNCTION
-		int nDelCount =rSkillEx.getGainsNumCount();
+		/*int nDelCount =rSkillEx.getGainsNumCount();
 		for (int i=0;i<nDelCount;i++)
 		{
 			int nGainType =rSkillEx.GetGainsTypebyIndex(i);
@@ -644,7 +619,7 @@ void Obj_Character::SkillGain(Table_SkillBase const& rSkillBase,Table_SkillEx co
 				}
 			}
 	
-		}
+		}*/
 	
 
 	__LEAVE_FUNCTION
@@ -870,34 +845,4 @@ bool Obj_Character::IsPassiveSkill(int nSkillId)
 
 	__LEAVE_FUNCTION
 	return false;
-}
-bool Obj_Character::IsXPSkill(int nSkillId)
-{
-	__ENTER_FUNCTION
-
-		if (nSkillId == invalid_id)
-		{
-			return false;
-		}
-
-		Table_SkillEx const* pSkillEx = GetTable_SkillExByID(nSkillId);
-		if (pSkillEx == null_ptr)
-		{
-			return false;
-		}
-
-		Table_SkillBase const* pSkillBase = GetTable_SkillBaseByID(pSkillEx->GetBaseId());
-		if (pSkillBase == null_ptr)
-		{
-			return false;
-		}
-
-		if ((pSkillBase->GetSkillClass() & SKILLCLASS::XP) != 0)
-		{
-			return true;
-		}
-		return false;
-
-		__LEAVE_FUNCTION
-			return false;
 }

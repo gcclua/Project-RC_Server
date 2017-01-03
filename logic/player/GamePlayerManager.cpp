@@ -1,9 +1,11 @@
 #include "GamePlayerManager.h"
 #include "service/Service.h"
-#include "Login/LoginService.h"
+#include "user/WorldUserService.h"
+#include "Message/WorldUserMsg.h"
+#include "service/MessageOp.h"
 
-GamePlayerManager::GamePlayerManager(LoginService &rLoginService)
-	:m_rLoginService(rLoginService)
+GamePlayerManager::GamePlayerManager(WorldUserService &rWorldService)
+	:m_rWorldService(rWorldService)
 {
 
 }
@@ -25,7 +27,7 @@ void GamePlayerManager::ProcessTicks(const TimeInfo &rTimeInfo)
 			PlayerPtr Ptr = (*it);
 			AssertEx(Ptr,"");
 			__ENTER_PROTECT_EX
-				bool bRet = Ptr->Tick_InLogin(rTimeInfo);
+				bool bRet = Ptr->Tick_InGame(rTimeInfo);
 			if (!bRet)
 			{
 				it = Del(Ptr,DEL_FOR_LOGINTICK1);
@@ -41,7 +43,7 @@ void GamePlayerManager::ProcessTicks(const TimeInfo &rTimeInfo)
 
 }
 
-PlayerPtr GamePlayerManager::GetPlayerByID(int64 nID)
+PlayerPtr GamePlayerManager::GetPlayerByID(int nID)
 {
 	__ENTER_FUNCTION
 		for (PlayerPtrList::iterator it = m_PlayerList.begin();it != m_PlayerList.end(); it++)
@@ -78,53 +80,36 @@ PlayerPtr GamePlayerManager::PopPlayerByStatusFOrEnterWorld(void)
 void GamePlayerManager::OnAddPlayer(PlayerPtr Ptr,int nResult)
 {
 	__ENTER_FUNCTION
-		m_rLoginService.SetCurPlayerCount(static_cast<int>(m_PlayerList.size()));
-	CACHE_LOG("Player","login playermanager add player("<<Ptr->GetID()<<"),result("<<nResult<<")");
+		m_rWorldService.SetCurPlayerCount(static_cast<int>(m_PlayerList.size()));
+
+	CacheLog(LOGDEF_INST(Player), "login playermanager add player(%d),result(%d)",
+		Ptr->GetID(), nResult);
+
 	__LEAVE_FUNCTION
 }
 
 void GamePlayerManager::OnDelPlayer(PlayerPtr Ptr,int nResult)
 {
 	__ENTER_FUNCTION
-		m_rLoginService.SetCurPlayerCount(static_cast<int>(m_PlayerList.size()));
-	bool bDelOnlineStatus = false;
-	switch (Ptr->GetStatus())
+		m_rWorldService.SetCurPlayerCount(static_cast<int>(m_PlayerList.size()));
+
+	bool bLastLeave = (nResult != DEL_FOR_ENTERWORLD);
+
+
+	Ptr->PrintLastPacketLog("scene del player");
+
+	CacheLog(LOGDEF_INST(Player), " playermanager del player(%d), result(%d)",
+		Ptr->GetID(), nResult);
+
+	if (bLastLeave)
 	{
-	case PlayerStatus::EMPTY:
-		{
-			bDelOnlineStatus = false;
-		}
-		break;
-	case PlayerStatus::CONNECTED:
-		{
-			bDelOnlineStatus = false;
-		}
-		break;
-	case PlayerStatus::LOGIN_READYENTERWORLD:
-		{
-			bDelOnlineStatus = true;
-		}
-		break;
-	case PlayerStatus::GAME_ENTERINGWORLD:
-		{
-			bDelOnlineStatus = false;
-		}
-		break;
-	case PlayerStatus::GAME_PLAYERING:
-		{
-			bDelOnlineStatus = false;
-		}
-		break;
+		PlayerLeaveWorldMsgPtr MsgPtr = POOLDEF_NEW(PlayerLeaveWorldMsg);
+		AssertEx(MsgPtr, "");
+		MsgPtr->m_guid = Ptr->GetObjUser().GetGuid();
+		MsgPtr->m_PlayerPtr = Ptr;
+		MsgPtr->m_nDelResult = nResult;
+		SendMessage2Srv(ServiceID::WORLDUSER, MsgPtr);
 	}
-
-	if (bDelOnlineStatus && nResult != DEL_FOR_ENTERWORLD)
-	{
-
-
-		CACHE_LOG("Player","ol del player("<<Ptr->GetID()<<") source(playermanager)");
-	}
-
-	CACHE_LOG("Player","login playermanager del player("<<Ptr->GetID()<<") result("<<nResult<<")");
 
 	__LEAVE_FUNCTION
 }

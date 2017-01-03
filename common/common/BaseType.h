@@ -10,41 +10,6 @@
 #define __BASETYPE_H__
 
 
-
-/////////////////////////////////////////////////////////////////////////////////
-//网络信息预定义宏
-/////////////////////////////////////////////////////////////////////////////////
-#ifndef FD_SETSIZE
-#define FD_SETSIZE      1024
-#endif /* FD_SETSIZE */
-
-
-/////////////////////////////////////////////////////////////////////////////////
-//当前包含的系统头文件引用
-/////////////////////////////////////////////////////////////////////////////////
-#if defined(__WINDOWS__)
-	#pragma warning ( disable : 4786 )
-	#include <Windows.h>
-	#include "crtdbg.h"
-#elif defined(__LINUX__)
-	#include <sys/types.h>
-	#include <pthread.h>
-	#include <execinfo.h>
-	#include <signal.h>
-	#include <exception>
-	#include <setjmp.h>
-	#include <sys/epoll.h>
-#endif
-
-#include <stdio.h>
-#include <iostream>
-#include <fstream>
-#include <string>
-#include <time.h>
-#include <math.h>
-#include <stdarg.h>
-
-
 ///////////////////////////////////////////////////////////////////////
 //标准数据类型定义
 ///////////////////////////////////////////////////////////////////////
@@ -103,43 +68,6 @@ typedef unsigned int uint32;
 #define _MAX_PATH 260
 #endif
 
-//解决winsock冲突
-#ifndef WIN32_LEAN_AND_MEAN
-#define WIN32_LEAN_AND_MEAN
-#endif
-
-#ifndef WIN32
-#include <ext/hash_map>
-using namespace __gnu_cxx;
-namespace __gnu_cxx
-{
-
-	template<>
-	struct hash<long long>
-	{
-
-		size_t
-			operator()(long long __x) const
-		{
-			return __x;
-		}
-	} ;
-
-	template<>
-	struct hash<std::string>
-	{
-
-		size_t
-			operator()(std::string __s) const
-		{
-			return __stl_hash_string(__s.c_str());
-		}
-	} ;
-}
-#else
-#include <hash_map>
-using namespace stdext;
-#endif
 
 
 ///////////////////////////////////////////////////////////////////////
@@ -153,25 +81,22 @@ using namespace stdext;
 #define TIMELENTH			23
 
 #if defined(_WIN32)
+#define __FUNCTION_NAME__ __FUNCTION__
 #define		tvsnprintf		_vsnprintf
 #define		tstricmp		_stricmp
 #define		tsnprintf		_snprintf
+#define	tatoll	_atoi64
+
+#define WIN32_LEAN_AND_MEAN
 #elif defined(__LINUX__)
-#define		tvsnprintf		vsnprintf
-#define		tstricmp		strcasecmp
-#define		tsnprintf		snprintf
+#define __FUNCTION_NAME__ __PRETTY_FUNCTION__
+
+#define tvsnprintf vsnprintf
+#define tstricmp strcasecmp
+#define tsnprintf snprintf
+#define	tatoll	atoll
 #endif
 
-///////////////////////////////////////////////////////////////////////
-//调试预定义宏定义
-///////////////////////////////////////////////////////////////////////
-#if defined(NDEBUG)
-	#define __ENTER_FUNCTION_FOXNET if(1){
-	#define __LEAVE_FUNCTION_FOXNET }
-#else
-	#define __ENTER_FUNCTION_FOXNET if(1){
-	#define __LEAVE_FUNCTION_FOXNET }
-#endif
 
 #define _MAX(a,b) (((a) > (b)) ? (a) : (b))
 #define _MIN(a,b) (((a) < (b)) ? (a) : (b))

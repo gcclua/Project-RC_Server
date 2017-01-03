@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="gbk" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine Author:Wendy ,don't modify${N}${N}</descript>
+  <dir>./tmp/cpp/Packet/</dir>
+  <filename>PacketDefine.h</filename>
+
+    <common>
+      #ifndef __PACKET_DEFINE_H__${N}
+      #define __PACKET_DEFINE_H__${N}
+      ${N}
+      
+      #include "BaseType.h"${N}
+      #define MAX_PACKET_NAME_SIZE (128) ${N}
+      ${N}
+      namespace Packets${N}
+      {${N}
+      //消息类型值描述格式：PACKET_XX_YYYYYY${N}
+      //XX可以描述为：GC、CG ${N}
+      //G游戏服务器端、C客户端 ${N}
+      //YYYYYY表示消息内容${N}
+      //例如：PACKET_CG_ATTACK 表示客户端发给游戏服务器端关于攻击的消息${N}
+      enum PACKET_DEFINE${N}
+      {${N}
+      PACKET_NONE = 0 ,				// 0，空${N}
+      PACKET_CG_LOGIN_PAK = 1,		//client ask login ${N}
+	  PACKET_GC_LOGIN_RET_PAK =2,	//client login result ${N}
+      ${FULLDATA}${N}
+      PACKET_MAX	//消息类型的最大值${N}
+      };${N}${N}
+
+			${N}
+			void InitPacketNameVector();${N}
+			const tchar* GetPacketNameByID(tint32 nPacketID);${N}
+
+      }${N}
+
+      #endif${N}
+      </common>
+</pbbuffer>

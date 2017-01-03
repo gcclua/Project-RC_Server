@@ -1,50 +1,65 @@
-
+////////////////////////////////////////////////////////////////////////////////////////
+//
+//             时间：11:08 2013-11-15 
+//			   说明：玩家数据存储
+//
+//
+/////////////////////////////////////////////////////////////////////////////////////////
 #include "ODBCCharFullData.h"
-#include "DataBase/ODBCInterface.h"
-#include "DataBase/SqlTemplate.h"
-
-
+#include "ODBCCityData.h"
+#include "ODBCBuildingData.h"
+#include "ODBCHeroData.h"
+#include "ODBCMarchData.h"
 
 ODBCCharFullData::ODBCCharFullData(ODBCInterface* pInterface)
 {
+	__ENTER_FUNCTION
 
-	mDBName = CHARACTER_DATABASE;
-	mResult			= 0;
-	mResultCount	= 0;
-	m_CharGuid		= INVALID_ID;
-	AssertEx(pInterface,"");
-	mInterface		=	pInterface;
+		mResult			= 0;
+		mResultCount	= 0;
+		m_CharGuid		= invalid_guid64;
+		AssertEx(pInterface,"");
+		mInterface		=	pInterface;
+		m_CRCValue      = 0;
+		m_DebugStep     = 0;
 
+	__LEAVE_FUNCTION
 }
 
 
 bool ODBCCharFullData::Load()
 {
+	__ENTER_FUNCTION
 
-	DB_QUERY* pQuery = GetInternalQuery();
+		DB_QUERY* pQuery = GetInternalQuery();
 
 	if(!pQuery)
 	{
 		AssertEx(false,"");
-	}
+	} 
 
-	pQuery->Clear();
-
-	if(m_CharGuid==INVALID_ID)
+	if(m_CharGuid==invalid_guid64)
 	{
 		return false;
 	}
 
-	pQuery->Parse(LoadCharFullData,CHAR_TABLE,m_CharGuid);
+	mInterface->Clear();
+	pQuery->Clear(); 
 
-	return ODBCBase::Load();
 
+	pQuery->Parse(LoadCharFullData,m_CharGuid);
+
+	return ODBCBase::Load_Execute();
+
+	__LEAVE_FUNCTION
+
+		return false;
 }
 
-bool ODBCCharFullData::Save(void* pSource)
+bool ODBCCharFullData::Save(DBFullUserData* pSource)
 {
-
-	DB_QUERY* pQuery = GetInternalQuery();
+	__ENTER_FUNCTION
+		LONG_DB_QUERY* pQuery = GetLongInterQuery();
 
 	if(!pQuery)
 	{
@@ -53,202 +68,217 @@ bool ODBCCharFullData::Save(void* pSource)
 
 	pQuery->Clear();
 
-	if(m_CharGuid==INVALID_ID)
+	m_DebugStep = 10;
+	if(m_CharGuid==invalid_guid64)
 	{
 		return false;
 	}
 
-	DBFullUserData* pCharFullData = static_cast<DBFullUserData*>(pSource);
-	AssertEx(pCharFullData,"");
+	AssertEx(pSource != null_ptr,"");
+	DBFullUserData& rUserFullData = *pSource;
+
+	m_DebugStep = 15;
+
+	if(!StrSafeCheck(rUserFullData.m_User.m_AccName,sizeof(rUserFullData.m_User.m_AccName)))
+	{
+		return false;
+	}
+
+	if(!StrSafeCheck(rUserFullData.m_User.m_CharName,sizeof(rUserFullData.m_User.m_CharName)))
+	{
+		return false;
+	}
+
 	
 
+	m_DebugStep = 20;
 
-	if(!StrSafeCheck(pCharFullData->m_baseUser.m_Title,MAX_CHARACTER_TITLE))
-		return false;
+	//公共数据
+	STATIC_ASSERT(sizeof(rUserFullData.m_User.m_CommonData) == 2048);
+	tchar COMMONDATA[sizeof(rUserFullData.m_User.m_CommonData)*2+1];
+	memset(COMMONDATA,0,sizeof(COMMONDATA));
+	Binary2String((tchar*)rUserFullData.m_User.m_CommonData,sizeof(rUserFullData.m_User.m_CommonData),COMMONDATA,sizeof(COMMONDATA));
+
+	//公共标记位
+	STATIC_ASSERT(sizeof(rUserFullData.m_User.m_CommonFlag) == 20);
+	tchar COMMONFLAG[sizeof(rUserFullData.m_User.m_CommonFlag)*2+1];
+	memset(COMMONFLAG,0,sizeof(COMMONFLAG));
+	Binary2String((tchar*)rUserFullData.m_User.m_CommonFlag,sizeof(rUserFullData.m_User.m_CommonFlag) ,COMMONFLAG,sizeof(COMMONFLAG));
 
 
-	tuint32 dbVersion = CalcCRC(pSource);
+	//计算CRC
+	m_CRCValue = rUserFullData.CalcCRC();
 
 	pQuery->Parse(UpdateCharFullData,
-				  CHAR_TABLE,
-				  pCharFullData->m_baseUser.m_Title,
-				  pCharFullData->m_baseUser.m_Sex,
-				  pCharFullData->m_baseUser.m_Level,
-				  pCharFullData->m_baseUser.m_DoubleExpTime_Num,
-				  pCharFullData->m_baseUser.m_Exp,
-				  pCharFullData->m_baseUser.m_Money,
-				  pCharFullData->m_baseUser.m_HairColor,
-				  pCharFullData->m_baseUser.m_FaceColor,
-				  pCharFullData->m_baseUser.m_HairModel,
-				  pCharFullData->m_baseUser.m_FaceModel,
-				  pCharFullData->m_baseUser.m_LastLoginTime,
-				  pCharFullData->m_baseUser.m_LastLogoutTime,
-				  pCharFullData->m_baseUser.m_MenPai,
-				  pCharFullData->m_baseUser.m_HP,
-				  pCharFullData->m_baseUser.m_MP,
-				  pCharFullData->m_baseUser.m_StrikePoint,
-				  pCharFullData->m_baseUser.m_Level1Points,
-			
-				  pCharFullData->m_baseUser.m_PortraitID,
-				  pCharFullData->m_baseUser.m_EnergyRegeneRate,
-				  pCharFullData->m_baseUser.m_RMBMoney,
-				  pCharFullData->m_baseUser.m_BankRMB,
-				  pCharFullData->m_baseUser.m_VigorRegeneRate,
-				  pCharFullData->m_baseUser.m_GmRight,
-				  pCharFullData->m_baseUser.m_uPwdDelTime,
-				  pCharFullData->m_baseUser.m_LeftDieTime,
-				  pCharFullData->m_baseUser.m_Rage,
-				  dbVersion,
-				  m_CharGuid);
-	
-	if(!ODBCBase::Save())
-		return false;
-	
+		rUserFullData.GetGuid(),
+		rUserFullData.m_User.m_CharName,
+		rUserFullData.m_User.m_AccName,
+		rUserFullData.m_User.m_Level,
+		rUserFullData.m_User.m_Exp,
+		rUserFullData.m_User.m_IsValid,
+		COMMONDATA,
+		COMMONFLAG,
+		rUserFullData.m_User.m_CreateRoleTime,
+		rUserFullData.m_User.m_LastLogoutTime,
+		m_CRCValue
+		);
+	m_DebugStep = 50;
+	tint32 beforeSaveTime = gTimeManager.SysRunTime();
 
-	AssertEx(mResultCount<=1,"");
-	mInterface->Clear();
-	if(mResultCount==0)
+	if (!ODBCBase::LongSave_Execute())
 	{
-		return true;
+		CacheLog(LOGDEF_INST(DBAgentError),"[DBUserFullData::Save]:Fail \1 UserGUID=%lld",
+			rUserFullData.GetGuid());
+		return false;
 	}
-	
-	dbVersion = 0;
 
+	m_DebugStep = 60;
+
+	AssertEx(mResultCount<=5,"");
+	mInterface->Clear();
+
+	if (mResultCount == 0)
+	{
+		DiskLog(LOGDEF_INST(DBAgentError), "UpdateCharFullData AffectRowCount==0,UserGUID=%lld",
+			rUserFullData.GetGuid());
+		//return true;
+	}
+
+	tuint32 beforSaveTime = 0;
+
+
+	CacheLog(LOGDEF_INST(DBAgent),"[DBUserFullData::Save]:DBFullUser \1 UserGUID=%lld \1 time=%d",
+			rUserFullData.GetGuid(),gTimeManager.SysRunTime()-beforeSaveTime);
+	beforeSaveTime = gTimeManager.SysRunTime();
+
+
+	
 	return true;
+
+	__LEAVE_FUNCTION
+
+		return false;
 }
 
-bool ODBCCharFullData::ParseResult(void* pResult)
+bool ODBCCharFullData::ParseResult(DBFullUserData* pResult)
 {
+	__ENTER_FUNCTION
 
-	switch(mOPType)
+		switch(mOPType)
 	{
-	case DB_LOAD:
-		{
-
-			DBFullUserData* pCharFullData = static_cast<DBFullUserData*>(pResult);
-			AssertEx(pCharFullData,"");
-
-			pCharFullData->CleanUp();
-			enum 
+		case DB_LOAD:
 			{
-				DB_CharGuid	=	1,
-				DB_CharName,
-				DB_Title,
-				DB_Sex,
-				DB_CreateTime,
-				DB_Level,
-				DB_Enegry,
-				DB_Exp,
-				DB_Money,
-				DB_Pw,
-				DB_HairColor,
-				DB_FaceColor,
-				DB_HairModel,
-				DB_FaceModel,
-				DB_Scene,
-				DB_XPos,
-				DB_ZPos,
-				DB_LoginTime,
-				DB_LogoutTime,
-				DB_Version,
-				DB_Camp,
-				DB_Menpai,
-				DB_HP,
-				DB_MP,
-				DB_StrikePoint,
-				DB_Str,
-				DB_Spr,
-				DB_Con,
-				DB_Ipr,
-				DB_Dex,
-				DB_Points,
-				DB_Setting,
-				DB_ShopInfo,
-				DB_CarryPet,
-				DB_GuildID,
-				DB_TeamID,
-				DB_HeadID,
-				DB_eRecover,
-				DB_RMB,
-				DB_BANKRMB,
-				DB_VRecover,
-				DB_EnergyMax,
-				DB_PwdelTime,
-				DB_DieTime,
-				DB_BankMoney,
-				DB_BankEnd,
-				DB_BackScene,
-				DB_BackXPos,
-				DB_BackZPos,
-				DB_Rage,
-			};
-			
-			AssertEx(mResultCount<=1,"");
-			AssertEx(mInterface,"");
-			int	   ErrorCode;
 
-			//加载基本属性
-			for(int i =0;i<1;i++)
-			{
-				if(!mInterface->Fetch())
-					break;
+				AssertEx(pResult,"");
+				DBFullUserData& rUserFullData = *pResult;
 
-				//加载角色基本属性
-				pCharFullData->m_baseUser.m_GUID	=	mInterface->GetUInt(DB_CharGuid,ErrorCode);
-				mInterface->GetString(DB_CharName,pCharFullData->m_baseUser.m_Name,MAX_CHARACTER_NAME,ErrorCode);
-				mInterface->GetString(DB_Title,pCharFullData->m_baseUser.m_Title,MAX_CHARACTER_TITLE,ErrorCode);
-				pCharFullData->m_baseUser.m_Sex	= mInterface->GetUInt(DB_Sex,ErrorCode);
-				pCharFullData->m_baseUser.m_CreateDate	=	mInterface->GetUInt(DB_CreateTime,ErrorCode);
-				pCharFullData->m_baseUser.m_Level	=	mInterface->GetUInt(DB_Level,ErrorCode);
-				pCharFullData->m_baseUser.m_DoubleExpTime_Num	=	mInterface->GetUInt(DB_Enegry,ErrorCode);
-				pCharFullData->m_baseUser.m_Exp	=	mInterface->GetUInt(DB_Exp,ErrorCode);
-				pCharFullData->m_baseUser.m_Money	=	mInterface->GetUInt(DB_Money,ErrorCode);
+				rUserFullData.CleanUp();
+				enum 
+				{
+					DB_AccName = 1,
+					DB_CharName,
+					DB_CharGuid,
+					DB_IsValid,
+					DB_CommonFlag,
+					DB_CommonData,
+					DB_LastLogoutTime,
+					DB_CreateRoleTime,
+					DB_CityId,
+					DB_Gender
+					
+				};
+				AssertEx(mResultCount<=1,"");
+				AssertEx(mInterface,"");
 
-				pCharFullData->m_baseUser.m_HairColor	=	mInterface->GetUInt(DB_HairColor,ErrorCode);
-				pCharFullData->m_baseUser.m_FaceColor	=	mInterface->GetBYTE(DB_FaceColor,ErrorCode);
-				pCharFullData->m_baseUser.m_HairModel	=	mInterface->GetBYTE(DB_HairModel,ErrorCode);
-				pCharFullData->m_baseUser.m_FaceModel	=	mInterface->GetBYTE(DB_FaceModel,ErrorCode);
-				pCharFullData->m_baseUser.m_LastLoginTime	=	mInterface->GetUInt(DB_LoginTime,ErrorCode);
-				pCharFullData->m_baseUser.m_LastLogoutTime	=	mInterface->GetUInt(DB_LogoutTime,ErrorCode);
-				pCharFullData->m_baseUser.m_DBVersion		=	mInterface->GetUInt(DB_Version,ErrorCode);
-	
+				tint32	   ErrorCode;
 
-				pCharFullData->m_baseUser.m_MenPai	=	mInterface->GetUInt(DB_Menpai,ErrorCode);
-				pCharFullData->m_baseUser.m_HP	=	mInterface->GetUInt(DB_HP,ErrorCode);
-				pCharFullData->m_baseUser.m_MP	=	mInterface->GetUInt(DB_MP,ErrorCode);
-				pCharFullData->m_baseUser.m_StrikePoint	=	mInterface->GetUInt(DB_StrikePoint,ErrorCode);
-		
-				pCharFullData->m_baseUser.m_Level1Points	=	mInterface->GetUInt(DB_Points,ErrorCode);
-				
-				pCharFullData->m_baseUser.m_PortraitID	=	mInterface->GetUInt(DB_HeadID,ErrorCode);
-				pCharFullData->m_baseUser.m_EnergyRegeneRate	=	mInterface->GetInt(DB_eRecover,ErrorCode);	
-				pCharFullData->m_baseUser.m_RMBMoney				=	mInterface->GetInt(DB_RMB,ErrorCode);					
-				pCharFullData->m_baseUser.m_BankRMB			=  mInterface->GetInt(DB_BANKRMB,ErrorCode);
-				pCharFullData->m_baseUser.m_VigorRegeneRate	=	mInterface->GetInt(DB_VRecover,ErrorCode);
-				pCharFullData->m_baseUser.m_GmRight	=	mInterface->GetInt(DB_EnergyMax,ErrorCode);
-				pCharFullData->m_baseUser.m_uPwdDelTime	=	mInterface->GetUInt(DB_PwdelTime,ErrorCode);
-				pCharFullData->m_baseUser.m_LeftDieTime	=	mInterface->GetUInt(DB_DieTime,ErrorCode);
-				pCharFullData->m_baseUser.m_Rage			  = mInterface->GetUInt(DB_Rage,ErrorCode);
+				//加载基本属性
+				if (mInterface->Fetch() )
+				{
+					//加载角色基本属性
+					rUserFullData.m_User.m_Guid = m_CharGuid;
 
-				mInterface->Clear();
+					mInterface->GetString(DB_AccName, rUserFullData.m_User.m_AccName, sizeof(rUserFullData.m_User.m_AccName), ErrorCode);
 
-				tuint32 dbVersion = CalcCRC( pCharFullData );
-				dbVersion = 0;
+					mInterface->GetString(DB_CharName,rUserFullData.m_User.m_CharName,sizeof(rUserFullData.m_User.m_CharName),ErrorCode);
+
+
+					rUserFullData.m_User.m_IsValid = mInterface->GetBYTE(DB_IsValid,ErrorCode); 
+					rUserFullData.m_User.m_LastLogoutTime = mInterface->GetLongLong(DB_LastLogoutTime,ErrorCode); 
+					rUserFullData.m_User.m_CreateRoleTime = mInterface->GetLongLong(DB_CreateRoleTime,ErrorCode); 
+					rUserFullData.m_User.m_CityId         = mInterface->GetLongLong(DB_CityId,ErrorCode);
+					rUserFullData.m_User.m_Gender         = mInterface->GetBYTE(DB_Gender,ErrorCode);
+					mInterface->Clear();
+				}
+
+				//加载城市信息
+				{				
+					ODBCCityData CityDataObject(mInterface);
+					CityDataObject.SetUserId(m_CharGuid);
+					if(!CityDataObject.Load())
+					{
+						return false;
+					}
+					CityDataObject.ParseResult(&(rUserFullData.m_City));
+				}
+
+				// 加载建筑信息
+				{				
+					ODBCBuildIngData BuildingDataObject(mInterface);
+					BuildingDataObject.SetCityId(rUserFullData.m_City.m_nCityID);
+					if(!BuildingDataObject.Load())
+					{
+						return false;
+					}
+					BuildingDataObject.ParseResult(&(rUserFullData.m_City));
+				}
+
+				// 加载英雄信息
+				{				
+					ODBCHeroData HeroDataObject(mInterface);
+					HeroDataObject.SetCityId(rUserFullData.m_City.m_nCityID);
+					if(!HeroDataObject.Load())
+					{
+						return false;
+					}
+					HeroDataObject.ParseResult(&rUserFullData);
+				}
+
+				// 加载March信息
+				{				
+					ODBCMarchData MarchDataObject(mInterface);
+					MarchDataObject.SetCityId(rUserFullData.m_City.m_nCityID);
+					if(!MarchDataObject.Load())
+					{
+						return false;
+					}
+					MarchDataObject.ParseResult(&rUserFullData);
+				}
 				
 			}
-		}
-		break;
-	case DB_SAVE:
-		{
-			
-		}
-		break;
-	default:
-		break;
+
+			break;
+		case DB_SAVE:
+			{
+				
+			}
+			break;
+		default:
+			break;
 	}
 
+	
 
+
+
+	m_DebugStep = 305;
+	AssertEx(mInterface,"");
+	mInterface->Clear();
 	return true;
+
+	__LEAVE_FUNCTION
+
+		return false;
 }
 
 int64	ODBCCharFullData::GetCharGuid()
@@ -259,23 +289,4 @@ int64	ODBCCharFullData::GetCharGuid()
 void	ODBCCharFullData::SetCharGuid(int64 guid)
 {
 	m_CharGuid	 = guid;
-}
-
-uint32	ODBCCharFullData::CalcCRC(void* pSource)
-{
-	DBFullUserData* pCharFullData = static_cast<DBFullUserData*>(pSource);
-	AssertEx(pCharFullData,"");
-
-	tuint32 dbVersion;
-	dbVersion = pCharFullData->m_baseUser.m_Level + 
-				pCharFullData->m_baseUser.m_Money + 
-				pCharFullData->m_baseUser.m_HP + 
-				pCharFullData->m_baseUser.m_MP +
-				pCharFullData->m_baseUser.m_GmRight;
-	dbVersion &= 0xFFFF0000;
-	dbVersion |= 0x80000000;
-	dbVersion += ( ( pCharFullData->m_baseUser.m_BankRMB & 0x000000FF ) << 8 );
-	dbVersion += pCharFullData->m_baseUser.m_RMBMoney & 0x000000FF;
-
-	return dbVersion;
 }

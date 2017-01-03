@@ -55,11 +55,11 @@ InvokerPtr DBServiceExec::InitMyself( void )
 
 	ODBCInterfaceInit();
 
-	LibMemInterfaceInit();
+	//LibMemInterfaceInit();
 
 
-	string szInvokerName = "DBServkceExecInvoker" + m_MyIndex;
-
+	tchar szInvokerName[64] = {0};
+	tsnprintfex(szInvokerName, sizeof(szInvokerName), "DBServiceExecInvoker(%d)", m_MyIndex);
 	InvokerPtr ptr(new DBServiceExecInvoker(*this,szInvokerName));
 	return ptr;
 	__LEAVE_FUNCTION

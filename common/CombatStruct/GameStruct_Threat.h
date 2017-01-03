@@ -53,7 +53,7 @@ public:
 		m_nThreat =nThreat;
 		if (nThreat >0)
 		{
-			m_nLastThreatTime = static_cast<uint32>(Clock::getCurrentSystemTime());//更新最近一次造成仇恨的时间
+			m_nLastThreatTime = gTimeManager.RunTime();//更新最近一次造成仇恨的时间
 		}
 	}
 	uint32 GetLastThreatTime() const { return m_nLastThreatTime; }

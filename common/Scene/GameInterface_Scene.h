@@ -4,7 +4,6 @@
 #include "Base.h"
 #include "GameStruct_Scene.h"
 
-class Scene;
 class GC_CHAT;
 
 class SceneInterface

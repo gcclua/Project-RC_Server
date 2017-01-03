@@ -75,7 +75,7 @@ public:
 		m_Guid = r.m_Guid;
 		m_szName = r.m_szName;
 		m_nLevel = r.m_nLevel;
-		m_nCombatNum = r.m_nCombatNum;
+		m_OwnGuid = r.m_OwnGuid;
 	}
 	MarchBaseInfo& operator = (const MarchBaseInfo &r)
 	{
@@ -84,7 +84,7 @@ public:
 			m_Guid = r.m_Guid;
 			m_szName = r.m_szName;
 			m_nLevel = r.m_nLevel;
-			m_nCombatNum = r.m_nCombatNum;
+			m_OwnGuid = r.m_OwnGuid;
 		}
 		return *this;
 	}
@@ -94,13 +94,14 @@ public:
 		m_Guid = 0;
 		m_szName = "";
 		m_nLevel = 0;
-		m_nCombatNum = 0;
+		m_OwnGuid = 0;
 	}
 public:
 	int64		m_Guid;
 	CHARNAME	m_szName;
-	int		m_nLevel;
-	int		m_nCombatNum;
+	int		    m_nLevel;
+	int64		m_OwnGuid;
+
 };
 
 class MarchInfo
@@ -140,38 +141,38 @@ typedef std::map<int64, MarchInfo> MarchInfoMap;
 class ScenePos
 {
 public:
-	float	m_fX;
-	float	m_fZ;
+	int	m_nX;
+	int	m_nZ;
 public:
-	ScenePos(void) : m_fX(0.0f), m_fZ(0.0f) {}
-	ScenePos(float fX, float fZ) : m_fX(fX), m_fZ(fZ) {}
-	ScenePos(const ScenePos &r) : m_fX(r.m_fX), m_fZ(r.m_fZ) {}
+	ScenePos(void) : m_nX(0), m_nZ(0) {}
+	ScenePos(int fX, int fZ) : m_nX(fX), m_nZ(fZ) {}
+	ScenePos(const ScenePos &r) : m_nX(r.m_nX), m_nZ(r.m_nZ) {}
 	ScenePos& operator=(const ScenePos &r)
 	{
-		m_fX = r.m_fX;
-		m_fZ = r.m_fZ;
+		m_nX = r.m_nX;
+		m_nZ = r.m_nZ;
 		return *this;
 	}
 public:
 	void CleanUp(void)
 	{
-		m_fX = 0.0f;
-		m_fZ = 0.0f;
+		m_nX = 0;
+		m_nZ = 0;
 	}
 	bool operator==(const ScenePos &r) const
 	{
-		return (fabs(m_fX-r.m_fX)+fabs(m_fZ-r.m_fZ)) < 0.001f;
+		return (abs(m_nX-r.m_nX)+abs(m_nZ-r.m_nZ)) == 0;
 	}
 	bool operator!=(const ScenePos &r) const
 	{
 		return !(*this == r);
 	}
-	float DistanceSquare(const ScenePos &r) const
+	int DistanceSquare(const ScenePos &r) const
 	{
-		float fDistX, fDistZ;
-		fDistX	= r.m_fX - m_fX;
-		fDistZ	= r.m_fZ - m_fZ;
-		return (float)(fDistX * fDistX + fDistZ * fDistZ);
+		int DistX, DistZ;
+		DistX	= r.m_nX - m_nX;
+		DistZ	= r.m_nZ - m_nZ;
+		return (int)(DistX * DistX + DistZ * DistZ);
 	}
 	float Distance(const ScenePos &r) const
 	{
@@ -532,85 +533,6 @@ public:
 		return *this;
 	}
 };
-struct CopySceneRewardItem
-{
-
-	CopySceneRewardItem(void)
-	{
-		Clear();
-	}
-	void Clear()
-	{
-		m_nType = invalid_id;
-		m_nItemID = invalid_id;
-		m_nCount = 0;
-		m_nNoticeID = invalid_id;
-	}
-	int m_nType;
-	int m_nItemID;
-	int m_nCount;
-	int m_nNoticeID;
-};
-//副本奖励
-BSARRAY_ASSIGN_DECL(CopySceneRewardItem, MAX_COPYSCENE_REWARD);
-struct CopySceneReward
-{
-	CopySceneReward(void)
-	{
-		
-		 Clear();
-	}
-	void Clear()
-	{
-		m_nDrawIndex = invalid_id;
-		m_nDrawIndexTwo = invalid_id;
-		m_nExp = 0;
-		m_nMoney = 0;
-		for (int i = 0; i < MAX_COPYSCENE_REWARD; ++i)
-		{
-			m_Reward[i].Clear();
-		}
-		for (int i = 0; i < MAX_COPYSCENE_DRAW; ++i)
-		{
-			m_Draw[i].Clear();
-		}
-	}
-	bool AddReward(	int nType,	int nItemID, int nCount, int nNoticeID = invalid_id)
-	{
-		for (int i = 0; i < MAX_COPYSCENE_REWARD;++i)
-		{
-			if (m_Reward[i].m_nType == invalid_id)
-			{
-				m_Reward[i].m_nType = nType;
-				m_Reward[i].m_nItemID = nItemID;
-				m_Reward[i].m_nCount = nCount;
-				m_Reward[i].m_nNoticeID = nNoticeID;
-				return true;
-			}
-		}
-		return false;
-	}
-	bool AddDraw(	int nType,	int nItemID, int nCount)
-	{
-		for (int i = 0; i < MAX_COPYSCENE_DRAW;++i)
-		{
-			if (m_Draw[i].m_nType == invalid_id)
-			{
-				m_Draw[i].m_nType = nType;
-				m_Draw[i].m_nItemID = nItemID;
-				m_Draw[i].m_nCount = nCount;
-				return true;
-			}
-		}
-		return false;
-	}
-	bsarray<CopySceneRewardItem, MAX_COPYSCENE_REWARD> m_Reward;
-	bsarray<CopySceneRewardItem, MAX_COPYSCENE_DRAW> m_Draw;
-	int m_nDrawIndex;
-	int m_nDrawIndexTwo;
-	int m_nExp;
-	int m_nMoney;
-};
 
 //////////////////////////////////////////////////////////////////////////
 struct OnlineAwardTableLine
@@ -669,33 +591,31 @@ public:
 	}
 };
 
-
-//场景内部传送点结构
-struct TeleportInScene 
+struct SceneObj
 {
 public:
-	int m_nId;			//传送点ID
-	float m_fPosX;		//传送点位置X
-	float m_fPosZ;		//传送点位置Z
-	float m_fTargetX;	//目标点位置X
-	float m_fTargetZ;	//目标点位置Z
+	int m_objId;
+	int m_dataId;
+	bsvector<int> m_skillLst;
+	int m_camp;
+	int m_unitCount;
+	int m_hp;
+	int m_maxHp;
+	int m_attack;
+	int m_defence;
+	int m_xp;
+	int m_level;
+	int m_posX;
+	int m_posZ;
+	int m_arrangeIndex;
+};
 
-public:
-	TeleportInScene()
-	{
-		CleanUp();
-	}
-
-	void CleanUp()
-	{
-		m_nId = -1;
-		m_fPosX = m_fPosZ = m_fTargetX = m_fTargetZ = 0.0f;
-	}
-
-	bool IsValid()
-	{
-		return (m_nId >= 0);
-	}
+struct ObjInfo
+{
+	int m_objId;
+	int m_posX;
+	int m_posZ;
+	int m_hp;
 };
 
 

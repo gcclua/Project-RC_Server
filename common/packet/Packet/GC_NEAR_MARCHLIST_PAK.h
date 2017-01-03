@@ -15,7 +15,6 @@ class GC_NEAR_MARCHLIST_PAK:public Packet
  GC_NEAR_MARCHLIST_PAK():Packet(m_PacketData){}
  virtual ~GC_NEAR_MARCHLIST_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_GC_NEAR_MARCHLIST_PAK;}
  public:
  ::GC_NEAR_MARCHLIST m_PacketData;
@@ -32,7 +31,6 @@ class GC_NEAR_MARCHLIST_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::GC_NEAR_MARCHLIST_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::GC_NEAR_MARCHLIST_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

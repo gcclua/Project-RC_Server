@@ -6,7 +6,7 @@
 #include "Scene/Obj/Obj_Npc.h"
 #include "Scene/Obj/Obj_March.h"
 #include "Scene/obj/Obj_Hero.h"
-#include "Scene/obj/Obj_Soldier.h"
+#include "Scene/obj/Obj_Troop.h"
 
 //////////////////////////////////////////////////////////////////////////
 //ObjÀàÐÍ¹ýÂË
@@ -144,20 +144,20 @@ public:
 	bool operator()(ObjPtr &rPtr)
 	{
 		ScenePos VerifyPos = rPtr->GetScenePos();
-		float fInPrd =
-			(m_DestinationPos.m_fX - m_OriginalPos.m_fX) * (VerifyPos.m_fX - m_OriginalPos.m_fX) +
-			(m_DestinationPos.m_fZ - m_OriginalPos.m_fZ) * (VerifyPos.m_fZ - m_OriginalPos.m_fZ);
-		if (fInPrd >= 0.0f)
+		int InPrd =
+			(m_DestinationPos.m_nX - m_OriginalPos.m_nX) * (VerifyPos.m_nX - m_OriginalPos.m_nX) +
+			(m_DestinationPos.m_nZ - m_OriginalPos.m_nZ) * (VerifyPos.m_nZ - m_OriginalPos.m_nZ);
+		if (InPrd >= 0)
 		{
-			float fAbsValue =
-				(m_DestinationPos.m_fX - m_OriginalPos.m_fX) * (m_DestinationPos.m_fX - m_OriginalPos.m_fX) +
-				(m_DestinationPos.m_fZ - m_OriginalPos.m_fZ) * (m_DestinationPos.m_fZ - m_OriginalPos.m_fZ);
-			float fR = fInPrd / fAbsValue;
+			int AbsValue =
+				(m_DestinationPos.m_nX - m_OriginalPos.m_nX) * (m_DestinationPos.m_nX - m_OriginalPos.m_nX) +
+				(m_DestinationPos.m_nZ - m_OriginalPos.m_nZ) * (m_DestinationPos.m_nZ - m_OriginalPos.m_nZ);
+			float fR = (float)InPrd / AbsValue;
 			if (fR <= 1.0f)
 			{
 				ScenePos ProjectionPos;
-				ProjectionPos.m_fX = m_OriginalPos.m_fX + (m_DestinationPos.m_fX - m_OriginalPos.m_fX) * fR;
-				ProjectionPos.m_fZ = m_OriginalPos.m_fZ + (m_DestinationPos.m_fZ - m_OriginalPos.m_fZ) * fR;
+				ProjectionPos.m_nX = (int)(m_OriginalPos.m_nX + (m_DestinationPos.m_nX - m_OriginalPos.m_nX) * fR);
+				ProjectionPos.m_nZ = (int)(m_OriginalPos.m_nZ + (m_DestinationPos.m_nZ - m_OriginalPos.m_nZ) * fR);
 
 				float fDistance = VerifyPos.Distance(ProjectionPos);
 				if (fDistance <= m_fScope)

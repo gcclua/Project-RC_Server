@@ -9,6 +9,7 @@ class Scene;
 class CopyScene;
 class Obj_March;
 class MainScene;
+class Obj_Npc;
 
 class Obj
 {
@@ -32,6 +33,8 @@ public:
 	virtual void SendMoveStatus(Obj_March &rMarch) {}
 	//参数中的User能否看到自己
 	virtual bool CanBeView(Obj_March &rMarch);
+
+	virtual bool CanBeView(Obj_Npc & rNpc);
 	//参数中的Obj能否侦测到自己if ()
 
 	virtual bool CanBeScout(Obj &rObj);

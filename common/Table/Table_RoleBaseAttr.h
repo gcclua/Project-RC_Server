@@ -14,50 +14,32 @@ ID_T,
 ID_CHARMODELID=2,
 ID_NAME,
 ID_SEX,
-ID_NPCTYPE,
 ID_LEVEL,
 ID_ATTACKDISTYPE,
 ID_SKILLSTRATEGYINDEX,
 ID_MAXHP,
 ID_MAXXP,
-ID_,
+ID_XPSPEED,
 ID_DEFENSE,
 ID_ATTACK,
 ID_HIT,
 ID_ATTACKTIME,
 ID_MOVESPEED,
 ID_CAMP,
-ID_PATHRADIUS,
-ID_ALERTRADIUS,
-ID_ISRANBDMOVE,
-ID_RANDMOVEDIS,
+ID_SELECTRADIUS,
 ID_CORPSETIME,
-ID_DROPITEMID,
 ID_EXP,
 ID_ISATTACKFLY,
-ID_BORNEFFCTID,
 ID_DIEEFFECTID,
 ID_RAMPTYPE,
 ID_ENHANCEID,
-ID_BELONGTYPE,
-ID_COMBATNPC,
-ID_MISSIONNPCFLAG,
+ID_UNITDATAID,
 ID_TAB_CURCOL_COUNT,
 MAX_ID=4096,
 MAX_RECORD=4096
  };
  public:
  bool __Load(DBC_Loader &loader);
-
-private:
- tint32 m_;
- public:
- tint32 Get() const { return m_; }
-
-private:
- tfloat32 m_AlertRadius;
- public:
- tfloat32 GetAlertRadius() const { return m_AlertRadius; }
 
 private:
  tint32 m_Attack;
@@ -75,16 +57,6 @@ private:
  tint32 GetAttackTime() const { return m_AttackTime; }
 
 private:
- tint32 m_BelongType;
- public:
- tint32 GetBelongType() const { return m_BelongType; }
-
-private:
- tint32 m_BornEffctID;
- public:
- tint32 GetBornEffctID() const { return m_BornEffctID; }
-
-private:
  tint32 m_Camp;
  public:
  tint32 GetCamp() const { return m_Camp; }
@@ -93,11 +65,6 @@ private:
  tint32 m_CharModelID;
  public:
  tint32 GetCharModelID() const { return m_CharModelID; }
-
-private:
- tint32 m_CombatNPC;
- public:
- tint32 GetCombatNPC() const { return m_CombatNPC; }
 
 private:
  tint32 m_CorpseTime;
@@ -113,11 +80,6 @@ private:
  tint32 m_DieEffectID;
  public:
  tint32 GetDieEffectID() const { return m_DieEffectID; }
-
-private:
- tint32 m_DropItemId;
- public:
- tint32 GetDropItemId() const { return m_DropItemId; }
 
 private:
  tint32 m_EnhanceID;
@@ -140,11 +102,6 @@ private:
  tint32 GetIsAttackFly() const { return m_IsAttackFly; }
 
 private:
- tint32 m_IsRanbdMove;
- public:
- tint32 GetIsRanbdMove() const { return m_IsRanbdMove; }
-
-private:
  tint32 m_Level;
  public:
  tint32 GetLevel() const { return m_Level; }
@@ -160,11 +117,6 @@ private:
  tint32 GetMaxXP() const { return m_MaxXP; }
 
 private:
- tint32 m_MissionNpcFlag;
- public:
- tint32 GetMissionNpcFlag() const { return m_MissionNpcFlag; }
-
-private:
  tint32 m_MoveSpeed;
  public:
  tint32 GetMoveSpeed() const { return m_MoveSpeed; }
@@ -175,24 +127,14 @@ private:
  const tchar* GetName() const { return m_Name; }
 
 private:
- tint32 m_NpcType;
- public:
- tint32 GetNpcType() const { return m_NpcType; }
-
-private:
- tfloat32 m_PathRadius;
- public:
- tfloat32 GetPathRadius() const { return m_PathRadius; }
-
-private:
  tint32 m_RampType;
  public:
  tint32 GetRampType() const { return m_RampType; }
 
 private:
- tfloat32 m_RandMoveDis;
+ tfloat32 m_SelectRadius;
  public:
- tfloat32 GetRandMoveDis() const { return m_RandMoveDis; }
+ tfloat32 GetSelectRadius() const { return m_SelectRadius; }
 
 private:
  tint32 m_Sex;
@@ -203,6 +145,16 @@ private:
  tint32 m_SkillstrategyIndex;
  public:
  tint32 GetSkillstrategyIndex() const { return m_SkillstrategyIndex; }
+
+private:
+ tint32 m_UnitDataID;
+ public:
+ tint32 GetUnitDataID() const { return m_UnitDataID; }
+
+private:
+ tint32 m_XpSpeed;
+ public:
+ tint32 GetXpSpeed() const { return m_XpSpeed; }
 
 private:
  tint32 m_T;

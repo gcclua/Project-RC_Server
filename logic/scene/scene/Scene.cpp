@@ -1,6 +1,7 @@
 #include "Scene.h"
 #include "Service/MessageOp.h"
 #include "Message/ChatMsg.h"
+#include "Message/SceneMsg.h"
 #include "Packet/Packet/GC_CHAT_PAK.h"
 #include "Packet/Packet/GC_NOTICE_PAK.h"
 #include "Table/Table_SceneClass.h"
@@ -15,9 +16,6 @@ Scene::Scene( void )
 
 	m_nCurPlayerCount = 0;
 	m_nEnteringPlayerCount = 0;
-
-	m_nMaxPlayerCountA = 0;
-	m_nMaxPlayerCountB = 0;
 
 	m_nObjIDAlloc = SCENEOBJIDMIN;
 
@@ -57,7 +55,8 @@ void Scene::Tick_AddObjs(void)
 	int nCount = static_cast<int>(m_AddingCacheObjPtrVec.size());
 	for (int i = 0; i < nCount; i++)
 	{
-		_AddNonUserObjImmediate(m_AddingCacheObjPtrVec[i]);
+		m_ObjPtrMap.insert(std::make_pair(m_AddingCacheObjPtrVec[i]->GetID(), m_AddingCacheObjPtrVec[i]));
+		//_AddNonUserObjImmediate(m_AddingCacheObjPtrVec[i]);
 	}
 	m_AddingCacheObjPtrVec.clear();
 
@@ -117,8 +116,25 @@ void Scene::HandleMessage(const MarchEnterSceneMsg &rMsg)
 {
 	__ENTER_FUNCTION
 
-
+	InitMarchObj(rMsg.m_March);
 	DecEnteringPlayerCount();
+
+	__LEAVE_FUNCTION
+}
+
+void Scene::HandleMessage(const MarchAcceptChangeSceneMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		Obj_MarchPtr pMarch = GetMarchByGuid(rMsg.m_guid);
+	if (pMarch != null_ptr)
+	{
+		_DelMarchImmediate(pMarch->GetID());
+		MarchChangeSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchChangeSceneMsg);
+		AssertEx(MsgPtr, "");
+		MsgPtr->m_March = pMarch->GetMarch();
+		MsgPtr->m_DestSceneID = rMsg.m_DestSceneID;
+		SendMessage2Srv(ServiceID::SCENE, MsgPtr);
+	}
 
 	__LEAVE_FUNCTION
 }
@@ -170,8 +186,8 @@ bool Scene::FindStraight(const ScenePos &rPosStart, const ScenePos &rPosEnd, Sce
 			if (nCurDistance < nTotalDistance)
 			{
 				ScenePos StepPos;
-				StepPos.m_fX = rPosStart.m_fX + nCurDistance * ::cos(fDirection);
-				StepPos.m_fZ = rPosStart.m_fZ + nCurDistance * ::sin(fDirection);
+				StepPos.m_nX = (int)(rPosStart.m_nX + nCurDistance * ::cos(fDirection));
+				StepPos.m_nZ = (int)(rPosStart.m_nZ + nCurDistance * ::sin(fDirection));
 				if (rSceneObstacle.GetObstacleValue(StepPos) == ObstacleValue::WALKABLE)
 				{
 					rPosEndRefixed = StepPos;
@@ -227,8 +243,8 @@ bool Scene::FindDest(const ScenePos& rPosStart, const ScenePos &rPosEnd, ScenePo
 		for (float fDis = fTotalDistance; fDis > 0.1f; fDis -= 0.5f)
 		{
 			ScenePos StepPos;
-			StepPos.m_fX = rPosStart.m_fX + fDis * ::cos(fDirection);
-			StepPos.m_fZ = rPosStart.m_fZ + fDis * ::sin(fDirection);
+			StepPos.m_nX = (int)(rPosStart.m_nX + fDis * ::cos(fDirection));
+			StepPos.m_nZ = (int)(rPosStart.m_nZ + fDis * ::sin(fDirection));
 			if (rSceneObstacle.GetObstacleValue(StepPos) == ObstacleValue::WALKABLE)
 			{
 				rPosEndRefixed = StepPos;

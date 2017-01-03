@@ -30,9 +30,11 @@ public:
 	virtual void OnObjLeave(tint32 nID);
 	virtual void OnObjDie(tint32 nID,tint32 nKillerId);
 
+public:
+	virtual void HandleMessage(const MarchEnterSceneMsg &rMsg);
 
-protected:
-	tint32 m_nScriptID;
+private:
+	void InitMarchObj(const March& rMarch);
 };
 
 POOLDEF_DECL(MainScene);

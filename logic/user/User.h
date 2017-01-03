@@ -10,11 +10,23 @@
 
 class Player;
 class BaseManager;
-typedef boost::shared_ptr<BaseManager> BaseManagerPtr;
+class Packet;
+
 
 class CG_REQ_NEAR_LIST;
 class CG_CHAT;
 class CG_MOVE;
+class CG_FIGHT;
+class CG_LEAVE_COPYSCENE;
+class CG_ROBOT_OPEN;
+class CG_ASSIGN_HERO;
+class CG_SEND_MARCH;
+class GC_LOGIN_RET;
+class CG_SKILL_USE;
+class CG_BATTLEINFOR;
+class CG_OBJPOSLIST;
+
+
 class MarchRetNearListMsg;
 class RetMarchMoveMsg;
 class MarchStopMsg;
@@ -28,12 +40,23 @@ class Player_EffectMsg;
 class Remove_EffectMsg;
 class Update_NeedImpactInfoMsg;
 class NoticeMsg;
+class RetSetRobotOpenMsg;
+class RetMarchStartMsg;
+class RetBattleInfoMsg;
+class RetObjListMsg;
+class ObjTrackTargetMsg;
+class ObjAttackTargetMsg;
+class ObjHurtMsg;
+class KickPlayerByGuidMsg;
+
 
 class User
 {
 public:
 	User(Player* pPlayer);
 	virtual ~User(void){};
+
+	User(ACCOUNTNAME name);
 
 private:
 
@@ -47,12 +70,28 @@ public:
 	void SetName(const CHARNAME& NewName);
 	void SetName(const tchar* strName);
 
+	const ACCOUNTNAME GetAccount() const {return m_szAccount;}
+
+	int   GetWorldId() const {return m_nWorldId;}
+	void  SetWorldId(int val) {m_nWorldId = val;}
+
 public:
 	void SerializeToDB(DBFullUserData& rDest);// 数据拷贝到存储结构中
 	void SerializeFromDB(const DBFullUserData& rSour);// 存储结构中数据拷贝
 	void Init(void);
+	void InitAsCreateNewChar(int nTileId,int nX,int nZ);
+	void InitManage(void);
+	// 登录的时候，结算下该结算的东西是否完成
 	void OnLogin(void);
 	void Tick(const TimeInfo& rTimeInfo);
+
+public:
+	bool SendMarchIntoMap(int64 nMarchId);
+private:
+	bool UpdateMarchState(int64 nMarchId,int nState);
+public:
+
+	bool AssignHeroToMarch(int64 nMarchId,int64 nHeroId);
 
 public:
 	void SendPacket(const Packet &rPacket);
@@ -68,41 +107,61 @@ private:
 	int m_nSaveTimeInterval;
 
 private:
-	BaseManagerPtr GetBaseManager(int nType);
+	BaseManager* GetBaseManager(int nType);
 
 private:
 	
-	typedef std::map<int,BaseManagerPtr> BaseManagerPtrMap;
+	typedef std::map<int,BaseManager*> BaseManagerPtrMap;
 	BaseManagerPtrMap m_mapBaseManager;
 
 private:
 	int64  m_guid;
 	CHARNAME  m_Name;
 	int    m_nLevel;
-	int    m_nExp;
+	int    m_Gender;
+	int    m_nWorldId; //玩家所属服务器
+	int64  m_nCityId;
+	ACCOUNTNAME m_szAccount;
 
 public:
 	tuint32 HandlePacket(::CG_REQ_NEAR_LIST &rPacket);		//处理客户端发来的请求附近玩家消息
 	tuint32 HandlePacket(::CG_CHAT &rPacket);
 	tuint32 HandlePacket(::CG_MOVE &rPacket);
+	tuint32 HandlePacket(::CG_FIGHT & rPacket);
+	tuint32 HandlePacket(::CG_LEAVE_COPYSCENE & rPacket);
+	tuint32 HandlePacket(::CG_ROBOT_OPEN &rPacket);
+	tuint32 HandlePacket(::CG_ASSIGN_HERO &rPacket);
+	tuint32 HandlePacket(::CG_SEND_MARCH &rPacket);
+	tuint32 HandlePacket(::CG_SKILL_USE &rPacket);
+	tuint32 HandlePacket(::CG_BATTLEINFOR &rPacket);
+	tuint32 HandlePacket(::CG_OBJPOSLIST &rPacket);
+	void    FillGCLogin(::GC_LOGIN_RET &rPacket);
 	bool	IsNoneInvalidText(CG_CHAT &rPacket);
 	void	HandleChatInfo(const TextChat& textchat, tint32 nVoiceIndex = invalid_id);
 
 public:
 
-	void HandleMessage(const MarchRetNearListMsg& rMsg);
+	void HandleMessage(const MarchRetNearListMsg &rMsg);
 	void HandleMessage(const MarchStopMsg &rMsg);
 	void HandleMessage(const RetMarchMoveMsg &rMsg);
 	void HandleMessage(const RetMarchTeleMoveMsg &rMsg);
 	void HandleMessage(const RetUserSkillMsg &rMsg);
 	void HandleMessage(const Update_Animation_State &rMsg);
-	void HandleMessage(const Del_MarchMsg& rMsg);
-	void HandleMessage(const Force_SetPosMsg& rMsg);
+	void HandleMessage(const ObjTrackTargetMsg &rMsg);
+	void HandleMessage(const ObjAttackTargetMsg &rMsg);
+	void HandleMessage(const ObjHurtMsg &rMsg);
+	void HandleMessage(const Del_MarchMsg &rMsg);
+	void HandleMessage(const Force_SetPosMsg &rMsg);
 	void HandleMessage(const AttackFlyMsg &rMsg);
 	void HandleMessage(const Player_EffectMsg &rMsg);
-	void HandleMessage(const Update_NeedImpactInfoMsg& rMsg);
-	void HandleMessage(const Remove_EffectMsg& rMsg);
-	void HandleMessage(const NoticeMsg& rMsg);
+	void HandleMessage(const Update_NeedImpactInfoMsg &rMsg);
+	void HandleMessage(const Remove_EffectMsg &rMsg);
+	void HandleMessage(const NoticeMsg &rMsg);
+	void HandleMessage(const RetSetRobotOpenMsg& rMsg);
+	void HandleMessage(const RetMarchStartMsg& rMsg);
+	void HandleMessage(const RetBattleInfoMsg& rMsg);
+	void HandleMessage(const RetObjListMsg &rMsg);
+	void HandleMessage(const KickPlayerByGuidMsg &rMsg);
 	// 禁言解禁时间start
 	//////////////////////////////////////////////////////////////////////////
 public:

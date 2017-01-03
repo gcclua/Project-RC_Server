@@ -14,26 +14,14 @@
     <Filter Include="Source Files\main">
       <UniqueIdentifier>{971fbc02-c514-45b3-bf59-bb25a8e64bba}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\protocol">
-      <UniqueIdentifier>{21c7bfb1-f309-4e9c-a35a-6cc65bbf6b36}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\logic">
       <UniqueIdentifier>{97b1e879-573a-4387-aae0-84932bae2c43}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\event_handle">
       <UniqueIdentifier>{64c6934f-fce4-4e79-89a2-a0e941172d92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\logic\badwords">
-      <UniqueIdentifier>{1a001da9-ffbe-4bf9-88cb-b01fee1030b4}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Source Files\logic\inventory">
       <UniqueIdentifier>{c4f68896-b008-4474-9a7e-a206e6e2fe44}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\logic\battle">
-      <UniqueIdentifier>{2026bfe0-0f1b-412f-8fcd-c567c1d67997}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Source Files\logic\config">
-      <UniqueIdentifier>{1dccc2e9-9597-409c-9ac4-e608c4fea059}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files\logic\player">
       <UniqueIdentifier>{f4112979-5f46-49a6-b8e8-6c40726cc261}</UniqueIdentifier>
@@ -77,6 +65,12 @@
     <Filter Include="Source Files\logic\scene\sceneclass">
       <UniqueIdentifier>{7ad4fa87-1641-4c18-b47c-eb569ec8cd3f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\logic\log">
+      <UniqueIdentifier>{d2cdfd7b-4f44-4a4c-8087-0d3708089526}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\logic\user\march">
+      <UniqueIdentifier>{078c992d-0d21-4506-9bd1-a376efb893eb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gamed\Daemon.cpp">
@@ -85,29 +79,8 @@
     <ClCompile Include="gamed\GameEventAutoCreate.cpp">
       <Filter>Source Files\main</Filter>
     </ClCompile>
-    <ClCompile Include="gamed\GameNetHandler.cpp">
-      <Filter>Source Files\main</Filter>
-    </ClCompile>
-    <ClCompile Include="gamed\AdminHandler.cpp">
-      <Filter>Source Files\protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="gamed\PolicyHandler.cpp">
-      <Filter>Source Files\protocol</Filter>
-    </ClCompile>
-    <ClCompile Include="logic\GameServerConfig.cpp">
-      <Filter>Source Files\logic\config</Filter>
-    </ClCompile>
     <ClCompile Include="logic\player\Player.cpp">
       <Filter>Source Files\logic\player</Filter>
-    </ClCompile>
-    <ClCompile Include="logic\badwords\badwordsTbl.cpp">
-      <Filter>Source Files\logic\badwords</Filter>
-    </ClCompile>
-    <ClCompile Include="logic\battle\BattleManager.cpp">
-      <Filter>Source Files\logic\battle</Filter>
-    </ClCompile>
-    <ClCompile Include="logic\battle\BattleTaskTbl.cpp">
-      <Filter>Source Files\logic\battle</Filter>
     </ClCompile>
     <ClCompile Include="DBManage\DBTask\DBBaseTask.cpp">
       <Filter>Source Files\data\DBTask</Filter>
@@ -277,9 +250,6 @@
     <ClCompile Include="logic\scene\obj\Obj_Hero.cpp">
       <Filter>Source Files\logic\scene\obj</Filter>
     </ClCompile>
-    <ClCompile Include="logic\scene\obj\Obj_Soldier.cpp">
-      <Filter>Source Files\logic\scene\obj</Filter>
-    </ClCompile>
     <ClCompile Include="logic\scene\skill\SL_ZhiXian.cpp">
       <Filter>Source Files\logic\scene\skill</Filter>
     </ClCompile>
@@ -298,34 +268,82 @@
     <ClCompile Include="logic\scene\sceneClass\MainSceneClass.cpp">
       <Filter>Source Files\logic\scene\sceneclass</Filter>
     </ClCompile>
+    <ClCompile Include="logic\Log\LogService.cpp">
+      <Filter>Source Files\logic\log</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_Troop.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_March_ChangeScene.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\scene\obj\Obj_March_CopyScene.cpp">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClCompile>
+    <ClCompile Include="logic\user\march\MarchManager.cpp">
+      <Filter>Source Files\logic\user\march</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBCreateCharTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCCreateChar.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBGuidTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCGuid.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBCharListTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCCharList.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBRandomNameTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCRandomName.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBCreateCityTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCCreateCity.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCBuildingData.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCHeroData.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCMarchData.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCTroopData.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCCityData.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCMapMarchData.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBWorldMarchTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBMarchTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gamed\Daemon.h">
       <Filter>Source Files\main</Filter>
     </ClInclude>
-    <ClInclude Include="gamed\GameNetHandler.h">
-      <Filter>Source Files\main</Filter>
-    </ClInclude>
-    <ClInclude Include="gamed\AdminHandler.h">
-      <Filter>Source Files\protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="gamed\PolicyHandler.h">
-      <Filter>Source Files\protocol</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\GameServerConfig.h">
-      <Filter>Source Files\logic\config</Filter>
-    </ClInclude>
     <ClInclude Include="logic\player\Player.h">
       <Filter>Source Files\logic\player</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\badwords\badwordsTbl.h">
-      <Filter>Source Files\logic\badwords</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\battle\BattleManager.h">
-      <Filter>Source Files\logic\battle</Filter>
-    </ClInclude>
-    <ClInclude Include="logic\battle\BattleTaskTbl.h">
-      <Filter>Source Files\logic\battle</Filter>
     </ClInclude>
     <ClInclude Include="DBManage\DBTask\DBBaseTask.h">
       <Filter>Source Files\data\DBTask</Filter>
@@ -468,9 +486,6 @@
     <ClInclude Include="logic\scene\obj\Obj_Hero.h">
       <Filter>Source Files\logic\scene\obj</Filter>
     </ClInclude>
-    <ClInclude Include="logic\scene\obj\Obj_Soldier.h">
-      <Filter>Source Files\logic\scene\obj</Filter>
-    </ClInclude>
     <ClInclude Include="logic\scene\skill\SL_ZhiXian.h">
       <Filter>Source Files\logic\scene\skill</Filter>
     </ClInclude>
@@ -488,6 +503,69 @@
     </ClInclude>
     <ClInclude Include="logic\scene\sceneClass\MainSceneClass.h">
       <Filter>Source Files\logic\scene\sceneclass</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\Log\LogService.h">
+      <Filter>Source Files\logic\log</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\scene\obj\Obj_Troop.h">
+      <Filter>Source Files\logic\scene\obj</Filter>
+    </ClInclude>
+    <ClInclude Include="logic\user\march\MarchManager.h">
+      <Filter>Source Files\logic\user\march</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBCreateCharTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCCreateChar.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBGuidTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCGuid.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBCharListTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCCharList.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBRandomNameTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCRandomName.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBCreateCityTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCCreateCity.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCBuildingData.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCHeroData.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCMarchData.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCTroopData.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCCityData.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCMapMarchData.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBWorldMarchTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBMarchTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

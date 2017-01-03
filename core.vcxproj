@@ -1,13 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
       <Platform>Win32</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
     <ProjectConfiguration Include="Release|Win32">
       <Configuration>Release</Configuration>
       <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -17,13 +25,25 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
+    <CharacterSet>MultiByte</CharacterSet>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
+    <UseOfMfc>false</UseOfMfc>
+    <CharacterSet>NotSet</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
@@ -33,7 +53,13 @@
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
   <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -44,10 +70,12 @@
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
   </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <Optimization>Disabled</Optimization>
@@ -65,7 +93,40 @@
       <OutputFile>$(OutDir)$(ProjectName)d.lib</OutputFile>
     </Lib>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <Optimization>Disabled</Optimization>
+      <AdditionalIncludeDirectories>common;logic;event\;windows\include;windows\include\boost;common\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
+      <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
+      <ProgramDataBaseFileName>$(IntDir)vc90-core.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4996;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <OutputFile>$(OutDir)$(ProjectName)d.lib</OutputFile>
+    </Lib>
+  </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <Optimization>MaxSpeed</Optimization>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>include\protobuf\src;include\libconfig\include;include\pthread\include;include\log4cxx\include;include\zlib;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>WIN32;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <ProgramDataBaseFileName>$(IntDir)vc90-core.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level3</WarningLevel>
+      <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
+      <DisableSpecificWarnings>4251;4275;%(DisableSpecificWarnings)</DisableSpecificWarnings>
+    </ClCompile>
+    <Lib>
+      <AdditionalLibraryDirectories>include\protobuf\lib;include\libconfig\lib;include\pthread\lib;include\log4cxx\lib; wsock32.lib ws2_32.lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Lib>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <Optimization>MaxSpeed</Optimization>
       <IntrinsicFunctions>true</IntrinsicFunctions>
@@ -99,28 +160,36 @@
     <ClInclude Include="common\common\BaseLib.h" />
     <ClInclude Include="common\common\BaseType.h" />
     <ClInclude Include="common\common\BaseUtility.h" />
-    <ClInclude Include="common\common\Clock.h" />
+    <ClInclude Include="common\common\Config.h" />
     <ClInclude Include="common\common\DBCTable.h" />
     <ClInclude Include="common\common\Exception.h" />
     <ClInclude Include="common\common\FLSeque.h" />
     <ClInclude Include="common\common\FLString.h" />
+    <ClInclude Include="common\common\GuidDefine.h" />
+    <ClInclude Include="common\common\GuidGenerator.h" />
+    <ClInclude Include="common\common\GuidLoader.h" />
+    <ClInclude Include="common\common\IniFile.h" />
     <ClInclude Include="common\common\LibNetwork.h" />
     <ClInclude Include="common\common\Misc.h" />
     <ClInclude Include="common\common\Pool.h" />
     <ClInclude Include="common\common\Random.h" />
     <ClInclude Include="common\common\ServerConfig.h" />
     <ClInclude Include="common\common\string-util.h" />
+    <ClInclude Include="common\common\TimeManager.h" />
     <ClInclude Include="common\DataBase\LibMemInterface.h" />
     <ClInclude Include="common\DataBase\ODBCBase.h" />
     <ClInclude Include="common\DataBase\ODBCInterface.h" />
     <ClInclude Include="common\DataBase\SqlTemplate.h" />
     <ClInclude Include="common\DBStruct\DBStruct.h" />
+    <ClInclude Include="common\DBStruct\DBStruct_CharList.h" />
     <ClInclude Include="common\DBStruct\DBStruct_City.h" />
+    <ClInclude Include="common\DBStruct\DBStruct_CityCreate.h" />
     <ClInclude Include="common\DBStruct\DBStruct_Cooldown.h" />
     <ClInclude Include="common\DBStruct\DBStruct_Hero.h" />
     <ClInclude Include="common\DBStruct\DBStruct_Impact.h" />
     <ClInclude Include="common\DBStruct\DBStruct_March.h" />
     <ClInclude Include="common\DBStruct\DBStruct_PK.h" />
+    <ClInclude Include="common\DBStruct\DBStruct_RandomName.h" />
     <ClInclude Include="common\DBStruct\DBStruct_Troop.h" />
     <ClInclude Include="common\DBStruct\DBStruct_User.h" />
     <ClInclude Include="common\DBStruct\DBStruct_WordMap.h" />
@@ -129,16 +198,9 @@
     <ClInclude Include="common\hero\GameStruct_Hero.h" />
     <ClInclude Include="common\ImpactStruct\GameDefine_Impact.h" />
     <ClInclude Include="common\ImpactStruct\GameStruct_Impact.h" />
-    <ClInclude Include="common\json\autolink.h" />
-    <ClInclude Include="common\json\config.h" />
-    <ClInclude Include="common\json\features.h" />
-    <ClInclude Include="common\json\forwards.h" />
-    <ClInclude Include="common\json-util.h" />
-    <ClInclude Include="common\json\json.h" />
-    <ClInclude Include="common\json\json_batchallocator.h" />
-    <ClInclude Include="common\json\reader.h" />
-    <ClInclude Include="common\json\value.h" />
-    <ClInclude Include="common\json\writer.h" />
+    <ClInclude Include="common\Login\GameInterface_Login.h" />
+    <ClInclude Include="common\log\Log.h" />
+    <ClInclude Include="common\log\LogDefine.h" />
     <ClInclude Include="common\LoudSpeaker\GameDefine_LoudSpeaker.h" />
     <ClInclude Include="common\LoudSpeaker\GameStruct_LoudSpeaker.h" />
     <ClInclude Include="common\march\GameDefine_March.h" />
@@ -149,16 +211,27 @@
     <ClInclude Include="common\Message\SceneMsg.h" />
     <ClInclude Include="common\Message\TransportMsg.h" />
     <ClInclude Include="common\Message\WorldUserMsg.h" />
+    <ClInclude Include="common\packet\Packet\CG_ASSIGN_HERO_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_CHAT_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_CONNECTED_HEARTBEAT_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_CREATEROLE_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_FIGHT_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_LEAVE_COPYSCENE_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_LOGIN_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_MOVE_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_REQ_NEAR_LIST_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_ROBOT_OPEN_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_SEND_MARCH_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_SKILL_USE_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_ASSIGN_HERO_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_ATTACKFLY_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_BATTLEINFOR_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_CHAT_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_CONNECTED_HEARTBEAT_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_CREATEROLE_RET_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_DELETE_OBJ_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_FORCE_SETPOS_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_LOGIN_QUEUE_STATUS_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_LOGIN_RET_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_MOVE_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_NEAR_MARCHLIST_PAK.h" />
@@ -166,24 +239,22 @@
     <ClInclude Include="common\packet\Packet\GC_PLAY_EFFECT_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_REMOVEEFFECT_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_RET_USE_SKILL_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_ROBOT_OPEN_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_SELECTROLE_RET_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_SEND_MARCH_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_STOP_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_TELEMOVE_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_UPDATE_ANIMATION_STATE_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_UPDATE_NEEDIMPACTINFO_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_UPDATE_SCENE_INSTACTIVATION_PAK.h" />
-    <ClInclude Include="common\packet\Packet\GS_CONNECTED_HEARTBEAT_PAK.h" />
     <ClInclude Include="common\packet\Packet\PacketDefine.h" />
     <ClInclude Include="common\packet\Packet\PBMessage.pb.h" />
-    <ClInclude Include="common\packet\Packet\SG_CONNECTED_HEARTBEAT_PAK.h" />
     <ClInclude Include="common\Scene\GameDefine_Obstacle.h" />
     <ClInclude Include="common\Scene\GameDefine_Scene.h" />
     <ClInclude Include="common\Scene\GameInterface_Scene.h" />
     <ClInclude Include="common\Scene\GameInterface_SceneActivation.h" />
     <ClInclude Include="common\Scene\GameStruct_Obstacle.h" />
     <ClInclude Include="common\Scene\GameStruct_Scene.h" />
-    <ClInclude Include="common\ServerPlayer\ServerPlayer.h" />
-    <ClInclude Include="common\ServerPlayer\ServerPlayerDefine.h" />
-    <ClInclude Include="common\ServerPlayer\ServerPlayerManager.h" />
     <ClInclude Include="common\service\BaseService.h" />
     <ClInclude Include="common\service\Invoker.h" />
     <ClInclude Include="common\service\Message.h" />
@@ -195,41 +266,44 @@
     <ClInclude Include="common\service\TimeInfo.h" />
     <ClInclude Include="common\skill\GameDefine_Skill.h" />
     <ClInclude Include="common\skill\GameStruct_Skill.h" />
-    <ClInclude Include="common\SysLog.h" />
-    <ClInclude Include="common\SysLogNet.h" />
+    <ClInclude Include="common\Table\TableManager.h" />
+    <ClInclude Include="common\Table\Table_ArrangeSelectTarget.h" />
+    <ClInclude Include="common\Table\Table_Building.h" />
+    <ClInclude Include="common\Table\Table_CityBuildingDefault.h" />
+    <ClInclude Include="common\Table\Table_CityBuildingLevel.h" />
+    <ClInclude Include="common\Table\Table_CityBuildingSlot.h" />
     <ClInclude Include="common\Table\Table_CoolDownTime.h" />
     <ClInclude Include="common\Table\Table_CopyScene.h" />
+    <ClInclude Include="common\Table\Table_CopySceneNpc.h" />
     <ClInclude Include="common\Table\Table_CopySceneRule.h" />
+    <ClInclude Include="common\Table\Table_Hero.h" />
     <ClInclude Include="common\Table\Table_Impact.h" />
+    <ClInclude Include="common\Table\Table_InitialCombatAttr.h" />
     <ClInclude Include="common\Table\Table_NameFilter.h" />
     <ClInclude Include="common\Table\Table_NpcOptionalSkill.h" />
     <ClInclude Include="common\Table\Table_NpcSkillStrategy.h" />
     <ClInclude Include="common\Table\Table_PatrolPoint.h" />
+    <ClInclude Include="common\Table\Table_PublicConfig.h" />
+    <ClInclude Include="common\Table\Table_RoleBaseAttr.h" />
     <ClInclude Include="common\Table\Table_SceneClass.h" />
     <ClInclude Include="common\Table\Table_SceneNpc.h" />
+    <ClInclude Include="common\Table\Table_ServerConfigList.h" />
+    <ClInclude Include="common\Table\Table_SkillActive.h" />
     <ClInclude Include="common\Table\Table_SkillBase.h" />
     <ClInclude Include="common\Table\Table_SkillEx.h" />
     <ClInclude Include="common\Table\Table_SnareObjBuffInfo.h" />
     <ClInclude Include="common\Table\Table_SnareObjInfo.h" />
+    <ClInclude Include="common\Table\Table_Troop.h" />
     <ClInclude Include="common\troop\GameDefine_Troop.h" />
     <ClInclude Include="common\troop\GameStruct_Troop.h" />
     <ClInclude Include="common\user\GameDefine_User.h" />
     <ClInclude Include="common\worldmap\GameDefine_WorldMap.h" />
     <ClInclude Include="common\worldmap\GameStruct_WorldMap.h" />
     <ClInclude Include="event\EventDefine.h" />
-    <ClInclude Include="net\NetCache.h" />
-    <ClInclude Include="net\NetHandler.h" />
-    <ClInclude Include="net\ProtocolHandler.h" />
     <ClInclude Include="common\coredump.h" />
     <ClInclude Include="common\distribution.h" />
-    <ClInclude Include="common\Ini.h" />
     <ClInclude Include="common\xml\tinystr.h" />
     <ClInclude Include="common\xml\tinyxml.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="common\json\json_internalarray.inl" />
-    <None Include="common\json\json_internalmap.inl" />
-    <None Include="common\json\json_valueiterator.inl" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common\building\GameStruct_Building.cpp" />
@@ -240,35 +314,43 @@
     <ClCompile Include="common\CombatStruct\GameStruct_Threat.cpp" />
     <ClCompile Include="common\common\BaseLib.cpp" />
     <ClCompile Include="common\common\BaseUtility.cpp" />
-    <ClCompile Include="common\common\Clock.cpp" />
+    <ClCompile Include="common\common\Config.cpp" />
     <ClCompile Include="common\common\DBCTable.cpp" />
     <ClCompile Include="common\common\Exception.cpp" />
+    <ClCompile Include="common\common\GuidDefine.cpp" />
+    <ClCompile Include="common\common\GuidGenerator.cpp" />
+    <ClCompile Include="common\common\GuidLoader.cpp" />
+    <ClCompile Include="common\common\IniFile.cpp" />
     <ClCompile Include="common\common\LibNetwork.cpp" />
     <ClCompile Include="common\common\Misc.cpp" />
     <ClCompile Include="common\common\pool.cpp" />
     <ClCompile Include="common\common\Random.cpp" />
     <ClCompile Include="common\common\ServerConfig.cpp" />
     <ClCompile Include="common\common\string-util.cpp" />
+    <ClCompile Include="common\common\TimeManager.cpp" />
     <ClCompile Include="common\DataBase\LibMemInterface.cpp" />
     <ClCompile Include="common\DataBase\ODBCBase.cpp" />
     <ClCompile Include="common\DataBase\ODBCInterface.cpp" />
     <ClCompile Include="common\DataBase\SqlTemplate.cpp" />
     <ClCompile Include="common\DBStruct\DBStruct.cpp" />
+    <ClCompile Include="common\DBStruct\DBStruct_CharList.cpp" />
     <ClCompile Include="common\DBStruct\DBStruct_City.cpp" />
+    <ClCompile Include="common\DBStruct\DBStruct_CityCreate.cpp" />
     <ClCompile Include="common\DBStruct\DBStruct_Cooldown.cpp" />
     <ClCompile Include="common\DBStruct\DBStruct_Hero.cpp" />
     <ClCompile Include="common\DBStruct\DBStruct_Impact.cpp" />
     <ClCompile Include="common\DBStruct\DBStruct_March.cpp" />
     <ClCompile Include="common\DBStruct\DBStruct_PK.cpp" />
+    <ClCompile Include="common\DBStruct\DBStruct_RandomName.cpp" />
     <ClCompile Include="common\DBStruct\DBStruct_Troop.cpp" />
     <ClCompile Include="common\DBStruct\DBStruct_User.cpp" />
     <ClCompile Include="common\DBStruct\DBStruct_WordMap.cpp" />
     <ClCompile Include="common\DictionaryFormat\DictionaryFormat.cpp" />
     <ClCompile Include="common\hero\GameStruct_Hero.cpp" />
     <ClCompile Include="common\ImpactStruct\GameStruct_Impact.cpp" />
-    <ClCompile Include="common\json\json_reader.cpp" />
-    <ClCompile Include="common\json\json_value.cpp" />
-    <ClCompile Include="common\json\json_writer.cpp" />
+    <ClCompile Include="common\Login\GameInterface_Login.cpp" />
+    <ClCompile Include="common\log\Log.cpp" />
+    <ClCompile Include="common\log\LogDefine.cpp" />
     <ClCompile Include="common\LoudSpeaker\GameStruct_LoudSpeaker.cpp" />
     <ClCompile Include="common\march\GameStruct_March.cpp" />
     <ClCompile Include="common\Message\ChatMsg.cpp" />
@@ -279,22 +361,15 @@
     <ClCompile Include="common\Message\WorldUserMsg.cpp" />
     <ClCompile Include="common\packet\PacketHandler\CG_Common_Handler.cpp" />
     <ClCompile Include="common\packet\PacketHandler\GC_Common_Handler.cpp" />
-    <ClCompile Include="common\packet\PacketHandler\GS_Common_Handler.cpp" />
-    <ClCompile Include="common\packet\PacketHandler\SG_Common_Handler.cpp" />
     <ClCompile Include="common\packet\Packet\CG_Common_PAK.cpp" />
     <ClCompile Include="common\packet\Packet\GC_Common_PAK.cpp" />
-    <ClCompile Include="common\packet\Packet\GS_Common_PAK.cpp" />
     <ClCompile Include="common\packet\Packet\PacketDefine.cpp" />
     <ClCompile Include="common\packet\Packet\PacketFactoryManager.cpp" />
     <ClCompile Include="common\packet\Packet\PBMessage.pb.cc" />
-    <ClCompile Include="common\packet\Packet\SG_Common_PAK.cpp" />
     <ClCompile Include="common\Scene\GameInterface_Scene.cpp" />
     <ClCompile Include="common\Scene\GameInterface_SceneActivation.cpp" />
     <ClCompile Include="common\Scene\GameStruct_Obstacle.cpp" />
     <ClCompile Include="common\Scene\GameStruct_Scene.cpp" />
-    <ClCompile Include="common\ServerPlayer\ServerPlayer.cpp" />
-    <ClCompile Include="common\ServerPlayer\ServerPlayerDefine.cpp" />
-    <ClCompile Include="common\ServerPlayer\ServerPlayerManager.cpp" />
     <ClCompile Include="common\service\BaseService.cpp" />
     <ClCompile Include="common\service\Invoker.cpp" />
     <ClCompile Include="common\service\Message.cpp" />
@@ -303,30 +378,37 @@
     <ClCompile Include="common\service\ServiceManager.cpp" />
     <ClCompile Include="common\service\TimeInfo.cpp" />
     <ClCompile Include="common\skill\GameStruct_Skill.cpp" />
-    <ClCompile Include="common\SysLog.cpp" />
-    <ClCompile Include="common\SysLogNet.cpp" />
+    <ClCompile Include="common\Table\Table_ArrangeSelectTarget.cpp" />
+    <ClCompile Include="common\Table\Table_Building.cpp" />
+    <ClCompile Include="common\Table\Table_CityBuildingDefault.cpp" />
+    <ClCompile Include="common\Table\Table_CityBuildingLevel.cpp" />
+    <ClCompile Include="common\Table\Table_CityBuildingSlot.cpp" />
     <ClCompile Include="common\Table\Table_CoolDownTime.cpp" />
     <ClCompile Include="common\Table\Table_CopyScene.cpp" />
+    <ClCompile Include="common\Table\Table_CopySceneNpc.cpp" />
     <ClCompile Include="common\Table\Table_CopySceneRule.cpp" />
+    <ClCompile Include="common\Table\Table_Hero.cpp" />
     <ClCompile Include="common\Table\Table_Impact.cpp" />
+    <ClCompile Include="common\Table\Table_InitialCombatAttr.cpp" />
     <ClCompile Include="common\Table\Table_NameFilter.cpp" />
     <ClCompile Include="common\Table\Table_NpcOptionalSkill.cpp" />
     <ClCompile Include="common\Table\Table_NpcSkillStrategy.cpp" />
     <ClCompile Include="common\Table\Table_PatrolPoint.cpp" />
+    <ClCompile Include="common\Table\Table_PublicConfig.cpp" />
+    <ClCompile Include="common\Table\Table_RoleBaseAttr.cpp" />
     <ClCompile Include="common\Table\Table_SceneClass.cpp" />
     <ClCompile Include="common\Table\Table_SceneNpc.cpp" />
+    <ClCompile Include="common\Table\Table_ServerConfigList.cpp" />
+    <ClCompile Include="common\Table\Table_SkillActive.cpp" />
     <ClCompile Include="common\Table\Table_SkillBase.cpp" />
     <ClCompile Include="common\Table\Table_SkillEx.cpp" />
     <ClCompile Include="common\Table\Table_SnareObjBuffInfo.cpp" />
     <ClCompile Include="common\Table\Table_SnareObjInfo.cpp" />
+    <ClCompile Include="common\Table\Table_Troop.cpp" />
     <ClCompile Include="common\troop\GameStruct_Troop.cpp" />
     <ClCompile Include="common\worldmap\GameStruct_WorldMap.cpp" />
-    <ClCompile Include="net\NetCache.cpp" />
-    <ClCompile Include="net\NetHandler.cpp" />
-    <ClCompile Include="net\ProtocolHandler.cpp" />
     <ClCompile Include="common\coredump.cpp" />
     <ClCompile Include="common\distribution.cpp" />
-    <ClCompile Include="common\Ini.cpp" />
     <ClCompile Include="common\xml\tinystr.cpp" />
     <ClCompile Include="common\xml\tinyxml.cpp" />
     <ClCompile Include="common\xml\tinyxmlerror.cpp" />

@@ -1,12 +1,18 @@
-
+////////////////////////////////////////////////////////////////////////////////////////
+//
+//             时间：15:23 2013-11-14
+//             说明：
+//
+//
+//
+/////////////////////////////////////////////////////////////////////////////////////////
 #include "ODBCBase.h"
-
 
 ODBCBase::ODBCBase()
 {
 	mResult = 0;
 	mResultCount = 0;
-	
+	mOPType = DB_INIT_EMPTY;
 }
 
 tuint32 ODBCBase::GetResultCount()
@@ -23,53 +29,26 @@ LONG_DB_QUERY*	ODBCBase::GetLongInterQuery()
 	return &mInterface->GetLongQuery();
 }
 
-int			ODBCBase::GetInternalAffectCount()
+tint32			ODBCBase::GetInternalAffectCount()
 {
 	return mInterface->GetAffectedRowCount();
 }
 
 bool	ODBCBase::IsPrepare()
 {
-	
 	__ENTER_FUNCTION
-	
+
 	return mInterface->IsPrepare();
+
 	__LEAVE_FUNCTION
 
 	return false;
 }
 
-bool  ODBCBase::CheckDBConnect(const char* pInfo)
+bool	ODBCBase::Load_Execute()
 {
 	__ENTER_FUNCTION
-		AssertEx(mInterface,"");
-		char info[256] = {0};
-		if (pInfo)
-		{
-			strncpy(info,pInfo,255);
-		}
-		if (!mInterface->IsConnected())
-		{
-			CACHE_LOG("DBAgentError","ERROR:"<<info<<"...connect database is fails");
-			for (int i = 0;i < 5; i++)
-			{
-				_Sleep(5000);
-				if (mInterface->Connect())
-				{
-					CACHE_LOG("DBAgentError","ERROR:"<<info<<"... Reconnect database");
-					return true;
-				}
-				CACHE_LOG("DBAgentError","ERROR:"<<info<<"... can't connect database("<<i<<")");
-			}
-		}
-	__LEAVE_FUNCTION
-	return false;
-}
 
-bool	ODBCBase::Load()
-{
-	
-	__ENTER_FUNCTION
 
 	if(!IsPrepare())
 		return false;
@@ -83,7 +62,7 @@ bool	ODBCBase::Load()
 
 	mResult = pInterface->Execute();
 	
-	mResultCount	= pInterface->mAffectCount;
+	mResultCount	= static_cast<tint32>(pInterface->mAffectCount);
 
 	return mResult;
 
@@ -92,13 +71,13 @@ bool	ODBCBase::Load()
 	return false;
 }
 
-bool	ODBCBase::LongLoad()
+bool	ODBCBase::LongLoad_Execute()
 {
-	
 	__ENTER_FUNCTION
 
-		if(!IsPrepare())
-			return false;
+
+	if(!IsPrepare())
+		return false;
 
 	ODBCInterface* pInterface= 	mInterface;
 
@@ -109,20 +88,44 @@ bool	ODBCBase::LongLoad()
 
 	mResult = pInterface->LongExecute();
 
-	mResultCount	= pInterface->mAffectCount;
+	mResultCount	= static_cast<tint32>(pInterface->mAffectCount);
 
 	return mResult;
 
 	__LEAVE_FUNCTION
 
-		return false;
+	return false;
 }
 
-
-bool	ODBCBase::AddNew()
+bool	ODBCBase::LongLoadEx_Execute()
 {
-	
 	__ENTER_FUNCTION
+
+	if(!IsPrepare())
+		return false;
+
+	ODBCInterface* pInterface= 	mInterface;
+
+	if(!pInterface)
+		return false;
+
+	mOPType = DB_LOAD;
+
+	mResult = pInterface->LongExecuteEx();
+
+	mResultCount	= static_cast<tint32>(pInterface->mAffectCount);
+
+	return mResult;
+
+	__LEAVE_FUNCTION
+
+	return false;
+}
+
+bool	ODBCBase::AddNew_Execute()
+{
+	__ENTER_FUNCTION
+
 	if(!IsPrepare())
 		return false;
 
@@ -135,7 +138,7 @@ bool	ODBCBase::AddNew()
 
 	mResult = pInterface->Execute();
 
-	mResultCount	= pInterface->mAffectCount;
+	mResultCount	= static_cast<tint32>(pInterface->mAffectCount);
 
 	return mResult;
 
@@ -144,7 +147,7 @@ bool	ODBCBase::AddNew()
 	return false;
 }
 
-bool ODBCBase::Delete()
+bool ODBCBase::Delete_Execute()
 {
 	__ENTER_FUNCTION
 
@@ -160,7 +163,7 @@ bool ODBCBase::Delete()
 
 	mResult = pInterface->Execute();
 
-	mResultCount	= pInterface->mAffectCount;
+	mResultCount	= static_cast<tint32>(pInterface->mAffectCount);
 
 	return mResult;
 
@@ -169,7 +172,32 @@ bool ODBCBase::Delete()
 	return false;
 }
 
-bool	ODBCBase::Save()
+bool ODBCBase::LongDelete_Execute()
+{
+__ENTER_FUNCTION
+
+	if(!IsPrepare())
+		return false;
+
+	ODBCInterface* pInterface= 	mInterface;
+
+	if(!pInterface)
+		return false;
+
+	mOPType = DB_DELETE;
+
+	mResult = pInterface->LongExecute();
+
+	mResultCount	= static_cast<tint32>(pInterface->mAffectCount);
+
+	return mResult;
+
+__LEAVE_FUNCTION	
+
+	return false;
+}
+
+bool	ODBCBase::Save_Execute()
 {
 
 	__ENTER_FUNCTION
@@ -186,16 +214,16 @@ bool	ODBCBase::Save()
 
 	mResult = pInterface->Execute();
 
-	mResultCount	= pInterface->mAffectCount;
+	mResultCount	= static_cast<tint32>(pInterface->mAffectCount);
 
 	return mResult;
 
 	__LEAVE_FUNCTION
 
-	return false;
+		return false;
 }
 
-bool	ODBCBase::LongSave()
+bool	ODBCBase::LongSave_Execute()
 {
 
 	__ENTER_FUNCTION
@@ -212,7 +240,7 @@ bool	ODBCBase::LongSave()
 
 	mResult = pInterface->LongExecute();
 
-	mResultCount	= pInterface->mAffectCount;
+	mResultCount	= static_cast<tint32>(pInterface->mAffectCount);
 
 	return mResult;
 
@@ -221,19 +249,44 @@ bool	ODBCBase::LongSave()
 	return false;
 }
 
-
-
-VOID ODBCBase::SetDBName(DB_NAMES dbName)
-{
-	mDBName = dbName;
-}
-
-int	ODBCBase::GetErrorCode()
+tint32	ODBCBase::GetErrorCode()
 {
 	return mInterface->GetError();
 }
 
-char* ODBCBase::GetErrorMessage()
+tchar* ODBCBase::GetErrorMessage()
 {
 	return mInterface->GetErrorMsg();
+}
+
+bool ODBCBase::CheckDBConnect(const tchar* pInfo)
+{
+__ENTER_FUNCTION
+	AssertEx(mInterface,"");
+	tchar info[256] = {0};
+	if(pInfo)	strncpy(info,pInfo,255);
+
+	if(!mInterface->IsConnected())
+	{
+		CacheLog(LOGDEF_INST(DBAgentError),"ERROR:%s...connect database is fails",info);
+		for(tint32 i = 0; i < 5; ++i)
+		{
+			_Sleep(5000);
+			//暂不使用g_DBConnectThread尽量避免并发重连[2007/12/03 YangJun]
+			//这个接口只在ShareMemory程序内使用
+			if(mInterface->Connect())
+			{
+				CacheLog(LOGDEF_INST(DBAgentError),"ERROR:%s...Reconnect database",info);
+				return true;
+			}
+
+			CacheLog(LOGDEF_INST(DBAgentError),"ERROR:%s...Can't connect database(%d)",info,i);
+		}
+
+		return false;
+	}
+
+	return true;
+__LEAVE_FUNCTION
+	return false;
 }

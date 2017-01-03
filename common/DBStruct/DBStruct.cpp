@@ -1,33 +1,34 @@
 
 #include "DBStruct.h"
-#include "Base.h"
+#include "stdarg.h"
 
-VOID	DB_QUERY::Parse(const char* pTemplate,...)
+void	DB_QUERY::Parse(const tchar* pTemplate,...)
 {
 	va_list argptr;
 	va_start(argptr, pTemplate);
-	int nchars  = tvsnprintf((char*)m_SqlStr, MAX_SQL_LENGTH, pTemplate, argptr );
+	int nchars  = tvsnprintf((tchar*)m_SqlStr, MAX_SQL_LENGTH, pTemplate, argptr );
 	va_end(argptr);
 
-	if (nchars == -1 || nchars > MAX_SQL_LENGTH )
+	if (nchars < 0 || nchars >= MAX_SQL_LENGTH )
 	{
 		AssertEx(false,"");
 		return;
 	}
-
+	m_SqlStr[nchars] = '\0';
 }
 
-VOID	LONG_DB_QUERY::Parse(const char* pTemplate,...)
+void	LONG_DB_QUERY::Parse(const tchar* pTemplate,...)
 {
 	va_list argptr;
 	va_start(argptr, pTemplate);
-	int nchars  = tvsnprintf((char*)m_SqlStr, MAX_LONG_SQL_LENGTH, pTemplate, argptr );
+	int nchars  = tvsnprintf((tchar*)m_SqlStr, MAX_LONG_SQL_LENGTH, pTemplate, argptr );
 	va_end(argptr);
-	if (nchars == -1 || nchars > MAX_LONG_SQL_LENGTH )
+	if (nchars < 0 || nchars >= MAX_LONG_SQL_LENGTH )
 	{
 		AssertEx(false,"");
 		return;
 	}
+	m_SqlStr[nchars] = '\0';
 
 }
 
@@ -153,33 +154,53 @@ char Ascii2Value(char in)
 }
 
 
-bool	Binary2String(const char* pIn,tuint32 InLength,char* pOut)
+bool	Binary2String(const tchar* pIn,tuint32 InLength,tchar* pOut, tuint32 OutLength)
 {
-
+	__ENTER_FUNCTION 
+		if ( null_ptr == pIn || null_ptr == pOut )
+		{
+			return false;
+		}
 		if(InLength==0)
 		{
 			return false;
 		}
 		tuint32 iOut = 0;
 
-		
-		for(tuint32 i = 0 ;i<InLength;i++)
-		{
-			
+
+		for(tuint32 i = 0;i<InLength;i++)
+		{	
 			pOut[iOut] = Value2Ascii(((unsigned char)pIn[i]&0xF0)>>4);
 			iOut++;
 			pOut[iOut] = Value2Ascii(pIn[i]&0x0F);
-			iOut++;
-		
-
+			iOut++;	   
 		}
+
+		if(OutLength != (tuint32)invalid_id)
+		{
+			if(iOut >= OutLength)
+			{
+				tchar msg[1024]={0};
+				tsnprintf(msg,sizeof(msg),"Binary2String: OutLength(%d) < InLength(%d)!",OutLength,InLength);
+				AssertEx(false,msg);
+			}
+		}
+
 		return true;
 
-}
+		__LEAVE_FUNCTION
 
-bool DBStr2Binary(const char* pIn,tuint32 InLength,char* pOut,tuint32 OutLimit,tuint32& OutLength)
+			return false;
+} 
+
+bool	DBStr2Binary( const tchar* pIn,tuint32 InLength,tchar* pOut,tuint32 OutLimit,tuint32& OutLength )
 {
+	__ENTER_FUNCTION
 
+		if ( null_ptr == pIn || null_ptr == pOut )
+		{
+			return false;
+		}
 		if(InLength==0)
 		{
 			return false;
@@ -187,13 +208,13 @@ bool DBStr2Binary(const char* pIn,tuint32 InLength,char* pOut,tuint32 OutLimit,t
 
 		tuint32 iOut = 0;
 		tuint32 i;
-		for( i = 0 ;i<InLength-1;)
+		for( i = 0;i<InLength-1;)
 		{
 			if(pIn[i]=='\0'||pIn[i+1]=='\0')
 			{
 				break;
 			}
-			
+
 			pOut[iOut]	=	(Ascii2Value(pIn[i])<<4) + Ascii2Value(pIn[i+1]);
 			iOut++;
 			i+=2;
@@ -202,6 +223,8 @@ bool DBStr2Binary(const char* pIn,tuint32 InLength,char* pOut,tuint32 OutLimit,t
 		}
 		OutLength = iOut;
 		return true;
+		__LEAVE_FUNCTION
+			return false;
 }
 
 
@@ -261,3 +284,22 @@ bool String2Binary(const char* pIn,tuint32 InLength,char* pOut,tuint32 OutLimit,
 		return true;
 }
 
+void DBGuidData::CleanUp()
+{
+	__ENTER_FUNCTION
+
+		m_Type=invalid_id;
+		m_Serial=0;
+
+	__LEAVE_FUNCTION
+}
+
+void DBGuidData::CopyFrom(const DBGuidData& rSour)
+{
+	__ENTER_FUNCTION
+
+		m_Type=rSour.m_Type;
+	    m_Serial=rSour.m_Serial;
+
+	__LEAVE_FUNCTION
+}

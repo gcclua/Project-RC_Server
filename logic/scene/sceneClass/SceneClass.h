@@ -5,7 +5,7 @@
 #include "Scene/Scene/Scene.h"
 #include "Message/SceneMsg.h"
 #include "Scene/GameStruct_Obstacle.h"
-#include "scene/obj/Obj_March.h"
+#include "march/GameStruct_March.h"
 
 class SceneClass
 {
@@ -16,23 +16,20 @@ public:
 public:
 	typedef std::pair<bool, SceneID> EnterResult;
 public:
-	virtual EnterResult EnterTo(Obj_MarchPtr Ptr, int nSceneInst) = 0;
-	virtual EnterResult EnterTo(Obj_MarchPtr Ptr) = 0;
+	virtual EnterResult EnterTo(const March& rMarch, int nSceneInst) = 0;
+	virtual EnterResult EnterTo(const March& rMarch) = 0;
 public:
-	virtual EnterResult FirstEnterTo(Obj_MarchPtr Ptr) = 0;
+	virtual EnterResult FirstEnterTo(const March& rMarch) = 0;
 
 public:
 	typedef std::pair<bool, SceneID> ChangeResult;
 public:
-	virtual ChangeResult ChangeTo(Obj_MarchPtr Ptr, int nSceneInst) = 0;
-	virtual ChangeResult ChangeTo(Obj_MarchPtr Ptr) = 0;
+	virtual ChangeResult ChangeTo(const March& rMarch, int nSceneInst) = 0;
+	virtual ChangeResult ChangeTo(const March& rMarch) = 0;
 public:
 	virtual bool ChangeFromCheck(const SceneID &rsid, const int64 &rGuid) = 0;
 	virtual bool ChangeToCheck(const SceneID &rsid, const int64 &rGuid) = 0;
 
-public:
-	virtual int RemainCapacityA(SceneInstID nSceneInst) = 0;
-	virtual int RemainCapacityB(SceneInstID nSceneInst) = 0;
 
 public:
 	virtual int ReusingScene(void) = 0;
@@ -90,14 +87,6 @@ public:
 protected:
 	SceneClassID m_nClassID;
 
-public:
-	int GetMaxPlayerCountA(void) const {return m_nMaxPlayerCountA;}
-	void SetMaxPlayerCountA(int nMaxPlayerCountA) {m_nMaxPlayerCountA = nMaxPlayerCountA;}
-	int GetMaxPlayerCountB(void) const {return m_nMaxPlayerCountB;}
-	void SetMaxPlayerCountB(int nMaxPlayerCountB) {m_nMaxPlayerCountB = nMaxPlayerCountB;}
-protected:
-	int m_nMaxPlayerCountA;
-	int m_nMaxPlayerCountB;
 
 public:
 	void InitSceneObstacle(int nWidth, int nHeight, const char *szObstacleFileName);

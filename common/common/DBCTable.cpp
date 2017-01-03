@@ -231,7 +231,7 @@ bool DBCFile::OpenFromMemoryImpl_Text(const char* pMemory, const char* pDeadEnd,
 
 	for(int i=0; i<(int)nFieldsNum; i++) 
 	{
-		if(vRet[i] == "int") vFieldsType[i] = T_INT;
+		if(vRet[i] == "INT") vFieldsType[i] = T_INT;
 		else if(vRet[i] == "FLOAT") vFieldsType[i] = T_FLOAT;
 		else if(vRet[i] == "STRING") vFieldsType[i] = T_STRING;
 		else
@@ -479,7 +479,7 @@ private:
 		void         SetStringLength(tuint32 nLength) {m_nStrlen = nLength;}
 	public:
 		String_T(void):m_pNext(null_ptr),m_pContent(null_ptr),m_nHashValue(0),m_nStrlen(0){};
-		~ String_T();
+		~ String_T(){CleanUp();}
 
 		bool IsMe(const char* szString,tuint32 nHashValue,tuint32 nLength)
 		{
@@ -547,7 +547,7 @@ private:
 
 	public:
 		StringTBlockNode_T(void):m_pNext(null_ptr),m_pBlock(null_ptr),m_nUserdSlotCount(0){};
-		~StringTBlockNode_T(void);
+		~StringTBlockNode_T(void){CleanUp();}
 		void CleanUp(void) {m_pBlock = null_ptr; m_pNext = null_ptr;}
 
 	private:
@@ -592,7 +592,7 @@ private:
 
 	public:
 		 CharBlockNode_T():m_pNext(null_ptr),m_pBlock(null_ptr),m_nUsedSize(0){};;
-		~ CharBlockNode_T();
+		 ~ CharBlockNode_T(){CleanUp();}
 		void CleanUp(void){m_pNext = null_ptr;m_pBlock = null_ptr; m_nUsedSize = 0;}
 
 	private:

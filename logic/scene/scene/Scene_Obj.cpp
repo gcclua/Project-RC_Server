@@ -7,6 +7,8 @@
 #include "Table/Table_SnareObjInfo.h"
 #include "Table/Table_SnareObjBuffInfo.h"
 #include "Service/MessageOp.h"
+#include "Table/Table_Troop.h"
+#include "Table/Table_Hero.h"
 
 void Scene::NpcInit(void)
 {
@@ -18,11 +20,13 @@ void Scene::NpcInit(void)
 }
 
 
-Obj_NpcPtr Scene::CreateNpc(int nDataID, const ScenePos &rPos, bool bReliveable, int nLevel)
+Obj_NpcPtr Scene::CreateNpc(int nDataID, const ScenePos &rPos, bool bReliveable,int nForce, int nLevel,Obj_NpcPtr NpcPtr)
 {
 	__ENTER_FUNCTION
-
-	Obj_NpcPtr NpcPtr = POOLDEF_NEW(Obj_Npc);
+	if (NpcPtr == null_ptr)
+	{
+		NpcPtr = POOLDEF_NEW(Obj_Npc);
+	}
 	AssertEx(NpcPtr, "");
 
 	Table_RoleBaseAttr const* pTable =GetTable_RoleBaseAttrByID(nDataID);
@@ -43,17 +47,7 @@ Obj_NpcPtr Scene::CreateNpc(int nDataID, const ScenePos &rPos, bool bReliveable,
 	}
  	NpcPtr->SetLevel(nLevel);
  	//势力
- 	NpcPtr->SetForceType(rTable.GetCamp());
- 	//巡逻范围
- 	NpcPtr->SetPathRadius(rTable.GetPathRadius());
- 	//警戒范围
- 	NpcPtr->SetAlertRadius(rTable.GetAlertRadius());
- 	//是否随机移动
- 	NpcPtr->SetRandMove((rTable.GetIsRanbdMove() ==1? true:false ));
-	//随机移动范围
- 	NpcPtr->SetRandMoveDis(rTable.GetRandMoveDis());
-	//NPC类型
-	NpcPtr->SetNpcType(rTable.GetNpcType());
+ 	NpcPtr->SetForceType(nForce);
 	//尸体停留时间
 	NpcPtr->SetCorpseTime(rTable.GetCorpseTime());
 
@@ -63,6 +57,10 @@ Obj_NpcPtr Scene::CreateNpc(int nDataID, const ScenePos &rPos, bool bReliveable,
 	NpcPtr->SetAttackDisType(rTable.GetAttackDisType());
 	//技能使用策略ID
 	NpcPtr->SetSkillStrategyId(rTable.GetSkillstrategyIndex());
+	//警戒范围
+	NpcPtr->SetAlertRadius(rTable.GetSelectRadius());
+	// 战意恢复速度
+	NpcPtr->SetXpSpeed(rTable.GetXpSpeed());
 	//初始化战斗属性
 	NpcPtr->MarkInitalAttrCalcDirty();
 
@@ -75,24 +73,21 @@ Obj_NpcPtr Scene::CreateNpc(int nDataID, const ScenePos &rPos, bool bReliveable,
 		Table_NpcSkillStrategy const& rNpcSkillStrategy =*pNpcSkillStrategy;
 		//先设置默认技能
 		NpcPtr->SetOwnSkill(rNpcSkillStrategy.GetDefaultSkillId(),0);
-		//再查看是否有配置的其他技能
-		if (rNpcSkillStrategy.GetIsHaveOptionalSkill() ==1)
+
+		int nSkillIndex =1;//0号索引给默认技能了
+		int nCount =rNpcSkillStrategy.getSkillIdCount();
+		for (int nIndex=0;nIndex<nCount;nIndex++)
 		{
-			int nSkillIndex =1;//0号索引给默认技能了
-			int nCount =rNpcSkillStrategy.getSkillIdCount();
-			for (int nIndex=0;nIndex<nCount;nIndex++)
+			int nSkillId =rNpcSkillStrategy.GetSkillIdbyIndex(nIndex);
+			if (nSkillId !=invalid_id)
 			{
-				int nSkillId =rNpcSkillStrategy.GetSkillIdbyIndex(nIndex);
-				if (nSkillId !=invalid_id)
-				{
-					NpcPtr->SetOwnSkill(nSkillId,nSkillIndex);
-					nSkillIndex++;
-				}
+				NpcPtr->SetOwnSkill(nSkillId,nSkillIndex);
+				nSkillIndex++;
 			}
 		}
 	}
 	ObjPtr objPtr = boost::static_pointer_cast<Obj, Obj_Npc>(NpcPtr);
-	_AddNonUserObj(objPtr);
+	_AddNonMarchObj(objPtr);
 	return NpcPtr;
 
 	__LEAVE_FUNCTION
@@ -152,15 +147,77 @@ Obj_SnarePtr Scene::CreateSnareObj(tint32 nSnareID,tint32 OwnerId, const ScenePo
 			SnarePtr->SetImpactInfoByIndex(impactInfo,nBuffIndex);
 		}
 	}
-	SnarePtr->SetCreateTime(static_cast<tuint32>(Clock::getCurrentSystemTime()));
+	SnarePtr->SetCreateTime(gTimeManager.RunTime());
 	ObjPtr objPtr = boost::static_pointer_cast<Obj, Obj_Snare>(SnarePtr);
-	_AddNonUserObj(objPtr);
+	_AddNonMarchObj(objPtr);
 	return SnarePtr;
 	__LEAVE_FUNCTION
 		return Obj_SnarePtr();
 }
 
-Obj_MarchPtr Scene::CreateMarch(const March& rMarchData, const ScenePos &rPos)
+Obj_TroopPtr  Scene::CreateTroopObj(const Troop& rTroop,const ScenePos &rPos,int nForce)
+{
+	__ENTER_FUNCTION
+		Obj_TroopPtr objTroopPtr = POOLDEF_NEW(Obj_Troop);
+	AssertEx(objTroopPtr,"");
+
+	Table_Troop const* pTroop = GetTable_TroopByID(rTroop.GetType());
+	if (pTroop == null_ptr)
+	{
+		return Obj_TroopPtr();
+	}
+
+	objTroopPtr->SetType(rTroop.GetType());
+	objTroopPtr->SetLevel(rTroop.GetLevel());
+	objTroopPtr->SetArrangeIndex(rTroop.GetArrangeIndex());
+	objTroopPtr->SetScenePos(rPos);
+	objTroopPtr->GetCooldownList() = rTroop.GetCooldownList();
+
+	CreateNpc(pTroop->GetDataIDbyIndex(GetLevel()),rPos,false,nForce,GetLevel(),objTroopPtr);
+
+	//初始化战斗属性
+	objTroopPtr->MarkInitalAttrCalcDirty();
+	
+	ObjPtr objPtr = boost::static_pointer_cast<Obj, Obj_Troop>(objTroopPtr);
+	_AddNonMarchObj(objPtr);
+	return objTroopPtr;
+	__LEAVE_FUNCTION
+		return Obj_TroopPtr();
+}
+
+Obj_HeroPtr  Scene::CreateHeroObj(const Hero& rHero,const ScenePos &rPos,int nForce)
+{
+	__ENTER_FUNCTION
+		Obj_HeroPtr objHeroPtr = POOLDEF_NEW(Obj_Hero);
+		AssertEx(objHeroPtr,"");
+
+		Table_Hero const* pHero = GetTable_HeroByID(rHero.GetType());
+		if (pHero == null_ptr)
+		{
+			return Obj_HeroPtr();
+		}
+
+		objHeroPtr->SetUID(rHero.GetUID());
+		objHeroPtr->SetType(rHero.GetType());
+		objHeroPtr->SetLevel(rHero.GetLevel());
+		objHeroPtr->SetQuality(rHero.GetQuality());
+		objHeroPtr->SetName(rHero.GetName());
+		objHeroPtr->SetArrangeIndex(rHero.GetArrangeIndex());
+		objHeroPtr->SetScenePos(rPos);
+
+		objHeroPtr->GetCooldownList() = rHero.GetCooldownList();
+		CreateNpc(pHero->GetDataIDbyIndex(GetLevel()),rPos,false,nForce,GetLevel(),objHeroPtr);
+		//初始化战斗属性
+		objHeroPtr->MarkInitalAttrCalcDirty();
+		
+		ObjPtr objPtr = boost::static_pointer_cast<Obj, Obj_Hero>(objHeroPtr);
+		_AddNonMarchObj(objPtr);
+		return objHeroPtr;
+	__LEAVE_FUNCTION
+		return Obj_HeroPtr();
+}
+
+Obj_MarchPtr Scene::CreateMarch(const March& rMarchData,const ScenePos& rPos)
 {
 	__ENTER_FUNCTION
 
@@ -172,40 +229,15 @@ Obj_MarchPtr Scene::CreateMarch(const March& rMarchData, const ScenePos &rPos)
 		return Obj_MarchPtr();
 	}
 
-	//坐标
 	MarchPtr->SetScenePos(rPos);
-	//势力 伙伴独有势力 不会改变
-	MarchPtr->SetForceType(5);
-	
-	MarchPtr->SetCityId(rMarchData.GetCityId());
 
-	MarchPtr->SetPlayerId(rMarchData.GetPlayerId());
-	//名字 所属城市
-	MarchPtr->SetName(rMarchData.GetName());
+	//坐标
+	MarchPtr->SetMarch(rMarchData);
+	
 
 	ObjPtr objPtr = boost::static_pointer_cast<Obj, Obj_March>(MarchPtr);
-	_AddNonUserObj(objPtr);
+	_AddNonMarchObj(objPtr);
 	return MarchPtr;
-
-	__LEAVE_FUNCTION
-	return Obj_MarchPtr();
-}
-
-
-Obj_MarchPtr Scene::GetMarchByID(int nObjID)
-{
-	__ENTER_FUNCTION
-
-	Obj_MarchPtr PtrRet;
-	ObjPtr Ptr = GetObjByID(nObjID);
-	if (Ptr)
-	{
-		if (Ptr->IsMarch())
-		{
-			PtrRet = boost::static_pointer_cast<Obj_March, Obj>(Ptr);
-		}
-	}
-	return PtrRet;
 
 	__LEAVE_FUNCTION
 	return Obj_MarchPtr();
@@ -311,7 +343,7 @@ __ENTER_FUNCTION
 __LEAVE_FUNCTION
 }
 
-void Scene::_AddNonUserObj(ObjPtr Ptr)
+void Scene::_AddNonMarchObj(ObjPtr Ptr)
 {
 	__ENTER_FUNCTION
 
@@ -326,36 +358,7 @@ void Scene::_AddNonUserObj(ObjPtr Ptr)
 	__LEAVE_FUNCTION
 }
 
-void Scene::_AddMarchImmediate(Obj_MarchPtr marchPtr, bool bFirstEnter)
-{
-	__ENTER_FUNCTION
-
-	int nObjID = _AllocObjID();
-	ObjPtr objPtr = boost::static_pointer_cast<Obj, Obj_March>(marchPtr);
-	m_ObjPtrMap.insert(std::make_pair(nObjID, objPtr));
-
-	marchPtr->SetID(nObjID);
-	marchPtr->SetScene(this);
-	if (bFirstEnter)
-	{
-		marchPtr->OnLogin();
-	}
-	marchPtr->OnEnterScene();
-	OnObjEnter(marchPtr->GetID());
-
-	__LEAVE_FUNCTION
-}
-
-void Scene::_AddNonUserObjImmediate(ObjPtr objPtr)
-{
-	__ENTER_FUNCTION
-
-	m_ObjPtrMap.insert(std::make_pair(objPtr->GetID(), objPtr));
-
-	__LEAVE_FUNCTION
-}
-
-void Scene::_DelMarchImmediate(int nObjID, bool bLastLeave)
+void Scene::_DelMarchImmediate(int nObjID)
 {
 	__ENTER_FUNCTION
 
@@ -365,17 +368,13 @@ void Scene::_DelMarchImmediate(int nObjID, bool bLastLeave)
 	AssertEx(objPtr, "");
 	AssertEx(objPtr->IsMarch(), "");
 
-	Obj_MarchPtr userPtr = boost::static_pointer_cast<Obj_March, Obj>(objPtr);
-	AssertEx(userPtr, "");
+	Obj_MarchPtr marchPtr = boost::static_pointer_cast<Obj_March, Obj>(objPtr);
+	AssertEx(marchPtr, "");
 
-	userPtr->OnLeaveScene();
-	OnObjLeave(userPtr->GetID());
-	if (bLastLeave)
-	{
-		userPtr->OnLogout();
-	}
-	userPtr->SetScene(null_ptr);
-	userPtr->SetID(invalid_id);
+	marchPtr->OnLeaveScene();
+	OnObjLeave(marchPtr->GetID());
+	marchPtr->SetScene(null_ptr);
+	marchPtr->SetID(invalid_id);
 
 	_erase(m_ObjPtrMap, itRemove);
 

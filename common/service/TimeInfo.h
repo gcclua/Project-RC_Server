@@ -27,7 +27,7 @@ public:
 	time_t m_nAnsiTime;     // 1970.1.1零时到现在经历了多少秒
 
 private:
-	int   m_uLastSysRunTime;
+	tuint32   m_uLastSysRunTime;
 	int   m_nLastYear;
 	int   m_nLastMonth;
 	int   m_nLastDay;

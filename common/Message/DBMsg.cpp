@@ -14,3 +14,16 @@ MESSAGE_IMPL(DBRetLoadTileDataMsg)
 MESSAGE_IMPL(DBReqSaveTileDataMsg)
 MESSAGE_IMPL(DBRetSaveTileDataMsg)
 MESSAGE_IMPL(DBReqSaveCityDataMsg)
+MESSAGE_IMPL(DBReqSaveMarchDataMsg)
+
+MESSAGE_IMPL(DBReqCreateBuildMsg)
+MESSAGE_IMPL(DBRetCreateBuildMsg)
+MESSAGE_IMPL(DBReqSaveGuidMsg)
+MESSAGE_IMPL(DBAskCharListMsg)
+MESSAGE_IMPL(DBRetAskCharListMsg)
+MESSAGE_IMPL(DBReqLoadRandomNameMsg);
+MESSAGE_IMPL(DBRetReqLoadRandomNameMsg);
+MESSAGE_IMPL(DBReqCreateCityMsg);
+MESSAGE_IMPL(DBRetCreateCityMsg);
+MESSAGE_IMPL(DBRetLoadMapMarchMsg);
+MESSAGE_IMPL(DBReqLoadMapMarchMsg);

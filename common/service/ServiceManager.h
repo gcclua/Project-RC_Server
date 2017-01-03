@@ -13,7 +13,7 @@ public:
 	virtual ~ServiceManager(void);
 
 public:
-	void Create(int nServiceCOunt,int nThreadCount);
+	void Create(int nServiceCount,tint32 nThreadCount);
 	void Register(Service * pInst);
 	void InitAllService(void);
 	void Run(void);

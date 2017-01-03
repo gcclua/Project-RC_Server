@@ -4,17 +4,17 @@
 
 #include "PlayerManager.h"
 
-class LoginService;
+class WorldUserService;
 
 
 class GamePlayerManager : public PlayerManager
 {
 public:
-	explicit GamePlayerManager(LoginService &rLoginService);
+	explicit GamePlayerManager(WorldUserService &rWorldService);
 	 ~GamePlayerManager(void);
 
 private:
-	LoginService &m_rLoginService;
+	WorldUserService &m_rWorldService;
 public:
 	virtual void ProcessTicks(const TimeInfo &rTimeInfo);
 
@@ -23,7 +23,7 @@ protected:
 	virtual void OnDelPlayer(PlayerPtr Ptr,int nResult);
 
 public:
-	PlayerPtr GetPlayerByID(int64 nID);
+	PlayerPtr GetPlayerByID(int nID);
 	PlayerPtr PopPlayerByStatusFOrEnterWorld(void);
 };
 

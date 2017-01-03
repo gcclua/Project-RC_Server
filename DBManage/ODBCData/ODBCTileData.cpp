@@ -30,7 +30,7 @@ bool ODBCTileData::Load()
 
 	pQuery->Parse(LoadTileData);
 
-	return ODBCBase::LongLoad();
+	return ODBCBase::LongLoad_Execute();
 	__LEAVE_FUNCTION
 		return false;
 }
@@ -71,9 +71,10 @@ bool ODBCTileData::Save(DBTileDataPtr* pSource)
 			rTileDataPtr->m_pData[i].m_tileID
 			);
 
-		if (!ODBCBase::LongSave())
+		if (!ODBCBase::LongSave_Execute())
 		{
-			CACHE_LOG("DBAgentError","ODBCTileData::Save Fail tileId"<<rTileDataPtr->m_pData[i].m_tileID);
+			CacheLog(LOGDEF_INST(DBAgentError), "ODBCTileData::Save Fail tileId(%d)",
+				rTileDataPtr->m_pData[i].m_tileID);
 			return false;
 		}
 

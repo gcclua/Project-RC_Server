@@ -24,9 +24,8 @@ public:
 	int m_nBlock; // 所属Block
 	int m_nType;  // 地块类型
 	int m_nCityId; // 城市ID
-	int64 m_nPlayerId; // 
-
-	
+	int64 m_nUserId; // 
+	int m_nState;  // 状态
 };
 
 typedef DBCommonData<DBTile> DBTileData;

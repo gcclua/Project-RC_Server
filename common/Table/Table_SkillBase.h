@@ -13,12 +13,7 @@ class Table_SkillBase:public DBC_Recorder_Loader<Table_SkillBase,1000,1000>
 ID_ID,
 ID_NAME=2,
 ID_ISSHOWSKILLNAME,
-ID_ISAUTOSELECTTAR,
-ID_ISMOVETOTARINAUTOCOMBAT,
 ID_ICON ,
-ID_PROFESSIONID,
-ID_ISNEEDWEAPON,
-ID_PRIORITYAUTOFIGHT,
 ID_SKILLCLASS,
 ID_USETYPE,
 ID_ISMOVE,
@@ -48,11 +43,6 @@ private:
  tint32 GetId() const { return m_Id; }
 
 private:
- tint32 m_IsAutoSelectTar;
- public:
- tint32 GetIsAutoSelectTar() const { return m_IsAutoSelectTar; }
-
-private:
  tint32 m_IsBreakBeAttacked;
  public:
  tint32 GetIsBreakBeAttacked() const { return m_IsBreakBeAttacked; }
@@ -68,19 +58,9 @@ private:
  tint32 GetIsMoveBreak() const { return m_IsMoveBreak; }
 
 private:
- tint32 m_IsMoveToTarInAutoCombat;
- public:
- tint32 GetIsMoveToTarInAutoCombat() const { return m_IsMoveToTarInAutoCombat; }
-
-private:
  tint32 m_IsNeedStopEffectId;
  public:
  tint32 GetIsNeedStopEffectId() const { return m_IsNeedStopEffectId; }
-
-private:
- tint32 m_IsNeedWeapon;
- public:
- tint32 GetIsNeedWeapon() const { return m_IsNeedWeapon; }
 
 private:
  tint32 m_IsPlayAttackSound;
@@ -106,16 +86,6 @@ private:
  const tchar* m_Name;
  public:
  const tchar* GetName() const { return m_Name; }
-
-private:
- tint32 m_PriorityAutoFight;
- public:
- tint32 GetPriorityAutoFight() const { return m_PriorityAutoFight; }
-
-private:
- tint32 m_ProfessionId;
- public:
- tint32 GetProfessionId() const { return m_ProfessionId; }
 
 private:
  tint32 m_SelLogic;

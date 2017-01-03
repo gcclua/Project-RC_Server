@@ -15,7 +15,6 @@ class CG_LOGIN_PAK:public Packet
  CG_LOGIN_PAK():Packet(m_PacketData){}
  virtual ~CG_LOGIN_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_CG_LOGIN_PAK;}
  public:
  ::CG_LOGIN m_PacketData;
@@ -32,7 +31,6 @@ class CG_LOGIN_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::CG_LOGIN_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::CG_LOGIN_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

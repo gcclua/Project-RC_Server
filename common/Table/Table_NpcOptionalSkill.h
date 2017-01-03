@@ -12,11 +12,6 @@ class Table_NpcOptionalSkill:public DBC_Recorder_Loader<Table_NpcOptionalSkill,9
  INVLAID_INDEX=-1,
 ID_SKILLID,
 ID_SELETARGETLOGIC=2,
-ID_SELECTPARAM1,
-ID_SELECTPARAM2,
-ID_USETYPE,
-ID_SKILLPRIORITY,
-ID_WEIGHT,
 ID_ACTIVATELOGIC,
 ID_ACTIVATEPARAM1,
 ID_ACTIVATEPARAM2,
@@ -48,36 +43,10 @@ private:
  public:
  tint32 GetSeleTargetLogic() const { return m_SeleTargetLogic; }
 
-public:
- tint32 getSelectParamCount() const { return 2; } 
- private:
- tint32 m_SelectParam[2];
- public:
- tint32 GetSelectParambyIndex(tint32 idx) const 
- {
- if(idx>=0 && idx<2) return m_SelectParam[idx];
- return -1;
- }
-
 private:
  tint32 m_SkillId;
  public:
  tint32 GetSkillId() const { return m_SkillId; }
-
-private:
- tint32 m_SkillPriority;
- public:
- tint32 GetSkillPriority() const { return m_SkillPriority; }
-
-private:
- tint32 m_UseType;
- public:
- tint32 GetUseType() const { return m_UseType; }
-
-private:
- tint32 m_Weight;
- public:
- tint32 GetWeight() const { return m_Weight; }
 
 };
  

@@ -19,6 +19,7 @@ public:
 
 protected:
 	virtual void Shutdown(void);
+	virtual void Openup(void);
 
 public:
 	virtual void Tick(const TimeInfo &rTimeInfo);
@@ -26,13 +27,20 @@ private:
 	void Tick_OnlineLog(const TimeInfo &rTimeInfo);
 
 private:
+	void LoadMarch(const DBMarchData& rData);
+
+private:
 	void Tick_Shutdown(const TimeInfo &rTimeInfo);
 private:
 	int m_nShutdownTime;
 
 public:
-	virtual void HandleMessage(const MarchEnterSceneMsg &rMsg);
+	virtual void HandleMessage(const MarchEnterSceneMsg rMsg);
+	virtual void HandleMessage(const MarchChangeSceneMsg rMsg);
 	virtual void HandleMessage(const MarchLeaveSceneMsg &rMsg);
+	virtual void HandleMessage(const MarchReqChangeSceneMsg &rMsg);
+	virtual void HandleMessage(const MarchReqFightMsg &rMsg);
+	
 
 	virtual void HandleMessage(const UpdateMarchBaseInfoMsg& rMsg);
 
@@ -40,6 +48,8 @@ public:
 	virtual void HandleMessage(const TransportToAllScene &rMsg);
 	virtual void HandleMessage(const TransportToSceneClass &rMsg);
 	virtual void HandleMessage(const TransportToSceneInst &rMsg);
+	virtual void HandleMessage(const DBRetLoadMapMarchMsg &rMsg);
+	virtual void HandleMessage(const ReqMarchStartMsg &rMsg);
 public:
 	template<typename _MessagePtrT>
 	void SendMessage(SceneID sceneid, _MessagePtrT Ptr)
@@ -69,9 +79,11 @@ public:
 	}
 
 private:
-	SceneID EnterTo(Obj_MarchPtr Ptr);
+	SceneID EnterTo(const March& rMarch);
+	SceneID EnterToDefaultScene(const March& rMarch);
 private:
-	SceneID ChangeTo(Obj_MarchPtr Ptr, const SceneID &rsid);
+	SceneID ChangeTo(const March& rMarch, const SceneID &rsid);
+	
 
 private:
 	void InitSceneClass(void);
@@ -104,8 +116,6 @@ private:
 private:
 	CachedMsgList m_CachedMsgList;	//¡¾stl¡¿
 	//////////////////////////////////////////////////////////////////////////	
-private:
-	void	Tick_ChangeNameCoolDown(const TimeInfo& rInfo);
 
 };
 

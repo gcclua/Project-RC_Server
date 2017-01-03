@@ -43,8 +43,8 @@ void SL_ChongFeng::OnActivate(Obj_Character& rSelf)
 			//移动到目标点
 	
 			ScenePos TargetPos;
-			TargetPos.m_fX =rSelf.GetScenePos().m_fX+cos(rSelf.GetFaceDir())*fDis;
-			TargetPos.m_fZ =rSelf.GetScenePos().m_fZ+sin(rSelf.GetFaceDir())*fDis;
+			TargetPos.m_nX =(int)(rSelf.GetScenePos().m_nX+cos(rSelf.GetFaceDir())*fDis);
+			TargetPos.m_nZ =(int)(rSelf.GetScenePos().m_nZ+sin(rSelf.GetFaceDir())*fDis);
 			rSelf.TeleMoveTo(TargetPos);
 			//通知客户端移动到最新的位置
 			rSelf.UpdateTeleMoveToClient(rSelf.GetScenePos(),false);

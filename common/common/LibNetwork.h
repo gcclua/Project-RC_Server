@@ -242,7 +242,6 @@ public :
 	//PACKET_EXE_ERROR 表示出现严重错误，当前连接需要被强制断开
 	//PACKET_EXE_CONTINUE 表示继续在当前循环里执行剩下的消息
 	virtual tuint32		Execute( Player* pPlayer ) = 0 ;
-	virtual tuint32		Execute( ServerPlayer* pServerPlayer ) = 0 ;
 
 	virtual	tuint16		GetPacketID( ) const = 0 ;
 

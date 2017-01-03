@@ -29,4 +29,27 @@ void Building::SerializeFromDB(const DBBuilding& rSource)
 	
 }
 
+FarmBuilding::FarmBuilding(City &rCity)
+	:Building(rCity)
+{
+
+}
+
+
+FarmBuilding::~FarmBuilding()
+{
+
+}
+
+
+BarrackBuilding::BarrackBuilding(City &rCity)
+	:Building(rCity)
+{
+	
+}
+
+BarrackBuilding::~BarrackBuilding()
+{
+
+}
 

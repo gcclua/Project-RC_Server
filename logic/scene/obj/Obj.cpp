@@ -32,6 +32,11 @@ void Obj::Tick(const TimeInfo &rTimeInfo)
 
 }
 
+bool Obj::CanBeView(Obj_Npc & rNpc)
+{
+	return CanBeScout(rNpc);
+}
+
 bool Obj::CanBeView(Obj_March &rMarch)
 {
 	return CanBeScout(rMarch);
@@ -65,9 +70,9 @@ void Obj::ForceSetScenePos(ScenePos Pos)
 
 		AssertEx(MsgPtr,"");
 		MsgPtr->m_nObjId = GetID();
-		MsgPtr->m_nPosX = static_cast<tint32>(m_ScenePos.m_fX * 100);
-		MsgPtr->m_nPoxZ = static_cast<tint32>(m_ScenePos.m_fZ * 100);
-
+		MsgPtr->m_nPosX = m_ScenePos.m_nX ;
+		MsgPtr->m_nPoxZ = m_ScenePos.m_nZ;
+		MsgPtr->m_nSceneId = GetSceneInstID();
 		GetScene().BroadCast(MsgPtr);
 	}
 
@@ -160,7 +165,7 @@ bool Obj::IsCharacter(void)
 	{
 	case ObjType::HERO:
 	case ObjType::NPC:
-	case ObjType::SOLDIER:
+	case ObjType::TROOP:
 		{
 			return true;
 		}
@@ -180,7 +185,21 @@ bool Obj::IsMarch(void)
 
 bool Obj::IsNpc(void)
 {
-	return (GetObjType() == ObjType::NPC);
+	switch (GetObjType())
+	{
+	case ObjType::HERO:
+	case ObjType::NPC:
+	case ObjType::TROOP:
+		{
+			return true;
+		}
+		break;
+	default:
+		{
+			return false;
+		}
+		break;
+	}
 }
 
 bool Obj::IsHero(void)
@@ -189,7 +208,7 @@ bool Obj::IsHero(void)
 }
 bool Obj::IsSoldier(void)
 {
-	return (GetObjType() == ObjType::SOLDIER);
+	return (GetObjType() == ObjType::TROOP);
 }
 
 bool Obj::IsSnareObj(void)

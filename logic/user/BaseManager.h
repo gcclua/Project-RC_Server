@@ -27,5 +27,4 @@ protected:
 };
 
 
-
 #endif

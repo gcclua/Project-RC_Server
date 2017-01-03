@@ -1,0 +1,21 @@
+SceneID	Desc	Name	ResName	Type	Length	Width	Obstacle	BGMusic	CopySceneID	SceneMapTexture	SceneMapWidth	SceneMapHeight	SceneMapLogicWidth	PlayerViewRadius	AttackPosX1	AttackPosZ1	AttackPosX2	AttackPosZ2	AttackPosX3	AttackPosZ3	AttackPosX4	AttackPosZ4	AttackPosX5	AttackPosZ5	AttackPosX6	AttackPosZ6	AttackPosX7	AttackPosZ7	AttackPosX8	AttackPosZ8	AttackPosX9	AttackPosZ9	DefencePosX1	DefencePosZ1	DefencePosX2	DefencePosZ2	DefencePosX3	DefencePosZ3	DefencePosX4	DefencePosZ4	DefencePosX5	DefencePosZ5	DefencePosX6	DefencePosZ6	DefencePosX7	DefencePosZ7	DefencePosX8	DefencePosZ8	DefencePosX9	DefencePosZ9
+INT	STRING	STRING	STRING	INT	INT	INT	STRING	INT	INT	STRING	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT
+#MAX_ID=1023;MAX_RECORD=1024;TableType=Index;																																																		
+#场景ID	描述(不读)	名称	资源名称	类型(-1客户端场景，0主场景，1，剧情场景， 2战斗场景)	长度	宽度	阻挡文件(服务器使用)	背景音乐ID	对应副本表CopyScene的ID	雷达地图对应资源	雷达地图图片宽度	雷达地图图片高度	地图实际逻辑宽度	玩家视野范围	攻击方位置1坐标	攻击方位置1坐标	攻击方位置2坐标	攻击方位置2坐标	攻击方位置3坐标	攻击方位置3坐标	攻击方位置4坐标	攻击方位置4坐标	攻击方位置5坐标	攻击方位置5坐标	攻击方位置6坐标	攻击方位置6坐标	攻击方位置7坐标	攻击方位置7坐标	攻击方位置8坐标	攻击方位置8坐标	攻击方位置9坐标	攻击方位置9坐标	防守方位置1坐标	防守方位置1坐标	防守方位置2坐标	防守方位置2坐标	防守方位置1坐标	防守方位置1坐标	防守方位置1坐标	防守方位置1坐标	防守方位置1坐标	防守方位置1坐标	防守方位置1坐标	防守方位置1坐标	防守方位置1坐标	防守方位置1坐标	防守方位置1坐标	防守方位置1坐标	防守方位置9坐标	防守方位置9坐标
+#此行必须有!!客户端确定是否需要读到内存	规则为填写S则不读，否则就会读取到客户端																																																	
+0	主场景	大地图	大地图	0	1	1		-1	-1	Texture/Map/UI_minimap_huojiacun	320	320	1	12																																				
+1	剧情场景	乐山大佛	LeShanDaFo	1	165	165	./Scene/LeShanDaFo.path	51	0	Texture/Map/UI_minimap_huojiacun	825	825	165	32																																				
+2	玩家城市	霍家庄	HuoJiaCun	1	96	96	./Scene/HuoJiaCun.path	59	-1	Texture/Map/UI_minimap_huojiacun	480	480	96	12																																				
+3	铁矿	无神绝宫	WuJueShenGong	1	72	72	./Scene/WuJueShenGong.path	54	1	Texture/Map/UI_minimap_wushenjuegong	360	360	72	32																																				
+4	玩家铁矿	天下第一楼	TianXiaDiYiLou	1	64	64	./Scene/TianXiaDiYiLou.path	68	2	Texture/Map/UI_minimap_tianxiadiyilou	325	325	64	32																																				
+5	农田	连城寨	LianChengZhai	1	128	128	./Scene/LianChengZhai.path	53	3	Texture/Map/UI_minimap_lianchengzhai	640	640	128	32																																				
+6	玩家农田	侠王府	XiaWangFu	1	145	145	./Scene/XiaWangFu.path	55	4	Texture/Map/UI_minimap_xiawangfu	725	725	145	32																																				
+7	石矿	剑池	JianChi	1	105	105	./Scene/JianChi.path	49	5	Texture/Map/UI_minimap_jianchi	525	525	105	32																																				
+8	玩家石矿	剑宗轮回	JianZongLunHui	1	30	45	./Scene/JianZongLunHui.path	52	6	Texture/Map/UI_minimap_jianzonglunhui	240	240	48	32																																				
+9	金矿	凌云窟	LingYunKu	1	64	64	./Scene/LingYunKu.path	89	7	Texture/Map/UI_minimap_lingyunku	320	320	64	32																																				
+10	玩家金矿	三分校场	ZhiZunZhengBaSai	1	36	36	./Scene/ZhiZunZhengBaSai.path	56	8	Texture/Map/UI_minimap_zhizunzhengba	180	180	36	32																																				
+11	野外建筑	至尊争霸赛	ZhiZunZhengBaSai	1	36	36	./Scene/ZhiZunZhengBaSai.path	56	9	Texture/Map/UI_minimap_zhizunzhengba	180	180	36	32																																				
+12	野外玩家1	天荫城	TianYinCheng	1	128	128	./Scene/TianYinCheng.path	65	9	Texture/Map/UI_minimap_tianyincheng	640	640	128	12																																				
+13	野外玩家2	天下会	TianXiaHui	1	96	96	./Scene/TianXiaHui.path	88	9	Texture/Map/UI_minimap_tianxiahui	480	480	96	12																																				
+14	野外玩家3	乐山	LeShan	1	96	96	./Scene/LeShan.path	62	9	Texture/Map/UI_minimap_leshan	480	480	96	12																																				
+15	野外玩家4	无双城	WuShuangCheng	1	96	96	./Scene/WuShuangCheng.path	66	9	Texture/Map/UI_minimap_wushuangcheng	480	480	96	12																																				

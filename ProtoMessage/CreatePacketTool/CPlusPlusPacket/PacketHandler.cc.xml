@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine${N}${N}</descript>
+  <dir>./tmp/cpp/PacketHandler/</dir>
+  <filename>${option}Handler.cpp</filename>
+  
+  <include>CG|GC|GS|SG|MC|CM|GM|MG</include>
+   <import>
+	#include "Packet/Packet/${option}.h"${N}
+	#include "Player/Player.h"${N}
+	#include "ServerPlayer/ServerPlayer.h"${N}
+   </import>
+
+   <common>   
+
+tuint32 Packets::${option}Handler::Execute( Packets::${option}* pPacket, Player* pPlayer )${N}
+{${N}
+	__ENTER_FUNCTION${N}
+		AssertEx(pPacket, "");${N}
+		AssertEx(pPlayer, "");${N}
+		return pPlayer->HandlePacket(pPacket->m_PacketData);${N}
+		__LEAVE_FUNCTION${N}
+		return PACKET_EXE_ERROR ; ${N}
+}${N}
+
+tuint32 Packets::${option}Handler::Execute( Packets::${option}* pPacket, ServerPlayer* pServerPlayer )${N}
+{${N}
+	__ENTER_FUNCTION${N}
+		AssertEx(pPacket, "");${N}
+		AssertEx(pServerPlayer, "");${N}
+		return pServerPlayer->HandlePacket(pPacket->m_PacketData);${N}
+		__LEAVE_FUNCTION${N}
+		return PACKET_EXE_ERROR ; ${N}
+}${N}
+
+  </common>
+
+  </pbbuffer>

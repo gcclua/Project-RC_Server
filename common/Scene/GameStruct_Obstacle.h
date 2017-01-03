@@ -13,8 +13,8 @@ struct ObstacleFileHeader
 
 struct ObstacleFileItem
 {
-	float	m_fX;
-	float	m_fZ;
+	int	m_nX;
+	int	m_nZ;
 	int		m_nValue;
 };
 

@@ -9,7 +9,7 @@ int getPlatidHash(const string& platid)
 	int hash = 0, mid = 0;
 	for(size_t i = 0; i < platid.length(); i += 4)
 	{
-		sscanf(platid.substr(i, 4).c_str(), "%x", &mid);
+		sscanf(platid.substr(i, 4).c_str(), "%lld", &mid);
 		hash += mid;
 	}
 	hash &= 0xffff;

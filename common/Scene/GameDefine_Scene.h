@@ -50,7 +50,7 @@ public:
 		EMPTY = 0,
 		MARCH,
 		HERO,
-		SOLDIER,
+		TROOP,
 		NPC,
 		SNAREOBJ,
 		MAX,
@@ -60,21 +60,23 @@ public:
 #define SCENEOBJIDMIN 1000			//场景ObjID的起始值，0-999留给客户端，用以实现纯客户端Obj
 #define SCENEOBJIDMAX 2100000000	//场景ObjID的最大值
 
-#define COPYSCENEMAXPLAYERCOUNT 100	//副本最大玩家数
+#define COPYSCENEMAXPLAYERCOUNT 100	//副本最大玩Obj数
+
+#define COPYWAITLINETIME 30 // 等待布阵时间
 
 
 #define MAX_CHAR_COMMON_DATA_NUM  (512)
 #define MAX_CHAR_COMMON_FLAG_NUM (5)
 
 //////////////////////////////////////////////////////////////////////////
-//消息由场景转到玩家
+//消息由场景转到场景内对象
 #define MESSAGE_TRANSPORTTOMARCH_DECL(MSGTYPE) \
 	virtual void HandleMessage(const MSGTYPE &rMsg);
 #define MESSAGE_TRANSPORTTOMARCH_IMPL(MSGTYPE) \
 	void Scene::HandleMessage(const MSGTYPE &rMsg) \
 { \
-	Obj_MarchPtr Ptr = GetMarchByGuid(rMsg.m_ReceiverGuid); \
-	if (Ptr) \
+	Obj_MarchPtr Ptr = GetMarchByID(rMsg.m_nReceiveObjId); \
+	if (Ptr && Ptr->GetPlayerId()>0 && Ptr->GetPlayerId()==rMsg.m_ReceiverGuid) \
 { \
 	Ptr->HandleMessage(rMsg); \
 } \
@@ -85,13 +87,8 @@ struct FORCETYPE_T //势力
 	enum      
 	{
 		TYPE_INVAILD   = -1,
-		USER_NORMAL    = 0, //玩家势力
-		NPC_FRIEND     = 1, //友好NPC
-		NPC_NEUTRALITY = 2, //中立NPC
-		NPC_ATTACK     = 3, //敌对NPC (主动攻击的)
-		PvP1           = 6, //PVP 势力1
-		PvP2           = 7, //PVP 势力2
-		HELP_NPC       = 8, //助战NPC 帮助玩家打怪
+		NPC_ATTACK     = 1, //攻击方
+		NPC_DEFENCE = 2, //防守方
 		MAX_NUM,            //最大值最好不要超过128，如果需要超过，请通知修改数据库存储
 
 	};
@@ -154,17 +151,6 @@ public:
 		SKILL_NAME_NPC,					//NPC技能名称
 	};
 	
-};
-
-struct NPC_TYPE
-{
-	enum
-	{
-		INVAILD =-1,
-		GENERAL,//普通
-		ELITE,//精英
-		BOSS,//BOSS
-	};
 };
 
 class CopyScenePlayType
@@ -231,13 +217,6 @@ public:
 		RESULT_DRAW,		//平局
 	};
 };
-#define MAX_COPYSCENE_USER	6		//副本最大人数
-#define MAX_COPYSCENE_REWARD 10		//奖励最大数
-#define MAX_COPYSCENE_DRAW 10		//抽奖数最大数
-#define MAX_COPYSCENE_DRAW_YUANBAO 10	//抽奖全部拿去扣除的元宝数
-#define MAX_COPYSCENE_CANGJINGGE_SWEEP 3	//藏经阁扫荡次数
-#define MAX_COPYSCENE_RESET 10				//重置次数最大值
-#define MAX_COPYSCENE_MASTER_LEVEL 20		//师门奖励等级相差等级
 
 //密码字符串长度
 #define MAX_COPYSCENENAME_SIZE	256
@@ -252,13 +231,16 @@ enum USER_BITLOCKTYPE
 {
 	USER_BITLOCK_INVALID = -1,			//无效值
 	USER_BITLOCK_COMMON = 0,			//公共
-	USER_BITLOCK_CONSIGNSALE_BUY,		//寄售行购买操作
+	USER_BITLOCK_CHANGESCENE,			//切换场景CD
+	USER_BITLOCK_COPYSCENE_OPEN,		//进入副本加个锁
 
 	//加在这个之前
 	USER_BITLOCK_NUM
 };
 
 #define TICK_VIEW_TICK_INTERVAL 300 // 300ms
+#define MAX_ARRANGE_COUNT        11 // 最大的阵型位置
+#define MAX_ATTACK_SET           3  // 最大的攻击集合
 
 ///////////////////////////////////////////////////////
 
@@ -282,43 +264,6 @@ public:
 };
 //////////////////////////////////////////////////////////////////////////	
 
-struct USER_GENDER
-{
-	enum
-	{
-		INVAILD =-1,
-		MALE	= 0,//男
-		FEMALE	= 1,//女
-	};
-};
 
-
-
-//合服标志
-enum ServerMergeStatus
-{
-	MERGE_STATUS_INVALID = 0,	//正常状态
-	MERGE_STATUS_BEFORE,		//合服之前
-	MERGE_STATUS_AFTER,			//合服之后
-};
-
-//CopyeSceneNumber
-class COPYSCENENUMBER_T
-{
-public:
-	enum
-	{
-		EXTRANUMBER_ITEM = 0,	//使用物品加的副本而外次数。
-		EXTRANUMBER_1,
-		EXTRANUMBER_2,
-		EXTRANUMBER_3,
-		EXTRANUMBER_4,
-		EXTRANUMBER_5,
-		EXTRANUMBER_6,
-		EXTRANUMBER_7,
-		EXTRANUMBER_MAX	,		//大小
-	};
-
-};
 
 #endif  //_GAMEDEFINE_SCENE_H_

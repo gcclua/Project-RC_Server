@@ -89,8 +89,6 @@ private:
 	ScenePos m_TargetPos;
 	float m_fStopRange;
 
-public:
-	ScenePos GetFollowPos(void);
 //////////////////////////////////////////////////////////////////////////
 // 移动 end
 //////////////////////////////////////////////////////////////////////////
@@ -153,7 +151,6 @@ protected:
 	CombatAttr m_FinalyAttr;//最终战斗值
 	CombatAttr_Refix m_BuffCombatRefix;//buff系统战斗属性修正
 	CombatAttr_Refix m_SkillCombatRefix;//技能战斗属性修正被动技能等)
-	CombatAttr m_CopySceneCombatRefix;//副本难度战斗属性修正
 	int m_nCurHp;
 	int m_nCurXp;
 	int m_nLevel;
@@ -216,8 +213,6 @@ public:
 	void ClearPassiveSkillBuff(int nSkillId);
 	//是否被动技能
 	bool IsPassiveSkill(int nSkillId);
-	//是否是XP技能
-	bool IsXPSkill(int nSkillId);
 protected:
 	void Tick_Skill(const TimeInfo &rTimeInfo);
 	SkillBaseLogicPtr m_CurSkillLogicPtr;
@@ -333,7 +328,6 @@ private:
 
 public:
 	//重载设定位置入口
-	virtual void SetScenePos(ScenePos Pos);
 	virtual void DelFromScene(void);	
 //绑定相关内容
 //////////////////////////////////////////////////////////////////////////

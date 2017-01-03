@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="gbk" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine Author:Wendy ,don't modify${N}${N}</descript>
+  <dir>./tmp/cpp/Packet/</dir>
+  <filename>${option}.h</filename>
+  <include>CG|GC|GS|SG|MC|CM|GM|MG</include>
+   <import>
+	#ifndef _${OPTION}_H_${N}
+	#define _${OPTION}_H_${N}${N}
+	#include "Base.h"${N}
+	#include "PBMessage.pb.h"${N}
+	 #include "PacketDefine.h"${N}
+	#include "LibNetwork.h"${N}
+   </import>
+   <head>
+   namespace Packets${N}
+	{${N}
+   </head>
+   <common>
+   
+class ${option}:public Packet${N}
+{${N}
+public:${N}
+	${option}():Packet(m_PacketData){}${N}
+	virtual ~${option}(){}${N}
+	virtual tuint32		Execute( Player* pPlayer );${N}
+	virtual tuint32		Execute( ServerPlayer* pServerPlayer );${N}
+	virtual	PacketID_t	GetPacketID( ) const {return PACKET_${OPTION};}${N}
+public:${N}
+	${Realclass} m_PacketData;${N}
+};${N}${N}
+
+
+
+class ${option}Factory : public PacketFactory${N} 
+{${N}
+public:${N}
+	Packet*		CreatePacket() { return new Packets::${option}(); }${N}
+	PacketID_t	GetPacketID()const { return PACKET_${OPTION} ; }${N}
+
+};${N}${N}
+
+class  ${option}Handler ${N}
+{${N}
+public:${N}
+	static tuint32 Execute(  Packets::${option}* pPacket, Player* pPlayer ) ;${N}
+	static tuint32 Execute(  Packets::${option}* pPacket, ServerPlayer* pServerPlayer ) ;${N}
+};${N}${N}
+
+  </common>
+
+  <tail>
+}${N}
+	#endif${N}
+  </tail>
+  </pbbuffer>

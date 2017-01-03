@@ -9,11 +9,12 @@ class ServiceID
 public:
 	enum 
 	{
-		DBAGEMT = 0,       //存储
+		DBAGENT = 0,       //存储
 		LOGIN,             //登录
 		WORLDMAP,          //地图
 		WORLDUSER,         //玩家
 		SCENE,
+		LOG,               //日志
 		MAX,
 	};
 };

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="gbk" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine ,don't modify${N}${N}</descript>
+  <dir>./tmp/java/Handler/</dir>
+  <filename>MessageID.java</filename>
+  
+  
+<!---public static final short SC_RESPONSE_RET = 15000;--->
+   <common>
+   package com.gc.net;${N}
+   public class MessageID {${N}
+   ${FULLDATA}${N}
+   public static final short PACKET_SIZE = ${maxpacket};${N}
+   }${N}
+    </common>
+</pbbuffer>

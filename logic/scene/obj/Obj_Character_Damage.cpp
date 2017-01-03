@@ -4,6 +4,7 @@
 #include "Table/Table_SkillEx.h"
 #include "Table/Table_SkillBase.h"
 #include "../scene/Scene.h"
+#include "Config.h"
 
 void Obj_Character::OnReceiveDamage(DamagesInof_T & rDamage)
 {
@@ -120,26 +121,6 @@ void Obj_Character::OnNoTypeDamage(DamagesInof_T& rDamage)
 		IgnoreNoTypeDamage(rDamage);//伤害免疫
 		AbsorbAndReflexNoTypeDamage(rDamage);//伤害吸收和反射
 		int  nIncHp=0-rDamage.GetNotypeDamage()-rDamage.GetDecHp();
-		//玩家使用XP技能 非BOSS怪物造成的伤害强制为0
-		if (senderPtr->IsNpc())
-		{
-			if (IsUsingSkill())
-			{
-				Obj_NpcPtr _SendNpcPtr =boost::static_pointer_cast<Obj_Npc,Obj_Character>(senderPtr);
-				if (_SendNpcPtr && _SendNpcPtr->GetNpcType()!=NPC_TYPE::BOSS)
-				{
-					if (m_CurSkillLogicPtr)
-					{
-						//IsValid 已经做了判空处理
-						Table_SkillBase const& rSkillBase =*m_CurSkillLogicPtr->GetCurSkillInfo().m_pSkillBase;
-						if ((rSkillBase.GetSkillClass()&SKILLCLASS::XP)!=0)
-						{
-							nIncHp =0;
-						}
-					}
-				}
-			}
-		}
 		//最后走到 扣血
 		int nOldHp =GetCurHp();
 		//IncreaseHp(nIncHp,*SenderPtr);

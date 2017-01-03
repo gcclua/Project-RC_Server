@@ -6,8 +6,6 @@ SceneClass::SceneClass( void )
 {
 	m_nSceneType = invalid_id;
 	m_nClassID = invalid_id;
-	m_nMaxPlayerCountA = 0;
-	m_nMaxPlayerCountB = 0;
 }
 
 SceneClass::~SceneClass( void )

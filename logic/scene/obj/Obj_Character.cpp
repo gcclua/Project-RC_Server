@@ -46,6 +46,7 @@ Obj_Character::Obj_Character( void )
 	m_nLastBroadcastHitTime =0;
 	m_EscapeCountDown = 0;
 	m_bIsBreedingClick = false;
+	m_nPlayerId = invalid_guid64;
 }
 
 Obj_Character::~Obj_Character( void )

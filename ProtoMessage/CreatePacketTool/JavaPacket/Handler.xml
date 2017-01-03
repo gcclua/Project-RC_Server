@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="gbk" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine${N}${N}</descript>
+  <dir>./tmp/java/Handler/</dir>
+  <filename>${option}Handler.java</filename>
+  
+  <include>CS|RS</include>
+  <include_head>SR|RS|CS|SC</include_head>
+  <import>
+  package com.gc.net.handler;${N}
+ import java.nio.ByteBuffer;${N}
+ import org.slf4j.Logger;${N}
+ import org.slf4j.LoggerFactory;${N}
+ import com.gc.mgame.Server.server.net.packet.Packet;${N}
+ import com.gc.mgame.Server.server.net.packet.PacketHandler;${N}
+ import com.gc.net.PBMessage.${Realpacket};${N}
+ import com.gc.net.MessageID;${N}
+ import com.google.protobuf.InvalidProtocolBufferException;${N}
+
+  </import>
+  
+  <common>
+public class ${option}Handler implements PacketHandler {${N}
+	private static final Logger log  = LoggerFactory.getLogger( ${option}Handler.class);${N}
+	
+	@Override${N}
+	public void Excute(Packet packet) {${N}
+		${Realpacket} info = null;${N}
+		try {${N}
+			info = ${Realpacket}.parseFrom(packet.msg.array());${N}
+		} catch (InvalidProtocolBufferException e) {${N}
+			e.printStackTrace();${N}}${N}
+		//Enter your logic belong${N}${N}
+		
+	}${N}
+
+@Override${N}
+	public int messageID() {${N}
+
+		return MessageID.${PACKETID};${N}
+	}${N}
+}${N}
+  </common>
+  </pbbuffer>

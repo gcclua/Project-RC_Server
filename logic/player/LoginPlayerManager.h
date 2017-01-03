@@ -23,7 +23,7 @@ protected:
 	virtual void OnDelPlayer(PlayerPtr Ptr,int nResult);
 
 public:
-	PlayerPtr GetPlayerByID(int64 nID);
+	PlayerPtr GetPlayerByID(int nID);
 	PlayerPtr PopPlayerByStatusFOrEnterWorld(void);
 };
 

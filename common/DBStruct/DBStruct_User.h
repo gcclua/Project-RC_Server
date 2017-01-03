@@ -6,7 +6,7 @@
 #include "DBStruct_City.h"
 #include "DBStruct_Troop.h"
 #include "DBStruct_Hero.h"
-
+#include "DBStruct_March.h"
 
 
 
@@ -18,55 +18,29 @@ public:
 	~DBBaseUserData(){};
 
 	void CleanUp( );
+	void InitAsCreateNewChar(const tchar* szCharName,const tchar* szAccName,int gender);
 	void CopyFrom(const DBBaseUserData& rSource);
 
-
+public:
 	//基本信息
-	//
-	int				m_PortraitID;					//角色头像
-	char			m_Name[MAX_CHARACTER_NAME];		//角色名字
-	char			m_Title[MAX_CHARACTER_TITLE];	//角色名字
-	int64			m_GUID;							//角色完全唯一号
-	int 			m_Sex;							//角色性别
-	tuint32			m_CreateDate;					//角色创建日期
-	int				m_Level;						//角色等级
-	int				m_RMBMoney;						//m_Vigor;						//活力			//目前是元宝值 
-	int				m_BankRMB;						//m_MaxVigor;						//活力上限	//存在银行的元宝
-	int				m_VigorRegeneRate;				//活力恢复速度
-	int				m_DoubleExpTime_Num;			//双倍经验时间和倍数;
-	int				m_GmRight;					   //gm权限等级
-	int				m_EnergyRegeneRate;				//精力恢复速度
-	tuint32			m_Exp;							//角色经验值
-	tuint32			m_Money;						//角色货币
-	//int				m_nRMBMoney;					//元宝值
-	tuint32			m_uPwdDelTime;					//设置强制解除密码的时间
-	tuint32			m_HairColor;					//头发颜色	
-	BYTE			m_FaceColor;					//脸形颜色
-	BYTE			m_HairModel;					//头发模型
-	BYTE			m_FaceModel;					//脸形模型
 
-	//
-	//基本状态
-	//
-	tuint32			m_OnlineTime;					//总在线时间
-	tuint32			m_LastLoginTime;				//最后一次登入时间
-	tuint32			m_LastLogoutTime;				//最后一次登出时间
-	tuint32			m_LeftDieTime;					//剩余死亡时间
-	tuint32			m_DBVersion;					//数据库版本
+	int64	m_Guid;						//Guid
+	tint16  m_Level;					//等级
+	tint32  m_Exp;						//经验
+	tint8   m_IsValid;
+	tint8  	m_Gender;                   //性别
+	int64   m_CityId;                   // 城市Id
 
-	//
-	//战斗信息
-	//
-	int				m_MenPai;					//门派 MENPAI_ATTRIBUTE
-	int				m_NeiShang;					//内伤
-	int				m_HP;						//生命值
-	int				m_MP;						//魔法
-	int 			m_StrikePoint;				//连击点
-	int 			m_Rage;						//怒气
-	int				m_nPKValue;					//杀气
-	int				m_Level1Points;				//一级属性剩余点数
+	char m_CharName[MAX_NAME_SIZE];
+	char m_AccName[MAX_ACCOUNT_SIZE];
 
-	
+	tint32	m_CommonData[MAX_CHAR_COMMON_DATA_NUM];	// 角色身上任务自定义数据
+	tint32	m_CommonFlag[MAX_CHAR_COMMON_FLAG_NUM];	// 角色身上FLAG标记
+
+	time_t		m_CreateRoleTime;        //角色创建时间
+	time_t      m_LastLogoutTime;
+
+
 };
 
 struct DBFullUserData
@@ -75,18 +49,20 @@ struct DBFullUserData
 	{
 		CleanUp();
 	}
-	DBBaseUserData				m_baseUser;
+	DBBaseUserData				m_User;
 	DBCity                      m_City;
-	DBHero                      m_Hero;
-	
+	DBHero                      m_HeroList[HEROTYPE_MAX];                      // 所有的英雄列表
+	DBMarch                     m_MarchList[MARCH_MAX_COUNT];
 	bool						m_bIsPasswdUnlock;
 
 	void   CleanUp();
 
 	void   CopyFrom(const DBFullUserData& rSource);
+	void	InitAsCreateNewChar(const tchar* szCharName,const tchar* szAccName,int gender);
 	uint32 CalcCRC();
 
-	int64  getGuid() const {return m_baseUser.m_GUID;}
+	int64  GetGuid() const {return m_User.m_Guid;}
+	void   SetGuid( int64 rGuid){ m_User.m_Guid = rGuid;}
 
 };
 

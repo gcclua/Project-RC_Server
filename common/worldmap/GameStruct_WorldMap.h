@@ -43,8 +43,13 @@ public:
 	void   SetCityID(int val){m_nCityId = val;}
 
 	// 玩家ID
-	int64  GetPlayerID() const {return m_nPlayerId;}
-	void   SetPlayerID(int val) {m_nPlayerId = val;}
+	int64  GetUserId() const {return m_nUserId;}
+	void   SetUserId(int64 val) {m_nUserId = val;}
+
+	// 状态
+	int    GetState() const {return m_nState;}
+	void   SetState(int val){m_nState=val;}
+
 private:
 	
 	int m_tileID; //地块ID
@@ -53,10 +58,12 @@ private:
 	int m_nBlock; // 所属Block
 	int m_nType;  // 地块类型
 	int m_nCityId; // 城市ID
-	int64 m_nPlayerId; // 玩家ID
+	int64 m_nUserId; // 玩家ID
+	int m_nState;  // 状态
+	time_t m_lockTime; // 锁定时间
 
 };
-
-typedef std::map<int,TileInfo> TileMap;
+typedef boost::shared_ptr<TileInfo> TileInfoPtr;
+typedef std::map<int,TileInfoPtr> TileMap;
 
 #endif

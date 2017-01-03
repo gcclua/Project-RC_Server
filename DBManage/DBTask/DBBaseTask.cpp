@@ -1,5 +1,4 @@
 #include "DBBaseTask.h"
-#include "Clock.h"
 #include "Message/DBMsg.h"
 #include "service/MessageOp.h"
 
@@ -7,7 +6,7 @@ DBBaseTask::DBBaseTask(void)
 	:m_OperationType(INVALID_ID),
 	m_key(INVALID_ID)
 {
-	m_ReqOptTime = (int)Clock::getCurrentSystemTime();
+	m_ReqOptTime = gTimeManager.SysRunTime();
 }
 
 DBBaseTask::~DBBaseTask()

@@ -1,11 +1,17 @@
 #include "DBService.h"
 #include "Message/DBMsg.h"
 #include "DBStruct/DBStruct.h"
-#include "GameServerConfig.h"
 #include "service/MessageOp.h"
 #include "DBTask/DBUserTask.h"
 #include "DBTask/DBWorldMapTask.h"
-#include "Clock.h"
+#include "DBTask/DBGuidTask.h"
+#include "DBTask/DBCreateCharTask.h"
+#include "DBTask/DBCharListTask.h"
+#include "DBTask/DBCreateCityTask.h"
+#include "DBTask/DBWorldMarchTask.h"
+#include "DBTask/DBRandomNameTask.h"
+#include "DBTask/DBMarchTask.h"
+#include "Config.h"
 
 DBService::DBService(void)
 {
@@ -54,8 +60,8 @@ void DBService::InitService()
 
 void DBService::NewServiceExec()
 {
-	__ENTER_FUNCTION
-		int nDBServiceExecCount = GameServerConfig::Instance().DBThreadCount();
+	__ENTER_FUNCTION 
+		int nDBServiceExecCount = _GameConfig().m_nDBThreadCount;
 	AssertEx(nDBServiceExecCount <= MAX_DB_SERVICEEXEC_COUNT ,"");
 	AssertEx(nDBServiceExecCount >= MIN_DB_SERVICEEXEC_COUNT ,"");
 
@@ -109,42 +115,46 @@ void DBService::OnStartRunning(void)
 void DBService::Tick_FinalSave(const TimeInfo& rTimeInfo)
 {
 	__ENTER_FUNCTION
-		if (!(GetRunState() == ServiceStatus::FINALSAVE_PROCESS))
+		if (!(GetStatus() == ServiceStatus::FINALSAVE_PROCESS))
 		{
 			return;
+		}	
+
+		if (rTimeInfo.m_bDiffSecond )
+		{ 	
+			m_FinalSaveDelayTime--;	
+
+			CacheLog(LOGDEF_INST(ServerStatus), "DBService::Tick_FinalSave Wait, FinalSaveDelayTime(%d)",
+				m_FinalSaveDelayTime);
 		}
 
-		if (rTimeInfo.m_bDiffSecond)
+		if(m_FinalSaveDelayTime <= 0)
 		{
-			m_FinalSaveDelayTime--;
-			CACHE_LOG("ServerStatus","DBService::Tick_FinalSave Wait,FinalSaveDelayTime"<<m_FinalSaveDelayTime);
-		}
+			CacheLog(LOGDEF_INST(ServerStatus), "DBService::Tick_FinalSave, FinalSaveDelayTime(%d)",
+				m_FinalSaveDelayTime);
 
-		if (m_FinalSaveDelayTime <= 0)
-		{
-			CACHE_LOG("ServerStatus","DBService::Tick_FinalSave ,FinalSaveDelayTime"<<m_FinalSaveDelayTime);
-		}
-
-		int nEmptyCurMapCount = 0;
-		for (int i=0; i < DB_TASK_MAX_NUM; i++)
-		{
-			if (m_CurProTaskPtrMap[i].empty())
+			tint32 nEmptyCurMapCount = 0;
+			for (tint32 i = 0;i < DB_TASK_MAX_NUM; i++)
 			{
-				nEmptyCurMapCount++;
+				if (m_CurProTaskPtrMap[i].empty())
+				{
+					nEmptyCurMapCount++;
+				}
+				else
+				{
+					CacheLog(LOGDEF_INST(ServerStatus), "DBService::Tick_FinalSave Not Empty TaskList, TaskType(%d),TaskCount(%d)",
+						i,m_CurProTaskPtrMap[i].size());
+				}
+			}
+			if (DB_TASK_MAX_NUM == nEmptyCurMapCount)
+			{
+				FinalsaveOk();
 			}
 			else
 			{
-				CACHE_LOG("ServerStatus","DBService::Tick_FinalSave Not Empty TaskList,TaskType"<<i<<"TaskCount"<<m_CurProTaskPtrMap[i].size());
+				CacheLog(LOGDEF_INST(ServerStatus), "DBService::Tick_FinalSave Empty TaskList Count, Count(%d)",
+					nEmptyCurMapCount);
 			}
-		}
-
-		if (DB_TASK_MAX_NUM == nEmptyCurMapCount)
-		{
-			FinalsaveOk();
-		}
-		else
-		{
-			CACHE_LOG("ServerStatus","DBService::Tick_FinalSave  Empty TaskList Count,Count"<<nEmptyCurMapCount);
 		}
 
 	__LEAVE_FUNCTION
@@ -218,6 +228,24 @@ void DBService::SendTaskByIndex(DBBaseTaskPtr baseTaskPtr)
 	__LEAVE_FUNCTION
 }
 
+void DBService::HandleMessage(const DBReqSaveMarchDataMsg &rMsg)
+{
+	__ENTER_FUNCTION
+	DBMarchTaskPtr TaskPtr = POOLDEF_NEW(DBMarchTask);
+	AssertEx(TaskPtr,"");
+
+	TaskPtr->SetData(rMsg.m_March);
+
+	DBBaseTaskPtr ptr = boost::static_pointer_cast<DBBaseTask, DBMarchTask>(TaskPtr);	
+	AssertEx(ptr,"");
+
+	//设置操作类型
+	ptr->SetOperationType(DBBaseTask::OPERATION_TYPE_SAVE_DB);	
+	ptr->SetKey(rMsg.m_March.m_nMarchId);  //为避免在队列中替换不同类型的GUID数据，用类型做key
+	AddTask(ptr);
+	__LEAVE_FUNCTION
+}
+
 void DBService::HandleMessage(const DBReqSaveTileDataMsg &rMsg)
 {
 	__ENTER_FUNCTION
@@ -255,6 +283,51 @@ void DBService::HandleMessage(const DBReqLoadTileDataMsg &rMsg)
 	__LEAVE_FUNCTION
 }
 
+void DBService::HandleMessage(const DBReqCreateCityMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		DBCreateCityTaskPtr TaskPtr = POOLDEF_NEW(DBCreateCityTask);
+	AssertEx(TaskPtr,"");
+	TaskPtr->SetKey(TaskPtr->GetTaskType());
+	TaskPtr->SetData(rMsg.m_Data);
+	TaskPtr->SetPlayerId(rMsg.m_nPlayerID);
+	DBBaseTaskPtr ptr = boost::static_pointer_cast<DBBaseTask,DBCreateCityTask>(TaskPtr);
+	AssertEx(ptr,"");
+
+	ptr->SetOperationType(DBBaseTask::OPERATION_TYPE_LOAD);
+
+	ptr->SetRetServiceID(ServiceID::WORLDMAP);
+
+	AddTask(ptr);
+	__LEAVE_FUNCTION
+}
+
+void DBService::HandleMessage(const DBReqSaveGuidMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		DBGuidTaskPtr TaskPtr = POOLDEF_NEW(DBGuidTask);
+	AssertEx(TaskPtr,"");
+
+	DBGuidData tempGuidData;
+	tempGuidData.m_Type   = rMsg.m_Type;
+	tempGuidData.m_Serial = rMsg.m_Serial;
+	TaskPtr->SetData(tempGuidData);
+
+	DBBaseTaskPtr ptr = boost::static_pointer_cast<DBBaseTask, DBGuidTask>(TaskPtr);	
+	AssertEx(ptr,"");
+
+	//设置操作类型
+	ptr->SetOperationType(DBBaseTask::OPERATION_TYPE_SAVE_DB);	
+	ptr->SetKey(rMsg.m_Type);  //为避免在队列中替换不同类型的GUID数据，用类型做key
+	AddTask(ptr);
+	__LEAVE_FUNCTION
+}
+
+void DBService::HandleMessage(const DBReqCreateBuildMsg &rMsg)
+{
+
+}
+
 void DBService::HandleMessage(const DBSaveUserMsg &rMsg)
 {
 	__ENTER_FUNCTION
@@ -286,7 +359,7 @@ void DBService::HandleMessage(const DBSaveUserMsg &rMsg)
 void DBService::HandleMessage(const DBLoadUserMsg &rMsg)
 {
 	__ENTER_FUNCTION
-		if (rMsg.m_UserGuid <=0)
+		if (rMsg.m_UserGuid <0)
 		{
 			return;
 		}
@@ -295,8 +368,9 @@ void DBService::HandleMessage(const DBLoadUserMsg &rMsg)
 		AssertEx(TaskPtr,"");
 		TaskPtr->SetKey(rMsg.m_UserGuid);
 		TaskPtr->SetUserGuid(rMsg.m_UserGuid);
-		TaskPtr->SetUserName(rMsg.m_UserName);
-		TaskPtr->SetData(rMsg.m_UserData);
+		TaskPtr->SetAccountName(rMsg.m_AccName);
+		TaskPtr->SetPlayerId(rMsg.m_nPlayerID);
+		//TaskPtr->SetData(rMsg.m_UserData);
 
 		DBBaseTaskPtr ptr = boost::static_pointer_cast<DBBaseTask,DBUserTask>(TaskPtr);
 		AssertEx(ptr,"");
@@ -309,7 +383,44 @@ void DBService::HandleMessage(const DBLoadUserMsg &rMsg)
 }
 void DBService::HandleMessage(const DBCreateCharMsg &rMsg)
 {
+	__ENTER_FUNCTION
+		DBCreateCharTaskPtr TaskPtr = POOLDEF_NEW(DBCreateCharTask);
+	AssertEx(TaskPtr, "");
+	TaskPtr->SetKey(rMsg.m_UserData.GetGuid());
+	TaskPtr->SetData(rMsg.m_UserData);
+	TaskPtr->SetAccName(rMsg.m_AccName);
+	TaskPtr->SetPlayerID(rMsg.m_nPlayerID);
+	DBBaseTaskPtr ptr = boost::static_pointer_cast<DBBaseTask, DBCreateCharTask>(TaskPtr);	
+	AssertEx(ptr,"");
 
+	//设置操作类型
+	ptr->SetOperationType(DBBaseTask::OPERATION_TYPE_LOAD);
+
+	ptr->SetRetServiceID(ServiceID::LOGIN);
+
+	AddTask(ptr);
+	__LEAVE_FUNCTION
+}
+
+void DBService::HandleMessage(const DBAskCharListMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		DBCharListTaskPtr TaskPtr = POOLDEF_NEW(DBCharListTask);
+	AssertEx(TaskPtr, "");
+	TaskPtr->SetData(rMsg.m_AccName);
+	TaskPtr->SetPlayerID(rMsg.m_nPlayerID);
+	TaskPtr->SetKey(rMsg.m_nPlayerID);
+
+	DBBaseTaskPtr ptr = boost::static_pointer_cast<DBBaseTask, DBCharListTask>(TaskPtr);
+	AssertEx(ptr,"");
+
+	//设置操作类型
+	ptr->SetOperationType(DBBaseTask::OPERATION_TYPE_LOAD);
+
+	ptr->SetRetServiceID(ServiceID::LOGIN);
+
+	AddTask(ptr);
+	__LEAVE_FUNCTION
 }
 
 bool DBService::IsCanAssigned(const DBBaseTaskPtr Ptr)
@@ -329,6 +440,40 @@ bool DBService::IsCanAssigned(const DBBaseTaskPtr Ptr)
 		return false;
 	__LEAVE_FUNCTION
 		return false;
+}
+
+void DBService::HandleMessage(const DBReqLoadMapMarchMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		DBWorldMarchTaskPtr TaskPtr = POOLDEF_NEW(DBWorldMarchTask);
+	AssertEx(TaskPtr,"");
+	TaskPtr->SetKey(TaskPtr->GetTaskType());
+
+	DBBaseTaskPtr BasePtr = boost::static_pointer_cast<DBBaseTask, DBWorldMarchTask>(TaskPtr);
+	AssertEx(BasePtr,"");
+	//设置操作类型
+	TaskPtr->SetOperationType(DBBaseTask::OPERATION_TYPE_LOAD);
+	BasePtr->SetRetServiceID(ServiceID::SCENE);
+
+	AddTask(BasePtr);
+	__LEAVE_FUNCTION
+}
+
+void DBService::HandleMessage(const DBReqLoadRandomNameMsg& rMsg)
+{
+	__ENTER_FUNCTION
+		DBRandomNameTaskPtr TaskPtr = POOLDEF_NEW(DBRandomNameTask);
+	AssertEx(TaskPtr,"");
+	TaskPtr->SetKey(TaskPtr->GetTaskType());
+
+	DBBaseTaskPtr BasePtr = boost::static_pointer_cast<DBBaseTask, DBRandomNameTask>(TaskPtr);
+	AssertEx(BasePtr,"");
+
+	BasePtr->SetOperationType(DBBaseTask::OPERATION_TYPE_LOAD);
+	BasePtr->SetRetServiceID(ServiceID::LOGIN);
+
+	AddTask(BasePtr);
+	__LEAVE_FUNCTION
 }
 
 bool DBService::IsTaskCanReplace(const DBBaseTaskPtr PtrOld,const DBBaseTaskPtr PtrNew) const
@@ -367,74 +512,89 @@ bool DBService::IsTaskCanReplace(const DBBaseTaskPtr PtrOld,const DBBaseTaskPtr 
 	return false;
 }
 
-void DBService::AddTask(const DBBaseTaskPtr Ptr)
+void DBService::AddTask(const DBBaseTaskPtr Ptr )
 {
 	__ENTER_FUNCTION
 		if (!Ptr)
 		{
-			CACHE_LOG("DBAgentError","DBService::Invalid DBBaseTaskPtr ased to add");
+			CacheLog(LOGDEF_INST(DBAgentError),"DBService::InValid DBBaseTaskPtr asked to add.");
+			return;
 		}
-
 		if (!IsCanAddTask())
 		{
+
 			if (Ptr->GetSaveFail())
 			{
-				// 存储失败的Task重新申请加入队列，不返回
-				// 将存储失败的Task重新加入队列处理，主要是避免停服存盘时，所示存储失败的任务不能被处理
-				CACHE_LOG("DBAgentError","DBService::Save Fail DBBaseTask asked to add after final save");
+				//存储失败的Task重新申请加入队列，不返回
+				//将存储失败的Task重新加入队列处理，主要是避免停服存盘时，死锁存储失败的任务不能被处理。
+				CacheLog(LOGDEF_INST(DBAgentError),"DBService::Save Fail DBBaseTask asked to add after final save.");
 			}
+			else
 			{
-				CACHE_LOG("DBAgentError","DBService::Invalid DBBaseTask asked to add after final save");
+				CacheLog(LOGDEF_INST(DBAgentError),"DBService::InValid DBBaseTask asked to add after final save.");
 				return;
 			}
 		}
 
-		// 如果是可以直接分配的任务，直接加入队列
+		//如果是可以直接分配的任务，直接加入队列
 		if (IsCanDirectAssigned(Ptr->GetTaskType()))
 		{
 			m_DBBaseTaskPtrList.push_back(Ptr);
-			CACHE_LOG("DBAgent","DBService::New DBTask Addd to List:\1 newTaskType="<<Ptr->GetTaskType()<<"newOpType="<<Ptr->GetOperationType());
+
+			CacheLog(LOGDEF_INST(DBAgent),"DBService::New DBTask Added to List newTaskType=%d newOpType=%d",
+				Ptr->GetTaskType(), Ptr->GetOperationType());
+
 			return;
 		}
-		
+
 		DBBaseTaskPtrList::reverse_iterator itPos = m_DBBaseTaskPtrList.rbegin();
 		DBBaseTaskPtrList::reverse_iterator itEnd = m_DBBaseTaskPtrList.rend();
-
-		for (itPos;itPos != itEnd;itPos++)
+		//轮询队列查找可替换的DBTask
+		for (itPos; itPos != itEnd; itPos++)
 		{
-			// 相同的任务
+			//相同的任务
 			if (IsTaskCanReplace(*itPos,Ptr))
 			{
-				//新DBTask的请求晚于旧的DBTask
-				if ((*itPos)->GetOptTime() > 0 && (*itPos)->GetOptTime() <= Ptr->GetOptTime())
+				//新DBTask的请求晚于旧DBTask
+				if ((*itPos)->GetOptTime() >0 && (*itPos)->GetOptTime() <= Ptr->GetOptTime())
 				{
-					// 替换
-					CACHE_LOG("DBAgent","DBService::Old DBTask Replace Begin, \1 oldTaskType="<<(*itPos)->GetTaskType()<<" \1 oldKey="<<(*itPos)->GetKey()<<" \1 oldReqTime="<<(*itPos)->GetOptTime()<<
-						" \1 newTaskType="<<Ptr->GetTaskType()<<"\1 newKey="<<Ptr->GetKey()<<"\1 newOptType="<<Ptr->GetOperationType()<<" \1 newReqOpTime="<<Ptr->GetOptTime());
+					//替换
+					CacheLog(LOGDEF_INST(DBAgent),"DBService::Old DBTask Replace Begin, \1 oldTaskType=%d \1 oldKey=%lld \1 oldOpType=%d \1 oldReqOpTime=%u \1 newTaskType=%d \1 newKey=%lld  \1 newOpType=%d \1 newReqOpTime=%u",
+						(*itPos)->GetTaskType(),(*itPos)->GetKey(),(*itPos)->GetOperationType(),(*itPos)->GetOptTime(),
+						Ptr->GetTaskType(),Ptr->GetKey(),Ptr->GetOperationType(),Ptr->GetOptTime());
+
 					(*itPos) = Ptr;
+
+					CacheLog(LOGDEF_INST(DBAgent),"DBService::Old DBTask Replace End,\1 Key=%lld",(*itPos)->GetKey());
 					return;
 				}
+				//新DBTask的请求操作时间早于旧DBTask
 				else
 				{
-					// 新DBTask的请求操作时间早于旧DBTask
-					CACHE_LOG("DBAgent","DBService::new DBTask Ignored, \1 oldTaskType="<<(*itPos)->GetTaskType()<<" \1 oldKey="<<(*itPos)->GetKey()<<" \1 oldReqTime="<<(*itPos)->GetOptTime()<<
-						" \1 newTaskType="<<Ptr->GetTaskType()<<"\1 newKey="<<Ptr->GetKey()<<"\1 newOptType="<<Ptr->GetOperationType()<<" \1 newReqOpTime="<<Ptr->GetOptTime());
+					//忽略
+					CacheLog(LOGDEF_INST(DBAgent),"DBService::New DBTask Ignored,\1 oldTaskType=%d \1 oldKey=%lld \1 oldOpType=%d \1 oldReqOpTime=%u \1 newTaskType=%d \1 newKey=%lld \1 newOpType=%d \1 newReqOpTime=%u",
+						(*itPos)->GetTaskType(),(*itPos)->GetKey(),(*itPos)->GetOperationType(),(*itPos)->GetOptTime(),
+						Ptr->GetTaskType(),Ptr->GetKey(),Ptr->GetOperationType(),Ptr->GetOptTime());
 					return;
 				}
 			}
 		}
-
+		//队列中没有相同的DBTask
 		if (itPos == itEnd)
 		{
 			m_DBBaseTaskPtrList.push_back(Ptr);
 			return;
 		}
 
-		CACHE_LOG("DBAgentError","DBService::New DBTask Missied, \1 newTaskType="<<Ptr->GetTaskType()<<"\1 newKey="<<Ptr->GetKey()<<"\1 newOptType="<<Ptr->GetOperationType()<<" \1 newReqOpTime="<<Ptr->GetOptTime());
+		//数据没有能加入队列
+		DiskLog(LOGDEF_INST(DBAgentError),"DBService::New DBTask Missied,\1 newTaskType=%d \1 newKey=%lld\1 newOpType=%d \1 newReqOpTime=%u",					 
+			Ptr->GetTaskType(),Ptr->GetKey(),\
+			Ptr->GetOperationType(),Ptr->GetOptTime());
 
-		AssertEx(false,"new DBTask Missied");
-	__LEAVE_FUNCTION
-}
+		AssertEx(false,":New DBTask Missied");
+
+		__LEAVE_FUNCTION
+}  
 
 bool DBService::IsCanDirectAssigned(int taskType)
 {
@@ -467,7 +627,7 @@ int DBService::GetUserDataTaskSaveType(int64 UserGuid,bool ImmediateSave)
 		if (itPos != m_UserDataLstSaveDBTime.end())
 		{
 			int lastSaveDBTime = itPos->second;
-			if (GameServerConfig::Instance().SaveInterval() < (Clock::getCurrentSystemTime() - lastSaveDBTime))
+			if (_GameConfig().m_nUserDataSaveDBInterval < (gTimeManager.SysRunTime() - lastSaveDBTime))
 			{
 				//需要存储DB
 				return DBBaseTask::OPERATION_TYPE_SAVE_DB;
@@ -484,8 +644,10 @@ int DBService::GetUserDataTaskSaveType(int64 UserGuid,bool ImmediateSave)
 			// 第一次先存DB
 			return DBBaseTask::OPERATION_TYPE_SAVE_DB;
 		}
-		// 错误的操作类型
-		CACHE_LOG("DBAgentError","DBService::GetUserDataTaskSaveType, \1 OPERATION_TYPE_UNKNOW="<<UserGuid<<"\1 SaveType="<<ImmediateSave);
+		
+		//错误的操作类型
+		CacheLog(LOGDEF_INST(DBAgentError),"DBService::GetUserDataTaskSaveType \1 OPERATION_TYPE_UNKNOWN=%lld \1 SaveType=%d",
+			UserGuid,ImmediateSave);
 		return DBBaseTask::OPERATION_TYPE_UNKNOW;
 	__LEAVE_FUNCTION
 		return DBBaseTask::OPERATION_TYPE_UNKNOW;
@@ -501,11 +663,11 @@ void DBService::UpdateUserDataLastSaveDbTime(int64 UserGuid)
 		DBLastSaveDBTimeMap::iterator itPos = m_UserDataLstSaveDBTime.find(UserGuid);
 		if (itPos != m_UserDataLstSaveDBTime.end())
 		{
-			itPos->second = (int)Clock::getCurrentSystemTime();
+			itPos->second = gTimeManager.SysRunTime();
 		}
 		else
 		{
-			m_UserDataLstSaveDBTime.insert(std::make_pair(UserGuid,(int)Clock::getCurrentSystemTime()));
+			m_UserDataLstSaveDBTime.insert(std::make_pair(UserGuid,gTimeManager.SysRunTime()));
 		}
 	__LEAVE_FUNCTION
 }

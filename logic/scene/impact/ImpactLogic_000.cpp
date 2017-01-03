@@ -33,19 +33,11 @@ void ImpactLogic_000::StartEffect(Obj_Character& rSelf)
 			if (pSkillEx !=null_ptr)
 			{
 				Table_SkillBase const* pSkillBase =GetTable_SkillBaseByID(pSkillEx->GetBaseId());
-				if (pSkillBase !=null_ptr && (pSkillBase->GetSkillClass() & SKILLCLASS::XP)!=0)
+				if (pSkillBase !=null_ptr)
 				{
 					if (rSelf.IsNpc()==false)
 					{
 						return;
-					}
-					else
-					{
-						Obj_Npc& rNpc=dynamic_cast<Obj_Npc&>(rSelf);
-						if (rNpc.GetNpcType() ==NPC_TYPE::BOSS)
-						{
-							return;
-						}
 					}
 				}
 			}
@@ -105,13 +97,12 @@ void ImpactLogic_000::StartEffect(Obj_Character& rSelf)
 			int nMoveSpeedAttr =_objNpc.GetCombatAttrByID(COMBATATTR_T::MOVESPEED);
 			//击倒
 			if (nRandNum<nAttcakDownRate 
-				&& _objNpc.GetNpcType() !=NPC_TYPE::BOSS
 				&& _DamageInfo.GetTotalDamage()>0) //受到伤害才出击倒
 			{
 				rSelf.BroadCastAnimState((int)ANIMATIONSTATE_T::STATE_ATTACKDOWN);
 			}
 			//死亡后才有击飞 (不能移动的怪物 就不做击飞处理了)
-			if (rSelf.IsDie() && _objNpc.GetNpcType() !=NPC_TYPE::BOSS && nMoveSpeedAttr>0)
+			if (rSelf.IsDie() &&  nMoveSpeedAttr>0)
 			{
 				
 				int nAttackFlyRate =rImpactData.GetParamValuebyIndex(ATTACKFLYRATE);
@@ -136,6 +127,7 @@ void ImpactLogic_000::StartEffect(Obj_Character& rSelf)
 					MsgPtr->m_nDis   = nFlyDis;
 					MsgPtr->m_nHight = nHight;
 					MsgPtr->m_nFlyTime = nFlyTime;
+					MsgPtr->m_nSceneId = rSelf.GetSceneInstID();
 					rScene.BroadCast_InSight_Include(MsgPtr,rSelf.GetID());
 
 					
@@ -153,6 +145,7 @@ void ImpactLogic_000::StartEffect(Obj_Character& rSelf)
 						MsgPtr->m_nDis   = 2;
 						MsgPtr->m_nHight = 4;
 						MsgPtr->m_nFlyTime = 300;
+						MsgPtr->m_nSceneId = rSelf.GetSceneInstID();
 						rScene.BroadCast_InSight_Include(MsgPtr,rSelf.GetID());
 					}
 				}

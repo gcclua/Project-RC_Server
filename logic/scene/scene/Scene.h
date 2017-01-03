@@ -36,14 +36,19 @@ protected:
 	void Tick_AddObjs(void);
 	void Tick_DelObjs(void);
 	void Tick_RunObjs(const TimeInfo &rTimeInfo);
-	
-protected:
-	virtual void Tick_Script(const TimeInfo &rTimeInfo){}
 
 public:
-
+	void InitMarchObj(const March& rMarch){};
+	
+public:
 	virtual void HandleMessage(const MarchEnterSceneMsg &rMsg);
+	virtual void HandleMessage(const MarchAcceptChangeSceneMsg &rMsg);
+	virtual void HandleMessage(const ReqMarchStartMsg &rMsg){};
 
+public:
+	// 战斗相关的消息包
+	virtual void HandleMessage(const ReqSetRobotOpenMsg& rMsg){};
+	
 protected:
 	void Initialize(void);
 protected:
@@ -74,14 +79,6 @@ public:
 	void DecEnteringPlayerCount(void) {m_nEnteringPlayerCount--;}
 protected:
 	int m_nEnteringPlayerCount;
-public:
-	void	SetMaxPlayerCountA(int nMaxPlayerCountA) {m_nMaxPlayerCountA = nMaxPlayerCountA;}
-	int	GetMaxPlayerCountA(void) const {return m_nMaxPlayerCountA;}
-	void	SetMaxPlayerCountB(int nMaxPlayerCountB) {m_nMaxPlayerCountB = nMaxPlayerCountB;}
-	int	GetMaxPlayerCountB(void) const {return m_nMaxPlayerCountB;}
-protected:
-	int m_nMaxPlayerCountA;
-	int m_nMaxPlayerCountB;
 	//////////////////////////////////////////////////////////////////////////
 
 	//////////////////////////////////////////////////////////////////////////
@@ -93,16 +90,8 @@ public:
 	virtual void OnObjLeave(int nID) {}
 	virtual void OnObjEnterCombat(int nID) {}
 	virtual void OnObjLeaveCombat(int nID) {}
-	virtual void OnScriptSkillStart(int nID,int nSkillId){}
-	virtual void OnScriptSkillBreak(int nID,int nSkillId){}
-	virtual void OnScriptSkillFininsh(int nID,int nSkillId){}
-	virtual bool OnScriptCheckUseSkill(int nID,int nSkillId){return false;}
 	virtual void OnObjDie(int nID,int nKillerId) {}
-	virtual bool OnObjBeforeHPChange(int nID, int nHP, int& nSpecialHP) {nSpecialHP = -1; return true;}
-	virtual bool OnObjBeforeMPChange(int nID, int nMP, int& nSpecialMP) {nSpecialMP = -1; return true;}
-	virtual void OnClientObjEnterOK(int nID) {}
 	virtual void OnObjTeleportChangeScene(int nID) {}
-	virtual bool IsManorScene(void) const {return false;}
 	virtual bool IsCopyScene(void) const {return false;}
 	virtual bool IsWildScene(void) const {return false;}
 	virtual bool IsMainScene(void) const {return false;}
@@ -123,11 +112,17 @@ protected:
 	void				NpcInit(void);
 
 public:
-	Obj_NpcPtr			CreateNpc(int nDataID, const ScenePos &rPos, bool bReliveable, int nLevel = invalid_id);
+	Obj_NpcPtr			CreateNpc(int nDataID, const ScenePos &rPos, bool bReliveable,int nForce, int nLevel = invalid_id,Obj_NpcPtr NpcPtr = null_ptr);
 
-	Obj_MarchPtr		CreateMarch(const March& rMarchData, const ScenePos &rPos);
+	Obj_MarchPtr		CreateMarch(const March& rMarchData,const ScenePos& rPos);
 
 	Obj_SnarePtr		CreateSnareObj(tint32 nSnareID,tint32 OwnerId, const ScenePos &rPos);
+
+	// 创建英雄对象
+	Obj_HeroPtr         CreateHeroObj(const Hero& rHero,const ScenePos &rPos,int nForce);
+
+	// 创建军队         
+	Obj_TroopPtr        CreateTroopObj(const Troop& rTroop,const ScenePos &rPos,int nForce);
 
 public:
 	Obj_MarchPtr		GetMarchByGuid(int64 guid);
@@ -142,10 +137,9 @@ public:
 	//Obj底层代码，游戏逻辑不得调用这些函数，也不得访问这些成员变量
 protected:
 	void _AddMarchImmediate(Obj_MarchPtr userPtr, bool bFirstEnter);
-	void _AddNonUserObj(ObjPtr Ptr);
-	void _AddNonUserObjImmediate(ObjPtr objPtr);
+	void _AddNonMarchObj(ObjPtr Ptr);
 protected:
-	void _DelMarchImmediate(int nObjID, bool bLastLeave);
+	void _DelMarchImmediate(int nObjID);
 	ObjPtrMap::iterator _DelNonUserObjImmediate(ObjPtrMap::iterator itRemove);
 protected:
 	ObjPtrMap m_ObjPtrMap;				//【stl】
@@ -240,6 +234,7 @@ private:
 	//需要场景转发给March的所有相关Message声明
 	MESSAGE_TRANSPORTTOMARCH_DECL(MarchReqNearListMsg);
 	MESSAGE_TRANSPORTTOMARCH_DECL(MarchMoveMsg);
+	MESSAGE_TRANSPORTTOMARCH_DECL(MarchOpenCopySceneMsg);
 	
 	//////////////////////////////////////////////////////////////////////////
 };

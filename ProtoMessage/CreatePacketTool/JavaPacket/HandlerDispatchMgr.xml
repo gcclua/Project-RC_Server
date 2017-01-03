@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="gbk" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine Author:Wendy ,don't modify${N}${N}</descript>
+  <dir>./tmp/java/Handler/</dir>
+  <filename>HandlerDispatchMgr.java</filename>
+   <include_head>RS|CS</include_head>
+  <!--Add(MessageID.CS_VERSION, new VersionHandler());-->
+   <import>
+	package com.gc.net;${N}
+ import com.gc.mgame.Server.server.net.packet.PacketHandler;${N}
+ import com.gc.mgame.Server.server.net.packet.Packet;${N}
+ import java.util.HashMap;${N}
+ import org.slf4j.Logger;${N}
+ import org.slf4j.LoggerFactory;${N}
+	${IMPORT}
+   </import>
+   
+   <include_single>import com.gc.net.handler.${instance}Handler;${N}</include_single>
+   
+   <factory_sub>Add(new ${packet}Handler());${N}</factory_sub>
+   <common>
+   public class HandlerDispatchMgr{${N}
+   private static final Logger log  = LoggerFactory.getLogger( HandlerDispatchMgr.class);${N}
+	public static HashMap${L}Integer,PacketHandler${R} handlers = new HashMap${L}Integer,PacketHandler${R}();${N}
+	
+	public HandlerDispatchMgr(){}${N}
+
+	public  void Init()${N}
+	{${N}
+	${FACTORY}${N}	
+	
+	}${N}
+	public void Add(PacketHandler handler)${N}
+	{${N}
+		handlers.put(handler.messageID(), handler);${N}
+	}${N}
+	
+	public void Del( int id)${N}
+	{${N}
+		handlers.remove(id);${N}
+	}${N}
+	public static void excute(Packet packet)${N}
+	{
+		int id = packet.methodid;		${N}
+		PacketHandler handler = handlers.get(id);${N}
+		if( handler != null )${N}
+		{${N}
+			try {${N}
+				handler.Excute(packet);${N}
+			} catch(Exception ex){${N}
+				log.info(ex.getMessage());${N}
+			}${N}
+		}${N}
+	}${N}
+}${N}
+   </common>
+ </pbbuffer>

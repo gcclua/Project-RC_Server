@@ -15,7 +15,6 @@ class GC_TELEMOVE_PAK:public Packet
  GC_TELEMOVE_PAK():Packet(m_PacketData){}
  virtual ~GC_TELEMOVE_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_GC_TELEMOVE_PAK;}
  public:
  ::GC_TELEMOVE m_PacketData;
@@ -32,7 +31,6 @@ class GC_TELEMOVE_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::GC_TELEMOVE_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::GC_TELEMOVE_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

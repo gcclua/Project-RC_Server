@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="gbk" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine${N}${N}</descript>
+  <dir>./tmp/cs/PacketHandler/</dir>
+  <filename>${option}Handler.cs</filename>
+  
+  <include>GC|MC</include>
+  <include_head>CG|GC|MC|CM</include_head>
+  <import>
+using System;${N}
+using Module.Log;${N}
+using Google.ProtocolBuffers;${N}
+using System.Collections;${N}
+  </import>
+  
+  <common>
+namespace SPacket.SocketInstance${N}
+{${N}
+	public class ${option}Handler : Ipacket${N}
+    {${N}
+		public uint Execute(PacketDistributed ipacket)${N}
+        {${N}
+
+			${Realpacket} packet = (${Realpacket} )ipacket;${N}
+			if (null == packet) return (uint)PACKET_EXE.PACKET_EXE_ERROR;${N}
+			//enter your logic${N}
+		     return (uint)PACKET_EXE.PACKET_EXE_CONTINUE;${N}
+        }${N}
+    }${N}
+
+}${N}
+  </common>
+  </pbbuffer>

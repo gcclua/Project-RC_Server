@@ -3,7 +3,6 @@
 #include "Scene/GameInterface_Scene.h"
 #include "ImpactStruct/GameStruct_Impact.h"
 #include "Table/Table_Impact.h"
-#include "Packet/Packet/GC_CHAT_PAK.h"
 
 #include "Scene/Impact/ImpactLogic_000.h"
 #include "Scene/Impact/ImpactLogic_001.h"

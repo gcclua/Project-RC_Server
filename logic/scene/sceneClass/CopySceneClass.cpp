@@ -13,7 +13,7 @@ CopySceneClass::~CopySceneClass( void )
 
 }
 
-SceneClass::EnterResult CopySceneClass::EnterTo(Obj_MarchPtr Ptr, int nSceneInst)
+SceneClass::EnterResult CopySceneClass::EnterTo(const March& rMarch, int nSceneInst)
 {
 	__ENTER_FUNCTION
 
@@ -22,12 +22,12 @@ SceneClass::EnterResult CopySceneClass::EnterTo(Obj_MarchPtr Ptr, int nSceneInst
 		AssertEx(m_ScenePtrVec[nSceneInst], "");
 		if (m_ScenePtrVec[nSceneInst]->GetActive())
 		{
-			if (m_ScenePtrVec[nSceneInst]->IsCanEnterByGuid(Ptr->GetMarchId()))
+			if (m_ScenePtrVec[nSceneInst]->IsCanEnterByGuid(rMarch.GetMarchId()))
 			{
 				MarchEnterSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchEnterSceneMsg);
 				AssertEx(MsgPtr, "");
-				MsgPtr->m_bFirstEnter = true;
-				MsgPtr->m_MarchPtr = Ptr;
+				MsgPtr->m_bFirstEnter = false;
+				MsgPtr->m_March = rMarch;
 				SendMarchEnterSceneMessage(nSceneInst, MsgPtr);
 
 				return std::make_pair(true, SceneID(GetSceneClassID(), nSceneInst));
@@ -42,7 +42,7 @@ SceneClass::EnterResult CopySceneClass::EnterTo(Obj_MarchPtr Ptr, int nSceneInst
 	return std::make_pair(false, SceneID(invalid_id, invalid_id));
 }
 
-SceneClass::EnterResult CopySceneClass::EnterTo(Obj_MarchPtr Ptr)
+SceneClass::EnterResult CopySceneClass::EnterTo(const March& rMarch)
 {
 	__ENTER_FUNCTION
 
@@ -52,7 +52,7 @@ SceneClass::EnterResult CopySceneClass::EnterTo(Obj_MarchPtr Ptr)
 	return std::make_pair(false, SceneID(invalid_id, invalid_id));
 }
 
-SceneClass::EnterResult CopySceneClass::FirstEnterTo(Obj_MarchPtr Ptr)
+SceneClass::EnterResult CopySceneClass::FirstEnterTo(const March& rMarch)
 {
 	__ENTER_FUNCTION
 
@@ -71,7 +71,7 @@ SceneClass::EnterResult CopySceneClass::FirstEnterTo(Obj_MarchPtr Ptr)
 	MarchEnterSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchEnterSceneMsg);
 	AssertEx(MsgPtr, "");
 	MsgPtr->m_bFirstEnter = true;
-	MsgPtr->m_MarchPtr = Ptr;
+	MsgPtr->m_March = rMarch;
 	SendMarchEnterSceneMessage(nSceneInst, MsgPtr);
 
 	return std::make_pair(true, SceneID(GetSceneClassID(), nSceneInst));
@@ -80,7 +80,7 @@ SceneClass::EnterResult CopySceneClass::FirstEnterTo(Obj_MarchPtr Ptr)
 	return std::make_pair(false, SceneID(invalid_id, invalid_id));
 }
 
-SceneClass::ChangeResult CopySceneClass::ChangeTo(Obj_MarchPtr Ptr, int nSceneInst)
+SceneClass::ChangeResult CopySceneClass::ChangeTo(const March& rMarch, int nSceneInst)
 {
 	__ENTER_FUNCTION
 
@@ -89,12 +89,12 @@ SceneClass::ChangeResult CopySceneClass::ChangeTo(Obj_MarchPtr Ptr, int nSceneIn
 		AssertEx(m_ScenePtrVec[nSceneInst], "");
 		if (m_ScenePtrVec[nSceneInst]->GetActive())
 		{
-			if (m_ScenePtrVec[nSceneInst]->IsCanEnterByGuid(Ptr->GetMarchId()))
+			if (m_ScenePtrVec[nSceneInst]->IsCanEnterByGuid(rMarch.GetMarchId()))
 			{
 				MarchEnterSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchEnterSceneMsg);
 				AssertEx(MsgPtr, "");
 				MsgPtr->m_bFirstEnter = false;
-				MsgPtr->m_MarchPtr = Ptr;
+				MsgPtr->m_March = rMarch;
 				SendMarchEnterSceneMessage(nSceneInst, MsgPtr);
 
 				return std::make_pair(true, SceneID(GetSceneClassID(), nSceneInst));
@@ -109,7 +109,7 @@ SceneClass::ChangeResult CopySceneClass::ChangeTo(Obj_MarchPtr Ptr, int nSceneIn
 	return std::make_pair(false, SceneID(invalid_id, invalid_id));
 }
 
-SceneClass::ChangeResult CopySceneClass::ChangeTo(Obj_MarchPtr Ptr)
+SceneClass::ChangeResult CopySceneClass::ChangeTo(const March& rMarch)
 {
 	__ENTER_FUNCTION
 
@@ -128,7 +128,7 @@ SceneClass::ChangeResult CopySceneClass::ChangeTo(Obj_MarchPtr Ptr)
 	MarchEnterSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchEnterSceneMsg);
 	AssertEx(MsgPtr, "");
 	MsgPtr->m_bFirstEnter = false;
-	MsgPtr->m_MarchPtr = Ptr;
+	MsgPtr->m_March = rMarch;
 	SendMarchEnterSceneMessage(nSceneInst, MsgPtr);
 
 	return std::make_pair(true, SceneID(GetSceneClassID(), nSceneInst));
@@ -196,16 +196,6 @@ bool CopySceneClass::ChangeToCheck(const SceneID &rsid, const int64 &rGuid)
 	return false;
 }
 
-int CopySceneClass::RemainCapacityA(SceneInstID nSceneInst)
-{
-	return 0;
-}
-
-int CopySceneClass::RemainCapacityB(SceneInstID nSceneInst)
-{
-	return 0;
-}
-
 int CopySceneClass::ReusingScene(void)
 {
 	__ENTER_FUNCTION
@@ -236,8 +226,6 @@ int CopySceneClass::EnlargeScene(void)
 	AssertEx(ssp, "");
 	ssp->SetSceneClassID(nClassID);
 	ssp->SetSceneInstID(nInstID);
-	ssp->SetMaxPlayerCountA(GetMaxPlayerCountA());
-	ssp->SetMaxPlayerCountB(GetMaxPlayerCountB());
 	ssp->SetSceneObstacle(&m_SceneObstacle);
 
 	ScenePtr sp = boost::static_pointer_cast<Scene, CopyScene>(ssp);

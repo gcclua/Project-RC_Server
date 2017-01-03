@@ -8,14 +8,15 @@
 #include "Exception.h"
 
 #include "Pool.h"
-#include "SysLog.h"
 #include "Misc.h"
 
 #include "FLSeque.h"
 #include "FLString.h"
 #include "BitSet.h"
-#include "Clock.h"
 
 #include "Random.h"
+#include "log/LogDefine.h"
+
+#include "TimeManager.h"
 
 #endif

@@ -1,0 +1,224 @@
+﻿  tinyxmlparser.cpp
+  tinyxmlerror.cpp
+  tinyxml.cpp
+  tinystr.cpp
+  distribution.cpp
+e:\realmconquerors\src\server\server\common\distribution.cpp(12): warning C4477: 'sscanf' : format string '%lld' requires an argument of type '__int64 *', but variadic argument 1 has type 'int *'
+  e:\realmconquerors\src\server\server\common\distribution.cpp(12): note: consider using '%d' in the format string
+  e:\realmconquerors\src\server\server\common\distribution.cpp(12): note: consider using '%Id' in the format string
+  e:\realmconquerors\src\server\server\common\distribution.cpp(12): note: consider using '%I32d' in the format string
+  coredump.cpp
+  GameStruct_WorldMap.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_Troop.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_Troop.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_SnareObjInfo.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_SnareObjBuffInfo.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_SkillEx.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_SkillBase.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_SkillActive.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_ServerConfigList.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_SceneNpc.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_SceneClass.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_RoleBaseAttr.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_PublicConfig.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_PatrolPoint.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Generating Code...
+  Compiling...
+  Table_NpcSkillStrategy.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_NpcOptionalSkill.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_NameFilter.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_InitialCombatAttr.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_Impact.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_Hero.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_CopySceneRule.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_CopySceneNpc.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_CopyScene.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_CoolDownTime.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_CityBuildingSlot.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_CityBuildingLevel.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_CityBuildingDefault.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_Building.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Table_ArrangeSelectTarget.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_Skill.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  TimeInfo.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  ServiceManager.cpp
+e:\realmconquerors\src\server\server\common\service\servicemanager.h(4): fatal error C1083: Cannot open include file: 'threadpool/threadpool.hpp': No such file or directory
+  ServiceCell.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Service.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Generating Code...
+  Compiling...
+  Message.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Invoker.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  BaseService.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_Scene.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_Obstacle.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameInterface_SceneActivation.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameInterface_Scene.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  PBMessage.pb.cc
+e:\realmconquerors\src\server\server\common\packet\packet\pbmessage.pb.h(9): fatal error C1083: Cannot open include file: 'google/protobuf/stubs/common.h': No such file or directory
+  PacketFactoryManager.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  PacketDefine.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GC_Common_PAK.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  CG_Common_PAK.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GC_Common_Handler.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  CG_Common_Handler.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  WorldUserMsg.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  TransportMsg.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  SceneMsg.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  LoginMsg.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBMsg.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  ChatMsg.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Generating Code...
+  Compiling...
+  GameStruct_March.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_LoudSpeaker.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  LogDefine.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Log.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameInterface_Login.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_Impact.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_Hero.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DictionaryFormat.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_WordMap.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_User.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_Troop.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_RandomName.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_PK.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_March.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_Impact.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_Hero.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_Cooldown.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_CityCreate.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_City.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBStruct_CharList.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Generating Code...
+  Compiling...
+  DBStruct.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  SqlTemplate.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  ODBCInterface.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  ODBCBase.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  LibMemInterface.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  TimeManager.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  string-util.cpp
+e:\realmconquerors\src\server\server\common\common\string-util.cpp(237): warning C4267: '=': conversion from 'size_t' to 'unsigned char', possible loss of data
+e:\realmconquerors\src\server\server\common\common\string-util.cpp(256): warning C4267: '=': conversion from 'size_t' to 'unsigned char', possible loss of data
+  ServerConfig.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Random.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  pool.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Misc.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  LibNetwork.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  IniFile.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GuidLoader.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GuidGenerator.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GuidDefine.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Exception.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  DBCTable.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Config.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  BaseUtility.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Generating Code...
+  Compiling...
+  BaseLib.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_Threat.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_PK.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_CombatAttr.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_City.cpp
+c1xx : fatal error C1083: Cannot open source file: 'common\city\GameStruct_City.cpp': No such file or directory
+  GameStruct_TextChat.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  GameStruct_Building.cpp
+e:\realmconquerors\src\server\server\common\common\baselib.h(52): fatal error C1083: Cannot open include file: 'boost/date_time/gregorian/gregorian.hpp': No such file or directory
+  Generating Code...

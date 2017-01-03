@@ -9,12 +9,13 @@ class ODBCCharFullData:public ODBCBase
 {
 	int64			m_CharGuid;
 	uint32          m_CRCValue;
+	int             m_DebugStep;
 public:
 	ODBCCharFullData(ODBCInterface* pInterface);
 
 	virtual bool	Load();
-	virtual bool	Save(void* pSource);
-	virtual bool	ParseResult(void* pResult);
+	virtual bool	Save(DBFullUserData* pSource);
+	virtual bool	ParseResult(DBFullUserData* pResult);
 
 public:
 	void			SetCharGuid(int64 guid);

@@ -4,4 +4,6 @@
 
 MESSAGE_IMPL(PlayerEnterWorldMsg)
 MESSAGE_IMPL(PlayerLeaveWorldMsg)
+MESSAGE_IMPL(PlayerQuitGameMsg)
+
 

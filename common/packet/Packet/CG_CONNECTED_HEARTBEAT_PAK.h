@@ -15,7 +15,6 @@ class CG_CONNECTED_HEARTBEAT_PAK:public Packet
  CG_CONNECTED_HEARTBEAT_PAK():Packet(m_PacketData){}
  virtual ~CG_CONNECTED_HEARTBEAT_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_CG_CONNECTED_HEARTBEAT_PAK;}
  public:
  ::CG_CONNECTED_HEARTBEAT m_PacketData;
@@ -32,7 +31,6 @@ class CG_CONNECTED_HEARTBEAT_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::CG_CONNECTED_HEARTBEAT_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::CG_CONNECTED_HEARTBEAT_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

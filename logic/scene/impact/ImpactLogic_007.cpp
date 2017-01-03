@@ -53,21 +53,12 @@ void ImpactLogic_007::StartEffect(Obj_Character& rSelf)
 			{
 				return;
 			}
-			if ((pSkillBase->GetSkillClass()&SKILLCLASS::XP)!=0)
+		
+			if (false ==rSelf.IsNpc())
 			{
-				if (false ==rSelf.IsNpc())
-				{
-					return;
-				}
-				Obj_NpcPtr npcPtr =rScene.GetNpcByID(rSelf.GetID());
-				if (npcPtr)
-				{
-					if (npcPtr->GetNpcType()==NPC_TYPE::BOSS)
-					{
-						return;
-					}
-				}
+				return;
 			}
+
 		}
 		//！！！！！先调用基类的 StartEffect
 		ImpactBaseLogic::StartEffect(rSelf);

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="gbk" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine Author:Wendy ,don't modify${N}${N}</descript>
+  <dir>./tmp/cs/</dir>
+  <filename>PacketFactoryManagerInstance.cs</filename>
+   <include_head>GC|CG|MC|CM</include_head>
+
+   <import>
+	using System;${N}
+using System.Collections.Generic;${N}
+   </import>
+   
+   
+   
+   <factory_sub>AddFactory(new ${packet}());${N}</factory_sub>
+   <handler_sub>AddPacketHander(${handler});${N}</handler_sub>
+   <common>   
+namespace SPacket.SocketInstance${N}
+{${N}
+   public  class PacketFactoryManagerInstance : PacketFactoryManager${N}
+	{${N}
+       public override bool Init ()${N}
+       {${N}
+          ${FACTORY}
+          ${PACKETHANDLERS}
+           return true;${N}
+       }       ${N}
+	}${N}
+	${N}${N}
+	${N}${N}
+	
+
+   </common>
+   
+   <body>
+    public class ${option}_PF : PacketFactory${N}
+     {${N}
+         public MessageID GetPacketID()${N}
+         {${N}
+             return MessageID.${PACKETDEFINE};${N}
+         }${N}
+     }${N}
+   </body>
+   
+   
+   <tail>}${N}</tail>
+ </pbbuffer>

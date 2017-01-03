@@ -25,10 +25,6 @@
 
 
 
-
-
-
-
 bool Table_SkillEx::__Load(DBC_Loader & loader)
  {
  __ENTER_FUNCTION
@@ -41,15 +37,8 @@ loader.ReadDirect(m_BulletEffectID[2],(tint32)ID_BULLETEFFECTID_03);
 loader.ReadDirect(m_CDTimeId,(tint32)ID_CDTIMEID);
 loader.ReadDirect(m_CameraRockId,(tint32)ID_CAMERAROCKID);
 loader.ReadDirect(m_CameraRockRate,(tint32)ID_CAMERAROCKRATE);
-loader.ReadDirect(m_CombatValue,(tint32)ID_COMBATVALUE);
-loader.ReadDirect(m_DelNum[0],(tint32)ID_DELNUM_01);
-loader.ReadDirect(m_DelNum[1],(tint32)ID_DELNUM_02);
-loader.ReadDirect(m_DelType[0],(tint32)ID_DELTYPE_01);
-loader.ReadDirect(m_DelType[1],(tint32)ID_DELTYPE_02);
-loader.ReadDirect(m_GainsNum[0],(tint32)ID_GAINSNUM_01);
-loader.ReadDirect(m_GainsNum[1],(tint32)ID_GAINSNUM_02);
-loader.ReadDirect(m_GainsType[0],(tint32)ID_GAINSTYPE_01);
-loader.ReadDirect(m_GainsType[1],(tint32)ID_GAINSTYPE_02);
+loader.ReadDirect(m_DelNum,(tint32)ID_DELNUM);
+loader.ReadDirect(m_DelType,(tint32)ID_DELTYPE);
 loader.ReadDirect(m_Impact[0],(tint32)ID_IMPACT_01);
 loader.ReadDirect(m_Impact[1],(tint32)ID_IMPACT_2);
 loader.ReadDirect(m_Impact[2],(tint32)ID_IMPACT_03);
@@ -75,7 +64,6 @@ loader.ReadDirect(m_SkillDelayTime,(tint32)ID_SKILLDELAYTIME);
 loader.ReadDirect(m_SkillDesc,(tint32)ID_SKILLDESC);
 loader.ReadDirect(m_SkillExID,(tint32)ID_SKILLEXID);
 loader.ReadDirect(m_SkillLogic,(tint32)ID_SKILLLOGIC);
-loader.ReadDirect(m_YinChangTime,(tint32)ID_YINCHANGTIME);
 loader.ReadDirect(m_Level,(tint32)ID_LEVEL);
 
  return true;

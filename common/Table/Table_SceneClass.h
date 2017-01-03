@@ -18,34 +18,76 @@ ID_LENGTH,
 ID_WIDTH,
 ID_OBSTACLE,
 ID_BGMUSIC,
-ID_PVPRULE,
-ID_RELIVETYPE_1,
-ID_RELIVETYPE_2,
-ID_RELIVETYPE_3,
-ID_ENTRY_X,
-ID_ENTRY_Z,
-ID_SAFE_X,
-ID_SAFE_Z,
-ID_DEADPUNISHRULE,
 ID_COPYSCENEID,
-ID_PLAYERSMAXA,
-ID_PLAYERSMAXB,
-ID_ISCANUSEXP,
-ID_ISCANUSELIGHT,
 ID_SCENEMAPTEXTURE,
 ID_SCENEMAPWIDTH,
 ID_SCENEMAPHEIGHT,
 ID_SCENEMAPLOGICWIDTH,
 ID_PLAYERVIEWRADIUS,
-ID_ISCANTEAMFOLLOW,
-ID_ISCANCALLTEAM,
-ID_SCRIPTID,
+ID_ATTACKPOSX1,
+ID_ATTACKPOSZ1,
+ID_ATTACKPOSX2,
+ID_ATTACKPOSZ2,
+ID_ATTACKPOSX3,
+ID_ATTACKPOSZ3,
+ID_ATTACKPOSX4,
+ID_ATTACKPOSZ4,
+ID_ATTACKPOSX5,
+ID_ATTACKPOSZ5,
+ID_ATTACKPOSX6,
+ID_ATTACKPOSZ6,
+ID_ATTACKPOSX7,
+ID_ATTACKPOSZ7,
+ID_ATTACKPOSX8,
+ID_ATTACKPOSZ8,
+ID_ATTACKPOSX9,
+ID_ATTACKPOSZ9,
+ID_DEFENCEPOSX1,
+ID_DEFENCEPOSZ1,
+ID_DEFENCEPOSX2,
+ID_DEFENCEPOSZ2,
+ID_DEFENCEPOSX3,
+ID_DEFENCEPOSZ3,
+ID_DEFENCEPOSX4,
+ID_DEFENCEPOSZ4,
+ID_DEFENCEPOSX5,
+ID_DEFENCEPOSZ5,
+ID_DEFENCEPOSX6,
+ID_DEFENCEPOSZ6,
+ID_DEFENCEPOSX7,
+ID_DEFENCEPOSZ7,
+ID_DEFENCEPOSX8,
+ID_DEFENCEPOSZ8,
+ID_DEFENCEPOSX9,
+ID_DEFENCEPOSZ9,
 ID_TAB_CURCOL_COUNT,
 MAX_ID=1023,
 MAX_RECORD=1024
  };
  public:
  bool __Load(DBC_Loader &loader);
+
+public:
+ tint32 getAttackPosXCount() const { return 9; } 
+ private:
+ tint32 m_AttackPosX[9];
+ public:
+ tint32 GetAttackPosXbyIndex(tint32 idx) const 
+ {
+ if(idx>=0 && idx<9) return m_AttackPosX[idx];
+ return -1;
+ }
+
+public:
+ tint32 getAttackPosZCount() const { return 9; } 
+ private:
+ tint32 m_AttackPosZ[9];
+ public:
+ tint32 GetAttackPosZbyIndex(tint32 idx) const 
+ {
+ if(idx>=0 && idx<9) return m_AttackPosZ[idx];
+ return -1;
+ }
 
 private:
  tint32 m_BGMusic;
@@ -57,40 +99,27 @@ private:
  public:
  tint32 GetCopySceneID() const { return m_CopySceneID; }
 
-private:
- tint32 m_DeadPunishRule;
+public:
+ tint32 getDefencePosXCount() const { return 9; } 
+ private:
+ tint32 m_DefencePosX[9];
  public:
- tint32 GetDeadPunishRule() const { return m_DeadPunishRule; }
+ tint32 GetDefencePosXbyIndex(tint32 idx) const 
+ {
+ if(idx>=0 && idx<9) return m_DefencePosX[idx];
+ return -1;
+ }
 
-private:
- tfloat32 m_EntryX;
+public:
+ tint32 getDefencePosZCount() const { return 9; } 
+ private:
+ tint32 m_DefencePosZ[9];
  public:
- tfloat32 GetEntryX() const { return m_EntryX; }
-
-private:
- tfloat32 m_EntryZ;
- public:
- tfloat32 GetEntryZ() const { return m_EntryZ; }
-
-private:
- tint32 m_IsCanCallTeam;
- public:
- tint32 GetIsCanCallTeam() const { return m_IsCanCallTeam; }
-
-private:
- tint32 m_IsCanTeamFollow;
- public:
- tint32 GetIsCanTeamFollow() const { return m_IsCanTeamFollow; }
-
-private:
- tint32 m_IsCanUseLight;
- public:
- tint32 GetIsCanUseLight() const { return m_IsCanUseLight; }
-
-private:
- tint32 m_IsCanUseXp;
- public:
- tint32 GetIsCanUseXp() const { return m_IsCanUseXp; }
+ tint32 GetDefencePosZbyIndex(tint32 idx) const 
+ {
+ if(idx>=0 && idx<9) return m_DefencePosZ[idx];
+ return -1;
+ }
 
 private:
  tint32 m_Length;
@@ -108,50 +137,14 @@ private:
  const tchar* GetObstacle() const { return m_Obstacle; }
 
 private:
- tint32 m_PVPRule;
- public:
- tint32 GetPVPRule() const { return m_PVPRule; }
-
-private:
  tint32 m_PlayerViewRadius;
  public:
  tint32 GetPlayerViewRadius() const { return m_PlayerViewRadius; }
 
 private:
- tint32 m_PlayersMaxA;
- public:
- tint32 GetPlayersMaxA() const { return m_PlayersMaxA; }
-
-private:
- tint32 m_PlayersMaxB;
- public:
- tint32 GetPlayersMaxB() const { return m_PlayersMaxB; }
-
-public:
- tint32 getReliveTypeCount() const { return 3; } 
- private:
- tint32 m_ReliveType[3];
- public:
- tint32 GetReliveTypebyIndex(tint32 idx) const 
- {
- if(idx>=0 && idx<3) return m_ReliveType[idx];
- return -1;
- }
-
-private:
  const tchar* m_ResName;
  public:
  const tchar* GetResName() const { return m_ResName; }
-
-private:
- tfloat32 m_SafeX;
- public:
- tfloat32 GetSafeX() const { return m_SafeX; }
-
-private:
- tfloat32 m_SafeZ;
- public:
- tfloat32 GetSafeZ() const { return m_SafeZ; }
 
 private:
  tint32 m_SceneID;
@@ -177,11 +170,6 @@ private:
  tint32 m_SceneMapWidth;
  public:
  tint32 GetSceneMapWidth() const { return m_SceneMapWidth; }
-
-private:
- tint32 m_ScriptID;
- public:
- tint32 GetScriptID() const { return m_ScriptID; }
 
 private:
  tint32 m_Type;

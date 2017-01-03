@@ -69,7 +69,7 @@ public:
 		{
 			if (nOldIndex>=0 && nOldIndex<MAX_LIST_SIZE)
 			{
-				m_AttackerList[nOldIndex].m_nAttackTime = Clock::getCurrentSystemTime();
+				m_AttackerList[nOldIndex].m_nAttackTime = gTimeManager.GetANSITime();
 			}
 			return true;
 		}
@@ -80,7 +80,7 @@ public:
 			if (m_AttackerList[i].m_AttackerGUID ==invalid_guid64)
 			{
 				m_AttackerList[i].m_AttackerGUID =TargetGuid;
-				m_AttackerList[i].m_nAttackTime = Clock::getCurrentSystemTime();
+				m_AttackerList[i].m_nAttackTime = gTimeManager.GetANSITime();
 				bHaveEmpty =true;
 				break;
 			}
@@ -92,7 +92,7 @@ public:
 			int nSelIndex =-1;
 			for (int i=0;i<MAX_LIST_SIZE;i++)
 			{
-				int nElapseTime =(int)(Clock::getCurrentSystemTime() -m_AttackerList[i].m_nAttackTime);
+				int nElapseTime =(int)(gTimeManager.GetANSITime() -m_AttackerList[i].m_nAttackTime);
 				if (nElapseTime>nMaxElapseTime)
 				{
 					nMaxElapseTime =nElapseTime;
@@ -102,7 +102,7 @@ public:
 			if (nSelIndex >=0 && nSelIndex<MAX_LIST_SIZE)
 			{
 				m_AttackerList[nSelIndex].m_AttackerGUID =TargetGuid;
-				m_AttackerList[nSelIndex].m_nAttackTime =static_cast<int>(Clock::getCurrentSystemTime());
+				m_AttackerList[nSelIndex].m_nAttackTime =gTimeManager.GetANSITime();
 			}
 			else
 			{

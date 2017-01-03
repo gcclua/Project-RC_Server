@@ -15,7 +15,6 @@ class GC_DELETE_OBJ_PAK:public Packet
  GC_DELETE_OBJ_PAK():Packet(m_PacketData){}
  virtual ~GC_DELETE_OBJ_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_GC_DELETE_OBJ_PAK;}
  public:
  ::GC_DELETE_OBJ m_PacketData;
@@ -32,7 +31,6 @@ class GC_DELETE_OBJ_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::GC_DELETE_OBJ_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::GC_DELETE_OBJ_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

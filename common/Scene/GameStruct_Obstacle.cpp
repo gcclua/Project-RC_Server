@@ -33,7 +33,7 @@ void SceneObstacle::Init(int nWidth, int nHeight)
 void SceneObstacle::Load(const char *szObstacleFileName)
 {
 	__ENTER_PROTECT
-
+		return;
 	AssertEx(szObstacleFileName != null_ptr, "");
 	int nObstacleFileNameLength = static_cast<int>(strlen(szObstacleFileName));
 	if (nObstacleFileNameLength > 0)
@@ -68,7 +68,7 @@ void SceneObstacle::Load(const char *szObstacleFileName)
 		fread(&(ofitemvec[0]), sizeof(ObstacleFileItem), m_nScaleWidth * m_nScaleHeight, fp);
 		for (int i = 0; i < static_cast<int>(ofitemvec.size()); i++)
 		{
-			SetObstacleValue(ScenePos(ofitemvec[i].m_fX, ofitemvec[i].m_fZ),
+			SetObstacleValue(ScenePos(ofitemvec[i].m_nX, ofitemvec[i].m_nZ),
 				ofitemvec[i].m_nValue == 1 ? ObstacleValue::WALKABLE : ObstacleValue::WALKDISABLE);
 		}
 
@@ -83,8 +83,10 @@ void SceneObstacle::Record(int nSceneClassID)
 {
 	__ENTER_FUNCTION
 
-	CACHE_LOG("Scene","sceneclass("<<nSceneClassID<<") obstacle record begin");
-	CACHE_LOG("Scene","width("<<m_nWidth<<"), height("<<m_nHeight<<"), scalewidth("<<m_nScaleWidth<<"), scaleheight("<<m_nScaleHeight<<")");
+	CacheLog(LOGDEF_INST(Scene), "sceneclass(%d) obstacle record begin", nSceneClassID);
+
+	CacheLog(LOGDEF_INST(Scene), "width(%d), height(%d), scalewidth(%d), scaleheight(%d)",
+		m_nWidth, m_nHeight, m_nScaleWidth, m_nScaleHeight);
 
 	FLString<1024> szBorderLine;
 	for (int i = 0; i < (m_nScaleWidth + 2); i++)
@@ -92,7 +94,8 @@ void SceneObstacle::Record(int nSceneClassID)
 		szBorderLine += "#";
 	}
 	szBorderLine += "\t";
-	CACHE_LOG("Scene",szBorderLine.GetCText());
+	
+	CacheLog(LOGDEF_INST(Scene), "%s", szBorderLine.GetCText());
 
 	for (int i = (m_nScaleHeight - 1); i >= 0; i--)
 	{
@@ -107,30 +110,32 @@ void SceneObstacle::Record(int nSceneClassID)
 
 		szLine += "#";
 		szLine += "\t";
-		CACHE_LOG("Scene",szLine.GetCText());
+		
+		CacheLog(LOGDEF_INST(Scene), "%s", szLine.GetCText());
 	}
 
-	CACHE_LOG("Scene",szBorderLine.GetCText());
-	CACHE_LOG("Scene","sceneclass("<<nSceneClassID<<") obstacle record end");
+	CacheLog(LOGDEF_INST(Scene), "%s", szBorderLine.GetCText());
+
+	CacheLog(LOGDEF_INST(Scene), "sceneclass(%d) obstacle record end", nSceneClassID);
 
 	__LEAVE_FUNCTION
 }
 
 void SceneObstacle::SetObstacleValue(const ScenePos &rPos, int nValue)
 {
-	float fX = rPos.m_fX * OBSTACLESCALE;
-	float fZ = rPos.m_fZ * OBSTACLESCALE;
-	int nX = _45FLOAT2INT(fX);
-	int nZ = _45FLOAT2INT(fZ);
+	int nX = rPos.m_nX * OBSTACLESCALE;
+	int nZ = rPos.m_nZ * OBSTACLESCALE;
+	//int nX = _45FLOAT2INT(fX);
+	//int nZ = _45FLOAT2INT(fZ);
 	SetScaleObstacleValue(nX, nZ, nValue);
 }
 
 int SceneObstacle::GetObstacleValue(const ScenePos &rPos) const
 {
-	float fX = rPos.m_fX * OBSTACLESCALE;
-	float fZ = rPos.m_fZ * OBSTACLESCALE;
-	int nX = _45FLOAT2INT(fX);
-	int nZ = _45FLOAT2INT(fZ);
+	int nX = rPos.m_nX * OBSTACLESCALE;
+	int nZ = rPos.m_nZ * OBSTACLESCALE;
+	//int nX = _45FLOAT2INT(fX);
+	//int nZ = _45FLOAT2INT(fZ);
 	return GetScaleObstacleValue(nX, nZ);
 }
 

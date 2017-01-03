@@ -1,7 +1,7 @@
 #include "GameStruct_Skill.h"
 #include "DBStruct/DBStruct_Cooldown.h"
 #include "Service/TimeInfo.h"
-
+BSARRAY_ASSIGN_IMPL(CoolDown_Info, 32);
 void CoolDown_Info::Tick(TimeInfo const&rTimeInfo)
 {
 	__ENTER_FUNCTION

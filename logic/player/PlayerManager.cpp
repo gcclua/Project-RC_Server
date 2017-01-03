@@ -227,7 +227,7 @@ void PlayerManager::ProcessOutputs(void)
 				else
 				{
 					__ENTER_PROTECT_EX
-						bool bRet = Ptr->ProcessInput();
+						bool bRet = Ptr->ProcessOutput();
 					if (!bRet)
 					{
 						it = Del(Ptr,DEL_FOR_OUTPUTEXP2);
@@ -278,7 +278,7 @@ void PlayerManager::ProcessOutputs(void)
 				else
 				{
 					__ENTER_PROTECT_EX
-						bool bRet = Ptr->ProcessInput();
+						bool bRet = Ptr->ProcessOutput();
 					if (!bRet)
 					{
 						it = Del(Ptr,DEL_FOR_OUTPUTEXP2);

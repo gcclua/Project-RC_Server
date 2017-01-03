@@ -103,11 +103,11 @@ public:
 	}
 
 public:
-	const byte * GetBitBuffer(void) const
+	const tbyte * GetBitBuffer(void) const
 	{
 		return m_BitBuffer;
 	}
-	void SetBitBuffer(const byte *pBytes, int nSize)
+	void SetBitBuffer(const tbyte *pBytes, int nSize)
 	{
 		if (pBytes != null_ptr && nSize == BYTE_SIZE)
 		{
@@ -139,7 +139,7 @@ public:
 	}
 
 private:
-	byte	m_BitBuffer[BYTE_SIZE];
+	tbyte	m_BitBuffer[BYTE_SIZE];
 	int	m_nMarkedBitCount;
 };
 

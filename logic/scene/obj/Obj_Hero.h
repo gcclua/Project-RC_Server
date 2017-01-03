@@ -7,6 +7,7 @@
 #include "Obj_Npc.h"
 #include "hero/GameStruct_Hero.h"
 
+
 class Obj_Hero : public Obj_Npc
 {
 public:
@@ -21,6 +22,17 @@ public:
 	virtual void OnLeaveScene(void);
 
 	virtual void Tick(const TimeInfo &rTimeInfo);
+
+	virtual bool CanBeView(Obj_Character &rObj);
+	// 战斗属性相关
+public:
+	virtual void CalculateInitalAttr(void);
+	virtual void CalculateFinalyAttr(void);
+
+	//获取最终战斗属性数值
+	virtual tint32 GetCombatAttrByID(tint32 AttrId);
+
+
 
 public:
 
@@ -41,12 +53,12 @@ public:
 
 private:
 	int     m_nType;    //英雄类型
-	int     m_nLevel;   //等级
 	int     m_nQuality; // 品质
-	
+
 	HERONAME m_Name;        // 名称
 
 	int64   m_nID;       // 英雄的uid
+
 
 };
 

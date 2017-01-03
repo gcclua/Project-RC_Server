@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="gbk" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine${N}${N}</descript>
+  <dir>./tmp/cs/</dir>
+  <filename>PacketDistributed.cs</filename>
+  
+  <include>GC|CG|CM|MC</include>
+  <include_head>CG|GC|CM|MC</include_head>
+  <import>
+  using System.IO;${N}
+using System;${N}
+#if UNITY_WP8	${N}
+using UnityPortSocket;	${N}
+#else	${N}
+using System.Net.Sockets;	${N}
+#endif	${N}
+using Google.ProtocolBuffers;${N}
+</import>
+<factory_sub>case MessageID.${PACKETID}: { packet = new ${Realpacket}(); } break;${N}</factory_sub>
+ <common>
+    public abstract class PacketDistributed${N}
+    {${N}
+        public static PacketDistributed CreatePacket(MessageID packetID)${N}
+        {${N}
+            PacketDistributed packet = null;${N}
+            switch (packetID)${N}
+            {${N}
+                ${FACTORY}
+				${N}
+            }${N}
+            if (null != packet)${N}
+            {${N}
+                packet.packetID = packetID;${N}
+            }${N}
+
+            return packet;${N}
+        }${N}
+        public void SendPacket()${N}
+        {${N}
+
+ 				NetWorkLogic.GetMe().SendPacket(this); ${N}              
+
+        }${N}
+${N}
+
+        public PacketDistributed ParseFrom(byte[] data, int nLen)${N}
+        {${N}
+            CodedInputStream input = CodedInputStream.CreateInstance(data,0,nLen);${N}
+            PacketDistributed inst = MergeFrom(input,this);${N}
+            input.CheckLastTagWas(0);${N}
+            return inst;${N}
+        }${N}
+${N}
+        public abstract int SerializedSize();${N}
+        public abstract void WriteTo(CodedOutputStream data);${N}
+        public abstract PacketDistributed MergeFrom(CodedInputStream input,PacketDistributed _Inst);${N}
+        public abstract bool IsInitialized();${N}
+${N}
+				 public MessageID GetPacketID() { return packetID; }${N}
+        protected MessageID packetID;${N}
+    }${N}
+  </common>
+ </pbbuffer>

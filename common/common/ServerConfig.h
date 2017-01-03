@@ -8,11 +8,11 @@
 
 #ifdef _WIN32
 #pragma warning(disable: 4290)
-#include <libconfig.hpp>
+
 #else
 #include <libconfig.h++>
 #endif
-
+#include <libconfig.h++>
 const char SZSYSLOGCFG[] = "syslog.cfg";
 
 using namespace std;
@@ -62,25 +62,6 @@ public:
 	const string proxyIp(int pid) {return proxy_addr[pid];}
 	int proxyBindPort1(int pid) {return proxy_port_1[pid];}
 	int proxyBindPort2(int pid) {return proxy_port_2[pid];}
-	int proxyPolicyPort(int pid) {return proxy_policy_port[pid];}
-
-
-	//日志系统相关函数
-	bool		 IsGameLogStart(){return gamed_log_start_>0;}
-	const string GetGameLogDir() {return gamed_log_dir_;}
-	const string GetGameLogName(){return gamed_log_name_;}
-	int			 GetGameLogStatLv(){return gamed_log_stat_level_;}
-	int			 GetGameLogStatModul(){return gamed_log_stat_modul_;}
-	int			 GetGameLogStatModulVal(){return gamed_log_stat_modul_val_;}
-	const string GetGameLog2SrvAddr(){return gamed_log_stat_addr_;}
-	const string GetGameLog2SrvPort(){return gamed_log_stat_port_;}
-
-	bool		 IsStarLogStart(){return star_log_start_>0;}
-	const string GetStarLogDir() {return star_log_dir_;}
-	const string GetStarLogName(){return star_log_name_;}
-	int			 GetStarLogStatLv(){return star_log_stat_level_;}
-	const string GetStarLog2SrvAddr(){return star_log_stat_addr_;}
-	const string GetStarLog2SrvPort(){return star_log_stat_port_;}
 
 
 private:
@@ -123,24 +104,6 @@ private:
 	map<int, string> proxy_addr;
 	map<int, int> proxy_port_1;
 	map<int, int> proxy_port_2;
-	map<int, int> proxy_policy_port;
-
-	//log stat args:
-	string	gamed_log_dir_;
-	string	gamed_log_name_;
-	int		gamed_log_start_;
-	int		gamed_log_stat_level_;
-	int	    gamed_log_stat_modul_;
-	int		gamed_log_stat_modul_val_;
-	string	gamed_log_stat_addr_;
-	string	gamed_log_stat_port_;
-
-	string	star_log_dir_;
-	string	star_log_name_;
-	int		star_log_start_;
-	int		star_log_stat_level_;
-	string	star_log_stat_addr_;
-	string	star_log_stat_port_;
 
 	string server_file_;
 	Config srv;

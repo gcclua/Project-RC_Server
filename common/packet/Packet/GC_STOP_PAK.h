@@ -15,7 +15,6 @@ class GC_STOP_PAK:public Packet
  GC_STOP_PAK():Packet(m_PacketData){}
  virtual ~GC_STOP_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_GC_STOP_PAK;}
  public:
  ::GC_STOP m_PacketData;
@@ -32,7 +31,6 @@ class GC_STOP_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::GC_STOP_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::GC_STOP_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

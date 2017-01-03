@@ -6,7 +6,9 @@
 #include "city/GameDefine_City.h"
 #include "building/GameDefine_Building.h"
 #include "troop/GameDefine_Troop.h"
+#include "hero/GameDefine_Hero.h"
 #include "DBStruct/DBStruct_Troop.h"
+#include "DBStruct/DBStruct_Hero.h"
 
 struct DBTechnology
 {
@@ -92,12 +94,15 @@ public:
 	int64 m_nFood; //食物
 	int64 m_nStone; //石料
 	int64 m_nIron;  // 铁矿
-
+	int64 m_nGold;
+	int   m_nPosX;
+	int   m_nPosZ;
 	DBBuilding m_BuildingList[BUIDINGTYPE_MAX]; // 所有的建筑列表
 	DBTechnology m_TechList[TECHNOLOGYTYPE_MAX];// 所有的科技列表
 	DBTechResearch m_TechResearchList[MAX_CITY_RESEARCH_COUNT]; // 正在研究的队列
 	DBBuildConstruct m_ConstructList[MAX_CITY_CONSTRUCT_COUNT]; // 正在建造的队列
-	DBTroop          m_TroopList[MAX_TROOP_QUEUE];                // 兵种列表
+	//DBTroop          m_TroopList[MAX_TROOP_QUEUE];                // 兵种列表
+	
 
 	
 };

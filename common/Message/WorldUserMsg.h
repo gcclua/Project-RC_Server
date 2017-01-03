@@ -12,8 +12,13 @@ MESSAGE_DEF_END(PlayerEnterWorldMsg)
 MESSAGE_DEF_BEGIN(PlayerLeaveWorldMsg)
 	PlayerPtr m_PlayerPtr;
 	int m_nDelResult;
+	int64 m_guid;
 MESSAGE_DEF_END(PlayerLeaveWorldMsg)
 
 
+MESSAGE_DEF_BEGIN(PlayerQuitGameMsg)
+	PlayerPtr m_PlayerPtr;
+tint32 m_nDelResult;
+MESSAGE_DEF_END(PlayerQuitGameMsg)
 
 #endif

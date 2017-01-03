@@ -7,6 +7,8 @@
 //最大的地块数
 #define  MAX_TILE_NUM 10000
 
+#define  TILE_LOCK_TIME 30
+
 // 地块类型
 enum TILE_TYPE
 {
@@ -15,6 +17,13 @@ enum TILE_TYPE
 	TILE_TYPE_PLAIN, // 平原
 	TILE_TYPE_SOURCE, // 资源
 	TILE_TYPE_WILD,    // 野地
+};
+
+enum TILE_STATE
+{
+	TILE_STATE_IDLE,// 空闲
+	TILE_STATE_LOCK,// 锁定
+	TILE_STATE_TAKE,// 建城或者生成资源点
 };
 
 #endif

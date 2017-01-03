@@ -15,7 +15,6 @@ class GC_PLAY_EFFECT_PAK:public Packet
  GC_PLAY_EFFECT_PAK():Packet(m_PacketData){}
  virtual ~GC_PLAY_EFFECT_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_GC_PLAY_EFFECT_PAK;}
  public:
  ::GC_PLAY_EFFECT m_PacketData;
@@ -32,7 +31,6 @@ class GC_PLAY_EFFECT_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::GC_PLAY_EFFECT_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::GC_PLAY_EFFECT_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

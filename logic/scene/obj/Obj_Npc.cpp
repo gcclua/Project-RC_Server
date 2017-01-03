@@ -4,19 +4,17 @@
 #include "Scene/Scene/Scene.h"
 #include "ServerConfig.h"
 #include "DictionaryFormat/DictionaryFormat.h"
+#include "Table/Table_ArrangeSelectTarget.h"
+#include "Scene/Scene/CopyScene.h"
+#include "Table/Table_SkillEx.h"
+#include "Table/Table_SkillBase.h"
 
 POOLDEF_IMPL(Obj_Npc);
 
 Obj_Npc::Obj_Npc( void )
 {
-	m_nLastRandMoveTime =0;
-	m_fPathRadius =0.0f;//巡逻范围
 	m_fAlertRadius =0.0f;//警戒范围
-	m_bIsRandMove =false;//是否随机游荡
-	m_fRandMoveDis =0.0f;//随机游荡范围
-	m_nSwitchTargetCooldown =0;
 	m_curAIType =Obj_Npc::AI_IDLE;
-	m_nNpcType =NPC_TYPE::INVAILD;//npc类型
 	m_bDeadBody = false;
 	m_nDeadBodyTime = 0;
 	m_nCorpseTime =0;//尸体停留时间
@@ -28,22 +26,20 @@ Obj_Npc::Obj_Npc( void )
 	m_nTraceTime =0;
 	m_nAttackDisType =-1;//攻击距离类型 近战还是远程
 	m_nSkillStrategyId =-1;
-	m_bIsJustEnterCombat = false;
+	m_nXpSpeed = 0;
 
 
 	m_nModelVisualID = invalid_id;		// 模型ID
 	m_nWeaponDataID = invalid_id;			// 武器ID
 	m_nKylinValue = 0;
 
-	m_nPatrolCountDown = 0;
-	m_nCurPatrolStep = invalid_id;
-
-	m_nCureTime = 0;
-	m_nIncHp = 0;
-	m_nIncMp = 0;
-
 	m_nSceneNpcID = invalid_id;
 	m_nMutexID	= invalid_id;
+
+	m_bRobot = true;
+
+	m_nArrangeIndex = 0; // 队形的位置
+	m_vecMarchTarget.clear();
 
 }
 
@@ -81,9 +77,6 @@ void Obj_Npc::Tick(const TimeInfo &rTimeInfo)
 	Tick_AI(rTimeInfo);
 	Tick_DeadStatus(rTimeInfo);
 
-	// 自动回复
-	Tick_AutoCure(rTimeInfo);
-
 	__LEAVE_PROTECT
 }
 
@@ -93,9 +86,9 @@ void Obj_Npc::Tick(const TimeInfo &rTimeInfo)
 //}
 
 
-bool Obj_Npc::CanBeView(Obj_March &rMarch)
+bool Obj_Npc::CanBeView(Obj_Npc &rNpc)
 {
-	if (Obj_Character::CanBeView(rMarch))
+	if (Obj_Character::CanBeView(rNpc))
 	{
 		if (IsDie())
 		{
@@ -220,11 +213,142 @@ void Obj_Npc::CalculateFinalyAttr()
 	__LEAVE_FUNCTION
 }
 
-int Obj_Npc::GetNpcForceType(Obj_Character &rObj) const
+int Obj_Npc::GetNpcForceType() const
 {
 	__ENTER_FUNCTION
 	
 	return GetForceType();
 	__LEAVE_FUNCTION
 	return GetForceType();
+}
+
+void Obj_Npc::MoveAppend(const ScenePos &rPos)
+{
+	__ENTER_FUNCTION
+
+
+		if (!IsMoving())
+		{
+			m_PathCont.PushBack(PathNode(GetScenePos(), rPos));
+			OnStartMove();
+		}
+		else
+		{
+			tint32 nSize = m_PathCont.Size();
+			AssertEx(nSize >= 1 && nSize <= m_PathCont.MaxSize(), "");
+			m_PathCont.PushBack(PathNode(m_PathCont[nSize - 1].m_EndPos, rPos));
+		}
+
+		__LEAVE_FUNCTION
+}
+
+void   Obj_Npc::InitPassiveSkill()
+{
+	//登陆时 加上被动技能buff
+	for (tint32 index=0; index<MAXOWNSKILL; index++)
+	{
+		tint32 nSkillId = m_OwnSkillList[index];
+		if (nSkillId != invalid_id)
+		{
+			Table_SkillEx const* pSkillEx = GetTable_SkillExByID(nSkillId);
+			if (pSkillEx == null_ptr)
+			{
+				continue;
+			}
+
+			Table_SkillBase const* pSkillBase = GetTable_SkillBaseByID(pSkillEx->GetBaseId());
+			if (pSkillBase == null_ptr)
+			{
+				continue;
+			}
+
+			//被动技能
+			if ((pSkillBase->GetSkillClass() & SKILLCLASS::PASSIVITY) != 0)
+			{
+				tint32 nImpactNum = pSkillEx->getImpactCount();
+				for (tint32 i = 0; i < nImpactNum; i++)
+				{
+					tint32 nImpackId = pSkillEx->GetImpactbyIndex(i);
+					if (nImpackId != invalid_id)
+					{
+						SendImpactToUnit(*this, nImpackId, nSkillId);
+					}
+				}
+			}
+		}
+	}
+}
+
+void  Obj_Npc::SelectTargetForMarch(bool bAttack)
+{
+	__ENTER_FUNCTION
+		Scene& rScene = GetScene();
+	if (false == rScene.IsCopyScene())
+	{
+		return;
+	}
+	CopyScene& rCopyScene = dynamic_cast<CopyScene&>(rScene);
+	tint32 nCount = GetTable_ArrangeSelectTargetCount();
+	Table_ArrangeSelectTarget const * pCurTable = null_ptr;
+	// 查找对应的配置文件
+	for (tint32 i=0;i<nCount;i++)
+	{
+		Table_ArrangeSelectTarget const * pTable = GetTable_ArrangeSelectTargetByIndex(i);
+		if (pTable != null_ptr)
+		{
+			if (pTable->GetSceneClass() == rScene.GetSceneClassID() 
+				&& pTable->GetArrangeIndex() == GetArrangeIndex()
+				&& pTable->GetForce() == (int)bAttack)
+			{
+				pCurTable = pTable;
+				break;
+			}
+		}
+
+	}
+	AssertEx(pCurTable,"");
+	AssertEx(pCurTable->getMarchLineXCount() == pCurTable->getMarchLineZCount(),"");
+	tint32 nMarchLine = pCurTable->getMarchLineXCount();
+	for (tint32 i=0;i<nMarchLine;i++)
+	{
+		ScenePos tmPos;
+		tmPos.m_nX = pCurTable->GetMarchLineXbyIndex(i);
+		tmPos.m_nZ = pCurTable->GetMarchLineZbyIndex(i);
+		MoveAppend(tmPos);
+	}
+	// 从对应的配置中寻找最优先攻击的集合
+	m_vecMarchTarget.clear();
+	for (tint32 i=0; i< MAX_ATTACK_SET; i++)
+	{
+		for (int j=1;j<=MAX_ARRANGE_COUNT;j++)
+		{
+			// 选按集合顺序找到对方已经部署兵的位置
+			if (pCurTable->GetTargetPosbyIndex(j) == i)
+			{
+				tint32 nTargetID = rCopyScene.GetSceneArrangeSelectTarget(j,bAttack);
+				if (nTargetID != invalid_id)
+				{
+					// 根据所属集合的扫描半径+自身扫描半径查找目标
+					if (m_vecMarchTarget.size() == 0)
+					{
+						SetAlertRadius(GetAlertRadius()+pCurTable->GetSelectRadiusbyIndex(i));
+					}
+					
+					m_vecMarchTarget.push_back(nTargetID);
+
+				}
+			}
+
+			
+			
+		}
+		if (m_vecMarchTarget.size()>0)
+		{
+			break;
+		}
+	}
+
+	InitPassiveSkill();
+
+	__LEAVE_FUNCTION
 }

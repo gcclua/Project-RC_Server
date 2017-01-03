@@ -12,7 +12,9 @@ class DBSaveUserMsg;
 class DBCreateCharMsg;
 class DBReqLoadTileDataMsg;
 class DBReqSaveTileDataMsg;
-
+class DBReqCreateBuildMsg;
+class DBReqLoadRandomNameMsg;
+class DBRetLoadMapMarchMsg;
 
 class DBService :public Service
 {
@@ -24,7 +26,7 @@ public:
 	enum 
 	{
 #if defined(_WIN32)
-	MIN_DB_SERVICEEXEC_COUNT = 2,
+	MIN_DB_SERVICEEXEC_COUNT = 1,
 	MAX_DB_SERVICEEXEC_COUNT = 8,
 #else
 	MIN_DB_SERVICEEXEC_COUNT = 8,
@@ -33,7 +35,7 @@ public:
 	};
 
 public:
-	virtual int GetServiceID(void){return ServiceID::DBAGEMT;}
+	virtual int GetServiceID(void){return ServiceID::DBAGENT;}
 
 public:
 	virtual void Init(void);
@@ -77,9 +79,18 @@ private:
 public:
 	virtual void HandleMessage(const DBSaveUserMsg &rMsg);
 	virtual void HandleMessage(const DBLoadUserMsg &rMsg);
-	virtual void HandleMessage(const DBCreateCharMsg &rMsg);
 	virtual void HandleMessage(const DBReqLoadTileDataMsg &rMsg);
 	virtual void HandleMessage(const DBReqSaveTileDataMsg &rMsg);
+	virtual void HandleMessage(const DBReqCreateBuildMsg &rMsg);
+	virtual void HandleMessage(const DBReqSaveGuidMsg &rMsg);
+
+	virtual void HandleMessage(const DBCreateCharMsg &rMsg);
+	virtual void HandleMessage(const DBAskCharListMsg &rMsg);
+	virtual void HandleMessage(const DBReqLoadRandomNameMsg &rMsg);	
+	virtual void HandleMessage(const DBReqCreateCityMsg &rMsg);
+
+	virtual void HandleMessage(const DBReqLoadMapMarchMsg &rMsg);
+	virtual void HandleMessage(const DBReqSaveMarchDataMsg &rMsg);
 
 public:
 	int  GetUserDataTaskSaveType(int64 UserGuid,bool ImmediateSave);

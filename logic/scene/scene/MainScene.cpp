@@ -2,6 +2,7 @@
 #include "Service/ServiceManager.h"
 #include "Message/SceneMsg.h"
 #include "Table/Table_SceneClass.h"
+#include "service/MessageOp.h"
 
 POOLDEF_IMPL(MainScene);
 MainScene::MainScene( void )
@@ -72,7 +73,6 @@ void MainScene::Initialize(void)
 	//先给m_nScriptID赋值在调用Scene::Initialize()，不然在调用OnSceneCreate 以及NpcInit时脚本号是invalid_id
 	const Table_SceneClass *pSceneClass = GetTable_SceneClassByID(GetSceneClassID());
 	AssertEx(pSceneClass, "");
-	m_nScriptID = pSceneClass->GetScriptID();
 
 	Scene::Initialize();
 	
@@ -115,5 +115,32 @@ void MainScene::OnObjDie(tint32 nID,tint32 nKillerId)
 	{
 		
 	}
+	__LEAVE_FUNCTION
+}
+
+
+void MainScene::InitMarchObj(const March& rMarch)
+{
+	__ENTER_FUNCTION
+	if (rMarch.GetMarchId() > 0)
+	{
+		Obj_MarchPtr pMarch = CreateMarch(rMarch,rMarch.GetPos());
+	}
+
+	RetMarchStartMsgPtr MsgPtr = POOLDEF_NEW(RetMarchStartMsg);
+	MsgPtr->m_marchId = rMarch.GetMarchId();
+	MsgPtr->m_ret     = 1;
+
+	SendMessage2User(rMarch.GetPlayerId(),MsgPtr);
+
+	__LEAVE_FUNCTION
+}
+
+void MainScene::HandleMessage(const MarchEnterSceneMsg &rMsg)
+{
+	__ENTER_FUNCTION
+
+		InitMarchObj(rMsg.m_March);
+
 	__LEAVE_FUNCTION
 }

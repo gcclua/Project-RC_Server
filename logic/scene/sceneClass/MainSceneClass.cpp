@@ -13,7 +13,7 @@ MainSceneClass::~MainSceneClass( void )
 
 }
 
-SceneClass::EnterResult MainSceneClass::EnterTo(Obj_MarchPtr Ptr, tint32 nSceneInst)
+SceneClass::EnterResult MainSceneClass::EnterTo(const March& rMarch, tint32 nSceneInst)
 {
 	__ENTER_FUNCTION
 
@@ -21,19 +21,14 @@ SceneClass::EnterResult MainSceneClass::EnterTo(Obj_MarchPtr Ptr, tint32 nSceneI
 		nSceneInst < (tint32)m_ScenePtrVec.size())
 	{
 		AssertEx(m_ScenePtrVec[nSceneInst], "");
-		tint32 nCurPlayerCount = m_ScenePtrVec[nSceneInst]->GetCurPlayerCount();
-		tint32 nMaxPlayerCount = m_ScenePtrVec[nSceneInst]->GetMaxPlayerCountB();
-		tint32 nEnteringPlayerCount = m_ScenePtrVec[nSceneInst]->GetEnteringPlayerCount();
-		if ((nCurPlayerCount + nEnteringPlayerCount) < nMaxPlayerCount)
-		{
-			MarchEnterSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchEnterSceneMsg);
-			AssertEx(MsgPtr, "");
-			MsgPtr->m_bFirstEnter = true;
-			MsgPtr->m_MarchPtr = Ptr;
-			SendMarchEnterSceneMessage(nSceneInst, MsgPtr);
 
-			return std::make_pair(true, SceneID(GetSceneClassID(), nSceneInst));
-		}
+		MarchEnterSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchEnterSceneMsg);
+		AssertEx(MsgPtr, "");
+		MsgPtr->m_bFirstEnter = true;
+		MsgPtr->m_March = rMarch;
+		SendMarchEnterSceneMessage(nSceneInst, MsgPtr);
+
+		return std::make_pair(true, SceneID(GetSceneClassID(), nSceneInst));
 	}
 
 	//进入指定的场景实例失败，返回false，上层会继续处理
@@ -43,7 +38,7 @@ SceneClass::EnterResult MainSceneClass::EnterTo(Obj_MarchPtr Ptr, tint32 nSceneI
 	return std::make_pair(false, SceneID(invalid_id, invalid_id));
 }
 
-SceneClass::EnterResult MainSceneClass::EnterTo(Obj_MarchPtr Ptr)
+SceneClass::EnterResult MainSceneClass::EnterTo(const March& rMarch)
 {
 	__ENTER_FUNCTION
 
@@ -59,7 +54,7 @@ SceneClass::EnterResult MainSceneClass::EnterTo(Obj_MarchPtr Ptr)
 	MarchEnterSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchEnterSceneMsg);
 	AssertEx(MsgPtr, "");
 	MsgPtr->m_bFirstEnter = true;
-	MsgPtr->m_MarchPtr = Ptr;
+	MsgPtr->m_March = rMarch;
 	SendMarchEnterSceneMessage(nSceneInst, MsgPtr);
 
 	return std::make_pair(true, SceneID(GetSceneClassID(), nSceneInst));
@@ -68,7 +63,7 @@ SceneClass::EnterResult MainSceneClass::EnterTo(Obj_MarchPtr Ptr)
 	return std::make_pair(false, SceneID(invalid_id, invalid_id));
 }
 
-SceneClass::EnterResult MainSceneClass::FirstEnterTo(Obj_MarchPtr Ptr)
+SceneClass::EnterResult MainSceneClass::FirstEnterTo(const March& rMarch)
 {
 	__ENTER_FUNCTION
 
@@ -79,7 +74,7 @@ SceneClass::EnterResult MainSceneClass::FirstEnterTo(Obj_MarchPtr Ptr)
 	return std::make_pair(false, SceneID(invalid_id, invalid_id));
 }
 
-SceneClass::ChangeResult MainSceneClass::ChangeTo(Obj_MarchPtr Ptr, tint32 nSceneInst)
+SceneClass::ChangeResult MainSceneClass::ChangeTo(const March& rMarch, tint32 nSceneInst)
 {
 	__ENTER_FUNCTION
 
@@ -87,19 +82,14 @@ SceneClass::ChangeResult MainSceneClass::ChangeTo(Obj_MarchPtr Ptr, tint32 nScen
 		nSceneInst < (tint32)m_ScenePtrVec.size())
 	{
 		AssertEx(m_ScenePtrVec[nSceneInst], "");
-		tint32 nCurPlayerCount = m_ScenePtrVec[nSceneInst]->GetCurPlayerCount();
-		tint32 nMaxPlayerCount = m_ScenePtrVec[nSceneInst]->GetMaxPlayerCountB();
-		tint32 nEnteringPlayerCount = m_ScenePtrVec[nSceneInst]->GetEnteringPlayerCount();
-		if ((nCurPlayerCount + nEnteringPlayerCount) < nMaxPlayerCount)
-		{
-			MarchEnterSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchEnterSceneMsg);
-			AssertEx(MsgPtr, "");
-			MsgPtr->m_bFirstEnter = false;
-			MsgPtr->m_MarchPtr = Ptr;
-			SendMarchEnterSceneMessage(nSceneInst, MsgPtr);
 
-			return std::make_pair(true, SceneID(GetSceneClassID(), nSceneInst));
-		}
+		MarchEnterSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchEnterSceneMsg);
+		AssertEx(MsgPtr, "");
+		MsgPtr->m_bFirstEnter = false;
+		MsgPtr->m_March = rMarch;
+		SendMarchEnterSceneMessage(nSceneInst, MsgPtr);
+
+		return std::make_pair(true, SceneID(GetSceneClassID(), nSceneInst));
 	}
 
 	//进入指定的场景实例失败，返回false，上层会继续处理
@@ -109,7 +99,7 @@ SceneClass::ChangeResult MainSceneClass::ChangeTo(Obj_MarchPtr Ptr, tint32 nScen
 	return std::make_pair(false, SceneID(invalid_id, invalid_id));
 }
 
-SceneClass::ChangeResult MainSceneClass::ChangeTo(Obj_MarchPtr Ptr)
+SceneClass::ChangeResult MainSceneClass::ChangeTo(const March& rMarch)
 {
 	__ENTER_FUNCTION
 
@@ -125,7 +115,7 @@ SceneClass::ChangeResult MainSceneClass::ChangeTo(Obj_MarchPtr Ptr)
 	MarchEnterSceneMsgPtr MsgPtr = POOLDEF_NEW(MarchEnterSceneMsg);
 	AssertEx(MsgPtr, "");
 	MsgPtr->m_bFirstEnter = false;
-	MsgPtr->m_MarchPtr = Ptr;
+	MsgPtr->m_March = rMarch;
 	SendMarchEnterSceneMessage(nSceneInst, MsgPtr);
 
 	return std::make_pair(true, SceneID(GetSceneClassID(), nSceneInst));
@@ -158,10 +148,7 @@ bool MainSceneClass::ChangeToCheck(const SceneID &rsid, const int64 &rGuid)
 				rsid.m_nInstID < (tint32)m_ScenePtrVec.size())
 			{
 				AssertEx(m_ScenePtrVec[rsid.m_nInstID], "");
-				tint32 nCurPlayerCount = m_ScenePtrVec[rsid.m_nInstID]->GetCurPlayerCount();
-				tint32 nMaxPlayerCount = m_ScenePtrVec[rsid.m_nInstID]->GetMaxPlayerCountB();
-				tint32 nEnteringPlayerCount = m_ScenePtrVec[rsid.m_nInstID]->GetEnteringPlayerCount();
-				return ((nCurPlayerCount + nEnteringPlayerCount) < nMaxPlayerCount);
+				return true;
 			}
 			else
 			{
@@ -182,66 +169,12 @@ bool MainSceneClass::ChangeToCheck(const SceneID &rsid, const int64 &rGuid)
 	return false;
 }
 
-tint32 MainSceneClass::RemainCapacityA(SceneInstID nSceneInst)
-{
-	__ENTER_FUNCTION
-
-	if (nSceneInst > invalid_id &&
-		nSceneInst < (tint32)m_ScenePtrVec.size())
-	{
-		AssertEx(m_ScenePtrVec[nSceneInst], "");
-		tint32 nCurPlayerCount = m_ScenePtrVec[nSceneInst]->GetCurPlayerCount();
-		tint32 nMaxPlayerCount = m_ScenePtrVec[nSceneInst]->GetMaxPlayerCountA();
-		tint32 nEnteringPlayerCount = m_ScenePtrVec[nSceneInst]->GetEnteringPlayerCount();
-		return (nMaxPlayerCount - (nCurPlayerCount + nEnteringPlayerCount));
-	}
-	else
-	{
-		return 0;
-	}
-
-	__LEAVE_FUNCTION
-	return 0;
-}
-
-tint32 MainSceneClass::RemainCapacityB(SceneInstID nSceneInst)
-{
-	__ENTER_FUNCTION
-
-	if (nSceneInst > invalid_id &&
-		nSceneInst < (tint32)m_ScenePtrVec.size())
-	{
-		AssertEx(m_ScenePtrVec[nSceneInst], "");
-		tint32 nCurPlayerCount = m_ScenePtrVec[nSceneInst]->GetCurPlayerCount();
-		tint32 nMaxPlayerCount = m_ScenePtrVec[nSceneInst]->GetMaxPlayerCountB();
-		tint32 nEnteringPlayerCount = m_ScenePtrVec[nSceneInst]->GetEnteringPlayerCount();
-		return (nMaxPlayerCount - (nCurPlayerCount + nEnteringPlayerCount));
-	}
-	else
-	{
-		return 0;
-	}
-
-	__LEAVE_FUNCTION
-	return 0;
-}
 
 tint32 MainSceneClass::ReusingScene(void)
 {
 	__ENTER_FUNCTION
 
-	for (tint32 i = 0; i < (tint32)m_ScenePtrVec.size(); i++)
-	{
-		AssertEx(m_ScenePtrVec[i], "");
-		tint32 nCurPlayerCount = m_ScenePtrVec[i]->GetCurPlayerCount();
-		tint32 nMaxPlayerCount = m_ScenePtrVec[i]->GetMaxPlayerCountA();
-		tint32 nEnteringPlayerCount = m_ScenePtrVec[i]->GetEnteringPlayerCount();
-		if ((nCurPlayerCount + nEnteringPlayerCount) < nMaxPlayerCount)
-		{
-			return i;
-		}
-	}
-	return invalid_id;
+	return 0;
 
 	__LEAVE_FUNCTION
 	return invalid_id;
@@ -259,8 +192,6 @@ tint32 MainSceneClass::EnlargeScene(void)
 	AssertEx(ssp, "");
 	ssp->SetSceneClassID(nClassID);
 	ssp->SetSceneInstID(nInstID);
-	ssp->SetMaxPlayerCountA(GetMaxPlayerCountA());
-	ssp->SetMaxPlayerCountB(GetMaxPlayerCountB());
 	ssp->SetSceneObstacle(&m_SceneObstacle);
 
 	ScenePtr sp = boost::static_pointer_cast<Scene, MainScene>(ssp);

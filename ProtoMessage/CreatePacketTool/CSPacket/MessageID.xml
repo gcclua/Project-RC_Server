@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="gbk" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = '>'-->
+  
+  <descript>//This code create by CodeEngine ,don't modify${N}${N}</descript>
+  <dir>./tmp/cs/</dir>
+  <filename>MessageID.cs</filename>
+  
+  
+<!---public static final short SC_RESPONSE_RET = 15000;--->
+   <common>
+  using System;${N}
+public enum MessageID :ushort${N}
+{${N}
+PACKET_NONE = 0 , // 0，空${N}
+PACKET_CG_LOGIN = 1,	//client ask login ${N}
+PACKET_GC_LOGIN_RET =2,	//client login result ${N}
+   ${FULLDATA}${N}
+   PACKET_SIZE${N}
+   }${N}
+    </common>
+</pbbuffer>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<pbbuffer>
+  <!--Inner descript ${N} =\n ${L} =< ${R} = > ${C}=&-->
+  
+  <descript>//This code create by CodeEngine Author:Wendy ,don't modify${N}${N}</descript>
+   <dir>./tmp/cpp/Packet/</dir>
+  <filename>PacketFactoryManager.cpp</filename>
+  <include_head>CG|GC|GS|SG|MC|CM|GM|MG</include_head>
+   <import>
+     #include "LibNetwork.h"${N}
+	${IMPORT}
+   </import>
+   <include_single>#include"${instance}.h"${N}</include_single>
+   <common>
+PacketFactoryManager gPacketFactoryManager;${N}
+PacketFactoryManager::PacketFactoryManager( )${N} 
+{${N}
+__ENTER_FUNCTION${N}
+	m_Factories = null_ptr ;${N}
+	m_Size = Packets::PACKET_MAX ;${N}
+	 AssertEx( m_Size>0, "" ) ;${N}	
+	m_Factories = new PacketFactory*[ m_Size ];${N}
+	 AssertEx( m_Factories, "" ) ;${N}
+	m_pPacketAllocCount = new tuint32[m_Size] ;${N}
+	 AssertEx( m_pPacketAllocCount, "" ) ;${N}	
+	for( tint32 i=0; i${L}m_Size; i++ )${N} 
+	{${N}
+		m_Factories[i] = null_ptr ;${N}
+		m_pPacketAllocCount[i] = 0 ;${N}
+	}${N}			
+__LEAVE_FUNCTION${N}
+}${N}
+${N}
+PacketFactoryManager::~PacketFactoryManager( ) ${N}
+{${N}
+__ENTER_FUNCTION${N}${N}		
+	 AssertEx( m_Factories!=null_ptr,"" ) ;${N}
+	for( tint32 i=0; i${L}m_Size; i++ ) ${N}
+	{${N}
+		SAFE_DELETE(m_Factories[i]) ;${N}
+	}${N}	
+	SAFE_DELETE_ARRAY(m_Factories) ;${N}
+	SAFE_DELETE_ARRAY(m_pPacketAllocCount) ;${N}			
+__LEAVE_FUNCTION${N}
+}${N}
+${N}
+void PacketFactoryManager::AddFactory( PacketFactory* pFactory ) ${N}
+{${N}
+__ENTER_FUNCTION${N}
+		${N}
+	if( m_Factories[pFactory->GetPacketID()]!=null_ptr )${N} 
+	{${N}
+		 AssertEx( false, "") ;${N}
+		return ;${N}
+	}${N}
+	${N}
+	m_Factories[pFactory->GetPacketID()] = pFactory ;${N}
+			${N}
+__LEAVE_FUNCTION${N}
+}${N}
+
+Packet* PacketFactoryManager::CreatePacket( PacketID_t packetID ) ${N}
+{${N}
+__ENTER_FUNCTION${N}
+	if( packetID>=m_Size || m_Factories[packetID]==null_ptr ) ${N}
+	{${N}
+		AssertEx(false, "") ;${N}
+		return null_ptr ;${N}
+	}${N}
+
+	Packet* pPacket = null_ptr ;${N}
+	Lock() ;${N}
+	try${N}
+	{${N}
+		pPacket = m_Factories[packetID]->CreatePacket();${N}
+		m_pPacketAllocCount[packetID]++ ;${N}
+	}${N}
+	 catch(...)${N}
+	{${N}
+		pPacket = null_ptr ;${N}
+	}${N}
+	Unlock() ;${N}
+
+	return pPacket ;${N}
+			
+__LEAVE_FUNCTION${N}
+
+	return null_ptr ;${N}
+}${N}${N}
+void PacketFactoryManager::RemovePacket( Packet* pPacket )${N}
+{${N}
+__ENTER_FUNCTION${N}
+
+	if( pPacket==null_ptr )${N}
+	{${N}
+		AssertEx(false, "") ;${N}
+		return ;${N}
+	}${N}
+
+	PacketID_t packetID = pPacket->GetPacketID() ;${N}
+	if( packetID>=m_Size ) ${N}${N}
+	{${N}
+		AssertEx(false, "") ;${N}
+		return ;${N}
+	}${N}
+${N}
+	Lock() ;${N}
+	try${N}
+	{${N}
+		SAFE_DELETE( pPacket ) ;${N}
+		m_pPacketAllocCount[packetID] -- ;${N}
+	}${N}
+	 catch(...)${N}
+	{${N}
+	}${N}
+	Unlock() ;${N}
+	return ;${N}
+
+__LEAVE_FUNCTION${N}
+
+	return ;${N}
+}${N}
+  </common>
+  <factory_sub>
+  AddFactory(new Packets::${packet}Factory());${N}
+  </factory_sub>
+  <factory>
+  
+bool PacketFactoryManager::Init( )${N}
+{${N}
+__ENTER_FUNCTION${N}
+
+	${FACTORY_SUB_CG}
+	${FACTORY_SUB_GC}
+	${FACTORY_SUB_GS}
+	${FACTORY_SUB_SG}
+	${FACTORY_SUB_CM}
+	${FACTORY_SUB_MC}
+	${FACTORY_SUB_GM}
+	${FACTORY_SUB_MG}
+	
+	return true ;${N}
+__LEAVE_FUNCTION${N}
+
+	return false ;${N}
+}${N}
+  </factory>
+  
+  </pbbuffer>

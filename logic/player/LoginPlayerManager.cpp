@@ -41,7 +41,7 @@ void LoginPlayerManager::ProcessTicks(const TimeInfo &rTimeInfo)
 
 }
 
-PlayerPtr LoginPlayerManager::GetPlayerByID(int64 nID)
+PlayerPtr LoginPlayerManager::GetPlayerByID(int nID)
 {
 	__ENTER_FUNCTION
 	for (PlayerPtrList::iterator it = m_PlayerList.begin();it != m_PlayerList.end(); it++)
@@ -79,52 +79,104 @@ void LoginPlayerManager::OnAddPlayer(PlayerPtr Ptr,int nResult)
 {
 	__ENTER_FUNCTION
 		m_rLoginService.SetCurPlayerCount(static_cast<int>(m_PlayerList.size()));
-		CACHE_LOG("Player","login playermanager add player("<<Ptr->GetID()<<"),result("<<nResult<<")");
+		CacheLog(LOGDEF_INST(Player), "login playermanager add player(%d), result(%d)",
+		Ptr->GetID(), nResult);
 	__LEAVE_FUNCTION
 }
 
 void LoginPlayerManager::OnDelPlayer(PlayerPtr Ptr,int nResult)
 {
 	__ENTER_FUNCTION
-		m_rLoginService.SetCurPlayerCount(static_cast<int>(m_PlayerList.size()));
-		bool bDelOnlineStatus = false;
-		switch (Ptr->GetStatus())
-		{
-		case PlayerStatus::EMPTY:
-			{
-				bDelOnlineStatus = false;
-			}
-			break;
-		case PlayerStatus::CONNECTED:
-			{
-				bDelOnlineStatus = false;
-			}
-			break;
-		case PlayerStatus::LOGIN_READYENTERWORLD:
-			{
-				bDelOnlineStatus = true;
-			}
-			break;
-		case PlayerStatus::GAME_ENTERINGWORLD:
-			{
-				bDelOnlineStatus = false;
-			}
-			break;
-		case PlayerStatus::GAME_PLAYERING:
-			{
-				bDelOnlineStatus = false;
-			}
-			break;
-		}
+		m_rLoginService.SetCurPlayerCount(static_cast<tint32>(m_PlayerList.size()));
+
+	bool bDelOnlineStatus = false;
+
+	switch (Ptr->GetStatus())
+	{
+	case PlayerStatus::EMPTY:
+		bDelOnlineStatus = false;
+		break;
+
+	case PlayerStatus::CONNECTED:
+		bDelOnlineStatus = false;
+		break;
+
+	case PlayerStatus::LOGIN_VALIDATING:
+		bDelOnlineStatus = false;
+		break;
+	case PlayerStatus::LOGIN_VALIDATE_OK:
+		bDelOnlineStatus = false;
+		break;
+	case PlayerStatus::LOGIN_VALIDATE_FAILED:
+		bDelOnlineStatus = false;
+		break;
+
+	case PlayerStatus::LOGIN_ACCOUNTSTATECHECKING:
+		bDelOnlineStatus = false;
+		break;
+	case PlayerStatus::LOGIN_ACCOUNTSTATECHECK_OK:
+		bDelOnlineStatus = true;
+		break;
+	case PlayerStatus::LOGIN_ACCOUNTSTATECHECK_FAILED:
+		bDelOnlineStatus = false;
+		break;
+
+	case PlayerStatus::LOGIN_QUEUING:
+		bDelOnlineStatus = true;
+		break;
+	case PlayerStatus::LOGIN_QUEUE_FINISH:
+		bDelOnlineStatus = true;
+		break;
+
+	case PlayerStatus::LOGIN_QUERYING_CHARLIST:
+		bDelOnlineStatus = true;
+		break;
+	case PlayerStatus::LOGIN_QUERY_CHARLIST_OK:
+		bDelOnlineStatus = true;
+		break;
+	case PlayerStatus::LOGIN_QUERY_CHARLIST_FAILED:
+		bDelOnlineStatus = false;
+		break;
+
+	case PlayerStatus::LOGIN_READYTONEXT:
+		bDelOnlineStatus = true;
+		break;
+
+	case PlayerStatus::LOGIN_CREATING_CHAR:
+		bDelOnlineStatus = true;
+		break;
+	case PlayerStatus::LOGIN_CREATE_CHAR_OK:
+		bDelOnlineStatus = true;
+		break;
+	case PlayerStatus::LOGIN_CREATE_CHAR_FAILED:
+		bDelOnlineStatus = false;
+		break;
+
+	case PlayerStatus::LOGIN_LOADING_CHAR:
+		bDelOnlineStatus = true;
+		break;
+	case PlayerStatus::LOGIN_LOAD_CHAR_OK:
+		bDelOnlineStatus = true;
+		break;
+	case PlayerStatus::LOGIN_LOAD_CHAR_FAILED:
+		bDelOnlineStatus = false;
+		break;
+
+	case PlayerStatus::LOGIN_READYENTERWORLD:
+		bDelOnlineStatus = true;
+		break;
+	}
 
 		if (bDelOnlineStatus && nResult != DEL_FOR_ENTERWORLD)
 		{
 			m_rLoginService.OLDelPlayer(Ptr->GetObjLogin().GetAccount());
-
-			CACHE_LOG("Player","ol del player("<<Ptr->GetID()<<") source(playermanager)");
+			CacheLog(LOGDEF_INST(Login),
+				"ol del player(%d) source(playermanager)",
+				Ptr->GetID());
 		}
 
-		CACHE_LOG("Player","login playermanager del player("<<Ptr->GetID()<<") result("<<nResult<<")");
+		CacheLog(LOGDEF_INST(Player), "login playermanager del player(%d), result(%d)",
+			Ptr->GetID(), nResult);
 
 	__LEAVE_FUNCTION
 }

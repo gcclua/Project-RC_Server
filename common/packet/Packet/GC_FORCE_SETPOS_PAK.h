@@ -15,7 +15,6 @@ class GC_FORCE_SETPOS_PAK:public Packet
  GC_FORCE_SETPOS_PAK():Packet(m_PacketData){}
  virtual ~GC_FORCE_SETPOS_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_GC_FORCE_SETPOS_PAK;}
  public:
  ::GC_FORCE_SETPOS m_PacketData;
@@ -32,7 +31,6 @@ class GC_FORCE_SETPOS_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::GC_FORCE_SETPOS_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::GC_FORCE_SETPOS_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

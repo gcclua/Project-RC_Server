@@ -1,6 +1,4 @@
 #include "DBUserTask.h"
-#include "Clock.h"
-#include "SysLog.h"
 #include "service/MessageOp.h"
 #include "Exception.h"
 #include "../ODBCData/ODBCCharFullData.h"
@@ -21,9 +19,9 @@ bool DBUserTask::Load(ODBCInterface& rODBCInterface,LibMemInterface &rLibMemInte
 {
 	DBRetLoadUserMsgPtr MsgPtr = POOLDEF_NEW(DBRetLoadUserMsg);
 	AssertEx(MsgPtr,"");
-	MsgPtr->m_nResult  = DBMsgResult::RESULT_FALL;
-	MsgPtr->m_UserName = m_UserName;
-	MsgPtr->m_UserGuid = m_UserGuid;
+	MsgPtr->m_nResult  = DBMsgResult::RESULT_FAIL;
+	MsgPtr->m_AccountName = m_AccountName;
+	MsgPtr->m_nPlayerID = m_nPlayerID;
 	__ENTER_PROTECT_EX
 	{
 		if (IsForLoad())
@@ -40,33 +38,33 @@ bool DBUserTask::Load(ODBCInterface& rODBCInterface,LibMemInterface &rLibMemInte
 
 			if (!memLoadRet && !dbLoadRet)
 			{
-				CACHE_LOG("DBAgentError","[UserDataErrr]:User Load Failed 1 guid="<< m_UserGuid);
+				CacheLog( LOGDEF_INST(DBAgentError), "[UserDataError]:User Load Failed \1 guid=%08X",\
+					m_UserGuid);
 
-				MsgPtr->m_nResult = DBMsgResult::RESULT_FALL;
+				MsgPtr->m_nResult = DBMsgResult::RESULT_FAIL;
 				SendMessage2Srv(ServiceID::LOGIN,MsgPtr);
-				SendOpResult(ServiceID::DBAGEMT,DBMsgResult::RESULT_FALL);//数据没有加载成功交给上层逻辑处理，DBService将加载任务认为处理完毕
+				SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);//数据没有加载成功交给上层逻辑处理，DBService将加载任务认为处理完毕
 				return false;
 			}
 			
 			// 返回数据
-			MsgPtr->m_nResult = DBMsgResult::RESULT_SUCESS;
+			MsgPtr->m_nResult = DBMsgResult::RESULT_SUCCESS;
 			MsgPtr->m_UserData.CopyFrom(m_UserData);
 			SendMessage2Srv(ServiceID::LOGIN,MsgPtr);
 
 			//返回结果
-			SendOpResult(ServiceID::DBAGEMT,DBMsgResult::RESULT_SUCESS);
+			SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
 			return true;
 		}
 		
 	}
 	__CATCH_PROTECT_EX
 	{
-		CACHE_LOG("DBAgentError","[UserDataError]:User Load Exception \1 guid"<<m_UserGuid);
-
+		CacheLog( LOGDEF_INST(DBAgentError), "[UserDataError]:User Load Exception \1 guid=%08X",m_UserGuid);
 		// 通知失败
-		MsgPtr->m_nResult = DBMsgResult::RESULT_FALL;
+		MsgPtr->m_nResult = DBMsgResult::RESULT_FAIL;
 		SendMessage2Srv(ServiceID::LOGIN,MsgPtr);
-		SendOpResult(ServiceID::DBAGEMT,DBMsgResult::RESULT_FALL);//数据没有加载成功交给上层逻辑处理，DBService将加载任务认为处理完毕
+		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);//数据没有加载成功交给上层逻辑处理，DBService将加载任务认为处理完毕
 		return false;
 	}
 	return true;
@@ -79,7 +77,7 @@ bool DBUserTask::Save(ODBCInterface& rODBCInterface,LibMemInterface &rLibMemInte
 {
 	DBRetSaveUserMsgPtr MsgPtr = POOLDEF_NEW(DBRetSaveUserMsg);
 	AssertEx(MsgPtr,"");
-	MsgPtr->m_nResult        = DBMsgResult::RESULT_FALL;
+	MsgPtr->m_nResult        = DBMsgResult::RESULT_FAIL;
 	MsgPtr->m_UserGuid       = m_UserGuid;
 	MsgPtr->m_bImmediateSave = m_bImmediateSave;
 	MsgPtr->m_bFinalSave     = m_bFinalSave;
@@ -91,33 +89,32 @@ bool DBUserTask::Save(ODBCInterface& rODBCInterface,LibMemInterface &rLibMemInte
 			bool memSaveRet = MemSave(rLibMemInterface);
 			if (DBBaseTask::OPERATION_TYPE_SAVE_MEM == GetOperationType())
 			{
-				SendOpResult(ServiceID::DBAGEMT,DBMsgResult::RESULT_SUCESS);
+				SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
 				return true;
 			}
 			// 数据存储到数据库中
 			bool dbSaveRet = DBSave(rODBCInterface);
 			if (dbSaveRet)
 			{
-				MsgPtr->m_nResult = DBMsgResult::RESULT_SUCESS;
+				MsgPtr->m_nResult = DBMsgResult::RESULT_SUCCESS;
 				SendMessage2Srv(ServiceID::LOGIN,MsgPtr);
-				SendOpResult(ServiceID::DBAGEMT,DBMsgResult::RESULT_SUCESS);
+				SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
 			}
 			else
 			{
-				MsgPtr->m_nResult = DBMsgResult::RESULT_FALL;
+				MsgPtr->m_nResult = DBMsgResult::RESULT_FAIL;
 				SendMessage2Srv(ServiceID::LOGIN,MsgPtr);
-				SendOpResult(ServiceID::DBAGEMT,DBMsgResult::RESULT_FALL);
+				SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);
 			}
 		}
 	}
 	__CATCH_PROTECT_EX
 	{
-		CACHE_LOG("DBAgentError","[UserDataError]:User Load Exception \1 guid"<<m_UserGuid);
-
+		CacheLog(LOGDEF_INST(DBAgentError),"[UserDataError]:User Save Exception \1 guid=%08X",m_UserGuid);
 		// 通知失败
-		MsgPtr->m_nResult = DBMsgResult::RESULT_FALL;
+		MsgPtr->m_nResult = DBMsgResult::RESULT_FAIL;
 		SendMessage2Srv(ServiceID::LOGIN,MsgPtr);
-		SendOpResult(ServiceID::DBAGEMT,DBMsgResult::RESULT_FALL);
+		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);
 		return false;
 	}
 	return true;
@@ -128,7 +125,7 @@ bool DBUserTask::Save(ODBCInterface& rODBCInterface,LibMemInterface &rLibMemInte
 bool DBUserTask::DBLoad(ODBCInterface &rODBCInterface)
 {
 	__ENTER_FUNCTION
-		time_t beforeLoadTime = Clock::getCurrentSystemTime();
+		tint32 beforeLoadTime = gTimeManager.SysRunTime();
 	
 		ODBCCharFullData userData(&rODBCInterface);
 		if (true == IsForLoad())
@@ -136,15 +133,16 @@ bool DBUserTask::DBLoad(ODBCInterface &rODBCInterface)
 			userData.SetCharGuid(m_UserGuid);
 			if (false == userData.Load())
 			{
-				CACHE_LOG("DBAgentError","[UserDataError]: Real Load User Error \1 guid="<<m_UserGuid<<" \1 m_AccName="<<m_UserName);
-
+				CacheLog( LOGDEF_INST(DBAgentError), "[UserData]:Real Load user Error \1 guid=%08X \1 m_AccName=%s", \
+					m_UserGuid,m_AccountName);
 				return false;
 			}
 
 			uint32 resultCount = userData.GetResultCount();
 			if (resultCount <= 0)
 			{
-				CACHE_LOG("DBAgentError","[UserDataError]: Real Load User Error \1 guid="<<m_UserGuid<<" \1 m_AccName="<<m_UserName);
+				CacheLog( LOGDEF_INST(DBAgentError), "[UserData]:Real Load user Result Error \1 guid=%08X \1 m_AccName=%s", \
+					m_UserGuid,m_AccountName);
 				return false;
 			}
 			m_UserData.CleanUp();
@@ -172,7 +170,8 @@ bool DBUserTask::DBSave(ODBCInterface &rODBCInterface)
 		ODBCCharFullData userData(&rODBCInterface);
 		if (false == userData.Save(&m_UserData))
 		{
-			CACHE_LOG("DBAgentError","[UserDataError]: Real Save User Error \1 guid="<<m_UserGuid<<" \1 m_AccName="<<m_UserName);
+			CacheLog( LOGDEF_INST(DBAgentError), "[UserData]:Real Save user Error \1 guid=%08X \1 m_AccName=%s", \
+				m_UserGuid,m_AccountName);
 			return false;
 		}
 
@@ -185,12 +184,14 @@ bool DBUserTask::MemLoad(LibMemInterface &rLibMemInterface)
 {
 	__ENTER_FUNCTION
 		char szKey[MAXPATH] = {0};
-		tsnprintf(szKey,sizeof(szKey)-1,"%x",m_UserGuid);
+		tsnprintf(szKey,sizeof(szKey)-1,"%lld",m_UserGuid);
 		szKey[sizeof(szKey)-1] = '0';
 		size_t retValLen = 0;
-		int beforeTime = (int)Clock::getCurrentSystemTime();
+		tuint32 beforeTime = gTimeManager.SysRunTime();
 		char* szRetVal = rLibMemInterface.Get(szKey,static_cast<uint32>(strlen(szKey)),&retValLen);
-		CACHE_LOG("DBAgent","[UserData]: \1 guid="<<m_UserGuid<<" \1 time="<<Clock::getCurrentSystemTime()-beforeTime<<" Mem Load End.");
+
+		CacheLog( LOGDEF_INST(DBAgent), "[UserData]:User  \1 guid=%lld \1 time=%d \1 Mem Load End.",\
+			m_UserGuid,gTimeManager.SysRunTime()-beforeTime);
 
 		MemFullUserData tempMemUserData;
 		if (retValLen == sizeof(tempMemUserData))
@@ -223,22 +224,23 @@ bool DBUserTask::MemSave(LibMemInterface &rLibMemInterface)
 {
 	__ENTER_FUNCTION
 		char szKey[MAXPATH] = {0};
-		tsnprintf(szKey,sizeof(szKey)-1,"%x",m_UserGuid);
+		tsnprintf(szKey,sizeof(szKey)-1,"%lld",m_UserGuid);
 		szKey[sizeof(szKey)-1] = '0';
 		MemFullUserData tempMemUserData;
 		tempMemUserData.m_UserData.CopyFrom(m_UserData);
 
-		int beforeTime = (int)Clock::getCurrentSystemTime();
+		tuint32 beforeTime = gTimeManager.SysRunTime();
 		bool bSet = rLibMemInterface.Set(szKey,static_cast<uint32>(strlen(szKey)),(char*)(&tempMemUserData),sizeof(tempMemUserData),0);
-		CACHE_LOG("DBAgent","[UserData]: User \1 guid="<<m_UserGuid<<" \1 time="<<Clock::getCurrentSystemTime()-beforeTime<<" Mem Save End.");
 
+		CacheLog( LOGDEF_INST(DBAgent), "[UserData]:User  \1 guid=%lld,%lld \1 time=%d \1 Mem Save End.",\
+			m_UserGuid,gTimeManager.SysRunTime()-beforeTime);
 		if (false == bSet)
 		{
-			CACHE_LOG("DBAgentError","[UserData]: User \1 guid="<<m_UserData.getGuid()<<" Mem Save Failed.");
+			CacheLog( LOGDEF_INST(DBAgentError), "[UserData]:User \1 guid=%lld \1 Mem Save Failed.",m_UserGuid);
 			
 			if (!rLibMemInterface.Delete(szKey,static_cast<uint32>(strlen(szKey)),0))
 			{
-				CACHE_LOG("DBAgentError","[UserData]: User \1 guid="<<m_UserData.getGuid()<<" Mem Delete Failed.");
+				CacheLog( LOGDEF_INST(DBAgentError), "[UserData]:User \1 guid=%lld \1 Mem Delete Failed.",m_UserGuid);
 			}
 		}
 		return true;

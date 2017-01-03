@@ -11,25 +11,24 @@ public:
 	virtual ~MainSceneClass(void);
 
 public:
-	virtual EnterResult EnterTo(Obj_MarchPtr Ptr, tint32 nSceneInst);
-	virtual EnterResult EnterTo(Obj_MarchPtr Ptr);
+	virtual EnterResult EnterTo(const March& rMarch, tint32 nSceneInst);
+	virtual EnterResult EnterTo(const March& rMarch);
 public:
-	virtual EnterResult FirstEnterTo(Obj_MarchPtr Ptr);
+	virtual EnterResult FirstEnterTo(const March& rMarch);
 
 public:
-	virtual ChangeResult ChangeTo(Obj_MarchPtr Ptr, tint32 nSceneInst);
-	virtual ChangeResult ChangeTo(Obj_MarchPtr Ptr);
+	virtual ChangeResult ChangeTo(const March& rMarch, tint32 nSceneInst);
+	virtual ChangeResult ChangeTo(const March& rMarch);
 public:
 	virtual bool ChangeFromCheck(const SceneID &rsid, const int64 &rGuid);
 	virtual bool ChangeToCheck(const SceneID &rsid, const int64 &rGuid);
 
-public:
-	virtual tint32 RemainCapacityA(SceneInstID nSceneInst);
-	virtual tint32 RemainCapacityB(SceneInstID nSceneInst);
 
 public:
 	virtual tint32 ReusingScene(void);
 	virtual tint32 EnlargeScene(void);
+
+
 };
 POOLDEF_DECL(MainSceneClass);
 

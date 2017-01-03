@@ -15,7 +15,6 @@ class CG_CHAT_PAK:public Packet
  CG_CHAT_PAK():Packet(m_PacketData){}
  virtual ~CG_CHAT_PAK(){}
  virtual tuint32 Execute( Player* pPlayer );
- virtual tuint32 Execute( ServerPlayer* pServerPlayer );
  virtual PacketID_t GetPacketID( ) const {return PACKET_CG_CHAT_PAK;}
  public:
  ::CG_CHAT m_PacketData;
@@ -32,7 +31,6 @@ class CG_CHAT_PAK:public Packet
  {
  public:
  static tuint32 Execute( Packets::CG_CHAT_PAK* pPacket, Player* pPlayer ) ;
- static tuint32 Execute( Packets::CG_CHAT_PAK* pPacket, ServerPlayer* pServerPlayer ) ;
  };
 
 }

@@ -1,7 +1,6 @@
 #include "Invoker.h"
-#include "SysLog.h"
 
-Invoker::Invoker(string szName,int nNormalInitDoingInterval,int nSlowlyInitDoingInterval)
+Invoker::Invoker(const tchar *szName,int nNormalInitDoingInterval,int nSlowlyInitDoingInterval)
 {
 	m_szName = szName;
 	m_nNormalInitDoingInterval = nNormalInitDoingInterval;
@@ -57,7 +56,7 @@ void Invoker::CheckScheduleState(int nElapse)
 	{
 		if (static_cast<int>(nLastScheduleTime /1000) != static_cast<int>(m_nScheduleTime / 1000))
 		{
-			CACHE_LOG("Efficiency","Schedule Slowly, Invoker(%s),Time(%d)"<<m_szName<<m_nScheduleTime);
+			CacheLog(LOGDEF_INST(Efficiency),"Schedule Slowly, Invoker(%s),Time(%d)",m_szName.GetCText(),m_nScheduleTime);
 		}
 	}
 }
@@ -70,7 +69,7 @@ void Invoker::CheckRunState(int nElapse)
 	{
 		if (static_cast<int>(uLastRunTime /1000) != static_cast<int>(m_nRunTime / 1000))
 		{
-			CACHE_LOG("Efficiency","Run Slowly, Invoker("<<m_szName<<"),Time("<<m_nRunTime<<")");
+			CacheLog(LOGDEF_INST(Efficiency),"Schedule Slowly, Invoker(%s),Time(%d)",m_szName.GetCText(),m_nRunTime);
 		}
 	}
 }

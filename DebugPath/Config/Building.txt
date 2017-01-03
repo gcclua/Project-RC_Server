@@ -1,0 +1,18 @@
+Id	Desc	ModelID	SlotType
+INT	STRING	INT	INT
+#MAX_ID=20;MAX_RECORD=20;TableType=Index;			
+#陷阱ID	描述	模型	地块类型
+#此行必须有!!客户端确定是否需要读到内存	规则		
+1	城堡	1	0
+2	城墙	15	0
+3	采石场	15	0
+4	农田	15	0
+5	兵营		
+6	教堂		
+7	试炼场		
+8	贸易中心		
+9	仓库		
+10	学院		
+11	使馆		
+12	酒馆		
+13	铁匠铺		
