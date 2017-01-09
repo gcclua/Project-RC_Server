@@ -92,6 +92,9 @@
     <Filter Include="Source Files\login">
       <UniqueIdentifier>{3d49470f-87f7-482b-8da9-34d2795f96f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\AStarPathFinding">
+      <UniqueIdentifier>{a2c04bf8-ef4d-496d-9a98-3f2df0e8e934}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="event\EventDefine.h">
@@ -574,6 +577,33 @@
     <ClInclude Include="common\Table\TableManager.h">
       <Filter>Source Files\table</Filter>
     </ClInclude>
+    <ClInclude Include="common\AStarPathFinding\Coord.h">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="common\AStarPathFinding\MapAStarCompact.h">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="common\AStarPathFinding\MapConst.h">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="common\AStarPathFinding\MapLayout.h">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="common\AStarPathFinding\MapProxy.h">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="common\AStarPathFinding\MapTileVO.h">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="common\AStarPathFinding\MinHeap.h">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="common\AStarPathFinding\Utils.h">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClInclude>
+    <ClInclude Include="common\AStarPathFinding\AStarHelper.h">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common\coredump.cpp">
@@ -896,6 +926,30 @@
     </ClCompile>
     <ClCompile Include="common\Table\Table_Troop.cpp">
       <Filter>Source Files\table</Filter>
+    </ClCompile>
+    <ClCompile Include="common\AStarPathFinding\Utils.cpp">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="common\AStarPathFinding\Coord.cpp">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="common\AStarPathFinding\MapAStarCompact.cpp">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="common\AStarPathFinding\MapConst.cpp">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="common\AStarPathFinding\MapLayout.cpp">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="common\AStarPathFinding\MapProxy.cpp">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="common\AStarPathFinding\MapTileVO.cpp">
+      <Filter>Source Files\AStarPathFinding</Filter>
+    </ClCompile>
+    <ClCompile Include="common\AStarPathFinding\AStarHelper.cpp">
+      <Filter>Source Files\AStarPathFinding</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

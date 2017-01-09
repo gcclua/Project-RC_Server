@@ -13,9 +13,13 @@ MESSAGE_DEF_END(MarchEnterSceneMsg)
 
 MESSAGE_DEF_BEGIN(MarchLeaveSceneMsg)
 	int64 m_guid;
-	PlayerPtr m_PlayerPtr;
+	March m_March;
 	int m_nDelResult;
 MESSAGE_DEF_END(MarchLeaveSceneMsg)
+
+MESSAGE_DEF_BEGIN(MarchLeaveBattleMsg)
+	March m_March;
+MESSAGE_DEF_END(MarchLeaveBattleMsg)
 
 MESSAGE_DEF_BEGIN(ReqMarchStartMsg)
 	ScenePos m_Pos;
@@ -67,6 +71,12 @@ MESSAGE_DEF_BEGIN(MarchReqFightMsg)
 	int64 m_nAtttackId;
 	int m_nSceneId;
 MESSAGE_DEF_END(MarchReqFightMsg)
+	
+MESSAGE_DEF_BEGIN(MarchRetFightMsg)
+int64 m_nMarchId;
+int   m_nSceneId;
+int   m_nResult;
+MESSAGE_DEF_END(MarchRetFightMsg)
 
 MESSAGE_DEF_BEGIN(MarchOpenCopySceneMsg)
 	int m_DestSceneID;

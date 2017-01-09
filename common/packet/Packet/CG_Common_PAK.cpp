@@ -124,3 +124,12 @@ tuint32 Packets::CG_OBJPOSLIST_PAK::Execute( Player* pPlayer )
  __LEAVE_FUNCTION
  return PACKET_EXE_ERROR;
  }
+//This code create by CodeEngine Author:Wendy ,don't modify
+#include "CG_BUILDING_LEVELUP_PAK.h"
+tuint32 Packets::CG_BUILDING_LEVELUP_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return CG_BUILDING_LEVELUP_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }

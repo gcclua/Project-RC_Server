@@ -20,6 +20,8 @@ public:
 
 	virtual void Tick(const TimeInfo &rTimeInfo);
 
+	virtual void Tick_Moving(const TimeInfo &rTimeInfo);
+
 	virtual bool CanBeView(Obj_Npc &rNpc);
 private:
 	void BeginDeadStatus_DeadBody(void);
@@ -95,7 +97,9 @@ public:
 	//接受伤害
 	virtual void OnReceiveDamage(DamagesInof_T& rDamage);
 public:
-	void StartMarch();
+	bool InCombat(){return m_curAIType == AI_COMBAT;}
+	void EnterMarch();
+	void EnterTrace();
 	bool SwitchAI(int AIType);
 	void ProessTrace(Obj_Character& rUnit,float fAttackDis);//追踪
 	// 在战斗状态下选择一个技能
@@ -140,6 +144,7 @@ protected:
 	bool SelectCanAttackObj();
 	virtual void EnterCombat(void);
 	virtual void LeaveCombat(void);
+
 	//npc 选择目标方式
 	int SelectNewTarget(int SelMethod);
 	int SelectMethod_Sencond();

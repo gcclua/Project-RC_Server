@@ -272,12 +272,13 @@ void SceneService::HandleMessage(const MarchReqChangeSceneMsg &rMsg)
 	__LEAVE_FUNCTION
 }
 
-void SceneService::HandleMessage(MarchChangeSceneMsg rMsg)
+void SceneService::HandleMessage(const MarchChangeSceneMsg &rMsg)
 {
 	__ENTER_FUNCTION
 
 	MarchInfo ui;
-	rMsg.m_March.FillMarchBaseInfo(ui.m_MarchBaseInfo);
+	March rMarch = rMsg.m_March;
+	rMarch.FillMarchBaseInfo(ui.m_MarchBaseInfo);
 	ui.m_MarchSceneInfo.m_nState = MarchSceneInfo::SCENEPLAYING;
 	ui.m_MarchSceneInfo.m_SceneID = ChangeTo(rMsg.m_March, rMsg.m_DestSceneID);
 	UpdateMarchInfo(ui);
@@ -286,12 +287,13 @@ void SceneService::HandleMessage(MarchChangeSceneMsg rMsg)
 	__LEAVE_FUNCTION
 }
 
-void SceneService::HandleMessage( MarchEnterSceneMsg rMsg )
+void SceneService::HandleMessage(const MarchEnterSceneMsg& rMsg )
 {
 	__ENTER_FUNCTION
 
 	MarchInfo ui;
-	rMsg.m_March.FillMarchBaseInfo(ui.m_MarchBaseInfo);
+	March rMarch = rMsg.m_March;
+	rMarch.FillMarchBaseInfo(ui.m_MarchBaseInfo);
 	ui.m_MarchSceneInfo.m_nState = MarchSceneInfo::SCENEPLAYING;
 	ui.m_MarchSceneInfo.m_SceneID = EnterTo(rMsg.m_March);
 
@@ -746,7 +748,14 @@ void SceneService::HandleMessage(const ReqMarchStartMsg &rMsg)
 		ScenePos rPos = rMsg.m_Pos;
 		March    rMarch = rMsg.m_March;
 
-		EnterToDefaultScene(rMarch);
+		
+
+		MarchInfo ui;
+		rMarch.FillMarchBaseInfo(ui.m_MarchBaseInfo);
+		ui.m_MarchSceneInfo.m_nState = MarchSceneInfo::SCENEPLAYING;
+		//tempTile->SerializeFromDB(rData.m_pData[i]);
+		ui.m_MarchSceneInfo.m_SceneID = EnterToDefaultScene(rMarch);
+		AddMarchInfo(ui);
 
 
 	__LEAVE_FUNCTION

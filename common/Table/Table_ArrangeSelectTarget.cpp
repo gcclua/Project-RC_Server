@@ -38,6 +38,8 @@ loader.ReadDirect(m_TargetPos[5],(tint32)ID_TARGETPOS6);
 loader.ReadDirect(m_TargetPos[6],(tint32)ID_TARGETPOS7);
 loader.ReadDirect(m_TargetPos[7],(tint32)ID_TARGETPOS8);
 loader.ReadDirect(m_TargetPos[8],(tint32)ID_TARGETPOS9);
+loader.ReadDirect(m_TargetPos[9],(tint32)ID_TARGETPOS10);
+loader.ReadDirect(m_TargetPos[10],(tint32)ID_TARGETPOS11);
 
  return true;
  __LEAVE_FUNCTION

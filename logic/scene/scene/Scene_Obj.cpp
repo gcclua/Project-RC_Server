@@ -173,7 +173,7 @@ Obj_TroopPtr  Scene::CreateTroopObj(const Troop& rTroop,const ScenePos &rPos,int
 	objTroopPtr->SetScenePos(rPos);
 	objTroopPtr->GetCooldownList() = rTroop.GetCooldownList();
 
-	CreateNpc(pTroop->GetDataIDbyIndex(GetLevel()),rPos,false,nForce,GetLevel(),objTroopPtr);
+	CreateNpc(pTroop->GetDataIDbyIndex(rTroop.GetLevel()-1),rPos,false,nForce,rTroop.GetLevel(),objTroopPtr);
 
 	//初始化战斗属性
 	objTroopPtr->MarkInitalAttrCalcDirty();
@@ -206,7 +206,7 @@ Obj_HeroPtr  Scene::CreateHeroObj(const Hero& rHero,const ScenePos &rPos,int nFo
 		objHeroPtr->SetScenePos(rPos);
 
 		objHeroPtr->GetCooldownList() = rHero.GetCooldownList();
-		CreateNpc(pHero->GetDataIDbyIndex(GetLevel()),rPos,false,nForce,GetLevel(),objHeroPtr);
+		CreateNpc(pHero->GetDataIDbyIndex(rHero.GetLevel()-1),rPos,false,nForce,rHero.GetLevel(),objHeroPtr);
 		//初始化战斗属性
 		objHeroPtr->MarkInitalAttrCalcDirty();
 		
@@ -233,6 +233,8 @@ Obj_MarchPtr Scene::CreateMarch(const March& rMarchData,const ScenePos& rPos)
 
 	//坐标
 	MarchPtr->SetMarch(rMarchData);
+
+	MarchPtr->SetGuid(rMarchData.GetMarchId());
 	
 
 	ObjPtr objPtr = boost::static_pointer_cast<Obj, Obj_March>(MarchPtr);

@@ -53,12 +53,6 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* GC_UPDATE_SCENE_INSTACTIVATION_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   GC_UPDATE_SCENE_INSTACTIVATION_reflection_ = NULL;
-const ::google::protobuf::Descriptor* GS_CONNECTED_HEARTBEAT_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  GS_CONNECTED_HEARTBEAT_reflection_ = NULL;
-const ::google::protobuf::Descriptor* SG_CONNECTED_HEARTBEAT_descriptor_ = NULL;
-const ::google::protobuf::internal::GeneratedMessageReflection*
-  SG_CONNECTED_HEARTBEAT_reflection_ = NULL;
 const ::google::protobuf::Descriptor* CG_MOVE_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   CG_MOVE_reflection_ = NULL;
@@ -101,6 +95,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* CG_FIGHT_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   CG_FIGHT_reflection_ = NULL;
+const ::google::protobuf::Descriptor* GC_FIGHT_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  GC_FIGHT_reflection_ = NULL;
 const ::google::protobuf::Descriptor* CG_LEAVE_COPYSCENE_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   CG_LEAVE_COPYSCENE_reflection_ = NULL;
@@ -190,6 +187,12 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* GC_OBJGETHURT_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   GC_OBJGETHURT_reflection_ = NULL;
+const ::google::protobuf::Descriptor* CG_Building_LevelUp_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  CG_Building_LevelUp_reflection_ = NULL;
+const ::google::protobuf::Descriptor* GC_Building_LevelUp_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  GC_Building_LevelUp_reflection_ = NULL;
 
 }  // namespace
 
@@ -396,39 +399,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_UPDATE_SCENE_INSTACTIVATION));
-  GS_CONNECTED_HEARTBEAT_descriptor_ = file->message_type(10);
-  static const int GS_CONNECTED_HEARTBEAT_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GS_CONNECTED_HEARTBEAT, senderworldid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GS_CONNECTED_HEARTBEAT, receiverworldid_),
-  };
-  GS_CONNECTED_HEARTBEAT_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      GS_CONNECTED_HEARTBEAT_descriptor_,
-      GS_CONNECTED_HEARTBEAT::default_instance_,
-      GS_CONNECTED_HEARTBEAT_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GS_CONNECTED_HEARTBEAT, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GS_CONNECTED_HEARTBEAT, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(GS_CONNECTED_HEARTBEAT));
-  SG_CONNECTED_HEARTBEAT_descriptor_ = file->message_type(11);
-  static const int SG_CONNECTED_HEARTBEAT_offsets_[2] = {
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SG_CONNECTED_HEARTBEAT, senderworldid_),
-    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SG_CONNECTED_HEARTBEAT, receiverworldid_),
-  };
-  SG_CONNECTED_HEARTBEAT_reflection_ =
-    new ::google::protobuf::internal::GeneratedMessageReflection(
-      SG_CONNECTED_HEARTBEAT_descriptor_,
-      SG_CONNECTED_HEARTBEAT::default_instance_,
-      SG_CONNECTED_HEARTBEAT_offsets_,
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SG_CONNECTED_HEARTBEAT, _has_bits_[0]),
-      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(SG_CONNECTED_HEARTBEAT, _unknown_fields_),
-      -1,
-      ::google::protobuf::DescriptorPool::generated_pool(),
-      ::google::protobuf::MessageFactory::generated_factory(),
-      sizeof(SG_CONNECTED_HEARTBEAT));
-  CG_MOVE_descriptor_ = file->message_type(12);
+  CG_MOVE_descriptor_ = file->message_type(10);
   static const int CG_MOVE_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_MOVE, poscount_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_MOVE, posx_),
@@ -448,7 +419,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_MOVE));
-  GC_MOVE_descriptor_ = file->message_type(13);
+  GC_MOVE_descriptor_ = file->message_type(11);
   static const int GC_MOVE_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MOVE, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MOVE, poscount_),
@@ -468,7 +439,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_MOVE));
-  GC_STOP_descriptor_ = file->message_type(14);
+  GC_STOP_descriptor_ = file->message_type(12);
   static const int GC_STOP_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_STOP, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_STOP, posserial_),
@@ -487,7 +458,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_STOP));
-  GC_TELEMOVE_descriptor_ = file->message_type(15);
+  GC_TELEMOVE_descriptor_ = file->message_type(13);
   static const int GC_TELEMOVE_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_TELEMOVE, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_TELEMOVE, targetposx_),
@@ -507,7 +478,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_TELEMOVE));
-  CG_SKILL_USE_descriptor_ = file->message_type(16);
+  CG_SKILL_USE_descriptor_ = file->message_type(14);
   static const int CG_SKILL_USE_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_SKILL_USE, senderid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_SKILL_USE, skillid_),
@@ -525,7 +496,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_SKILL_USE));
-  GC_RET_USE_SKILL_descriptor_ = file->message_type(17);
+  GC_RET_USE_SKILL_descriptor_ = file->message_type(15);
   static const int GC_RET_USE_SKILL_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_RET_USE_SKILL, skillid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_RET_USE_SKILL, senderid_),
@@ -545,7 +516,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_RET_USE_SKILL));
-  GC_UPDATE_ANIMATION_STATE_descriptor_ = file->message_type(18);
+  GC_UPDATE_ANIMATION_STATE_descriptor_ = file->message_type(16);
   static const int GC_UPDATE_ANIMATION_STATE_offsets_[9] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_UPDATE_ANIMATION_STATE, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_UPDATE_ANIMATION_STATE, animationstate_),
@@ -568,7 +539,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_UPDATE_ANIMATION_STATE));
-  GC_DELETE_OBJ_descriptor_ = file->message_type(19);
+  GC_DELETE_OBJ_descriptor_ = file->message_type(17);
   static const int GC_DELETE_OBJ_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_DELETE_OBJ, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_DELETE_OBJ, sceneid_),
@@ -585,7 +556,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_DELETE_OBJ));
-  GC_ATTACKFLY_descriptor_ = file->message_type(20);
+  GC_ATTACKFLY_descriptor_ = file->message_type(18);
   static const int GC_ATTACKFLY_offsets_[5] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_ATTACKFLY, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_ATTACKFLY, dis_),
@@ -604,7 +575,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_ATTACKFLY));
-  GC_FORCE_SETPOS_descriptor_ = file->message_type(21);
+  GC_FORCE_SETPOS_descriptor_ = file->message_type(19);
   static const int GC_FORCE_SETPOS_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_FORCE_SETPOS, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_FORCE_SETPOS, posx_),
@@ -622,7 +593,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_FORCE_SETPOS));
-  GC_UPDATE_NEEDIMPACTINFO_descriptor_ = file->message_type(22);
+  GC_UPDATE_NEEDIMPACTINFO_descriptor_ = file->message_type(20);
   static const int GC_UPDATE_NEEDIMPACTINFO_offsets_[7] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_UPDATE_NEEDIMPACTINFO, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_UPDATE_NEEDIMPACTINFO, impactid_),
@@ -643,7 +614,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_UPDATE_NEEDIMPACTINFO));
-  GC_PLAY_EFFECT_descriptor_ = file->message_type(23);
+  GC_PLAY_EFFECT_descriptor_ = file->message_type(21);
   static const int GC_PLAY_EFFECT_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_PLAY_EFFECT, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_PLAY_EFFECT, effectid_),
@@ -660,7 +631,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_PLAY_EFFECT));
-  GC_REMOVEEFFECT_descriptor_ = file->message_type(24);
+  GC_REMOVEEFFECT_descriptor_ = file->message_type(22);
   static const int GC_REMOVEEFFECT_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_REMOVEEFFECT, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_REMOVEEFFECT, effectid_),
@@ -677,7 +648,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_REMOVEEFFECT));
-  CG_FIGHT_descriptor_ = file->message_type(25);
+  CG_FIGHT_descriptor_ = file->message_type(23);
   static const int CG_FIGHT_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_FIGHT, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_FIGHT, attackid_),
@@ -695,7 +666,24 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_FIGHT));
-  CG_LEAVE_COPYSCENE_descriptor_ = file->message_type(26);
+  GC_FIGHT_descriptor_ = file->message_type(24);
+  static const int GC_FIGHT_offsets_[3] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_FIGHT, ret_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_FIGHT, marchid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_FIGHT, sceneid_),
+  };
+  GC_FIGHT_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      GC_FIGHT_descriptor_,
+      GC_FIGHT::default_instance_,
+      GC_FIGHT_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_FIGHT, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_FIGHT, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(GC_FIGHT));
+  CG_LEAVE_COPYSCENE_descriptor_ = file->message_type(25);
   static const int CG_LEAVE_COPYSCENE_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_LEAVE_COPYSCENE, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_LEAVE_COPYSCENE, sceneid_),
@@ -711,7 +699,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_LEAVE_COPYSCENE));
-  CG_ROBOT_OPEN_descriptor_ = file->message_type(27);
+  CG_ROBOT_OPEN_descriptor_ = file->message_type(26);
   static const int CG_ROBOT_OPEN_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_ROBOT_OPEN, sceneid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_ROBOT_OPEN, open_),
@@ -727,7 +715,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_ROBOT_OPEN));
-  GC_ROBOT_OPEN_descriptor_ = file->message_type(28);
+  GC_ROBOT_OPEN_descriptor_ = file->message_type(27);
   static const int GC_ROBOT_OPEN_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_ROBOT_OPEN, sceneid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_ROBOT_OPEN, ret_),
@@ -743,7 +731,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_ROBOT_OPEN));
-  CG_ASSIGN_HERO_descriptor_ = file->message_type(29);
+  CG_ASSIGN_HERO_descriptor_ = file->message_type(28);
   static const int CG_ASSIGN_HERO_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_ASSIGN_HERO, marchid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_ASSIGN_HERO, heroid_),
@@ -759,7 +747,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_ASSIGN_HERO));
-  GC_ASSIGN_HERO_descriptor_ = file->message_type(30);
+  GC_ASSIGN_HERO_descriptor_ = file->message_type(29);
   static const int GC_ASSIGN_HERO_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_ASSIGN_HERO, marchid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_ASSIGN_HERO, heroid_),
@@ -776,7 +764,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_ASSIGN_HERO));
-  CG_SEND_MARCH_descriptor_ = file->message_type(31);
+  CG_SEND_MARCH_descriptor_ = file->message_type(30);
   static const int CG_SEND_MARCH_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_SEND_MARCH, marchid_),
   };
@@ -791,7 +779,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_SEND_MARCH));
-  GC_SEND_MARCH_descriptor_ = file->message_type(32);
+  GC_SEND_MARCH_descriptor_ = file->message_type(31);
   static const int GC_SEND_MARCH_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_SEND_MARCH, marchid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_SEND_MARCH, ret_),
@@ -807,7 +795,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_SEND_MARCH));
-  CG_CREATEROLE_descriptor_ = file->message_type(33);
+  CG_CREATEROLE_descriptor_ = file->message_type(32);
   static const int CG_CREATEROLE_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_CREATEROLE, gender_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_CREATEROLE, name_),
@@ -823,7 +811,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_CREATEROLE));
-  GC_CREATEROLE_RET_descriptor_ = file->message_type(34);
+  GC_CREATEROLE_RET_descriptor_ = file->message_type(33);
   static const int GC_CREATEROLE_RET_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_CREATEROLE_RET, result_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_CREATEROLE_RET, playerguid_),
@@ -841,7 +829,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_CREATEROLE_RET));
   GC_CREATEROLE_RET_CREATEROLE_RESULT_descriptor_ = GC_CREATEROLE_RET_descriptor_->enum_type(0);
-  GC_LOGIN_QUEUE_STATUS_descriptor_ = file->message_type(35);
+  GC_LOGIN_QUEUE_STATUS_descriptor_ = file->message_type(34);
   static const int GC_LOGIN_QUEUE_STATUS_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_LOGIN_QUEUE_STATUS, status_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_LOGIN_QUEUE_STATUS, index_),
@@ -858,7 +846,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_LOGIN_QUEUE_STATUS));
   GC_LOGIN_QUEUE_STATUS_QUEUESTATUS_descriptor_ = GC_LOGIN_QUEUE_STATUS_descriptor_->enum_type(0);
-  GC_RoleData_descriptor_ = file->message_type(36);
+  GC_RoleData_descriptor_ = file->message_type(35);
   static const int GC_RoleData_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_RoleData, guid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_RoleData, hp_),
@@ -875,7 +863,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_RoleData));
-  GC_BuildingData_descriptor_ = file->message_type(37);
+  GC_BuildingData_descriptor_ = file->message_type(36);
   static const int GC_BuildingData_offsets_[4] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_BuildingData, guid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_BuildingData, type_),
@@ -893,7 +881,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_BuildingData));
-  GC_CoolDownInfo_descriptor_ = file->message_type(38);
+  GC_CoolDownInfo_descriptor_ = file->message_type(37);
   static const int GC_CoolDownInfo_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_CoolDownInfo, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_CoolDownInfo, cdtime_),
@@ -910,7 +898,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_CoolDownInfo));
-  GC_HeroData_descriptor_ = file->message_type(39);
+  GC_HeroData_descriptor_ = file->message_type(38);
   static const int GC_HeroData_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_HeroData, guid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_HeroData, type_),
@@ -934,7 +922,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_HeroData));
-  GC_TroopData_descriptor_ = file->message_type(40);
+  GC_TroopData_descriptor_ = file->message_type(39);
   static const int GC_TroopData_offsets_[8] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_TroopData, type_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_TroopData, level_),
@@ -956,7 +944,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_TroopData));
-  GC_MarchData_descriptor_ = file->message_type(41);
+  GC_MarchData_descriptor_ = file->message_type(40);
   static const int GC_MarchData_offsets_[10] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MarchData, marchid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MarchData, begintime_),
@@ -980,7 +968,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_MarchData));
-  GC_TargetMarchData_descriptor_ = file->message_type(42);
+  GC_TargetMarchData_descriptor_ = file->message_type(41);
   static const int GC_TargetMarchData_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_TargetMarchData, marchid_),
   };
@@ -995,7 +983,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_TargetMarchData));
-  GC_CityData_descriptor_ = file->message_type(43);
+  GC_CityData_descriptor_ = file->message_type(42);
   static const int GC_CityData_offsets_[8] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_CityData, tileid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_CityData, cityid_),
@@ -1017,7 +1005,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_CityData));
-  GC_HeroList_descriptor_ = file->message_type(44);
+  GC_HeroList_descriptor_ = file->message_type(43);
   static const int GC_HeroList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_HeroList, herolist_),
   };
@@ -1032,7 +1020,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_HeroList));
-  GC_MarchList_descriptor_ = file->message_type(45);
+  GC_MarchList_descriptor_ = file->message_type(44);
   static const int GC_MarchList_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MarchList, marchlist_),
   };
@@ -1047,7 +1035,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_MarchList));
-  CG_BATTLEINFOR_descriptor_ = file->message_type(46);
+  CG_BATTLEINFOR_descriptor_ = file->message_type(45);
   static const int CG_BATTLEINFOR_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_BATTLEINFOR, sceneid_),
   };
@@ -1062,7 +1050,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_BATTLEINFOR));
-  GC_OBJINFOR_descriptor_ = file->message_type(47);
+  GC_OBJINFOR_descriptor_ = file->message_type(46);
   static const int GC_OBJINFOR_offsets_[14] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJINFOR, id_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJINFOR, unitdataid_),
@@ -1090,7 +1078,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_OBJINFOR));
-  GC_BATTLEINFOR_descriptor_ = file->message_type(48);
+  GC_BATTLEINFOR_descriptor_ = file->message_type(47);
   static const int GC_BATTLEINFOR_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_BATTLEINFOR, sceneid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_BATTLEINFOR, objlist_),
@@ -1106,7 +1094,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_BATTLEINFOR));
-  GC_OBJPOS_descriptor_ = file->message_type(49);
+  GC_OBJPOS_descriptor_ = file->message_type(48);
   static const int GC_OBJPOS_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJPOS, objid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJPOS, posx_),
@@ -1126,7 +1114,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_OBJPOS));
-  GC_OBJPOSLIST_descriptor_ = file->message_type(50);
+  GC_OBJPOSLIST_descriptor_ = file->message_type(49);
   static const int GC_OBJPOSLIST_offsets_[2] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJPOSLIST, sceneid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJPOSLIST, objposlist_),
@@ -1142,7 +1130,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_OBJPOSLIST));
-  CG_OBJPOSLIST_descriptor_ = file->message_type(51);
+  CG_OBJPOSLIST_descriptor_ = file->message_type(50);
   static const int CG_OBJPOSLIST_offsets_[1] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_OBJPOSLIST, sceneid_),
   };
@@ -1157,7 +1145,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_OBJPOSLIST));
-  GC_OBJCOMMANDPURSUE_descriptor_ = file->message_type(52);
+  GC_OBJCOMMANDPURSUE_descriptor_ = file->message_type(51);
   static const int GC_OBJCOMMANDPURSUE_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJCOMMANDPURSUE, sceneid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJCOMMANDPURSUE, objid_),
@@ -1174,7 +1162,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_OBJCOMMANDPURSUE));
-  GC_OBJPREPAREFORATTACK_descriptor_ = file->message_type(53);
+  GC_OBJPREPAREFORATTACK_descriptor_ = file->message_type(52);
   static const int GC_OBJPREPAREFORATTACK_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJPREPAREFORATTACK, sceneid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJPREPAREFORATTACK, objid_),
@@ -1191,7 +1179,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_OBJPREPAREFORATTACK));
-  GC_OBJGETHURT_descriptor_ = file->message_type(54);
+  GC_OBJGETHURT_descriptor_ = file->message_type(53);
   static const int GC_OBJGETHURT_offsets_[6] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJGETHURT, sceneid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_OBJGETHURT, objid_),
@@ -1211,6 +1199,37 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_OBJGETHURT));
+  CG_Building_LevelUp_descriptor_ = file->message_type(54);
+  static const int CG_Building_LevelUp_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_Building_LevelUp, buildingid_),
+  };
+  CG_Building_LevelUp_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      CG_Building_LevelUp_descriptor_,
+      CG_Building_LevelUp::default_instance_,
+      CG_Building_LevelUp_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_Building_LevelUp, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(CG_Building_LevelUp, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(CG_Building_LevelUp));
+  GC_Building_LevelUp_descriptor_ = file->message_type(55);
+  static const int GC_Building_LevelUp_offsets_[2] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_Building_LevelUp, buildingid_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_Building_LevelUp, level_),
+  };
+  GC_Building_LevelUp_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      GC_Building_LevelUp_descriptor_,
+      GC_Building_LevelUp::default_instance_,
+      GC_Building_LevelUp_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_Building_LevelUp, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_Building_LevelUp, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(GC_Building_LevelUp));
 }
 
 namespace {
@@ -1244,10 +1263,6 @@ void protobuf_RegisterTypes(const ::std::string&) {
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     GC_UPDATE_SCENE_INSTACTIVATION_descriptor_, &GC_UPDATE_SCENE_INSTACTIVATION::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    GS_CONNECTED_HEARTBEAT_descriptor_, &GS_CONNECTED_HEARTBEAT::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
-    SG_CONNECTED_HEARTBEAT_descriptor_, &SG_CONNECTED_HEARTBEAT::default_instance());
-  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     CG_MOVE_descriptor_, &CG_MOVE::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     GC_MOVE_descriptor_, &GC_MOVE::default_instance());
@@ -1275,6 +1290,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     GC_REMOVEEFFECT_descriptor_, &GC_REMOVEEFFECT::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     CG_FIGHT_descriptor_, &CG_FIGHT::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    GC_FIGHT_descriptor_, &GC_FIGHT::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     CG_LEAVE_COPYSCENE_descriptor_, &CG_LEAVE_COPYSCENE::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
@@ -1333,6 +1350,10 @@ void protobuf_RegisterTypes(const ::std::string&) {
     GC_OBJPREPAREFORATTACK_descriptor_, &GC_OBJPREPAREFORATTACK::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     GC_OBJGETHURT_descriptor_, &GC_OBJGETHURT::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    CG_Building_LevelUp_descriptor_, &CG_Building_LevelUp::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    GC_Building_LevelUp_descriptor_, &GC_Building_LevelUp::default_instance());
 }
 
 }  // namespace
@@ -1358,10 +1379,6 @@ void protobuf_ShutdownFile_PBMessage_2eproto() {
   delete GC_NOTICE_reflection_;
   delete GC_UPDATE_SCENE_INSTACTIVATION::default_instance_;
   delete GC_UPDATE_SCENE_INSTACTIVATION_reflection_;
-  delete GS_CONNECTED_HEARTBEAT::default_instance_;
-  delete GS_CONNECTED_HEARTBEAT_reflection_;
-  delete SG_CONNECTED_HEARTBEAT::default_instance_;
-  delete SG_CONNECTED_HEARTBEAT_reflection_;
   delete CG_MOVE::default_instance_;
   delete CG_MOVE_reflection_;
   delete GC_MOVE::default_instance_;
@@ -1390,6 +1407,8 @@ void protobuf_ShutdownFile_PBMessage_2eproto() {
   delete GC_REMOVEEFFECT_reflection_;
   delete CG_FIGHT::default_instance_;
   delete CG_FIGHT_reflection_;
+  delete GC_FIGHT::default_instance_;
+  delete GC_FIGHT_reflection_;
   delete CG_LEAVE_COPYSCENE::default_instance_;
   delete CG_LEAVE_COPYSCENE_reflection_;
   delete CG_ROBOT_OPEN::default_instance_;
@@ -1448,6 +1467,10 @@ void protobuf_ShutdownFile_PBMessage_2eproto() {
   delete GC_OBJPREPAREFORATTACK_reflection_;
   delete GC_OBJGETHURT::default_instance_;
   delete GC_OBJGETHURT_reflection_;
+  delete CG_Building_LevelUp::default_instance_;
+  delete CG_Building_LevelUp_reflection_;
+  delete GC_Building_LevelUp::default_instance_;
+  delete GC_Building_LevelUp_reflection_;
 }
 
 void protobuf_AddDesc_PBMessage_2eproto() {
@@ -1505,114 +1528,114 @@ void protobuf_AddDesc_PBMessage_2eproto() {
     "\n\006notice\030\001 \002(\t\022\024\n\014filterRepeat\030\002 \001(\005\"g\n\036"
     "GC_UPDATE_SCENE_INSTACTIVATION\022\024\n\014scenec"
     "lassid\030\001 \002(\005\022\026\n\016sceneinstcount\030\002 \002(\005\022\027\n\017"
-    "sceneactivation\030\003 \003(\005\"H\n\026GS_CONNECTED_HE"
-    "ARTBEAT\022\025\n\rsenderworldid\030\001 \002(\005\022\027\n\017receiv"
-    "erworldid\030\002 \002(\005\"H\n\026SG_CONNECTED_HEARTBEA"
-    "T\022\025\n\rsenderworldid\030\001 \002(\005\022\027\n\017receiverworl"
-    "did\030\002 \002(\005\"i\n\007CG_MOVE\022\020\n\010poscount\030\001 \002(\005\022\014"
-    "\n\004posx\030\002 \003(\005\022\014\n\004posz\030\003 \003(\005\022\020\n\010ismoving\030\004"
-    " \002(\005\022\r\n\005objid\030\005 \002(\005\022\017\n\007sceneId\030\006 \002(\005\"j\n\007"
-    "GC_MOVE\022\r\n\005objid\030\001 \002(\005\022\020\n\010poscount\030\002 \002(\005"
-    "\022\021\n\tposserial\030\003 \003(\005\022\014\n\004posx\030\004 \003(\005\022\014\n\004pos"
-    "z\030\005 \003(\005\022\017\n\007sceneId\030\006 \002(\005\"X\n\007GC_STOP\022\r\n\005o"
-    "bjid\030\001 \002(\005\022\021\n\tposserial\030\002 \002(\005\022\014\n\004posx\030\003 "
-    "\002(\005\022\014\n\004posz\030\004 \002(\005\022\017\n\007sceneId\030\005 \002(\005\"\200\001\n\013G"
-    "C_TELEMOVE\022\r\n\005objId\030\001 \002(\005\022\022\n\ntargetPosX\030"
-    "\002 \002(\005\022\022\n\ntargetPosZ\030\003 \002(\005\022\030\n\020needChangeF"
-    "aceto\030\004 \002(\005\022\017\n\007animaId\030\005 \001(\005\022\017\n\007sceneId\030"
-    "\006 \002(\005\"T\n\014CG_SKILL_USE\022\020\n\010senderId\030\001 \002(\005\022"
-    "\017\n\007skillId\030\002 \002(\005\022\020\n\010targetId\030\003 \002(\005\022\017\n\007sc"
-    "eneId\030\004 \002(\005\"\202\001\n\020GC_RET_USE_SKILL\022\017\n\007skil"
-    "lId\030\001 \002(\005\022\020\n\010senderId\030\002 \002(\005\022\020\n\010TargetId\030"
-    "\003 \002(\005\022\025\n\rskillfailType\030\004 \001(\005\022\021\n\tskillnam"
-    "e\030\005 \001(\t\022\017\n\007sceneId\030\006 \002(\005\"\334\001\n\031GC_UPDATE_A"
-    "NIMATION_STATE\022\r\n\005objId\030\001 \002(\005\022\026\n\016Animati"
-    "onState\030\002 \002(\005\022\026\n\016verticalOffDis\030\003 \001(\005\022\030\n"
-    "\020horizontalOffDis\030\004 \001(\005\022\025\n\rstateLastTime"
-    "\030\005 \001(\005\022\027\n\017stateResortTime\030\006 \001(\005\022\020\n\010hitTi"
-    "mes\030\007 \001(\005\022\023\n\013hitInterval\030\010 \001(\005\022\017\n\007sceneI"
-    "d\030\t \002(\005\"@\n\rGC_DELETE_OBJ\022\r\n\005objId\030\001 \002(\005\022"
-    "\017\n\007sceneId\030\002 \002(\005\022\017\n\007marchId\030\003 \002(\005\"[\n\014GC_"
-    "ATTACKFLY\022\r\n\005objId\030\001 \002(\005\022\013\n\003Dis\030\002 \002(\005\022\r\n"
-    "\005Hight\030\003 \002(\005\022\017\n\007FlyTime\030\004 \002(\005\022\017\n\007sceneId"
-    "\030\005 \002(\005\"M\n\017GC_FORCE_SETPOS\022\r\n\005objID\030\001 \002(\005"
-    "\022\014\n\004PosX\030\002 \002(\005\022\014\n\004PosZ\030\003 \002(\005\022\017\n\007sceneId\030"
-    "\004 \002(\005\"\231\001\n\030GC_UPDATE_NEEDIMPACTINFO\022\r\n\005ob"
-    "jId\030\001 \002(\005\022\020\n\010impactId\030\002 \003(\005\022\025\n\rimpactLog"
-    "icId\030\003 \003(\005\022\021\n\tisForever\030\004 \003(\005\022\022\n\nremainT"
-    "ime\030\005 \003(\005\022\r\n\005isAdd\030\006 \003(\005\022\017\n\007sceneId\030\007 \002("
-    "\005\"B\n\016GC_PLAY_EFFECT\022\r\n\005ObjID\030\001 \002(\005\022\020\n\010Ef"
-    "fectID\030\002 \002(\005\022\017\n\007sceneId\030\005 \002(\005\"C\n\017GC_REMO"
-    "VEEFFECT\022\r\n\005objId\030\001 \002(\005\022\020\n\010effectId\030\002 \002("
-    "\005\022\017\n\007sceneId\030\003 \002(\005\"N\n\010CG_FIGHT\022\014\n\004Type\030\001"
-    " \002(\005\022\020\n\010AttackId\030\002 \002(\003\022\021\n\tDefenceId\030\003 \001("
-    "\003\022\017\n\007sceneId\030\004 \002(\005\"4\n\022CG_LEAVE_COPYSCENE"
-    "\022\r\n\005objId\030\001 \002(\005\022\017\n\007sceneId\030\002 \002(\005\".\n\rCG_R"
-    "OBOT_OPEN\022\017\n\007sceneId\030\001 \002(\005\022\014\n\004open\030\002 \002(\005"
-    "\"-\n\rGC_ROBOT_OPEN\022\017\n\007sceneId\030\001 \002(\005\022\013\n\003re"
-    "t\030\002 \002(\005\"1\n\016CG_ASSIGN_HERO\022\017\n\007marchid\030\001 \002"
-    "(\003\022\016\n\006heroid\030\002 \002(\003\">\n\016GC_ASSIGN_HERO\022\017\n\007"
-    "marchid\030\001 \002(\003\022\016\n\006heroId\030\002 \002(\003\022\013\n\003ret\030\003 \002"
-    "(\005\" \n\rCG_SEND_MARCH\022\017\n\007marchid\030\001 \002(\003\"-\n\r"
-    "GC_SEND_MARCH\022\017\n\007marchId\030\001 \002(\003\022\013\n\003ret\030\002 "
-    "\002(\005\"-\n\rCG_CREATEROLE\022\016\n\006gender\030\001 \002(\005\022\014\n\004"
-    "name\030\002 \002(\t\"\356\001\n\021GC_CREATEROLE_RET\022\016\n\006resu"
-    "lt\030\001 \002(\005\022\022\n\nplayerGuid\030\002 \002(\004\022\022\n\nplayerNa"
-    "me\030\003 \002(\t\"\240\001\n\021CREATEROLE_RESULT\022\026\n\022CREATE"
-    "ROLE_SUCCESS\020\000\022\023\n\017CREATEROLE_FAIL\020\001\022\035\n\031C"
-    "REATEROLE_FAIL_NAMEEXIST\020\002\022!\n\035CREATEROLE"
-    "_FAIL_NAMESCREENING\020\003\022\034\n\030CREATEROLE_FAIL"
-    "_LONGNAME\020\004\"p\n\025GC_LOGIN_QUEUE_STATUS\022\016\n\006"
-    "status\030\001 \002(\005\022\r\n\005index\030\002 \002(\005\"8\n\013QUEUESTAT"
-    "US\022\016\n\nBEGINQUEUE\020\000\022\013\n\007QUEUING\020\001\022\014\n\010ENDQU"
-    "EUE\020\002\"<\n\013GC_RoleData\022\014\n\004guid\030\001 \002(\003\022\n\n\002hp"
-    "\030\002 \001(\005\022\023\n\013accountName\030\003 \002(\t\"J\n\017GC_Buildi"
-    "ngData\022\014\n\004guid\030\001 \002(\003\022\014\n\004type\030\002 \002(\005\022\014\n\004sl"
-    "ot\030\003 \002(\005\022\r\n\005level\030\004 \002(\005\">\n\017GC_CoolDownIn"
-    "fo\022\n\n\002id\030\001 \002(\003\022\016\n\006cdtime\030\002 \002(\005\022\017\n\007elapse"
-    "d\030\003 \002(\005\"\271\001\n\013GC_HeroData\022\014\n\004guid\030\001 \002(\003\022\014\n"
-    "\004type\030\002 \002(\005\022\r\n\005level\030\003 \002(\005\022\r\n\005state\030\004 \002("
-    "\005\022\n\n\002hp\030\005 \002(\005\022\n\n\002mp\030\006 \002(\005\022\r\n\005skill\030\007 \003(\005"
-    "\022\"\n\010cooldown\030\010 \003(\0132\020.GC_CoolDownInfo\022\024\n\014"
-    "arrangeindex\030\t \002(\005\022\017\n\007marchId\030\n \002(\003\"\235\001\n\014"
-    "GC_TroopData\022\014\n\004type\030\001 \002(\005\022\r\n\005level\030\002 \002("
-    "\005\022\n\n\002hp\030\003 \002(\005\022\n\n\002mp\030\004 \002(\005\022\r\n\005skill\030\005 \003(\005"
-    "\022\"\n\010cooldown\030\006 \003(\0132\020.GC_CoolDownInfo\022\024\n\014"
-    "arrangeindex\030\007 \002(\005\022\017\n\007marchid\030\010 \002(\003\"\317\001\n\014"
-    "GC_MarchData\022\017\n\007marchid\030\001 \002(\003\022\021\n\tbeginti"
-    "me\030\002 \002(\005\022\020\n\010playerid\030\003 \002(\003\022\016\n\006cityId\030\004 \002"
-    "(\003\022\016\n\006status\030\005 \002(\005\022\r\n\005speed\030\006 \002(\005\022\017\n\007fig"
-    "htid\030\007 \001(\003\022\017\n\007buildid\030\010 \001(\003\022\032\n\004hero\030\t \002("
-    "\0132\014.GC_HeroData\022\034\n\005troop\030\n \003(\0132\r.GC_Troo"
-    "pData\"%\n\022GC_TargetMarchData\022\017\n\007marchid\030\001"
-    " \002(\003\"\256\001\n\013GC_CityData\022\016\n\006tileId\030\001 \002(\005\022\016\n\006"
-    "cityId\030\002 \002(\003\022\r\n\005level\030\003 \002(\005\022\014\n\004food\030\004 \002("
-    "\003\022\r\n\005stone\030\005 \002(\003\022\014\n\004iron\030\006 \002(\003\022#\n\tbuildl"
-    "ist\030\007 \003(\0132\020.GC_BuildingData\022 \n\ttrooplist"
-    "\030\010 \003(\0132\r.GC_TroopData\"-\n\013GC_HeroList\022\036\n\010"
-    "heroList\030\001 \003(\0132\014.GC_HeroData\"0\n\014GC_March"
-    "List\022 \n\tmarchlist\030\001 \003(\0132\r.GC_MarchData\"!"
-    "\n\016CG_BATTLEINFOR\022\017\n\007sceneId\030\001 \002(\005\"\354\001\n\013GC"
-    "_OBJINFOR\022\n\n\002id\030\001 \002(\005\022\022\n\nunitDataId\030\002 \002("
-    "\005\022\023\n\013skillDataId\030\003 \003(\005\022\014\n\004camp\030\004 \002(\005\022\021\n\t"
-    "unitCount\030\005 \002(\005\022\n\n\002hp\030\006 \002(\005\022\r\n\005maxhp\030\007 \002"
-    "(\005\022\016\n\006attack\030\010 \002(\005\022\017\n\007defence\030\t \002(\005\022\n\n\002s"
-    "p\030\n \002(\005\022\r\n\005level\030\013 \002(\005\022\014\n\004posX\030\014 \002(\005\022\014\n\004"
-    "posZ\030\r \002(\005\022\024\n\014arrangeIndex\030\016 \002(\005\"@\n\016GC_B"
-    "ATTLEINFOR\022\017\n\007sceneId\030\001 \002(\005\022\035\n\007objList\030\002"
-    " \003(\0132\014.GC_OBJINFOR\"f\n\tGC_OBJPOS\022\r\n\005objId"
-    "\030\001 \002(\005\022\014\n\004posX\030\002 \002(\005\022\014\n\004posZ\030\003 \002(\005\022\n\n\002hp"
-    "\030\004 \002(\005\022\020\n\010targetId\030\005 \002(\005\022\020\n\010objState\030\006 \002"
-    "(\005\"@\n\rGC_OBJPOSLIST\022\017\n\007sceneId\030\001 \002(\005\022\036\n\n"
-    "objPosList\030\002 \003(\0132\n.GC_OBJPOS\" \n\rCG_OBJPO"
-    "SLIST\022\017\n\007sceneId\030\001 \002(\005\"G\n\023GC_OBJCOMMANDP"
-    "URSUE\022\017\n\007sceneId\030\001 \002(\005\022\r\n\005objId\030\002 \002(\005\022\020\n"
-    "\010aimObjId\030\003 \002(\005\"J\n\026GC_OBJPREPAREFORATTAC"
-    "K\022\017\n\007sceneId\030\001 \002(\005\022\r\n\005objId\030\002 \002(\005\022\020\n\010aim"
-    "ObjId\030\003 \002(\005\"z\n\rGC_OBJGETHURT\022\017\n\007sceneId\030"
-    "\001 \002(\005\022\r\n\005objId\030\002 \002(\005\022\023\n\013attackObjId\030\003 \002("
-    "\005\022\016\n\006damage\030\004 \002(\005\022\017\n\007objDead\030\005 \002(\005\022\023\n\013de"
-    "athNumber\030\006 \002(\005", 6215);
+    "sceneactivation\030\003 \003(\005\"i\n\007CG_MOVE\022\020\n\010posc"
+    "ount\030\001 \002(\005\022\014\n\004posx\030\002 \003(\005\022\014\n\004posz\030\003 \003(\005\022\020"
+    "\n\010ismoving\030\004 \002(\005\022\r\n\005objid\030\005 \002(\005\022\017\n\007scene"
+    "Id\030\006 \002(\005\"j\n\007GC_MOVE\022\r\n\005objid\030\001 \002(\005\022\020\n\010po"
+    "scount\030\002 \002(\005\022\021\n\tposserial\030\003 \003(\005\022\014\n\004posx\030"
+    "\004 \003(\005\022\014\n\004posz\030\005 \003(\005\022\017\n\007sceneId\030\006 \002(\005\"X\n\007"
+    "GC_STOP\022\r\n\005objid\030\001 \002(\005\022\021\n\tposserial\030\002 \002("
+    "\005\022\014\n\004posx\030\003 \002(\005\022\014\n\004posz\030\004 \002(\005\022\017\n\007sceneId"
+    "\030\005 \002(\005\"\200\001\n\013GC_TELEMOVE\022\r\n\005objId\030\001 \002(\005\022\022\n"
+    "\ntargetPosX\030\002 \002(\005\022\022\n\ntargetPosZ\030\003 \002(\005\022\030\n"
+    "\020needChangeFaceto\030\004 \002(\005\022\017\n\007animaId\030\005 \001(\005"
+    "\022\017\n\007sceneId\030\006 \002(\005\"T\n\014CG_SKILL_USE\022\020\n\010sen"
+    "derId\030\001 \002(\005\022\017\n\007skillId\030\002 \002(\005\022\020\n\010targetId"
+    "\030\003 \002(\005\022\017\n\007sceneId\030\004 \002(\005\"\202\001\n\020GC_RET_USE_S"
+    "KILL\022\017\n\007skillId\030\001 \002(\005\022\020\n\010senderId\030\002 \002(\005\022"
+    "\020\n\010TargetId\030\003 \002(\005\022\025\n\rskillfailType\030\004 \001(\005"
+    "\022\021\n\tskillname\030\005 \001(\t\022\017\n\007sceneId\030\006 \002(\005\"\334\001\n"
+    "\031GC_UPDATE_ANIMATION_STATE\022\r\n\005objId\030\001 \002("
+    "\005\022\026\n\016AnimationState\030\002 \002(\005\022\026\n\016verticalOff"
+    "Dis\030\003 \001(\005\022\030\n\020horizontalOffDis\030\004 \001(\005\022\025\n\rs"
+    "tateLastTime\030\005 \001(\005\022\027\n\017stateResortTime\030\006 "
+    "\001(\005\022\020\n\010hitTimes\030\007 \001(\005\022\023\n\013hitInterval\030\010 \001"
+    "(\005\022\017\n\007sceneId\030\t \002(\005\"@\n\rGC_DELETE_OBJ\022\r\n\005"
+    "objId\030\001 \002(\005\022\017\n\007sceneId\030\002 \002(\005\022\017\n\007marchId\030"
+    "\003 \002(\005\"[\n\014GC_ATTACKFLY\022\r\n\005objId\030\001 \002(\005\022\013\n\003"
+    "Dis\030\002 \002(\005\022\r\n\005Hight\030\003 \002(\005\022\017\n\007FlyTime\030\004 \002("
+    "\005\022\017\n\007sceneId\030\005 \002(\005\"M\n\017GC_FORCE_SETPOS\022\r\n"
+    "\005objID\030\001 \002(\005\022\014\n\004PosX\030\002 \002(\005\022\014\n\004PosZ\030\003 \002(\005"
+    "\022\017\n\007sceneId\030\004 \002(\005\"\231\001\n\030GC_UPDATE_NEEDIMPA"
+    "CTINFO\022\r\n\005objId\030\001 \002(\005\022\020\n\010impactId\030\002 \003(\005\022"
+    "\025\n\rimpactLogicId\030\003 \003(\005\022\021\n\tisForever\030\004 \003("
+    "\005\022\022\n\nremainTime\030\005 \003(\005\022\r\n\005isAdd\030\006 \003(\005\022\017\n\007"
+    "sceneId\030\007 \002(\005\"B\n\016GC_PLAY_EFFECT\022\r\n\005ObjID"
+    "\030\001 \002(\005\022\020\n\010EffectID\030\002 \002(\005\022\017\n\007sceneId\030\005 \002("
+    "\005\"C\n\017GC_REMOVEEFFECT\022\r\n\005objId\030\001 \002(\005\022\020\n\010e"
+    "ffectId\030\002 \002(\005\022\017\n\007sceneId\030\003 \002(\005\"N\n\010CG_FIG"
+    "HT\022\014\n\004Type\030\001 \002(\005\022\020\n\010AttackId\030\002 \002(\003\022\021\n\tDe"
+    "fenceId\030\003 \001(\003\022\017\n\007sceneId\030\004 \002(\005\"9\n\010GC_FIG"
+    "HT\022\013\n\003ret\030\001 \002(\005\022\017\n\007marchId\030\002 \001(\003\022\017\n\007scen"
+    "eId\030\003 \001(\005\"4\n\022CG_LEAVE_COPYSCENE\022\r\n\005objId"
+    "\030\001 \002(\005\022\017\n\007sceneId\030\002 \002(\005\".\n\rCG_ROBOT_OPEN"
+    "\022\017\n\007sceneId\030\001 \002(\005\022\014\n\004open\030\002 \002(\005\"-\n\rGC_RO"
+    "BOT_OPEN\022\017\n\007sceneId\030\001 \002(\005\022\013\n\003ret\030\002 \002(\005\"1"
+    "\n\016CG_ASSIGN_HERO\022\017\n\007marchid\030\001 \002(\003\022\016\n\006her"
+    "oid\030\002 \002(\003\">\n\016GC_ASSIGN_HERO\022\017\n\007marchid\030\001"
+    " \002(\003\022\016\n\006heroId\030\002 \002(\003\022\013\n\003ret\030\003 \002(\005\" \n\rCG_"
+    "SEND_MARCH\022\017\n\007marchid\030\001 \002(\003\"-\n\rGC_SEND_M"
+    "ARCH\022\017\n\007marchId\030\001 \002(\003\022\013\n\003ret\030\002 \002(\005\"-\n\rCG"
+    "_CREATEROLE\022\016\n\006gender\030\001 \002(\005\022\014\n\004name\030\002 \002("
+    "\t\"\356\001\n\021GC_CREATEROLE_RET\022\016\n\006result\030\001 \002(\005\022"
+    "\022\n\nplayerGuid\030\002 \002(\004\022\022\n\nplayerName\030\003 \002(\t\""
+    "\240\001\n\021CREATEROLE_RESULT\022\026\n\022CREATEROLE_SUCC"
+    "ESS\020\000\022\023\n\017CREATEROLE_FAIL\020\001\022\035\n\031CREATEROLE"
+    "_FAIL_NAMEEXIST\020\002\022!\n\035CREATEROLE_FAIL_NAM"
+    "ESCREENING\020\003\022\034\n\030CREATEROLE_FAIL_LONGNAME"
+    "\020\004\"p\n\025GC_LOGIN_QUEUE_STATUS\022\016\n\006status\030\001 "
+    "\002(\005\022\r\n\005index\030\002 \002(\005\"8\n\013QUEUESTATUS\022\016\n\nBEG"
+    "INQUEUE\020\000\022\013\n\007QUEUING\020\001\022\014\n\010ENDQUEUE\020\002\"<\n\013"
+    "GC_RoleData\022\014\n\004guid\030\001 \002(\003\022\n\n\002hp\030\002 \001(\005\022\023\n"
+    "\013accountName\030\003 \002(\t\"J\n\017GC_BuildingData\022\014\n"
+    "\004guid\030\001 \002(\003\022\014\n\004type\030\002 \002(\005\022\014\n\004slot\030\003 \002(\005\022"
+    "\r\n\005level\030\004 \002(\005\">\n\017GC_CoolDownInfo\022\n\n\002id\030"
+    "\001 \002(\003\022\016\n\006cdtime\030\002 \002(\005\022\017\n\007elapsed\030\003 \002(\005\"\271"
+    "\001\n\013GC_HeroData\022\014\n\004guid\030\001 \002(\003\022\014\n\004type\030\002 \002"
+    "(\005\022\r\n\005level\030\003 \002(\005\022\r\n\005state\030\004 \002(\005\022\n\n\002hp\030\005"
+    " \002(\005\022\n\n\002mp\030\006 \002(\005\022\r\n\005skill\030\007 \003(\005\022\"\n\010coold"
+    "own\030\010 \003(\0132\020.GC_CoolDownInfo\022\024\n\014arrangein"
+    "dex\030\t \002(\005\022\017\n\007marchId\030\n \002(\003\"\235\001\n\014GC_TroopD"
+    "ata\022\014\n\004type\030\001 \002(\005\022\r\n\005level\030\002 \002(\005\022\n\n\002hp\030\003"
+    " \002(\005\022\n\n\002mp\030\004 \002(\005\022\r\n\005skill\030\005 \003(\005\022\"\n\010coold"
+    "own\030\006 \003(\0132\020.GC_CoolDownInfo\022\024\n\014arrangein"
+    "dex\030\007 \002(\005\022\017\n\007marchid\030\010 \002(\003\"\317\001\n\014GC_MarchD"
+    "ata\022\017\n\007marchid\030\001 \002(\003\022\021\n\tbegintime\030\002 \002(\005\022"
+    "\020\n\010playerid\030\003 \002(\003\022\016\n\006cityId\030\004 \002(\003\022\016\n\006sta"
+    "tus\030\005 \002(\005\022\r\n\005speed\030\006 \002(\005\022\017\n\007fightid\030\007 \001("
+    "\003\022\017\n\007buildid\030\010 \001(\003\022\032\n\004hero\030\t \002(\0132\014.GC_He"
+    "roData\022\034\n\005troop\030\n \003(\0132\r.GC_TroopData\"%\n\022"
+    "GC_TargetMarchData\022\017\n\007marchid\030\001 \002(\003\"\256\001\n\013"
+    "GC_CityData\022\016\n\006tileId\030\001 \002(\005\022\016\n\006cityId\030\002 "
+    "\002(\003\022\r\n\005level\030\003 \002(\005\022\014\n\004food\030\004 \002(\003\022\r\n\005ston"
+    "e\030\005 \002(\003\022\014\n\004iron\030\006 \002(\003\022#\n\tbuildlist\030\007 \003(\013"
+    "2\020.GC_BuildingData\022 \n\ttrooplist\030\010 \003(\0132\r."
+    "GC_TroopData\"-\n\013GC_HeroList\022\036\n\010heroList\030"
+    "\001 \003(\0132\014.GC_HeroData\"0\n\014GC_MarchList\022 \n\tm"
+    "archlist\030\001 \003(\0132\r.GC_MarchData\"!\n\016CG_BATT"
+    "LEINFOR\022\017\n\007sceneId\030\001 \002(\005\"\354\001\n\013GC_OBJINFOR"
+    "\022\n\n\002id\030\001 \002(\005\022\022\n\nunitDataId\030\002 \002(\005\022\023\n\013skil"
+    "ldataid\030\003 \003(\005\022\014\n\004camp\030\004 \002(\005\022\021\n\tunitcount"
+    "\030\005 \002(\005\022\n\n\002hp\030\006 \002(\005\022\r\n\005maxhp\030\007 \002(\005\022\016\n\006att"
+    "ack\030\010 \002(\005\022\017\n\007defence\030\t \002(\005\022\n\n\002sp\030\n \002(\005\022\r"
+    "\n\005level\030\013 \002(\005\022\014\n\004posx\030\014 \002(\005\022\014\n\004posz\030\r \002("
+    "\005\022\024\n\014arrangeindex\030\016 \002(\005\"@\n\016GC_BATTLEINFO"
+    "R\022\017\n\007sceneId\030\001 \002(\005\022\035\n\007objList\030\002 \003(\0132\014.GC"
+    "_OBJINFOR\"f\n\tGC_OBJPOS\022\r\n\005objId\030\001 \002(\005\022\014\n"
+    "\004posX\030\002 \002(\005\022\014\n\004posZ\030\003 \002(\005\022\n\n\002hp\030\004 \002(\005\022\020\n"
+    "\010targetId\030\005 \002(\005\022\020\n\010objState\030\006 \002(\005\"@\n\rGC_"
+    "OBJPOSLIST\022\017\n\007sceneId\030\001 \002(\005\022\036\n\nobjPosLis"
+    "t\030\002 \003(\0132\n.GC_OBJPOS\" \n\rCG_OBJPOSLIST\022\017\n\007"
+    "sceneId\030\001 \002(\005\"G\n\023GC_OBJCOMMANDPURSUE\022\017\n\007"
+    "sceneId\030\001 \002(\005\022\r\n\005objId\030\002 \002(\005\022\020\n\010aimObjId"
+    "\030\003 \002(\005\"J\n\026GC_OBJPREPAREFORATTACK\022\017\n\007scen"
+    "eId\030\001 \002(\005\022\r\n\005objId\030\002 \002(\005\022\020\n\010aimObjId\030\003 \002"
+    "(\005\"z\n\rGC_OBJGETHURT\022\017\n\007sceneId\030\001 \002(\005\022\r\n\005"
+    "objId\030\002 \002(\005\022\023\n\013attackObjId\030\003 \002(\005\022\016\n\006dama"
+    "ge\030\004 \002(\005\022\017\n\007objDead\030\005 \002(\005\022\023\n\013deathNumber"
+    "\030\006 \002(\005\")\n\023CG_Building_LevelUp\022\022\n\nbuildin"
+    "gID\030\001 \002(\003\"8\n\023GC_Building_LevelUp\022\022\n\nbuil"
+    "dingID\030\001 \002(\003\022\r\n\005level\030\002 \002(\005", 6227);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "PBMessage.proto", &protobuf_RegisterTypes);
   CG_LOGIN::default_instance_ = new CG_LOGIN();
@@ -1625,8 +1648,6 @@ void protobuf_AddDesc_PBMessage_2eproto() {
   GC_CHAT::default_instance_ = new GC_CHAT();
   GC_NOTICE::default_instance_ = new GC_NOTICE();
   GC_UPDATE_SCENE_INSTACTIVATION::default_instance_ = new GC_UPDATE_SCENE_INSTACTIVATION();
-  GS_CONNECTED_HEARTBEAT::default_instance_ = new GS_CONNECTED_HEARTBEAT();
-  SG_CONNECTED_HEARTBEAT::default_instance_ = new SG_CONNECTED_HEARTBEAT();
   CG_MOVE::default_instance_ = new CG_MOVE();
   GC_MOVE::default_instance_ = new GC_MOVE();
   GC_STOP::default_instance_ = new GC_STOP();
@@ -1641,6 +1662,7 @@ void protobuf_AddDesc_PBMessage_2eproto() {
   GC_PLAY_EFFECT::default_instance_ = new GC_PLAY_EFFECT();
   GC_REMOVEEFFECT::default_instance_ = new GC_REMOVEEFFECT();
   CG_FIGHT::default_instance_ = new CG_FIGHT();
+  GC_FIGHT::default_instance_ = new GC_FIGHT();
   CG_LEAVE_COPYSCENE::default_instance_ = new CG_LEAVE_COPYSCENE();
   CG_ROBOT_OPEN::default_instance_ = new CG_ROBOT_OPEN();
   GC_ROBOT_OPEN::default_instance_ = new GC_ROBOT_OPEN();
@@ -1670,6 +1692,8 @@ void protobuf_AddDesc_PBMessage_2eproto() {
   GC_OBJCOMMANDPURSUE::default_instance_ = new GC_OBJCOMMANDPURSUE();
   GC_OBJPREPAREFORATTACK::default_instance_ = new GC_OBJPREPAREFORATTACK();
   GC_OBJGETHURT::default_instance_ = new GC_OBJGETHURT();
+  CG_Building_LevelUp::default_instance_ = new CG_Building_LevelUp();
+  GC_Building_LevelUp::default_instance_ = new GC_Building_LevelUp();
   CG_LOGIN::default_instance_->InitAsDefaultInstance();
   GC_LOGIN_RET::default_instance_->InitAsDefaultInstance();
   CG_CONNECTED_HEARTBEAT::default_instance_->InitAsDefaultInstance();
@@ -1680,8 +1704,6 @@ void protobuf_AddDesc_PBMessage_2eproto() {
   GC_CHAT::default_instance_->InitAsDefaultInstance();
   GC_NOTICE::default_instance_->InitAsDefaultInstance();
   GC_UPDATE_SCENE_INSTACTIVATION::default_instance_->InitAsDefaultInstance();
-  GS_CONNECTED_HEARTBEAT::default_instance_->InitAsDefaultInstance();
-  SG_CONNECTED_HEARTBEAT::default_instance_->InitAsDefaultInstance();
   CG_MOVE::default_instance_->InitAsDefaultInstance();
   GC_MOVE::default_instance_->InitAsDefaultInstance();
   GC_STOP::default_instance_->InitAsDefaultInstance();
@@ -1696,6 +1718,7 @@ void protobuf_AddDesc_PBMessage_2eproto() {
   GC_PLAY_EFFECT::default_instance_->InitAsDefaultInstance();
   GC_REMOVEEFFECT::default_instance_->InitAsDefaultInstance();
   CG_FIGHT::default_instance_->InitAsDefaultInstance();
+  GC_FIGHT::default_instance_->InitAsDefaultInstance();
   CG_LEAVE_COPYSCENE::default_instance_->InitAsDefaultInstance();
   CG_ROBOT_OPEN::default_instance_->InitAsDefaultInstance();
   GC_ROBOT_OPEN::default_instance_->InitAsDefaultInstance();
@@ -1725,6 +1748,8 @@ void protobuf_AddDesc_PBMessage_2eproto() {
   GC_OBJCOMMANDPURSUE::default_instance_->InitAsDefaultInstance();
   GC_OBJPREPAREFORATTACK::default_instance_->InitAsDefaultInstance();
   GC_OBJGETHURT::default_instance_->InitAsDefaultInstance();
+  CG_Building_LevelUp::default_instance_->InitAsDefaultInstance();
+  GC_Building_LevelUp::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_PBMessage_2eproto);
 }
 
@@ -5957,504 +5982,6 @@ void GC_UPDATE_SCENE_INSTACTIVATION::Swap(GC_UPDATE_SCENE_INSTACTIVATION* other)
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = GC_UPDATE_SCENE_INSTACTIVATION_descriptor_;
   metadata.reflection = GC_UPDATE_SCENE_INSTACTIVATION_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int GS_CONNECTED_HEARTBEAT::kSenderworldidFieldNumber;
-const int GS_CONNECTED_HEARTBEAT::kReceiverworldidFieldNumber;
-#endif  // !_MSC_VER
-
-GS_CONNECTED_HEARTBEAT::GS_CONNECTED_HEARTBEAT()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void GS_CONNECTED_HEARTBEAT::InitAsDefaultInstance() {
-}
-
-GS_CONNECTED_HEARTBEAT::GS_CONNECTED_HEARTBEAT(const GS_CONNECTED_HEARTBEAT& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void GS_CONNECTED_HEARTBEAT::SharedCtor() {
-  _cached_size_ = 0;
-  senderworldid_ = 0;
-  receiverworldid_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-GS_CONNECTED_HEARTBEAT::~GS_CONNECTED_HEARTBEAT() {
-  SharedDtor();
-}
-
-void GS_CONNECTED_HEARTBEAT::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void GS_CONNECTED_HEARTBEAT::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* GS_CONNECTED_HEARTBEAT::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return GS_CONNECTED_HEARTBEAT_descriptor_;
-}
-
-const GS_CONNECTED_HEARTBEAT& GS_CONNECTED_HEARTBEAT::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_PBMessage_2eproto();
-  return *default_instance_;
-}
-
-GS_CONNECTED_HEARTBEAT* GS_CONNECTED_HEARTBEAT::default_instance_ = NULL;
-
-GS_CONNECTED_HEARTBEAT* GS_CONNECTED_HEARTBEAT::New() const {
-  return new GS_CONNECTED_HEARTBEAT;
-}
-
-void GS_CONNECTED_HEARTBEAT::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    senderworldid_ = 0;
-    receiverworldid_ = 0;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool GS_CONNECTED_HEARTBEAT::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 senderworldid = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &senderworldid_)));
-          set_has_senderworldid();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(16)) goto parse_receiverworldid;
-        break;
-      }
-
-      // required int32 receiverworldid = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_receiverworldid:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &receiverworldid_)));
-          set_has_receiverworldid();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void GS_CONNECTED_HEARTBEAT::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 senderworldid = 1;
-  if (has_senderworldid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->senderworldid(), output);
-  }
-
-  // required int32 receiverworldid = 2;
-  if (has_receiverworldid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->receiverworldid(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* GS_CONNECTED_HEARTBEAT::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required int32 senderworldid = 1;
-  if (has_senderworldid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->senderworldid(), target);
-  }
-
-  // required int32 receiverworldid = 2;
-  if (has_receiverworldid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->receiverworldid(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int GS_CONNECTED_HEARTBEAT::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 senderworldid = 1;
-    if (has_senderworldid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->senderworldid());
-    }
-
-    // required int32 receiverworldid = 2;
-    if (has_receiverworldid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->receiverworldid());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void GS_CONNECTED_HEARTBEAT::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const GS_CONNECTED_HEARTBEAT* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const GS_CONNECTED_HEARTBEAT*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void GS_CONNECTED_HEARTBEAT::MergeFrom(const GS_CONNECTED_HEARTBEAT& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_senderworldid()) {
-      set_senderworldid(from.senderworldid());
-    }
-    if (from.has_receiverworldid()) {
-      set_receiverworldid(from.receiverworldid());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void GS_CONNECTED_HEARTBEAT::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void GS_CONNECTED_HEARTBEAT::CopyFrom(const GS_CONNECTED_HEARTBEAT& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool GS_CONNECTED_HEARTBEAT::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
-
-  return true;
-}
-
-void GS_CONNECTED_HEARTBEAT::Swap(GS_CONNECTED_HEARTBEAT* other) {
-  if (other != this) {
-    std::swap(senderworldid_, other->senderworldid_);
-    std::swap(receiverworldid_, other->receiverworldid_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata GS_CONNECTED_HEARTBEAT::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = GS_CONNECTED_HEARTBEAT_descriptor_;
-  metadata.reflection = GS_CONNECTED_HEARTBEAT_reflection_;
-  return metadata;
-}
-
-
-// ===================================================================
-
-#ifndef _MSC_VER
-const int SG_CONNECTED_HEARTBEAT::kSenderworldidFieldNumber;
-const int SG_CONNECTED_HEARTBEAT::kReceiverworldidFieldNumber;
-#endif  // !_MSC_VER
-
-SG_CONNECTED_HEARTBEAT::SG_CONNECTED_HEARTBEAT()
-  : ::google::protobuf::Message() {
-  SharedCtor();
-}
-
-void SG_CONNECTED_HEARTBEAT::InitAsDefaultInstance() {
-}
-
-SG_CONNECTED_HEARTBEAT::SG_CONNECTED_HEARTBEAT(const SG_CONNECTED_HEARTBEAT& from)
-  : ::google::protobuf::Message() {
-  SharedCtor();
-  MergeFrom(from);
-}
-
-void SG_CONNECTED_HEARTBEAT::SharedCtor() {
-  _cached_size_ = 0;
-  senderworldid_ = 0;
-  receiverworldid_ = 0;
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-}
-
-SG_CONNECTED_HEARTBEAT::~SG_CONNECTED_HEARTBEAT() {
-  SharedDtor();
-}
-
-void SG_CONNECTED_HEARTBEAT::SharedDtor() {
-  if (this != default_instance_) {
-  }
-}
-
-void SG_CONNECTED_HEARTBEAT::SetCachedSize(int size) const {
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-}
-const ::google::protobuf::Descriptor* SG_CONNECTED_HEARTBEAT::descriptor() {
-  protobuf_AssignDescriptorsOnce();
-  return SG_CONNECTED_HEARTBEAT_descriptor_;
-}
-
-const SG_CONNECTED_HEARTBEAT& SG_CONNECTED_HEARTBEAT::default_instance() {
-  if (default_instance_ == NULL) protobuf_AddDesc_PBMessage_2eproto();
-  return *default_instance_;
-}
-
-SG_CONNECTED_HEARTBEAT* SG_CONNECTED_HEARTBEAT::default_instance_ = NULL;
-
-SG_CONNECTED_HEARTBEAT* SG_CONNECTED_HEARTBEAT::New() const {
-  return new SG_CONNECTED_HEARTBEAT;
-}
-
-void SG_CONNECTED_HEARTBEAT::Clear() {
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    senderworldid_ = 0;
-    receiverworldid_ = 0;
-  }
-  ::memset(_has_bits_, 0, sizeof(_has_bits_));
-  mutable_unknown_fields()->Clear();
-}
-
-bool SG_CONNECTED_HEARTBEAT::MergePartialFromCodedStream(
-    ::google::protobuf::io::CodedInputStream* input) {
-#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
-  ::google::protobuf::uint32 tag;
-  while ((tag = input->ReadTag()) != 0) {
-    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
-      // required int32 senderworldid = 1;
-      case 1: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &senderworldid_)));
-          set_has_senderworldid();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectTag(16)) goto parse_receiverworldid;
-        break;
-      }
-
-      // required int32 receiverworldid = 2;
-      case 2: {
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_receiverworldid:
-          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
-                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
-                 input, &receiverworldid_)));
-          set_has_receiverworldid();
-        } else {
-          goto handle_uninterpreted;
-        }
-        if (input->ExpectAtEnd()) return true;
-        break;
-      }
-
-      default: {
-      handle_uninterpreted:
-        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
-            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
-          return true;
-        }
-        DO_(::google::protobuf::internal::WireFormat::SkipField(
-              input, tag, mutable_unknown_fields()));
-        break;
-      }
-    }
-  }
-  return true;
-#undef DO_
-}
-
-void SG_CONNECTED_HEARTBEAT::SerializeWithCachedSizes(
-    ::google::protobuf::io::CodedOutputStream* output) const {
-  // required int32 senderworldid = 1;
-  if (has_senderworldid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->senderworldid(), output);
-  }
-
-  // required int32 receiverworldid = 2;
-  if (has_receiverworldid()) {
-    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->receiverworldid(), output);
-  }
-
-  if (!unknown_fields().empty()) {
-    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
-        unknown_fields(), output);
-  }
-}
-
-::google::protobuf::uint8* SG_CONNECTED_HEARTBEAT::SerializeWithCachedSizesToArray(
-    ::google::protobuf::uint8* target) const {
-  // required int32 senderworldid = 1;
-  if (has_senderworldid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->senderworldid(), target);
-  }
-
-  // required int32 receiverworldid = 2;
-  if (has_receiverworldid()) {
-    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->receiverworldid(), target);
-  }
-
-  if (!unknown_fields().empty()) {
-    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
-        unknown_fields(), target);
-  }
-  return target;
-}
-
-int SG_CONNECTED_HEARTBEAT::ByteSize() const {
-  int total_size = 0;
-
-  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    // required int32 senderworldid = 1;
-    if (has_senderworldid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->senderworldid());
-    }
-
-    // required int32 receiverworldid = 2;
-    if (has_receiverworldid()) {
-      total_size += 1 +
-        ::google::protobuf::internal::WireFormatLite::Int32Size(
-          this->receiverworldid());
-    }
-
-  }
-  if (!unknown_fields().empty()) {
-    total_size +=
-      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
-        unknown_fields());
-  }
-  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
-  _cached_size_ = total_size;
-  GOOGLE_SAFE_CONCURRENT_WRITES_END();
-  return total_size;
-}
-
-void SG_CONNECTED_HEARTBEAT::MergeFrom(const ::google::protobuf::Message& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  const SG_CONNECTED_HEARTBEAT* source =
-    ::google::protobuf::internal::dynamic_cast_if_available<const SG_CONNECTED_HEARTBEAT*>(
-      &from);
-  if (source == NULL) {
-    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
-  } else {
-    MergeFrom(*source);
-  }
-}
-
-void SG_CONNECTED_HEARTBEAT::MergeFrom(const SG_CONNECTED_HEARTBEAT& from) {
-  GOOGLE_CHECK_NE(&from, this);
-  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
-    if (from.has_senderworldid()) {
-      set_senderworldid(from.senderworldid());
-    }
-    if (from.has_receiverworldid()) {
-      set_receiverworldid(from.receiverworldid());
-    }
-  }
-  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
-}
-
-void SG_CONNECTED_HEARTBEAT::CopyFrom(const ::google::protobuf::Message& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-void SG_CONNECTED_HEARTBEAT::CopyFrom(const SG_CONNECTED_HEARTBEAT& from) {
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
-}
-
-bool SG_CONNECTED_HEARTBEAT::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
-
-  return true;
-}
-
-void SG_CONNECTED_HEARTBEAT::Swap(SG_CONNECTED_HEARTBEAT* other) {
-  if (other != this) {
-    std::swap(senderworldid_, other->senderworldid_);
-    std::swap(receiverworldid_, other->receiverworldid_);
-    std::swap(_has_bits_[0], other->_has_bits_[0]);
-    _unknown_fields_.Swap(&other->_unknown_fields_);
-    std::swap(_cached_size_, other->_cached_size_);
-  }
-}
-
-::google::protobuf::Metadata SG_CONNECTED_HEARTBEAT::GetMetadata() const {
-  protobuf_AssignDescriptorsOnce();
-  ::google::protobuf::Metadata metadata;
-  metadata.descriptor = SG_CONNECTED_HEARTBEAT_descriptor_;
-  metadata.reflection = SG_CONNECTED_HEARTBEAT_reflection_;
   return metadata;
 }
 
@@ -11764,6 +11291,295 @@ void CG_FIGHT::Swap(CG_FIGHT* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = CG_FIGHT_descriptor_;
   metadata.reflection = CG_FIGHT_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int GC_FIGHT::kRetFieldNumber;
+const int GC_FIGHT::kMarchIdFieldNumber;
+const int GC_FIGHT::kSceneIdFieldNumber;
+#endif  // !_MSC_VER
+
+GC_FIGHT::GC_FIGHT()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void GC_FIGHT::InitAsDefaultInstance() {
+}
+
+GC_FIGHT::GC_FIGHT(const GC_FIGHT& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void GC_FIGHT::SharedCtor() {
+  _cached_size_ = 0;
+  ret_ = 0;
+  marchid_ = GOOGLE_LONGLONG(0);
+  sceneid_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+GC_FIGHT::~GC_FIGHT() {
+  SharedDtor();
+}
+
+void GC_FIGHT::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void GC_FIGHT::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* GC_FIGHT::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return GC_FIGHT_descriptor_;
+}
+
+const GC_FIGHT& GC_FIGHT::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_PBMessage_2eproto();
+  return *default_instance_;
+}
+
+GC_FIGHT* GC_FIGHT::default_instance_ = NULL;
+
+GC_FIGHT* GC_FIGHT::New() const {
+  return new GC_FIGHT;
+}
+
+void GC_FIGHT::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    ret_ = 0;
+    marchid_ = GOOGLE_LONGLONG(0);
+    sceneid_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool GC_FIGHT::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int32 ret = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &ret_)));
+          set_has_ret();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_marchId;
+        break;
+      }
+
+      // optional int64 marchId = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_marchId:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &marchid_)));
+          set_has_marchid();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(24)) goto parse_sceneId;
+        break;
+      }
+
+      // optional int32 sceneId = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_sceneId:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &sceneid_)));
+          set_has_sceneid();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void GC_FIGHT::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int32 ret = 1;
+  if (has_ret()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(1, this->ret(), output);
+  }
+
+  // optional int64 marchId = 2;
+  if (has_marchid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(2, this->marchid(), output);
+  }
+
+  // optional int32 sceneId = 3;
+  if (has_sceneid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->sceneid(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* GC_FIGHT::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int32 ret = 1;
+  if (has_ret()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(1, this->ret(), target);
+  }
+
+  // optional int64 marchId = 2;
+  if (has_marchid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(2, this->marchid(), target);
+  }
+
+  // optional int32 sceneId = 3;
+  if (has_sceneid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->sceneid(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int GC_FIGHT::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int32 ret = 1;
+    if (has_ret()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->ret());
+    }
+
+    // optional int64 marchId = 2;
+    if (has_marchid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->marchid());
+    }
+
+    // optional int32 sceneId = 3;
+    if (has_sceneid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->sceneid());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void GC_FIGHT::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const GC_FIGHT* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const GC_FIGHT*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void GC_FIGHT::MergeFrom(const GC_FIGHT& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_ret()) {
+      set_ret(from.ret());
+    }
+    if (from.has_marchid()) {
+      set_marchid(from.marchid());
+    }
+    if (from.has_sceneid()) {
+      set_sceneid(from.sceneid());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void GC_FIGHT::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GC_FIGHT::CopyFrom(const GC_FIGHT& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GC_FIGHT::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void GC_FIGHT::Swap(GC_FIGHT* other) {
+  if (other != this) {
+    std::swap(ret_, other->ret_);
+    std::swap(marchid_, other->marchid_);
+    std::swap(sceneid_, other->sceneid_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata GC_FIGHT::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = GC_FIGHT_descriptor_;
+  metadata.reflection = GC_FIGHT_reflection_;
   return metadata;
 }
 
@@ -18308,18 +18124,18 @@ void CG_BATTLEINFOR::Swap(CG_BATTLEINFOR* other) {
 #ifndef _MSC_VER
 const int GC_OBJINFOR::kIdFieldNumber;
 const int GC_OBJINFOR::kUnitDataIdFieldNumber;
-const int GC_OBJINFOR::kSkillDataIdFieldNumber;
+const int GC_OBJINFOR::kSkilldataidFieldNumber;
 const int GC_OBJINFOR::kCampFieldNumber;
-const int GC_OBJINFOR::kUnitCountFieldNumber;
+const int GC_OBJINFOR::kUnitcountFieldNumber;
 const int GC_OBJINFOR::kHpFieldNumber;
 const int GC_OBJINFOR::kMaxhpFieldNumber;
 const int GC_OBJINFOR::kAttackFieldNumber;
 const int GC_OBJINFOR::kDefenceFieldNumber;
 const int GC_OBJINFOR::kSpFieldNumber;
 const int GC_OBJINFOR::kLevelFieldNumber;
-const int GC_OBJINFOR::kPosXFieldNumber;
-const int GC_OBJINFOR::kPosZFieldNumber;
-const int GC_OBJINFOR::kArrangeIndexFieldNumber;
+const int GC_OBJINFOR::kPosxFieldNumber;
+const int GC_OBJINFOR::kPoszFieldNumber;
+const int GC_OBJINFOR::kArrangeindexFieldNumber;
 #endif  // !_MSC_VER
 
 GC_OBJINFOR::GC_OBJINFOR()
@@ -18440,15 +18256,15 @@ bool GC_OBJINFOR::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_skillDataId;
+        if (input->ExpectTag(24)) goto parse_skilldataid;
         break;
       }
 
-      // repeated int32 skillDataId = 3;
+      // repeated int32 skilldataid = 3;
       case 3: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_skillDataId:
+         parse_skilldataid:
           DO_((::google::protobuf::internal::WireFormatLite::ReadRepeatedPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  1, 24, input, this->mutable_skilldataid())));
@@ -18461,7 +18277,7 @@ bool GC_OBJINFOR::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(24)) goto parse_skillDataId;
+        if (input->ExpectTag(24)) goto parse_skilldataid;
         if (input->ExpectTag(32)) goto parse_camp;
         break;
       }
@@ -18478,15 +18294,15 @@ bool GC_OBJINFOR::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(40)) goto parse_unitCount;
+        if (input->ExpectTag(40)) goto parse_unitcount;
         break;
       }
 
-      // required int32 unitCount = 5;
+      // required int32 unitcount = 5;
       case 5: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_unitCount:
+         parse_unitcount:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &unitcount_)));
@@ -18590,15 +18406,15 @@ bool GC_OBJINFOR::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(96)) goto parse_posX;
+        if (input->ExpectTag(96)) goto parse_posx;
         break;
       }
 
-      // required int32 posX = 12;
+      // required int32 posx = 12;
       case 12: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_posX:
+         parse_posx:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &posx_)));
@@ -18606,15 +18422,15 @@ bool GC_OBJINFOR::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(104)) goto parse_posZ;
+        if (input->ExpectTag(104)) goto parse_posz;
         break;
       }
 
-      // required int32 posZ = 13;
+      // required int32 posz = 13;
       case 13: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_posZ:
+         parse_posz:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &posz_)));
@@ -18622,15 +18438,15 @@ bool GC_OBJINFOR::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
-        if (input->ExpectTag(112)) goto parse_arrangeIndex;
+        if (input->ExpectTag(112)) goto parse_arrangeindex;
         break;
       }
 
-      // required int32 arrangeIndex = 14;
+      // required int32 arrangeindex = 14;
       case 14: {
         if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
             ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
-         parse_arrangeIndex:
+         parse_arrangeindex:
           DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
                    ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
                  input, &arrangeindex_)));
@@ -18670,7 +18486,7 @@ void GC_OBJINFOR::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->unitdataid(), output);
   }
 
-  // repeated int32 skillDataId = 3;
+  // repeated int32 skilldataid = 3;
   for (int i = 0; i < this->skilldataid_size(); i++) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(
       3, this->skilldataid(i), output);
@@ -18681,7 +18497,7 @@ void GC_OBJINFOR::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(4, this->camp(), output);
   }
 
-  // required int32 unitCount = 5;
+  // required int32 unitcount = 5;
   if (has_unitcount()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(5, this->unitcount(), output);
   }
@@ -18716,17 +18532,17 @@ void GC_OBJINFOR::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->level(), output);
   }
 
-  // required int32 posX = 12;
+  // required int32 posx = 12;
   if (has_posx()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(12, this->posx(), output);
   }
 
-  // required int32 posZ = 13;
+  // required int32 posz = 13;
   if (has_posz()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(13, this->posz(), output);
   }
 
-  // required int32 arrangeIndex = 14;
+  // required int32 arrangeindex = 14;
   if (has_arrangeindex()) {
     ::google::protobuf::internal::WireFormatLite::WriteInt32(14, this->arrangeindex(), output);
   }
@@ -18749,7 +18565,7 @@ void GC_OBJINFOR::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->unitdataid(), target);
   }
 
-  // repeated int32 skillDataId = 3;
+  // repeated int32 skilldataid = 3;
   for (int i = 0; i < this->skilldataid_size(); i++) {
     target = ::google::protobuf::internal::WireFormatLite::
       WriteInt32ToArray(3, this->skilldataid(i), target);
@@ -18760,7 +18576,7 @@ void GC_OBJINFOR::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(4, this->camp(), target);
   }
 
-  // required int32 unitCount = 5;
+  // required int32 unitcount = 5;
   if (has_unitcount()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(5, this->unitcount(), target);
   }
@@ -18795,17 +18611,17 @@ void GC_OBJINFOR::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->level(), target);
   }
 
-  // required int32 posX = 12;
+  // required int32 posx = 12;
   if (has_posx()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(12, this->posx(), target);
   }
 
-  // required int32 posZ = 13;
+  // required int32 posz = 13;
   if (has_posz()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(13, this->posz(), target);
   }
 
-  // required int32 arrangeIndex = 14;
+  // required int32 arrangeindex = 14;
   if (has_arrangeindex()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(14, this->arrangeindex(), target);
   }
@@ -18842,7 +18658,7 @@ int GC_OBJINFOR::ByteSize() const {
           this->camp());
     }
 
-    // required int32 unitCount = 5;
+    // required int32 unitcount = 5;
     if (has_unitcount()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -18893,21 +18709,21 @@ int GC_OBJINFOR::ByteSize() const {
           this->level());
     }
 
-    // required int32 posX = 12;
+    // required int32 posx = 12;
     if (has_posx()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->posx());
     }
 
-    // required int32 posZ = 13;
+    // required int32 posz = 13;
     if (has_posz()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->posz());
     }
 
-    // required int32 arrangeIndex = 14;
+    // required int32 arrangeindex = 14;
     if (has_arrangeindex()) {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
@@ -18915,7 +18731,7 @@ int GC_OBJINFOR::ByteSize() const {
     }
 
   }
-  // repeated int32 skillDataId = 3;
+  // repeated int32 skilldataid = 3;
   {
     int data_size = 0;
     for (int i = 0; i < this->skilldataid_size(); i++) {
@@ -21151,6 +20967,464 @@ void GC_OBJGETHURT::Swap(GC_OBJGETHURT* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = GC_OBJGETHURT_descriptor_;
   metadata.reflection = GC_OBJGETHURT_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int CG_Building_LevelUp::kBuildingIDFieldNumber;
+#endif  // !_MSC_VER
+
+CG_Building_LevelUp::CG_Building_LevelUp()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void CG_Building_LevelUp::InitAsDefaultInstance() {
+}
+
+CG_Building_LevelUp::CG_Building_LevelUp(const CG_Building_LevelUp& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void CG_Building_LevelUp::SharedCtor() {
+  _cached_size_ = 0;
+  buildingid_ = GOOGLE_LONGLONG(0);
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+CG_Building_LevelUp::~CG_Building_LevelUp() {
+  SharedDtor();
+}
+
+void CG_Building_LevelUp::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void CG_Building_LevelUp::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* CG_Building_LevelUp::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return CG_Building_LevelUp_descriptor_;
+}
+
+const CG_Building_LevelUp& CG_Building_LevelUp::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_PBMessage_2eproto();
+  return *default_instance_;
+}
+
+CG_Building_LevelUp* CG_Building_LevelUp::default_instance_ = NULL;
+
+CG_Building_LevelUp* CG_Building_LevelUp::New() const {
+  return new CG_Building_LevelUp;
+}
+
+void CG_Building_LevelUp::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    buildingid_ = GOOGLE_LONGLONG(0);
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool CG_Building_LevelUp::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int64 buildingID = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &buildingid_)));
+          set_has_buildingid();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void CG_Building_LevelUp::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int64 buildingID = 1;
+  if (has_buildingid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->buildingid(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* CG_Building_LevelUp::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int64 buildingID = 1;
+  if (has_buildingid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->buildingid(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int CG_Building_LevelUp::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int64 buildingID = 1;
+    if (has_buildingid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->buildingid());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void CG_Building_LevelUp::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const CG_Building_LevelUp* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const CG_Building_LevelUp*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void CG_Building_LevelUp::MergeFrom(const CG_Building_LevelUp& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_buildingid()) {
+      set_buildingid(from.buildingid());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void CG_Building_LevelUp::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void CG_Building_LevelUp::CopyFrom(const CG_Building_LevelUp& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool CG_Building_LevelUp::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  return true;
+}
+
+void CG_Building_LevelUp::Swap(CG_Building_LevelUp* other) {
+  if (other != this) {
+    std::swap(buildingid_, other->buildingid_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata CG_Building_LevelUp::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = CG_Building_LevelUp_descriptor_;
+  metadata.reflection = CG_Building_LevelUp_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int GC_Building_LevelUp::kBuildingIDFieldNumber;
+const int GC_Building_LevelUp::kLevelFieldNumber;
+#endif  // !_MSC_VER
+
+GC_Building_LevelUp::GC_Building_LevelUp()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void GC_Building_LevelUp::InitAsDefaultInstance() {
+}
+
+GC_Building_LevelUp::GC_Building_LevelUp(const GC_Building_LevelUp& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void GC_Building_LevelUp::SharedCtor() {
+  _cached_size_ = 0;
+  buildingid_ = GOOGLE_LONGLONG(0);
+  level_ = 0;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+GC_Building_LevelUp::~GC_Building_LevelUp() {
+  SharedDtor();
+}
+
+void GC_Building_LevelUp::SharedDtor() {
+  if (this != default_instance_) {
+  }
+}
+
+void GC_Building_LevelUp::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* GC_Building_LevelUp::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return GC_Building_LevelUp_descriptor_;
+}
+
+const GC_Building_LevelUp& GC_Building_LevelUp::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_PBMessage_2eproto();
+  return *default_instance_;
+}
+
+GC_Building_LevelUp* GC_Building_LevelUp::default_instance_ = NULL;
+
+GC_Building_LevelUp* GC_Building_LevelUp::New() const {
+  return new GC_Building_LevelUp;
+}
+
+void GC_Building_LevelUp::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    buildingid_ = GOOGLE_LONGLONG(0);
+    level_ = 0;
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool GC_Building_LevelUp::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required int64 buildingID = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int64, ::google::protobuf::internal::WireFormatLite::TYPE_INT64>(
+                 input, &buildingid_)));
+          set_has_buildingid();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectTag(16)) goto parse_level;
+        break;
+      }
+
+      // required int32 level = 2;
+      case 2: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_level:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &level_)));
+          set_has_level();
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void GC_Building_LevelUp::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required int64 buildingID = 1;
+  if (has_buildingid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt64(1, this->buildingid(), output);
+  }
+
+  // required int32 level = 2;
+  if (has_level()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->level(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* GC_Building_LevelUp::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required int64 buildingID = 1;
+  if (has_buildingid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt64ToArray(1, this->buildingid(), target);
+  }
+
+  // required int32 level = 2;
+  if (has_level()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->level(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int GC_Building_LevelUp::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required int64 buildingID = 1;
+    if (has_buildingid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int64Size(
+          this->buildingid());
+    }
+
+    // required int32 level = 2;
+    if (has_level()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->level());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void GC_Building_LevelUp::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const GC_Building_LevelUp* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const GC_Building_LevelUp*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void GC_Building_LevelUp::MergeFrom(const GC_Building_LevelUp& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_buildingid()) {
+      set_buildingid(from.buildingid());
+    }
+    if (from.has_level()) {
+      set_level(from.level());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void GC_Building_LevelUp::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GC_Building_LevelUp::CopyFrom(const GC_Building_LevelUp& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GC_Building_LevelUp::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+
+  return true;
+}
+
+void GC_Building_LevelUp::Swap(GC_Building_LevelUp* other) {
+  if (other != this) {
+    std::swap(buildingid_, other->buildingid_);
+    std::swap(level_, other->level_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata GC_Building_LevelUp::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = GC_Building_LevelUp_descriptor_;
+  metadata.reflection = GC_Building_LevelUp_reflection_;
   return metadata;
 }
 

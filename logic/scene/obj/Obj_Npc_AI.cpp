@@ -309,13 +309,7 @@ int Obj_Npc::SelectMethod_March()
 				if (m_vecMarchTarget[i] == rNPC.GetID())
 				{
 					m_nCurSelectObjId = rNPC.GetID();
-					SwitchAI(AI_TRACE);
-					
-					ObjTrackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjTrackTargetMsg);
-					MsgPtr->m_nSceneId = GetSceneInstID();
-					MsgPtr->m_nObjId   = GetID();
-					MsgPtr->m_nTargetId = m_nCurSelectObjId;
-					SendMessage2User(GetPlayerId(),MsgPtr);
+					EnterTrace();
 					break;
 				}
 			}
@@ -655,14 +649,7 @@ void Obj_Npc::Tick_AI_Combat(TimeInfo const& rTimeInfo)
 				//不能移动的npc不追踪
 				if (nMoveSpeedAttr >0)
 				{
-					//切换追击模式
-					m_fTraceStopDis =rSkillEx.GetRadius();
-					SwitchAI(Obj_Npc::AI_TRACE);
-					ObjTrackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjTrackTargetMsg);
-					MsgPtr->m_nSceneId = GetSceneInstID();
-					MsgPtr->m_nObjId   = GetID();
-					MsgPtr->m_nTargetId = m_nCurSelectObjId;
-					SendMessage2User(GetPlayerId(),MsgPtr);
+					EnterTrace();
 				}
 				return;
 			}
@@ -675,10 +662,34 @@ void Obj_Npc::Tick_AI_Combat(TimeInfo const& rTimeInfo)
 	__LEAVE_FUNCTION
 }
 
-void Obj_Npc::StartMarch()
+void Obj_Npc::EnterMarch()
 {
 	__ENTER_FUNCTION
 		SwitchAI(AI_MARCH);
+	__LEAVE_FUNCTION
+}
+
+void Obj_Npc::EnterTrace()
+{
+	__ENTER_FUNCTION
+		//切换追击模式
+		Table_SkillEx const* pSkillEx =GetTable_SkillExByID(m_OwnSkillList[0]);
+	if (pSkillEx ==null_ptr)
+	{
+		//出异常了 切回待机AI
+		SwitchAI(Obj_Npc::AI_IDLE);
+		return;
+	}
+	
+	m_fTraceStopDis =pSkillEx->GetRadius();
+	StopMove(false,true);
+	SwitchAI(Obj_Npc::AI_TRACE);
+
+	ObjTrackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjTrackTargetMsg);
+	MsgPtr->m_nSceneId = GetSceneInstID();
+	MsgPtr->m_nObjId   = GetID();
+	MsgPtr->m_nTargetId = m_nCurSelectObjId;
+	SendMessage2User(GetPlayerId(),MsgPtr);
 	__LEAVE_FUNCTION
 }
 
@@ -696,12 +707,7 @@ void Obj_Npc::Tick_AI_March(TimeInfo const& rTimeInfo)
 	if (nSeleObjId != invalid_id)
 	{
 		m_nCurSelectObjId = nSeleObjId;
-		SwitchAI(AI_TRACE);
-		ObjTrackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjTrackTargetMsg);
-		MsgPtr->m_nSceneId = GetSceneInstID();
-		MsgPtr->m_nObjId   = GetID();
-		MsgPtr->m_nTargetId = m_nCurSelectObjId;
-		SendMessage2User(GetPlayerId(),MsgPtr);
+		EnterTrace();
 		return;
 	}
 	
@@ -878,17 +884,10 @@ void Obj_Npc::SelectSkillAndTarget(int& nSelSkillId,int& nSelObjectId)
 			return;
 		}
 		Scene& rScene =GetScene();
-		int nSelSkillId =invalid_id;
 		if (GetSkillStrategyId() ==invalid_id)
 		{
 			return;
 		}
-		Table_NpcSkillStrategy const* pNpcSkillStrategy =GetTable_NpcSkillStrategyByIndex(GetSkillStrategyId());
-		if (pNpcSkillStrategy ==null_ptr)
-		{
-			return;
-		}
-		Table_NpcSkillStrategy const& rNpcSkillStrategy =*pNpcSkillStrategy;
 		
 		for (int nSkillIndex =0;nSkillIndex<MAXOWNSKILL;nSkillIndex++)
 		{
@@ -948,7 +947,7 @@ void Obj_Npc::SelectSkillAndTarget(int& nSelSkillId,int& nSelObjectId)
 			int nCurRunTime =gTimeManager.RunTime();;
 			if (nCurRunTime -m_nLastAttackTime >m_nAttackTime)
 			{
-				Table_SkillEx const* pSkillEx=GetTable_SkillExByID(rNpcSkillStrategy.GetDefaultSkillId());
+				Table_SkillEx const* pSkillEx=GetTable_SkillExByID(m_OwnSkillList[0]);
 				if (pSkillEx !=null_ptr)
 				{
 					Table_SkillEx const& rSkillEx =*pSkillEx;
@@ -963,7 +962,7 @@ void Obj_Npc::SelectSkillAndTarget(int& nSelSkillId,int& nSelObjectId)
 							if (TargetPtr)
 							{
 								ChangeCurSelectObjId(nSelObjectId);
-								nSelSkillId = rNpcSkillStrategy.GetDefaultSkillId();
+								nSelSkillId = m_OwnSkillList[0];
 							}
 						}
 					}

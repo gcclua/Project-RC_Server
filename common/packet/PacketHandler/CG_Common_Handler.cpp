@@ -180,3 +180,16 @@ tuint32 Packets::CG_OBJPOSLIST_PAKHandler::Execute( Packets::CG_OBJPOSLIST_PAK* 
  __LEAVE_FUNCTION
  return PACKET_EXE_ERROR ; 
  }
+//This code create by CodeEngine
+
+#include "Packet/Packet/CG_BUILDING_LEVELUP_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::CG_BUILDING_LEVELUP_PAKHandler::Execute( Packets::CG_BUILDING_LEVELUP_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }

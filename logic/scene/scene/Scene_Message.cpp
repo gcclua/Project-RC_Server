@@ -9,7 +9,26 @@
 
 MESSAGE_TRANSPORTTOMARCH_IMPL(MarchReqNearListMsg);
 MESSAGE_TRANSPORTTOMARCH_IMPL(MarchMoveMsg);
-MESSAGE_TRANSPORTTOMARCH_IMPL(MarchOpenCopySceneMsg);
+//MESSAGE_TRANSPORTTOMARCH_GUID_IMPL(MarchOpenCopySceneMsg);
+//MESSAGE_TRANSPORTTOMARCH_GUID_IMPL(AskJoinCopySceneMsg);
 
+
+void Scene::HandleMessage(const MarchOpenCopySceneMsg &rMsg)
+{
+	Obj_MarchPtr Ptr = GetMarchByGuid(rMsg.m_ReceiverGuid); 
+		if (Ptr && Ptr->GetPlayerId()>0 && Ptr->GetPlayerId()==rMsg.m_ReceiverGuid) 
+		{ 
+		Ptr->HandleMessage(rMsg); 
+		} 
+}
+
+void Scene::HandleMessage(const AskJoinCopySceneMsg &rMsg)
+{
+	Obj_MarchPtr Ptr = GetMarchByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr && Ptr->GetPlayerId()>0 && Ptr->GetPlayerId()==rMsg.m_ReceiverGuid) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	} 
+}
 
 

@@ -395,7 +395,7 @@ bool LoginService::PCDLoad(int64 guid,DBFullUserData &rUserData) const
 		if (it != m_PCDMap.end())
 		{
 			VerifyEx((*it).second.m_bOnline == false,"");
-			VerifyEx((*it).second.m_bFinalSaveProcess == false,"");
+			VerifyEx((*it).second.m_bFinalSaveProcess == true,"");
 
 			rUserData.CopyFrom((*it).second.m_DBFullUserData);
 			return true;
@@ -414,7 +414,7 @@ void LoginService::PCDOnPlayerEnterWorld(Player &rPlayer)
 		if (it != m_PCDMap.end())
 		{
 			VerifyEx((*it).second.m_bOnline == false,"");
-			VerifyEx((*it).second.m_bFinalSaveProcess == false,"");
+			VerifyEx((*it).second.m_bFinalSaveProcess == true,"");
 			(*it).second.m_bOnline = true;
 			(*it).second.m_bFinalSaveProcess = false;
 			(*it).second.m_bFinalSaveOk = false;
@@ -439,7 +439,7 @@ void LoginService::PCDOnPlayerLeaveWorld(Player &rPlayer)
 		PCDMap::iterator it = m_PCDMap.find(rPlayer.GetUserId());
 	if (it != m_PCDMap.end())
 	{
-		VerifyEx((*it).second.m_bOnline == false,"");
+		VerifyEx((*it).second.m_bOnline == true,"");
 		VerifyEx((*it).second.m_bFinalSaveProcess == false,"");
 		(*it).second.m_bOnline = false;
 		(*it).second.m_bFinalSaveProcess = true;
@@ -823,6 +823,7 @@ void LoginService::HandleMessage(const PlayerQuitGameMsg &rMsg)
 {
 	__ENTER_FUNCTION
 		OLDelPlayer(rMsg.m_PlayerPtr->GetObjLogin().GetAccount());
+		PCDOnPlayerLeaveWorld(*(rMsg.m_PlayerPtr));
 	__LEAVE_FUNCTION
 }
 

@@ -1,4 +1,6 @@
 /.vs/
+/Debug/
+/Debug_gamed/
 
 # Compiled Object files
 *.slo

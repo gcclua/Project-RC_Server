@@ -48,6 +48,8 @@ class ObjTrackTargetMsg;
 class ObjAttackTargetMsg;
 class ObjHurtMsg;
 class KickPlayerByGuidMsg;
+class MarchRetFightMsg;
+
 
 
 class User
@@ -162,6 +164,7 @@ public:
 	void HandleMessage(const RetBattleInfoMsg& rMsg);
 	void HandleMessage(const RetObjListMsg &rMsg);
 	void HandleMessage(const KickPlayerByGuidMsg &rMsg);
+	void HandleMessage(const MarchRetFightMsg &rMsg);
 	// ½ûÑÔ½â½ûÊ±¼ästart
 	//////////////////////////////////////////////////////////////////////////
 public:
@@ -174,7 +177,7 @@ private:
 
 };
 
-typedef boost::shared_ptr<User> UserPtr;
-typedef std::map<int64,UserPtr> UserPtrMap;
+//typedef boost::shared_ptr<User> UserPtr;
+typedef std::map<int64,User> UserMap;
 
 #endif

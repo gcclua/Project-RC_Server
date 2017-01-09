@@ -66,7 +66,7 @@ void Obj_Hero::CalculateInitalAttr(void)
 		return ;
 	}
 
-	Table_RoleBaseAttr const * pRoleBase = GetTable_RoleBaseAttrByID(pHero->GetDataIDbyIndex(GetLevel()));
+	Table_RoleBaseAttr const * pRoleBase = GetTable_RoleBaseAttrByID(pHero->GetDataIDbyIndex(GetLevel()-1));
 	if (pRoleBase == null_ptr)
 	{
 		return;

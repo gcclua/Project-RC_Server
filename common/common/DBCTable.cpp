@@ -887,7 +887,7 @@ void DBC_Loader::_Read(tfloat32& val,const DBCFile& rDB, tint32 nRow, tint32 nCo
 	const DBCFile::FIELD* pField = rDB.Search_Posistion(nRow,nColumn);
 	if (pField != null_ptr)
 	{
-		val = static_cast<tfloat32>(pField->iValue);
+		val = static_cast<tfloat32>(pField->fValue);
 	}
 }
 

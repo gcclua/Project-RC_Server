@@ -82,6 +82,16 @@ public:
 } \
 }
 
+#define MESSAGE_TRANSPORTTOMARCH_GUID_IMPL(MSGTYPE) \
+	void Scene::HandleMessage(const MSGTYPE &rMsg) \
+{ \
+	Obj_MarchPtr Ptr = GetMarchByID(rMsg.m_ReceiverGuid); \
+	if (Ptr && Ptr->GetPlayerId()>0) \
+{ \
+	Ptr->HandleMessage(rMsg); \
+} \
+}
+
 struct FORCETYPE_T //ÊÆÁ¦
 {
 	enum      

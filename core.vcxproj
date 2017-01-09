@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -25,25 +25,25 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v140</PlatformToolset>
+    <PlatformToolset>v110</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
@@ -144,6 +144,15 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="common\AStarPathFinding\AStarHelper.h" />
+    <ClInclude Include="common\AStarPathFinding\Coord.h" />
+    <ClInclude Include="common\AStarPathFinding\MapAStarCompact.h" />
+    <ClInclude Include="common\AStarPathFinding\MapConst.h" />
+    <ClInclude Include="common\AStarPathFinding\MapLayout.h" />
+    <ClInclude Include="common\AStarPathFinding\MapProxy.h" />
+    <ClInclude Include="common\AStarPathFinding\MapTileVO.h" />
+    <ClInclude Include="common\AStarPathFinding\MinHeap.h" />
+    <ClInclude Include="common\AStarPathFinding\Utils.h" />
     <ClInclude Include="common\building\GameDefine_Building.h" />
     <ClInclude Include="common\building\GameStruct_Building.h" />
     <ClInclude Include="common\Chat\GameDefine_Chat.h" />
@@ -306,6 +315,14 @@
     <ClInclude Include="common\xml\tinyxml.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="common\AStarPathFinding\AStarHelper.cpp" />
+    <ClCompile Include="common\AStarPathFinding\Coord.cpp" />
+    <ClCompile Include="common\AStarPathFinding\MapAStarCompact.cpp" />
+    <ClCompile Include="common\AStarPathFinding\MapConst.cpp" />
+    <ClCompile Include="common\AStarPathFinding\MapLayout.cpp" />
+    <ClCompile Include="common\AStarPathFinding\MapProxy.cpp" />
+    <ClCompile Include="common\AStarPathFinding\MapTileVO.cpp" />
+    <ClCompile Include="common\AStarPathFinding\Utils.cpp" />
     <ClCompile Include="common\building\GameStruct_Building.cpp" />
     <ClCompile Include="common\Chat\GameStruct_TextChat.cpp" />
     <ClCompile Include="common\city\GameStruct_City.cpp" />

@@ -221,6 +221,19 @@ tuint32 Packets::GC_REMOVEEFFECT_PAKHandler::Execute( Packets::GC_REMOVEEFFECT_P
  }
 //This code create by CodeEngine
 
+#include "Packet/Packet/GC_FIGHT_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::GC_FIGHT_PAKHandler::Execute( Packets::GC_FIGHT_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
 #include "Packet/Packet/GC_ROBOT_OPEN_PAK.h"
  #include "Player/Player.h"
 tuint32 Packets::GC_ROBOT_OPEN_PAKHandler::Execute( Packets::GC_ROBOT_OPEN_PAK* pPacket, Player* pPlayer )
@@ -286,19 +299,6 @@ tuint32 Packets::GC_LOGIN_QUEUE_STATUS_PAKHandler::Execute( Packets::GC_LOGIN_QU
  }
 //This code create by CodeEngine
 
-#include "Packet/Packet/GC_OBJINFOR_PAK.h"
- #include "Player/Player.h"
-tuint32 Packets::GC_OBJINFOR_PAKHandler::Execute( Packets::GC_OBJINFOR_PAK* pPacket, Player* pPlayer )
- {
- __ENTER_FUNCTION
- AssertEx(pPacket, "");
- AssertEx(pPlayer, "");
- return pPlayer->HandlePacket(pPacket->m_PacketData);
- __LEAVE_FUNCTION
- return PACKET_EXE_ERROR ; 
- }
-//This code create by CodeEngine
-
 #include "Packet/Packet/GC_BATTLEINFOR_PAK.h"
  #include "Player/Player.h"
 tuint32 Packets::GC_BATTLEINFOR_PAKHandler::Execute( Packets::GC_BATTLEINFOR_PAK* pPacket, Player* pPlayer )
@@ -354,6 +354,19 @@ tuint32 Packets::GC_OBJPREPAREFORATTACK_PAKHandler::Execute( Packets::GC_OBJPREP
 #include "Packet/Packet/GC_OBJGETHURT_PAK.h"
  #include "Player/Player.h"
 tuint32 Packets::GC_OBJGETHURT_PAKHandler::Execute( Packets::GC_OBJGETHURT_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
+#include "Packet/Packet/GC_BUILDING_LEVELUP_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::GC_BUILDING_LEVELUP_PAKHandler::Execute( Packets::GC_BUILDING_LEVELUP_PAK* pPacket, Player* pPlayer )
  {
  __ENTER_FUNCTION
  AssertEx(pPacket, "");

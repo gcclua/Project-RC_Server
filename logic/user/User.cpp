@@ -36,6 +36,7 @@
 #include "packet/Packet/GC_OBJCOMMANDPURSUE_PAK.h"
 #include "packet/Packet/GC_OBJPREPAREFORATTACK_PAK.h"
 #include "packet/Packet/GC_OBJGETHURT_PAK.h"
+#include "packet/Packet/GC_FIGHT_PAK.h"
 #include "GuidDefine.h"
 #include "Table/Table_CityBuildingSlot.h"
 
@@ -345,9 +346,9 @@ void User::Tick_Save(const TimeInfo& rTimeInfo)
 tuint32 User::HandlePacket(::CG_OBJPOSLIST &rPacket)
 {
 	__ENTER_FUNCTION
-		ReqBattleInfoMsgPtr MsgPtr = POOLDEF_NEW(ReqBattleInfoMsg);
-	MsgPtr->m_nSceneId = rPacket.sceneid();
-	SendMessage2Scene(rPacket.sceneid(),MsgPtr);
+		ReqObjListMsgPtr MsgPtr = POOLDEF_NEW(ReqObjListMsg);
+	SceneID rScene(1,rPacket.sceneid());
+	SendMessage2Scene(rScene,MsgPtr);
 	return PACKET_EXE_CONTINUE;
 	__LEAVE_FUNCTION
 		return PACKET_EXE_CONTINUE;
@@ -358,7 +359,9 @@ tuint32 User::HandlePacket(::CG_BATTLEINFOR &rPacket)
 	__ENTER_FUNCTION
 		ReqBattleInfoMsgPtr MsgPtr = POOLDEF_NEW(ReqBattleInfoMsg);
 		MsgPtr->m_nSceneId = rPacket.sceneid();
-		SendMessage2Scene(rPacket.sceneid(),MsgPtr);
+		SceneID rScene(1,rPacket.sceneid());
+		MsgPtr->m_ReceiverGuid = GetGuid();
+		SendMessage2Scene(rScene,MsgPtr);
 		return PACKET_EXE_CONTINUE;
 		__LEAVE_FUNCTION
 			return PACKET_EXE_CONTINUE;
@@ -378,7 +381,7 @@ tuint32 User::HandlePacket(::CG_ROBOT_OPEN &rPacket)
 	{
 		MsgPtr->m_bOpen        = 0;
 	}
-	SceneID rScene(invalid_id,rPacket.sceneid());
+	SceneID rScene(1,rPacket.sceneid());
 	SendMessage2Scene(rScene,MsgPtr);
 	return PACKET_EXE_CONTINUE;
 	__LEAVE_FUNCTION
@@ -732,6 +735,17 @@ void User::HandleMessage(const RetMarchStartMsg& rMsg)
 	__LEAVE_FUNCTION
 }
 
+void User::HandleMessage(const MarchRetFightMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		Packets::GC_FIGHT_PAK pak;
+		pak.m_PacketData.set_marchid(rMsg.m_nMarchId);
+		pak.m_PacketData.set_ret(rMsg.m_nResult);
+		pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
+		SendPacket(pak);
+	__LEAVE_FUNCTION
+}
+
 void User::HandleMessage(const RetObjListMsg &rMsg)
 {
 	__ENTER_FUNCTION
@@ -758,15 +772,16 @@ void User::HandleMessage(const RetBattleInfoMsg& rMsg)
 		pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
 		
 		int nSize = (int)rMsg.m_objList.size();
-		for (int i=0;i<nSize;i++)
+		for (int i=0;i<2;i++)
 		{
 			GC_OBJINFOR * pObjInfo = pak.m_PacketData.add_objlist();
-			pObjInfo->set_id(rMsg.m_objList[i].m_objId);
+			/*pObjInfo->set_id(rMsg.m_objList[i].m_objId);
 			pObjInfo->set_unitdataid(rMsg.m_objList[i].m_dataId);
 			int SkillCount = (int)rMsg.m_objList[i].m_skillLst.size();
+			pObjInfo->set_skilldataid(rMsg.m_objList[i].m_skillLst[0]);
 			for (int j=0;j<SkillCount;j++)
 			{
-				pObjInfo->add_skilldataid(rMsg.m_objList[i].m_skillLst[j]);
+				//pObjInfo->add_skilldataid(rMsg.m_objList[i].m_skillLst[j]);
 			}
 			pObjInfo->set_arrangeindex(rMsg.m_objList[i].m_arrangeIndex);
 			pObjInfo->set_attack(rMsg.m_objList[i].m_attack);
@@ -778,6 +793,25 @@ void User::HandleMessage(const RetBattleInfoMsg& rMsg)
 			pObjInfo->set_posx(rMsg.m_objList[i].m_posX);
 			pObjInfo->set_posz(rMsg.m_objList[i].m_posZ);
 			pObjInfo->set_sp(rMsg.m_objList[i].m_xp);
+			pObjInfo->set_unitcount(rMsg.m_objList[i].m_unitCount);*/
+
+			pObjInfo->set_id(1);
+			pObjInfo->set_unitdataid(1);
+			pObjInfo->set_skilldataid(1);
+
+			//pObjInfo->set_arrangeindex(1);
+			pObjInfo->set_attack(1);
+			pObjInfo->set_camp(1);
+			pObjInfo->set_hp(1);
+			//pObjInfo->set_level(1);
+			//pObjInfo->set_defence(1);
+			pObjInfo->set_maxhp(1);
+			//pObjInfo->set_posx(1);
+			//pObjInfo->set_posz(1);
+			//pObjInfo->set_sp(1);
+			pObjInfo->set_unitcount(1);
+
+			int j=0;
 		}
 		
 		SendPacket(pak);
@@ -790,6 +824,7 @@ void User::HandleMessage(const RetSetRobotOpenMsg& rMsg)
 	Packets::GC_ROBOT_OPEN_PAK pak;
 	pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
 	pak.m_PacketData.set_ret(rMsg.m_nRet);
+	SendPacket(pak);
 	__LEAVE_FUNCTION
 
 }

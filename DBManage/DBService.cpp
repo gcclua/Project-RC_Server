@@ -302,6 +302,43 @@ void DBService::HandleMessage(const DBReqCreateCityMsg &rMsg)
 	__LEAVE_FUNCTION
 }
 
+void DBService::HandleMessage( const DBOpRetMsg &rMsg )
+{
+	__ENTER_FUNCTION
+	tint32 taskType = rMsg.m_TaskType;
+	if (taskType >=0 && taskType < DB_TASK_MAX_NUM)
+	{
+		DBBaseTaskPtrMap::const_iterator taskConstIter = m_CurProTaskPtrMap[taskType].find(rMsg.m_Key);
+		if(m_CurProTaskPtrMap[taskType].end() != taskConstIter )
+		{
+			const DBBaseTaskPtr proTask = taskConstIter->second;
+			//校验操作类型 请求时间是否一致
+			if (proTask && proTask->GetOperationType() == rMsg.m_OpType && proTask->GetOptTime() == rMsg.m_ReqOpTime)
+			{
+				//当前处理记录中删除
+				m_CurProTaskPtrMap[taskType].erase(proTask->GetKey());
+				//玩家数据存储DB，需要刷新一下上次存储DB时间
+				if (proTask->GetTaskType() == DB_TASK_USER_DATA && proTask->GetOperationType() == DBBaseTask::OPERATION_TYPE_SAVE_DB)
+				{
+					UpdateUserDataLastSaveDbTime(proTask->GetKey());
+				}
+				
+				//如果存储失败，重新加入队列
+				if (DBMsgResult::RESULT_FAIL == rMsg.m_OpRet && rMsg.m_OpType == DBBaseTask::OPERATION_TYPE_SAVE_DB)
+				{
+					//设置任务存储失败
+					proTask->SetSaveFail(true);
+					AddTask(proTask);
+					CacheLog(LOGDEF_INST(DBAgent),"DBService::Save Failed，Task Req To Add To List：\1 TaskType=%d \1 Key=%lld \1 OpType=%d \1 ReqOpTime=%u",
+						proTask->GetTaskType(),proTask->GetKey(),proTask->GetOperationType(),proTask->GetOptTime());
+				}	
+			}
+		}
+	} 
+
+	__LEAVE_FUNCTION
+}
+
 void DBService::HandleMessage(const DBReqSaveGuidMsg &rMsg)
 {
 	__ENTER_FUNCTION

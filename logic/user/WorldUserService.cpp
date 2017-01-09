@@ -55,12 +55,11 @@ void WorldUserService::Tick_User(const TimeInfo &rTimeInfo)
 			return;
 		}
 
-		UserPtrMap::iterator it = m_mapUser.begin();
+		UserMap::iterator it = m_mapUser.begin();
 		for (;it != m_mapUser.end();it++)
 		{
-			UserPtr Ptr = it->second;
-			AssertEx(Ptr,"");
-			Ptr->Tick(rTimeInfo);
+			User& rUser = it->second;
+			rUser.Tick(rTimeInfo);
 		}
 
 
@@ -86,27 +85,37 @@ void WorldUserService::Shutdown(void)
 	__LEAVE_FUNCTION
 }
 
-UserPtr WorldUserService::GetUserByGuid(int64 guid)
+User* WorldUserService::GetUserByGuid(int64 guid)
 {
 	__ENTER_FUNCTION
 
-		UserPtrMap::iterator it = m_mapUser.find(guid);
-	UserPtr Ptr = null_ptr;
+		UserMap::iterator it = m_mapUser.find(guid);
 	if (it != m_mapUser.end())
 	{
-		Ptr = it->second;
+		return &(it->second);
 	}
 
-	return Ptr;
+	return null_ptr;
 
 	__LEAVE_FUNCTION
-		return UserPtr();
+	return null_ptr;
+}
+
+void WorldUserService::HandleMessage(const RetBattleInfoMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
 }
 
 void WorldUserService::HandleMessage(const RetMarchStartMsg &rMsg)
 {
 	__ENTER_FUNCTION
-		UserPtr Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
 		if (Ptr) 
 		{ 
 			Ptr->HandleMessage(rMsg); 
@@ -114,11 +123,22 @@ void WorldUserService::HandleMessage(const RetMarchStartMsg &rMsg)
 		__LEAVE_FUNCTION
 }
 
+void WorldUserService::HandleMessage(const MarchRetFightMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+
 void WorldUserService::HandleMessage( const PlayerEnterWorldMsg &rMsg )
 {
 	__ENTER_FUNCTION
 
-		UserPtr Ptr = GetUserByGuid(rMsg.m_PlayerPtr->GetUserId());
+		User* Ptr = GetUserByGuid(rMsg.m_PlayerPtr->GetUserId());
 	    if (Ptr != null_ptr)
 		{
 			return;
@@ -128,8 +148,7 @@ void WorldUserService::HandleMessage( const PlayerEnterWorldMsg &rMsg )
 		rMsg.m_PlayerPtr->SetStatus(PlayerStatus::GAME_PLAYERING);
 		m_PlayerManager.Add(rMsg.m_PlayerPtr,PlayerManager::ADD_FOR_ENTREWORLD);
 		DecEnteringPlayerCount();
-		Ptr = UserPtr(&rUser);
-		m_mapUser.insert(std::make_pair(rUser.GetGuid(),Ptr));
+		m_mapUser.insert(std::make_pair(rUser.GetGuid(),rUser));
 
 	__LEAVE_FUNCTION
 }
@@ -137,11 +156,11 @@ void WorldUserService::HandleMessage( const PlayerEnterWorldMsg &rMsg )
 void WorldUserService::HandleMessage(const PlayerLeaveWorldMsg &rMsg)
 {
 	__ENTER_FUNCTION
-		UserPtrMap::iterator itFind = m_mapUser.find(rMsg.m_guid);
+		UserMap::iterator itFind = m_mapUser.find(rMsg.m_guid);
 	if (itFind != m_mapUser.end())
 	{
-		_erase(m_mapUser, itFind);
-		//m_mapUser.erase(itFind);
+		//_erase(m_mapUser, itFind);
+		m_mapUser.erase(itFind);
 	}
 	else
 	{

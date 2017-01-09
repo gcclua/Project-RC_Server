@@ -16,6 +16,12 @@ public:
 	virtual void Tick(const TimeInfo &rTimeInfo);
 private:
 	virtual void Tick_Logic(const TimeInfo & rTimeInfo);
+	virtual void Tick_Line(const TimeInfo &rTimeInfo);
+	virtual void Tick_SelectTarget(const TimeInfo &rTimeInfo);
+	virtual void Tick_March(const TimeInfo &rTimeInfo);
+	virtual void Tick_Combat(const TimeInfo &rTimeInfo);
+
+	virtual void Tick_Close(const TimeInfo &rTimeInfo);
 public:
 	virtual InvokerPtr InitMyself(void);
 
@@ -30,7 +36,8 @@ protected:
 		STATUS_LINE, // 布阵
 		STATUS_SELECTTARGET,//选择目标
 		STATUS_MARCH, // 行军
-		STATUS_COMBAT, // 冲锋
+		STATUS_COMBAT, // 战斗
+		STATUS_SETTLEMENT,    // 结束
 		STATUS_CLOSED,
 	};
 protected:
@@ -70,6 +77,13 @@ private:
 	void SetDefenceMarchLine();
 	void StartAttachMarch();
 	void StartDefenceMarch();
+
+	// 检测战斗是否结束
+	int CheckFightEnd(); // 0未结束，1 攻方胜，2守方胜 3平均
+
+	// 结算战斗相关的
+	void FightSettlement();
+
 	//void InitNpcObj();
 
 public:
@@ -114,6 +128,8 @@ private:
 
 	March m_AttackMarch;
 	March m_DefenceMarch;
+
+	int  m_nWin;
 
 protected:
 	int m_nWaitCloseTime;

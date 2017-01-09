@@ -230,11 +230,14 @@ private:
 	//////////////////////////////////////////////////////////////////////////
 
 	////////////////////////////////////////////////////////////////////////////
-
+	virtual void HandleMessage(const MarchOpenCopySceneMsg &rMsg);
+	virtual void HandleMessage(const AskJoinCopySceneMsg &rMsg);
 	//需要场景转发给March的所有相关Message声明
 	MESSAGE_TRANSPORTTOMARCH_DECL(MarchReqNearListMsg);
 	MESSAGE_TRANSPORTTOMARCH_DECL(MarchMoveMsg);
-	MESSAGE_TRANSPORTTOMARCH_DECL(MarchOpenCopySceneMsg);
+	//MESSAGE_TRANSPORTTOMARCH_DECL(MarchOpenCopySceneMsg);
+	//MESSAGE_TRANSPORTTOMARCH_DECL(AskJoinCopySceneMsg);
+	
 	
 	//////////////////////////////////////////////////////////////////////////
 };

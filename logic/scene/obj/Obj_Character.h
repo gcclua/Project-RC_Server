@@ -77,14 +77,13 @@ public:
 public:
 	virtual void Tick_Moving(const TimeInfo &rTimeInfo);
 	void Moving(const TimeInfo &rTimeInfo);
+	void Stopping(void);
 protected:
 	PathCont m_PathCont;
 protected:
 	float m_fDistanceCompensate;
 	int m_fMoveTimeSeconds;
-
-private:
-	void Stopping(void);
+	
 private:
 	ScenePos m_TargetPos;
 	float m_fStopRange;

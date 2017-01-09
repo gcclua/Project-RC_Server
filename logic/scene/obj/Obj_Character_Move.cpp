@@ -178,12 +178,9 @@ void Obj_Character::SendMoveStatus(Obj_March &rMarch)
 		for (int i = 0; i < nSize; i++)
 		{
 			const PathNode &rPathNode = m_PathCont[i];
-			if (rPathNode.m_bBroadcast)
-			{
-				MsgPtr->m_nSerial.push_back(rPathNode.m_nSerial);
-				MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nX );
-				MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nZ );
-			}
+			MsgPtr->m_nSerial.push_back(rPathNode.m_nSerial);
+			MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nX );
+			MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nZ );
 		}
 
 		AssertEx(MsgPtr->m_nPosCount == MsgPtr->m_nSerial.size(), "");
@@ -217,12 +214,10 @@ void Obj_Character::BroadcastMoveStatus(void)
 		for (int i = 0; i < nSize; i++)
 		{
 			const PathNode &rPathNode = m_PathCont[i];
-			if (rPathNode.m_bBroadcast)
-			{
-				MsgPtr->m_nSerial.push_back(rPathNode.m_nSerial);
-				MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nX );
-				MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nZ );
-			}
+		
+			MsgPtr->m_nSerial.push_back(rPathNode.m_nSerial);
+			MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nX );
+			MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nZ );
 		}
 
 		AssertEx(MsgPtr->m_nPosCount == MsgPtr->m_nSerial.size(), "");

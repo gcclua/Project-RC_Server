@@ -42,8 +42,6 @@ class CG_CHAT;
 class GC_CHAT;
 class GC_NOTICE;
 class GC_UPDATE_SCENE_INSTACTIVATION;
-class GS_CONNECTED_HEARTBEAT;
-class SG_CONNECTED_HEARTBEAT;
 class CG_MOVE;
 class GC_MOVE;
 class GC_STOP;
@@ -58,6 +56,7 @@ class GC_UPDATE_NEEDIMPACTINFO;
 class GC_PLAY_EFFECT;
 class GC_REMOVEEFFECT;
 class CG_FIGHT;
+class GC_FIGHT;
 class CG_LEAVE_COPYSCENE;
 class CG_ROBOT_OPEN;
 class GC_ROBOT_OPEN;
@@ -87,6 +86,8 @@ class CG_OBJPOSLIST;
 class GC_OBJCOMMANDPURSUE;
 class GC_OBJPREPAREFORATTACK;
 class GC_OBJGETHURT;
+class CG_Building_LevelUp;
+class GC_Building_LevelUp;
 
 enum CG_LOGIN_VALIDATETYPE {
   CG_LOGIN_VALIDATETYPE_TEST = 0,
@@ -1721,190 +1722,6 @@ class GC_UPDATE_SCENE_INSTACTIVATION : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static GC_UPDATE_SCENE_INSTACTIVATION* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class GS_CONNECTED_HEARTBEAT : public ::google::protobuf::Message {
- public:
-  GS_CONNECTED_HEARTBEAT();
-  virtual ~GS_CONNECTED_HEARTBEAT();
-
-  GS_CONNECTED_HEARTBEAT(const GS_CONNECTED_HEARTBEAT& from);
-
-  inline GS_CONNECTED_HEARTBEAT& operator=(const GS_CONNECTED_HEARTBEAT& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const GS_CONNECTED_HEARTBEAT& default_instance();
-
-  void Swap(GS_CONNECTED_HEARTBEAT* other);
-
-  // implements Message ----------------------------------------------
-
-  GS_CONNECTED_HEARTBEAT* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const GS_CONNECTED_HEARTBEAT& from);
-  void MergeFrom(const GS_CONNECTED_HEARTBEAT& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required int32 senderworldid = 1;
-  inline bool has_senderworldid() const;
-  inline void clear_senderworldid();
-  static const int kSenderworldidFieldNumber = 1;
-  inline ::google::protobuf::int32 senderworldid() const;
-  inline void set_senderworldid(::google::protobuf::int32 value);
-
-  // required int32 receiverworldid = 2;
-  inline bool has_receiverworldid() const;
-  inline void clear_receiverworldid();
-  static const int kReceiverworldidFieldNumber = 2;
-  inline ::google::protobuf::int32 receiverworldid() const;
-  inline void set_receiverworldid(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:GS_CONNECTED_HEARTBEAT)
- private:
-  inline void set_has_senderworldid();
-  inline void clear_has_senderworldid();
-  inline void set_has_receiverworldid();
-  inline void clear_has_receiverworldid();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::int32 senderworldid_;
-  ::google::protobuf::int32 receiverworldid_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
-
-  friend void  protobuf_AddDesc_PBMessage_2eproto();
-  friend void protobuf_AssignDesc_PBMessage_2eproto();
-  friend void protobuf_ShutdownFile_PBMessage_2eproto();
-
-  void InitAsDefaultInstance();
-  static GS_CONNECTED_HEARTBEAT* default_instance_;
-};
-// -------------------------------------------------------------------
-
-class SG_CONNECTED_HEARTBEAT : public ::google::protobuf::Message {
- public:
-  SG_CONNECTED_HEARTBEAT();
-  virtual ~SG_CONNECTED_HEARTBEAT();
-
-  SG_CONNECTED_HEARTBEAT(const SG_CONNECTED_HEARTBEAT& from);
-
-  inline SG_CONNECTED_HEARTBEAT& operator=(const SG_CONNECTED_HEARTBEAT& from) {
-    CopyFrom(from);
-    return *this;
-  }
-
-  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
-    return _unknown_fields_;
-  }
-
-  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
-    return &_unknown_fields_;
-  }
-
-  static const ::google::protobuf::Descriptor* descriptor();
-  static const SG_CONNECTED_HEARTBEAT& default_instance();
-
-  void Swap(SG_CONNECTED_HEARTBEAT* other);
-
-  // implements Message ----------------------------------------------
-
-  SG_CONNECTED_HEARTBEAT* New() const;
-  void CopyFrom(const ::google::protobuf::Message& from);
-  void MergeFrom(const ::google::protobuf::Message& from);
-  void CopyFrom(const SG_CONNECTED_HEARTBEAT& from);
-  void MergeFrom(const SG_CONNECTED_HEARTBEAT& from);
-  void Clear();
-  bool IsInitialized() const;
-
-  int ByteSize() const;
-  bool MergePartialFromCodedStream(
-      ::google::protobuf::io::CodedInputStream* input);
-  void SerializeWithCachedSizes(
-      ::google::protobuf::io::CodedOutputStream* output) const;
-  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
-  int GetCachedSize() const { return _cached_size_; }
-  private:
-  void SharedCtor();
-  void SharedDtor();
-  void SetCachedSize(int size) const;
-  public:
-
-  ::google::protobuf::Metadata GetMetadata() const;
-
-  // nested types ----------------------------------------------------
-
-  // accessors -------------------------------------------------------
-
-  // required int32 senderworldid = 1;
-  inline bool has_senderworldid() const;
-  inline void clear_senderworldid();
-  static const int kSenderworldidFieldNumber = 1;
-  inline ::google::protobuf::int32 senderworldid() const;
-  inline void set_senderworldid(::google::protobuf::int32 value);
-
-  // required int32 receiverworldid = 2;
-  inline bool has_receiverworldid() const;
-  inline void clear_receiverworldid();
-  static const int kReceiverworldidFieldNumber = 2;
-  inline ::google::protobuf::int32 receiverworldid() const;
-  inline void set_receiverworldid(::google::protobuf::int32 value);
-
-  // @@protoc_insertion_point(class_scope:SG_CONNECTED_HEARTBEAT)
- private:
-  inline void set_has_senderworldid();
-  inline void clear_has_senderworldid();
-  inline void set_has_receiverworldid();
-  inline void clear_has_receiverworldid();
-
-  ::google::protobuf::UnknownFieldSet _unknown_fields_;
-
-  ::google::protobuf::int32 senderworldid_;
-  ::google::protobuf::int32 receiverworldid_;
-
-  mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
-
-  friend void  protobuf_AddDesc_PBMessage_2eproto();
-  friend void protobuf_AssignDesc_PBMessage_2eproto();
-  friend void protobuf_ShutdownFile_PBMessage_2eproto();
-
-  void InitAsDefaultInstance();
-  static SG_CONNECTED_HEARTBEAT* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -3658,6 +3475,108 @@ class CG_FIGHT : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static CG_FIGHT* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GC_FIGHT : public ::google::protobuf::Message {
+ public:
+  GC_FIGHT();
+  virtual ~GC_FIGHT();
+
+  GC_FIGHT(const GC_FIGHT& from);
+
+  inline GC_FIGHT& operator=(const GC_FIGHT& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GC_FIGHT& default_instance();
+
+  void Swap(GC_FIGHT* other);
+
+  // implements Message ----------------------------------------------
+
+  GC_FIGHT* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GC_FIGHT& from);
+  void MergeFrom(const GC_FIGHT& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 ret = 1;
+  inline bool has_ret() const;
+  inline void clear_ret();
+  static const int kRetFieldNumber = 1;
+  inline ::google::protobuf::int32 ret() const;
+  inline void set_ret(::google::protobuf::int32 value);
+
+  // optional int64 marchId = 2;
+  inline bool has_marchid() const;
+  inline void clear_marchid();
+  static const int kMarchIdFieldNumber = 2;
+  inline ::google::protobuf::int64 marchid() const;
+  inline void set_marchid(::google::protobuf::int64 value);
+
+  // optional int32 sceneId = 3;
+  inline bool has_sceneid() const;
+  inline void clear_sceneid();
+  static const int kSceneIdFieldNumber = 3;
+  inline ::google::protobuf::int32 sceneid() const;
+  inline void set_sceneid(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:GC_FIGHT)
+ private:
+  inline void set_has_ret();
+  inline void clear_has_ret();
+  inline void set_has_marchid();
+  inline void clear_has_marchid();
+  inline void set_has_sceneid();
+  inline void clear_has_sceneid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int64 marchid_;
+  ::google::protobuf::int32 ret_;
+  ::google::protobuf::int32 sceneid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GC_FIGHT* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -6047,10 +5966,10 @@ class GC_OBJINFOR : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 unitdataid() const;
   inline void set_unitdataid(::google::protobuf::int32 value);
 
-  // repeated int32 skillDataId = 3;
+  // repeated int32 skilldataid = 3;
   inline int skilldataid_size() const;
   inline void clear_skilldataid();
-  static const int kSkillDataIdFieldNumber = 3;
+  static const int kSkilldataidFieldNumber = 3;
   inline ::google::protobuf::int32 skilldataid(int index) const;
   inline void set_skilldataid(int index, ::google::protobuf::int32 value);
   inline void add_skilldataid(::google::protobuf::int32 value);
@@ -6066,10 +5985,10 @@ class GC_OBJINFOR : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 camp() const;
   inline void set_camp(::google::protobuf::int32 value);
 
-  // required int32 unitCount = 5;
+  // required int32 unitcount = 5;
   inline bool has_unitcount() const;
   inline void clear_unitcount();
-  static const int kUnitCountFieldNumber = 5;
+  static const int kUnitcountFieldNumber = 5;
   inline ::google::protobuf::int32 unitcount() const;
   inline void set_unitcount(::google::protobuf::int32 value);
 
@@ -6115,24 +6034,24 @@ class GC_OBJINFOR : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 level() const;
   inline void set_level(::google::protobuf::int32 value);
 
-  // required int32 posX = 12;
+  // required int32 posx = 12;
   inline bool has_posx() const;
   inline void clear_posx();
-  static const int kPosXFieldNumber = 12;
+  static const int kPosxFieldNumber = 12;
   inline ::google::protobuf::int32 posx() const;
   inline void set_posx(::google::protobuf::int32 value);
 
-  // required int32 posZ = 13;
+  // required int32 posz = 13;
   inline bool has_posz() const;
   inline void clear_posz();
-  static const int kPosZFieldNumber = 13;
+  static const int kPoszFieldNumber = 13;
   inline ::google::protobuf::int32 posz() const;
   inline void set_posz(::google::protobuf::int32 value);
 
-  // required int32 arrangeIndex = 14;
+  // required int32 arrangeindex = 14;
   inline bool has_arrangeindex() const;
   inline void clear_arrangeindex();
-  static const int kArrangeIndexFieldNumber = 14;
+  static const int kArrangeindexFieldNumber = 14;
   inline ::google::protobuf::int32 arrangeindex() const;
   inline void set_arrangeindex(::google::protobuf::int32 value);
 
@@ -6931,6 +6850,180 @@ class GC_OBJGETHURT : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static GC_OBJGETHURT* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CG_Building_LevelUp : public ::google::protobuf::Message {
+ public:
+  CG_Building_LevelUp();
+  virtual ~CG_Building_LevelUp();
+
+  CG_Building_LevelUp(const CG_Building_LevelUp& from);
+
+  inline CG_Building_LevelUp& operator=(const CG_Building_LevelUp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CG_Building_LevelUp& default_instance();
+
+  void Swap(CG_Building_LevelUp* other);
+
+  // implements Message ----------------------------------------------
+
+  CG_Building_LevelUp* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CG_Building_LevelUp& from);
+  void MergeFrom(const CG_Building_LevelUp& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int64 buildingID = 1;
+  inline bool has_buildingid() const;
+  inline void clear_buildingid();
+  static const int kBuildingIDFieldNumber = 1;
+  inline ::google::protobuf::int64 buildingid() const;
+  inline void set_buildingid(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:CG_Building_LevelUp)
+ private:
+  inline void set_has_buildingid();
+  inline void clear_has_buildingid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int64 buildingid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static CG_Building_LevelUp* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GC_Building_LevelUp : public ::google::protobuf::Message {
+ public:
+  GC_Building_LevelUp();
+  virtual ~GC_Building_LevelUp();
+
+  GC_Building_LevelUp(const GC_Building_LevelUp& from);
+
+  inline GC_Building_LevelUp& operator=(const GC_Building_LevelUp& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GC_Building_LevelUp& default_instance();
+
+  void Swap(GC_Building_LevelUp* other);
+
+  // implements Message ----------------------------------------------
+
+  GC_Building_LevelUp* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GC_Building_LevelUp& from);
+  void MergeFrom(const GC_Building_LevelUp& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int64 buildingID = 1;
+  inline bool has_buildingid() const;
+  inline void clear_buildingid();
+  static const int kBuildingIDFieldNumber = 1;
+  inline ::google::protobuf::int64 buildingid() const;
+  inline void set_buildingid(::google::protobuf::int64 value);
+
+  // required int32 level = 2;
+  inline bool has_level() const;
+  inline void clear_level();
+  static const int kLevelFieldNumber = 2;
+  inline ::google::protobuf::int32 level() const;
+  inline void set_level(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:GC_Building_LevelUp)
+ private:
+  inline void set_has_buildingid();
+  inline void clear_has_buildingid();
+  inline void set_has_level();
+  inline void clear_has_level();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int64 buildingid_;
+  ::google::protobuf::int32 level_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GC_Building_LevelUp* default_instance_;
 };
 // ===================================================================
 
@@ -8949,102 +9042,6 @@ GC_UPDATE_SCENE_INSTACTIVATION::mutable_sceneactivation() {
 
 // -------------------------------------------------------------------
 
-// GS_CONNECTED_HEARTBEAT
-
-// required int32 senderworldid = 1;
-inline bool GS_CONNECTED_HEARTBEAT::has_senderworldid() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void GS_CONNECTED_HEARTBEAT::set_has_senderworldid() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void GS_CONNECTED_HEARTBEAT::clear_has_senderworldid() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void GS_CONNECTED_HEARTBEAT::clear_senderworldid() {
-  senderworldid_ = 0;
-  clear_has_senderworldid();
-}
-inline ::google::protobuf::int32 GS_CONNECTED_HEARTBEAT::senderworldid() const {
-  return senderworldid_;
-}
-inline void GS_CONNECTED_HEARTBEAT::set_senderworldid(::google::protobuf::int32 value) {
-  set_has_senderworldid();
-  senderworldid_ = value;
-}
-
-// required int32 receiverworldid = 2;
-inline bool GS_CONNECTED_HEARTBEAT::has_receiverworldid() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void GS_CONNECTED_HEARTBEAT::set_has_receiverworldid() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void GS_CONNECTED_HEARTBEAT::clear_has_receiverworldid() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void GS_CONNECTED_HEARTBEAT::clear_receiverworldid() {
-  receiverworldid_ = 0;
-  clear_has_receiverworldid();
-}
-inline ::google::protobuf::int32 GS_CONNECTED_HEARTBEAT::receiverworldid() const {
-  return receiverworldid_;
-}
-inline void GS_CONNECTED_HEARTBEAT::set_receiverworldid(::google::protobuf::int32 value) {
-  set_has_receiverworldid();
-  receiverworldid_ = value;
-}
-
-// -------------------------------------------------------------------
-
-// SG_CONNECTED_HEARTBEAT
-
-// required int32 senderworldid = 1;
-inline bool SG_CONNECTED_HEARTBEAT::has_senderworldid() const {
-  return (_has_bits_[0] & 0x00000001u) != 0;
-}
-inline void SG_CONNECTED_HEARTBEAT::set_has_senderworldid() {
-  _has_bits_[0] |= 0x00000001u;
-}
-inline void SG_CONNECTED_HEARTBEAT::clear_has_senderworldid() {
-  _has_bits_[0] &= ~0x00000001u;
-}
-inline void SG_CONNECTED_HEARTBEAT::clear_senderworldid() {
-  senderworldid_ = 0;
-  clear_has_senderworldid();
-}
-inline ::google::protobuf::int32 SG_CONNECTED_HEARTBEAT::senderworldid() const {
-  return senderworldid_;
-}
-inline void SG_CONNECTED_HEARTBEAT::set_senderworldid(::google::protobuf::int32 value) {
-  set_has_senderworldid();
-  senderworldid_ = value;
-}
-
-// required int32 receiverworldid = 2;
-inline bool SG_CONNECTED_HEARTBEAT::has_receiverworldid() const {
-  return (_has_bits_[0] & 0x00000002u) != 0;
-}
-inline void SG_CONNECTED_HEARTBEAT::set_has_receiverworldid() {
-  _has_bits_[0] |= 0x00000002u;
-}
-inline void SG_CONNECTED_HEARTBEAT::clear_has_receiverworldid() {
-  _has_bits_[0] &= ~0x00000002u;
-}
-inline void SG_CONNECTED_HEARTBEAT::clear_receiverworldid() {
-  receiverworldid_ = 0;
-  clear_has_receiverworldid();
-}
-inline ::google::protobuf::int32 SG_CONNECTED_HEARTBEAT::receiverworldid() const {
-  return receiverworldid_;
-}
-inline void SG_CONNECTED_HEARTBEAT::set_receiverworldid(::google::protobuf::int32 value) {
-  set_has_receiverworldid();
-  receiverworldid_ = value;
-}
-
-// -------------------------------------------------------------------
-
 // CG_MOVE
 
 // required int32 poscount = 1;
@@ -10735,6 +10732,76 @@ inline ::google::protobuf::int32 CG_FIGHT::sceneid() const {
   return sceneid_;
 }
 inline void CG_FIGHT::set_sceneid(::google::protobuf::int32 value) {
+  set_has_sceneid();
+  sceneid_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// GC_FIGHT
+
+// required int32 ret = 1;
+inline bool GC_FIGHT::has_ret() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GC_FIGHT::set_has_ret() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GC_FIGHT::clear_has_ret() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GC_FIGHT::clear_ret() {
+  ret_ = 0;
+  clear_has_ret();
+}
+inline ::google::protobuf::int32 GC_FIGHT::ret() const {
+  return ret_;
+}
+inline void GC_FIGHT::set_ret(::google::protobuf::int32 value) {
+  set_has_ret();
+  ret_ = value;
+}
+
+// optional int64 marchId = 2;
+inline bool GC_FIGHT::has_marchid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GC_FIGHT::set_has_marchid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GC_FIGHT::clear_has_marchid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GC_FIGHT::clear_marchid() {
+  marchid_ = GOOGLE_LONGLONG(0);
+  clear_has_marchid();
+}
+inline ::google::protobuf::int64 GC_FIGHT::marchid() const {
+  return marchid_;
+}
+inline void GC_FIGHT::set_marchid(::google::protobuf::int64 value) {
+  set_has_marchid();
+  marchid_ = value;
+}
+
+// optional int32 sceneId = 3;
+inline bool GC_FIGHT::has_sceneid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GC_FIGHT::set_has_sceneid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GC_FIGHT::clear_has_sceneid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GC_FIGHT::clear_sceneid() {
+  sceneid_ = 0;
+  clear_has_sceneid();
+}
+inline ::google::protobuf::int32 GC_FIGHT::sceneid() const {
+  return sceneid_;
+}
+inline void GC_FIGHT::set_sceneid(::google::protobuf::int32 value) {
   set_has_sceneid();
   sceneid_ = value;
 }
@@ -12620,7 +12687,7 @@ inline void GC_OBJINFOR::set_unitdataid(::google::protobuf::int32 value) {
   unitdataid_ = value;
 }
 
-// repeated int32 skillDataId = 3;
+// repeated int32 skilldataid = 3;
 inline int GC_OBJINFOR::skilldataid_size() const {
   return skilldataid_.size();
 }
@@ -12667,7 +12734,7 @@ inline void GC_OBJINFOR::set_camp(::google::protobuf::int32 value) {
   camp_ = value;
 }
 
-// required int32 unitCount = 5;
+// required int32 unitcount = 5;
 inline bool GC_OBJINFOR::has_unitcount() const {
   return (_has_bits_[0] & 0x00000010u) != 0;
 }
@@ -12821,7 +12888,7 @@ inline void GC_OBJINFOR::set_level(::google::protobuf::int32 value) {
   level_ = value;
 }
 
-// required int32 posX = 12;
+// required int32 posx = 12;
 inline bool GC_OBJINFOR::has_posx() const {
   return (_has_bits_[0] & 0x00000800u) != 0;
 }
@@ -12843,7 +12910,7 @@ inline void GC_OBJINFOR::set_posx(::google::protobuf::int32 value) {
   posx_ = value;
 }
 
-// required int32 posZ = 13;
+// required int32 posz = 13;
 inline bool GC_OBJINFOR::has_posz() const {
   return (_has_bits_[0] & 0x00001000u) != 0;
 }
@@ -12865,7 +12932,7 @@ inline void GC_OBJINFOR::set_posz(::google::protobuf::int32 value) {
   posz_ = value;
 }
 
-// required int32 arrangeIndex = 14;
+// required int32 arrangeindex = 14;
 inline bool GC_OBJINFOR::has_arrangeindex() const {
   return (_has_bits_[0] & 0x00002000u) != 0;
 }
@@ -13425,6 +13492,80 @@ inline ::google::protobuf::int32 GC_OBJGETHURT::deathnumber() const {
 inline void GC_OBJGETHURT::set_deathnumber(::google::protobuf::int32 value) {
   set_has_deathnumber();
   deathnumber_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// CG_Building_LevelUp
+
+// required int64 buildingID = 1;
+inline bool CG_Building_LevelUp::has_buildingid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CG_Building_LevelUp::set_has_buildingid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CG_Building_LevelUp::clear_has_buildingid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CG_Building_LevelUp::clear_buildingid() {
+  buildingid_ = GOOGLE_LONGLONG(0);
+  clear_has_buildingid();
+}
+inline ::google::protobuf::int64 CG_Building_LevelUp::buildingid() const {
+  return buildingid_;
+}
+inline void CG_Building_LevelUp::set_buildingid(::google::protobuf::int64 value) {
+  set_has_buildingid();
+  buildingid_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// GC_Building_LevelUp
+
+// required int64 buildingID = 1;
+inline bool GC_Building_LevelUp::has_buildingid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GC_Building_LevelUp::set_has_buildingid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GC_Building_LevelUp::clear_has_buildingid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GC_Building_LevelUp::clear_buildingid() {
+  buildingid_ = GOOGLE_LONGLONG(0);
+  clear_has_buildingid();
+}
+inline ::google::protobuf::int64 GC_Building_LevelUp::buildingid() const {
+  return buildingid_;
+}
+inline void GC_Building_LevelUp::set_buildingid(::google::protobuf::int64 value) {
+  set_has_buildingid();
+  buildingid_ = value;
+}
+
+// required int32 level = 2;
+inline bool GC_Building_LevelUp::has_level() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GC_Building_LevelUp::set_has_level() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GC_Building_LevelUp::clear_has_level() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GC_Building_LevelUp::clear_level() {
+  level_ = 0;
+  clear_has_level();
+}
+inline ::google::protobuf::int32 GC_Building_LevelUp::level() const {
+  return level_;
+}
+inline void GC_Building_LevelUp::set_level(::google::protobuf::int32 value) {
+  set_has_level();
+  level_ = value;
 }
 
 

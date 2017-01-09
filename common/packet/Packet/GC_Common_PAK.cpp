@@ -152,6 +152,15 @@ tuint32 Packets::GC_REMOVEEFFECT_PAK::Execute( Player* pPlayer )
  return PACKET_EXE_ERROR;
  }
 //This code create by CodeEngine Author:Wendy ,don't modify
+#include "GC_FIGHT_PAK.h"
+tuint32 Packets::GC_FIGHT_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return GC_FIGHT_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
 #include "GC_ROBOT_OPEN_PAK.h"
 tuint32 Packets::GC_ROBOT_OPEN_PAK::Execute( Player* pPlayer )
  {
@@ -197,15 +206,6 @@ tuint32 Packets::GC_LOGIN_QUEUE_STATUS_PAK::Execute( Player* pPlayer )
  return PACKET_EXE_ERROR;
  }
 //This code create by CodeEngine Author:Wendy ,don't modify
-#include "GC_OBJINFOR_PAK.h"
-tuint32 Packets::GC_OBJINFOR_PAK::Execute( Player* pPlayer )
- {
- __ENTER_FUNCTION
- return GC_OBJINFOR_PAKHandler::Execute(this,pPlayer);
- __LEAVE_FUNCTION
- return PACKET_EXE_ERROR;
- }
-//This code create by CodeEngine Author:Wendy ,don't modify
 #include "GC_BATTLEINFOR_PAK.h"
 tuint32 Packets::GC_BATTLEINFOR_PAK::Execute( Player* pPlayer )
  {
@@ -247,6 +247,15 @@ tuint32 Packets::GC_OBJGETHURT_PAK::Execute( Player* pPlayer )
  {
  __ENTER_FUNCTION
  return GC_OBJGETHURT_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
+#include "GC_BUILDING_LEVELUP_PAK.h"
+tuint32 Packets::GC_BUILDING_LEVELUP_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return GC_BUILDING_LEVELUP_PAKHandler::Execute(this,pPlayer);
  __LEAVE_FUNCTION
  return PACKET_EXE_ERROR;
  }

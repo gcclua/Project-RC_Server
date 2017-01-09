@@ -72,6 +72,10 @@ public:
 
 	void FillMarchBaseInfo(MarchBaseInfo &rInfo);
 
+public: 
+	void SetHeroHp(int nHp);
+	void SetTroopHp(int nArrangeIndex,int nHp);
+
 private:
 	// Áì¾üµÄhero
 	Hero m_Hero;

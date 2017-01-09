@@ -35,8 +35,8 @@ private:
 	int m_nShutdownTime;
 
 public:
-	virtual void HandleMessage(const MarchEnterSceneMsg rMsg);
-	virtual void HandleMessage(const MarchChangeSceneMsg rMsg);
+	virtual void HandleMessage(const MarchEnterSceneMsg& rMsg);
+	virtual void HandleMessage(const MarchChangeSceneMsg &rMsg);
 	virtual void HandleMessage(const MarchLeaveSceneMsg &rMsg);
 	virtual void HandleMessage(const MarchReqChangeSceneMsg &rMsg);
 	virtual void HandleMessage(const MarchReqFightMsg &rMsg);

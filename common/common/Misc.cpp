@@ -139,7 +139,7 @@ void ToUpper(const char* src,char* dst,int len)
 {
 	
 }
-const std::string gXorKey("1E95A51FD4C38CD");
+const std::string gXorKey("1E95A51FD4C38CD68428186BC5C3E26F");
 
 void _XOR(char* pContent,uint32 nSize)
 {

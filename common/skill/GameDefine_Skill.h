@@ -83,7 +83,7 @@ public:
 	};
 };
 
-#define  MAXOWNSKILL 15
+#define  MAXOWNSKILL 3
 #define  SKILLPUBLICCD 40
 #define	 YTWJBASEID 307 //以退为进BaseID
 #define  MINXPSKILLSTUDYLEV 16 //XP 学习等级

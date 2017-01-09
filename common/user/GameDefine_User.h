@@ -21,7 +21,7 @@ enum EMANAGER_TYPE
 #define MESSAGE_TRANSPORTTOUSER_IMPL(MSGTYPE) \
 	void WorldUserService::HandleMessage(const MSGTYPE &rMsg) \
 { \
-	UserPtr Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); \
+	User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); \
 	if (Ptr) \
 { \
 	Ptr->HandleMessage(rMsg); \

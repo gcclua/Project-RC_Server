@@ -50,6 +50,7 @@ March& March::operator=(March const& rhs)
 	m_nStatus    = rhs.m_nStatus;
 	m_nFightId   = rhs.m_nFightId;
 	m_nBuildId   = rhs.m_nBuildId;
+	m_nForce     = rhs.m_nForce;
 	return (*this);
 }
 
@@ -64,6 +65,7 @@ void March::CleanUp()
 	m_nStatus = MARCHSTATUS_INVALID;    // ״̬
 	m_nFightId = 0;
 	m_nBuildId = invalid_guid64;
+	m_nForce   = invalid_id;
 	//m_mapArrange.clear();
 	m_TroopList.CleanUp();
 	m_Hero.CleanUp();
@@ -172,4 +174,17 @@ int64  March::GetHeroId()
 	return m_Hero.GetUID();
 	__LEAVE_FUNCTION
 		return invalid_guid64;
+}
+
+void March::SetHeroHp(int nHp)
+{
+	__ENTER_FUNCTION
+		m_Hero.SetHp(nHp);
+	__LEAVE_FUNCTION
+}
+void March::SetTroopHp(int nArrangeIndex,int nHp)
+{
+	__ENTER_FUNCTION
+	m_TroopList.SetTroopHp(nArrangeIndex,nHp);
+	__LEAVE_FUNCTION
 }

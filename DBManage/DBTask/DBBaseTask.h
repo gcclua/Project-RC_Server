@@ -42,7 +42,7 @@ public:
 	inline void   SetKey(int64 val){m_key=val;}
 	inline int64  GetKey(){return m_key;}
 	inline bool   IsForLoad() const{return OPERATION_TYPE_LOAD==m_OperationType;}
-	inline bool   IsForSave() const{return (OPERATION_TYPE_SAVE_MEM==m_OperationType || OPERATION_TYPE_SAVE_MEM==m_OperationType);}
+	inline bool   IsForSave() const{return (OPERATION_TYPE_SAVE_MEM==m_OperationType || OPERATION_TYPE_SAVE_DB==m_OperationType);}
 	inline void   SetRetServiceID(int val){m_RetServieID=val;}
 	inline int    GetRetServiceID() const {return m_RetServieID;}
 	inline void   SetSaveFail(bool val) {m_SaveFail = val;}

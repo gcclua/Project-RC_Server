@@ -56,8 +56,11 @@ public:
 	virtual void HandleMessage(const PlayerLeaveWorldMsg &rMsg);
 
 	virtual void HandleMessage(const PlayerEnterWorldMsg &rMsg);
+	virtual void HandleMessage(const MarchRetFightMsg &rMsg);
+	virtual void HandleMessage(const RetBattleInfoMsg &rMsg);
+	
 private:
-	UserPtr			GetUserByGuid(int64 guid);
+	User*			GetUserByGuid(int64 guid);
 
 
 public:
@@ -67,7 +70,7 @@ public:
 
 private:
 
-	UserPtrMap m_mapUser;
+	UserMap m_mapUser;
 
 	GamePlayerManager m_PlayerManager;
 };

@@ -3,28 +3,6 @@ INT	STRING	STRING	INT	STRING	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT
 #MAX_ID=1000;MAX_RECORD=1000;TableType=Hash;															
 #本行程序不读 技能ID	描述	技能名称	是否显示技能名字	图标	技能类型（1主动 2被动 4自动连续技 8XP技 16冲锋技 32读条技 64师门技能 128加持技能)（同时符合两种或以上 累加）	施放类型（0瞬发 1吟唱 2被动）		移动是否打断	是否可以被其他技能打断	受攻击是否打断	目标类型（1 自己 2队友 4敌人 8右方）	选择逻辑（0单体 1群体 2自身 ）	是否附加攻击音效	技能结束时需要停止的特效（针对于那些带持续循环的技能特效 防止特效因为异常而没有停掉）	目标死亡是否中断技能
 #此行必须有!!客户端确定是否需要读到内存	规则为填写S则不读，否则就会读取到客户端														
-100	怪物普攻	怪物普攻	0	空	1	0	0	0	0	0	4	0	0	-1	0
-110	飞云	普通攻击	0	attack01	5	0	1	1	1	0	4	0	1	-1	0
-120	飞云	入魔	0	XP	8	0	0	0	0	0	1	2	0	-1	0
-130	飞云	排云掌	0	feiyun-paiyunzhang	33	0	1	1	1	0	4	0	0	29	1
-140	飞云	霍家剑法	0	feiyun-huojiajianfa	1	0	0	0	0	0	4	1	0	-1	0
-150	飞云	莫名剑法	0	feiyun-momingjianfa	1	0	0	0	0	0	4	1	0	-1	0
-160	飞云	圣灵剑法	0	feiyun-shenlingjianfa	1	0	0	0	0	0	4	1	0	-1	0
-170	飞云	云十剑	0	feiyun-yunshijian	1	0	0	0	0	0	1	2	0	-1	0
-180	飞云	摩诃无量	0	feiyun-mokewuliang	1	0	0	0	0	0	1	2	0	-1	0
-210	神风	普通攻击	0	attack01	5	0	1	1	1	0	4	0	1	-1	0
-220	神风	入魔	0	XP	8	0	0	0	0	0	1	2	0	-1	0
-230	神风	风神腿	0	shengfeng-fengshentui	33	0	1	1	1	0	4	0	0	131	1
-240	神风	傲寒六诀	0	shenfeng-aohanshijue	1	0	0	0	0	0	4	1	1	-1	0
-250	神风	冰心诀	0	shenfeng-bingxinjue	1	0	0	0	0	0	4	1	0	-1	0
-260	神风	急转步	0	shenfeng-jizhuanbu	1	0	0	0	0	0	1	2	0	-1	0
-270	神风	神风动	0	shenfeng-shenfengjie	17	0	0	0	0	0	4	0	0	-1	0
-280	神风	创刀五式	0	shenfeng-chuangdaowushi	1	0	0	0	0	0	1	2	0	-1	0
-310	断情	普通攻击	0	attack01	5	0	1	1	1	0	4	0	1	-1	0
-320	断情	入魔	0	XP	8	0	0	0	0	0	1	2	0	-1	0
-330	断情	断情七绝	0	duanqing-duanqingqijue	33	0	0	1	1	0	4	0	1	138	1
-340	断情	惊情十变	0	duanqing-jingqingshibian	1	0	0	0	0	0	4	1	0	-1	0
-350	断情	虚空刀气	0	duanqing-xukongdaoqi	1	0	0	0	0	0	1	2	0	-1	0
-360	断情	七式刀意	0	duanqing-qishidaoyi	1	0	0	0	0	0	1	2	0	-1	0
-370	断情	邪王十劫	0	duanqing-xiewangwujie	1	0	0	0	0	0	1	2	0	-1	0
-380	断情	无相破元	0	duanqing-wuxiangpoyuan	1	0	0	0	0	0	1	2	0	-1	0
+100	近战普通攻击	挥砍	0	空	4	0	0	0	1	0	4	0	0	-1	0
+101	远程普通攻击	射击	0		4	0	1	0	1	0	4	0	0	-1	0
+102	英雄技能	巨力重击	0		1	0	1	0	0	0	4	1	0	-1	0

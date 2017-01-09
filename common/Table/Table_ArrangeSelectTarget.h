@@ -23,6 +23,8 @@ ID_TARGETPOS6,
 ID_TARGETPOS7,
 ID_TARGETPOS8,
 ID_TARGETPOS9,
+ID_TARGETPOS10,
+ID_TARGETPOS11,
 ID_MARCHLINEX1,
 ID_MARCHLINEZ1,
 ID_MARCHLINEX2,
@@ -95,13 +97,13 @@ public:
  }
 
 public:
- tint32 getTargetPosCount() const { return 9; } 
+ tint32 getTargetPosCount() const { return 11; } 
  private:
- tint32 m_TargetPos[9];
+ tint32 m_TargetPos[11];
  public:
  tint32 GetTargetPosbyIndex(tint32 idx) const 
  {
- if(idx>=0 && idx<9) return m_TargetPos[idx];
+ if(idx>=0 && idx<11) return m_TargetPos[idx];
  return -1;
  }
 

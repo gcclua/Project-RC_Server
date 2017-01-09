@@ -134,6 +134,17 @@ public:
 		return false;
 	}
 
+	void SetTroopHp(int nArrangeIndex,int nHp)
+	{
+		for(tint32 nId=0;m_TroopList.ElemSize()>nId;++nId)
+		{
+			if(m_TroopList[nId].GetArrangeIndex() ==nArrangeIndex)
+			{
+				m_TroopList[nId].SetHp(nHp);
+			}
+		}
+	}
+
 	Troop const& GetTroopById(int64  nTroopId) const
 	{
 		if(0 <= nTroopId)

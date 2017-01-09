@@ -311,11 +311,6 @@ ImpactBaseLogicPtr Obj_Character::CreateImpactInstanceById(int nLogicId)
 void Obj_Character::ReceiveImpact(int nImpactId,int nSkillId,Obj_Character& rSender)
 {
 	__ENTER_FUNCTION
-		//伙伴只吃自己给自己的BUFF
-		if ( rSender.GetID() !=GetID())
-		{
-			return;
-		}
 		const Table_Impact*  pLine =GetTable_ImpactByID(nImpactId);
 		if (pLine ==null_ptr)
 		{

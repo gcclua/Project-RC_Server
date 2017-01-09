@@ -74,7 +74,7 @@ bool ODBCMapMarchData::ParseResult(DBMarchDataPtr* pResult)
 				
 
 			};
-			AssertEx(mResultCount<=1,"");
+			AssertEx(mResultCount>=0,"");
 			AssertEx(mInterface,"");
 
 			tint32	   ErrorCode;

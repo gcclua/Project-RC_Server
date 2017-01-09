@@ -92,6 +92,8 @@ public:
 	virtual void HandleMessage(const DBReqLoadMapMarchMsg &rMsg);
 	virtual void HandleMessage(const DBReqSaveMarchDataMsg &rMsg);
 
+	virtual void HandleMessage(const DBOpRetMsg &rMsg);
+
 public:
 	int  GetUserDataTaskSaveType(int64 UserGuid,bool ImmediateSave);
 	void UpdateUserDataLastSaveDbTime(int64 UserGuid);

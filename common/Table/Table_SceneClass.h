@@ -42,6 +42,10 @@ ID_ATTACKPOSX8,
 ID_ATTACKPOSZ8,
 ID_ATTACKPOSX9,
 ID_ATTACKPOSZ9,
+ID_ATTACKPOSX10,
+ID_ATTACKPOSZ10,
+ID_ATTACKPOSX11,
+ID_ATTACKPOSZ11,
 ID_DEFENCEPOSX1,
 ID_DEFENCEPOSZ1,
 ID_DEFENCEPOSX2,
@@ -60,6 +64,10 @@ ID_DEFENCEPOSX8,
 ID_DEFENCEPOSZ8,
 ID_DEFENCEPOSX9,
 ID_DEFENCEPOSZ9,
+ID_DEFENCEPOSX10,
+ID_DEFENCEPOSZ10,
+ID_DEFENCEPOSX11,
+ID_DEFENCEPOSZ11,
 ID_TAB_CURCOL_COUNT,
 MAX_ID=1023,
 MAX_RECORD=1024
@@ -68,24 +76,24 @@ MAX_RECORD=1024
  bool __Load(DBC_Loader &loader);
 
 public:
- tint32 getAttackPosXCount() const { return 9; } 
+ tint32 getAttackPosXCount() const { return 11; } 
  private:
- tint32 m_AttackPosX[9];
+ tint32 m_AttackPosX[11];
  public:
  tint32 GetAttackPosXbyIndex(tint32 idx) const 
  {
- if(idx>=0 && idx<9) return m_AttackPosX[idx];
+ if(idx>=0 && idx<11) return m_AttackPosX[idx];
  return -1;
  }
 
 public:
- tint32 getAttackPosZCount() const { return 9; } 
+ tint32 getAttackPosZCount() const { return 11; } 
  private:
- tint32 m_AttackPosZ[9];
+ tint32 m_AttackPosZ[11];
  public:
  tint32 GetAttackPosZbyIndex(tint32 idx) const 
  {
- if(idx>=0 && idx<9) return m_AttackPosZ[idx];
+ if(idx>=0 && idx<11) return m_AttackPosZ[idx];
  return -1;
  }
 
@@ -100,24 +108,24 @@ private:
  tint32 GetCopySceneID() const { return m_CopySceneID; }
 
 public:
- tint32 getDefencePosXCount() const { return 9; } 
+ tint32 getDefencePosXCount() const { return 11; } 
  private:
- tint32 m_DefencePosX[9];
+ tint32 m_DefencePosX[11];
  public:
  tint32 GetDefencePosXbyIndex(tint32 idx) const 
  {
- if(idx>=0 && idx<9) return m_DefencePosX[idx];
+ if(idx>=0 && idx<11) return m_DefencePosX[idx];
  return -1;
  }
 
 public:
- tint32 getDefencePosZCount() const { return 9; } 
+ tint32 getDefencePosZCount() const { return 11; } 
  private:
- tint32 m_DefencePosZ[9];
+ tint32 m_DefencePosZ[11];
  public:
  tint32 GetDefencePosZbyIndex(tint32 idx) const 
  {
- if(idx>=0 && idx<9) return m_DefencePosZ[idx];
+ if(idx>=0 && idx<11) return m_DefencePosZ[idx];
  return -1;
  }
 

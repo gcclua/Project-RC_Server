@@ -67,6 +67,16 @@ void Obj_Npc::OnLeaveScene(void)
 	__LEAVE_FUNCTION
 }
 
+void Obj_Npc::Tick_Moving(const TimeInfo &rTimeInfo)
+{
+	__ENTER_FUNCTION
+
+		Stopping();
+		Moving(rTimeInfo);
+
+	__LEAVE_FUNCTION
+}
+
 void Obj_Npc::Tick(const TimeInfo &rTimeInfo)
 {
 	__ENTER_PROTECT
@@ -314,13 +324,17 @@ void  Obj_Npc::SelectTargetForMarch(bool bAttack)
 		ScenePos tmPos;
 		tmPos.m_nX = pCurTable->GetMarchLineXbyIndex(i);
 		tmPos.m_nZ = pCurTable->GetMarchLineZbyIndex(i);
-		MoveAppend(tmPos);
+		if (tmPos.m_nX !=  invalid_id && tmPos.m_nZ != invalid_id)
+		{
+			MoveAppend(tmPos);
+		}
+		
 	}
 	// 从对应的配置中寻找最优先攻击的集合
 	m_vecMarchTarget.clear();
 	for (tint32 i=0; i< MAX_ATTACK_SET; i++)
 	{
-		for (int j=1;j<=MAX_ARRANGE_COUNT;j++)
+		for (int j=0;j<MAX_ARRANGE_COUNT;j++)
 		{
 			// 选按集合顺序找到对方已经部署兵的位置
 			if (pCurTable->GetTargetPosbyIndex(j) == i)
@@ -328,23 +342,20 @@ void  Obj_Npc::SelectTargetForMarch(bool bAttack)
 				tint32 nTargetID = rCopyScene.GetSceneArrangeSelectTarget(j,bAttack);
 				if (nTargetID != invalid_id)
 				{
-					// 根据所属集合的扫描半径+自身扫描半径查找目标
-					if (m_vecMarchTarget.size() == 0)
-					{
-						SetAlertRadius(GetAlertRadius()+pCurTable->GetSelectRadiusbyIndex(i));
-					}
-					
 					m_vecMarchTarget.push_back(nTargetID);
-
 				}
 			}
 
-			
 			
 		}
 		if (m_vecMarchTarget.size()>0)
 		{
 			break;
+		}
+		// 根据所属集合的扫描半径+自身扫描半径查找目标
+		if (m_vecMarchTarget.size() == 0)
+		{
+			SetAlertRadius(GetAlertRadius()+pCurTable->GetSelectRadiusbyIndex(i));
 		}
 	}
 
