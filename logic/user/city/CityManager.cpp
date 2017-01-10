@@ -3,6 +3,7 @@
 #include "CityManager.h"
 #include "Message/DBMsg.h"
 #include "service/MessageOp.h"
+#include "packet/Packet/GC_BUILDING_LEVELUP_PAK.h"
 
 
 /////////arrange function///////////////
@@ -70,6 +71,29 @@ bool  CityManager::CheckSendMarchIntoMap(int64 nBuildId)
 	__ENTER_FUNCTION
 		AssertEx(m_CityPtr,"");
 	return m_CityPtr->CheckSendMarchIntoMap(nBuildId);
+	__LEAVE_FUNCTION
+		return false;
+}
+
+bool CityManager::BuildLevelUp(int64 nBuildId,GC_Building_LevelUp* pMessage)
+{
+	__ENTER_FUNCTION
+		AssertEx(m_CityPtr,"");
+		
+	bool bRet = m_CityPtr->BuildingLevelUp(nBuildId);
+	pMessage->set_buildingid(nBuildId);
+	if (bRet)
+	{
+		
+		pMessage->set_ret(0);
+	}
+	else
+	{
+		pMessage->set_ret(1);
+	}
+	BuildingPtr Ptr = m_CityPtr->GetBuilding(nBuildId);
+	AssertEx(Ptr,"");
+	pMessage->set_level(Ptr->GetLevel());
 	__LEAVE_FUNCTION
 		return false;
 }

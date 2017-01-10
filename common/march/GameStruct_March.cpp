@@ -51,6 +51,8 @@ March& March::operator=(March const& rhs)
 	m_nFightId   = rhs.m_nFightId;
 	m_nBuildId   = rhs.m_nBuildId;
 	m_nForce     = rhs.m_nForce;
+	m_nInstSceneId = rhs.m_nInstSceneId;
+	m_nSceneClass  = rhs.m_nSceneClass;
 	return (*this);
 }
 
@@ -70,6 +72,8 @@ void March::CleanUp()
 	m_TroopList.CleanUp();
 	m_Hero.CleanUp();
 	m_TroopMarchMap.clear();
+	m_nInstSceneId = 0;
+	m_nSceneClass  = 0;
 }
 
 void March::SerializeToDB(DBMarch& rDest) const

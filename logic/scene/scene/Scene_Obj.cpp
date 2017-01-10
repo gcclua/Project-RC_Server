@@ -172,7 +172,7 @@ Obj_TroopPtr  Scene::CreateTroopObj(const Troop& rTroop,const ScenePos &rPos,int
 	objTroopPtr->SetArrangeIndex(rTroop.GetArrangeIndex());
 	objTroopPtr->SetScenePos(rPos);
 	objTroopPtr->GetCooldownList() = rTroop.GetCooldownList();
-
+	objTroopPtr->SetCurHp(rTroop.GetHp());
 	CreateNpc(pTroop->GetDataIDbyIndex(rTroop.GetLevel()-1),rPos,false,nForce,rTroop.GetLevel(),objTroopPtr);
 
 	//初始化战斗属性
@@ -204,6 +204,7 @@ Obj_HeroPtr  Scene::CreateHeroObj(const Hero& rHero,const ScenePos &rPos,int nFo
 		objHeroPtr->SetName(rHero.GetName());
 		objHeroPtr->SetArrangeIndex(rHero.GetArrangeIndex());
 		objHeroPtr->SetScenePos(rPos);
+		objHeroPtr->SetCurHp(rHero.GetHp());
 
 		objHeroPtr->GetCooldownList() = rHero.GetCooldownList();
 		CreateNpc(pHero->GetDataIDbyIndex(rHero.GetLevel()-1),rPos,false,nForce,rHero.GetLevel(),objHeroPtr);

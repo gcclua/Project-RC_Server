@@ -101,6 +101,28 @@ User* WorldUserService::GetUserByGuid(int64 guid)
 	return null_ptr;
 }
 
+void WorldUserService::HandleMessage(const RetObjListMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+
+void WorldUserService::HandleMessage(const UpdateMarchMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+
 void WorldUserService::HandleMessage(const RetBattleInfoMsg &rMsg)
 {
 	__ENTER_FUNCTION

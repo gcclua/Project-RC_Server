@@ -25,6 +25,7 @@ class GC_LOGIN_RET;
 class CG_SKILL_USE;
 class CG_BATTLEINFOR;
 class CG_OBJPOSLIST;
+class CG_Building_LevelUp;
 
 
 class MarchRetNearListMsg;
@@ -49,6 +50,7 @@ class ObjAttackTargetMsg;
 class ObjHurtMsg;
 class KickPlayerByGuidMsg;
 class MarchRetFightMsg;
+class UpdateMarchMsg;
 
 
 
@@ -137,6 +139,7 @@ public:
 	tuint32 HandlePacket(::CG_SKILL_USE &rPacket);
 	tuint32 HandlePacket(::CG_BATTLEINFOR &rPacket);
 	tuint32 HandlePacket(::CG_OBJPOSLIST &rPacket);
+	tuint32 HandlePacket(::CG_Building_LevelUp &rPacket);
 	void    FillGCLogin(::GC_LOGIN_RET &rPacket);
 	bool	IsNoneInvalidText(CG_CHAT &rPacket);
 	void	HandleChatInfo(const TextChat& textchat, tint32 nVoiceIndex = invalid_id);
@@ -165,6 +168,7 @@ public:
 	void HandleMessage(const RetObjListMsg &rMsg);
 	void HandleMessage(const KickPlayerByGuidMsg &rMsg);
 	void HandleMessage(const MarchRetFightMsg &rMsg);
+	void HandleMessage(const UpdateMarchMsg &rMsg);
 	// ½ûÑÔ½â½ûÊ±¼ästart
 	//////////////////////////////////////////////////////////////////////////
 public:

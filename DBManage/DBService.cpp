@@ -252,7 +252,7 @@ void DBService::HandleMessage(const DBReqSaveTileDataMsg &rMsg)
 		DBWorldMapTaskPtr TaskPtr = POOLDEF_NEW(DBWorldMapTask);
 		AssertEx(TaskPtr,"");
 		TaskPtr->SetKey(TaskPtr->GetTaskType());
-
+		TaskPtr->SetData(rMsg.m_DataPtr);
 		DBBaseTaskPtr ptr = boost::static_pointer_cast<DBBaseTask,DBWorldMapTask>(TaskPtr);
 		AssertEx(ptr,"");
 

@@ -75,6 +75,7 @@ class AskJoinCopySceneMsg;
 class MarchReqFightMsg;
 class MarchRetFightMsg;
 class MarchLeaveFightMsg;
+class UpdateMarchMsg;
 class MarchReqChangeSceneMsg;
 class MarchAcceptChangeSceneMsg;
 class MarchChangeSceneMsg;
@@ -204,6 +205,7 @@ public:
 	virtual void HandleMessage(const MarchAcceptChangeSceneMsg &rMsg){};
 	virtual void HandleMessage(const MarchChangeSceneMsg &rMsg){};
 	virtual void HandleMessage(const MarchOpenCopySceneMsg &rMsg){};
+	virtual void HandleMessage(const UpdateMarchMsg &rMsg){};
 	virtual void HandleMessage(const ReqSetRobotOpenMsg &rMsg){};
 	virtual void HandleMessage(const RetSetRobotOpenMsg &rMsg){};
 	virtual void HandleMessage(const ReqMarchStartMsg &rMsg){};

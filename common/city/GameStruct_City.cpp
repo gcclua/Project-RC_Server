@@ -243,6 +243,20 @@ BuildingPtr City::GetBuilding(int64 Id)
 		return null_ptr;
 }
 
+bool City::BuildingLevelUp(int64 nBuildingId)
+{
+	__ENTER_FUNCTION
+		BuildingPtr Ptr = GetBuilding(nBuildingId);
+	    if (Ptr == null_ptr)
+		{
+			return false;
+		}
+		Ptr->SetLevel(Ptr->GetLevel()+1);
+		return true;
+	__LEAVE_FUNCTION
+		return false;
+}
+
 TechnologyPtr City::GetTechnology(int nType)
 {
 	__ENTER_FUNCTION

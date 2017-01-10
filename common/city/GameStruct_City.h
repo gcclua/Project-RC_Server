@@ -197,9 +197,10 @@ public:
 	bool AddResearch(TechResearchPtr Ptr);
 	bool AddConstruct(BuildConstructPtr Ptr);
 	
-
+public:
 	// 建造一个建筑物
 	bool CreateBuilding(int nType,int nSlot);
+	bool BuildingLevelUp(int64 nBuildingId);
 
 public:
 	BuildingPtr GetBuilding(int64 Id) ;

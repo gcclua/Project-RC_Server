@@ -10,6 +10,7 @@
 #include "Scene/GameStruct_Scene.h"
 
 class GC_CityData;
+class GC_Building_LevelUp;
 
 class CityManager : public BaseManager
 {
@@ -38,8 +39,8 @@ public:
 	// 从城市中派遣一队兵到大地图
 	bool       CheckSendMarchIntoMap(int64 nBuildId);
 
-	// 获得整个队伍信息
-	//TroopList_T GetTroopList(int64 nBuildId);
+	// 建筑升级
+	bool       BuildLevelUp(int64 nBuildId,GC_Building_LevelUp* pMessage);
 
 public:
 	void    FileData(GC_CityData* pCityData);

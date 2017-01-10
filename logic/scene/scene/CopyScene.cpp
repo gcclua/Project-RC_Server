@@ -96,13 +96,6 @@ void CopyScene::Tick_March(const TimeInfo &rTimeInfo)
 	__LEAVE_FUNCTION
 }
 
-void CopyScene::Tick_Close(const TimeInfo &rTimeInfo)
-{
-	__ENTER_FUNCTION
-
-	__LEAVE_FUNCTION
-}
-
 void CopyScene::Tick_Combat(const TimeInfo &rTimeInfo)
 {
 	__ENTER_FUNCTION
@@ -348,7 +341,12 @@ void CopyScene::InitAttackObj(const March& rMarch)
 			m_nStatus = STATUS_LINE;
 			
 		}
+		m_AttackMarch.SetSceneInstId(GetSceneInstID());
+		m_AttackMarch.SetSceneClass(GetSceneClassID());
 
+		UpdateMarchMsgPtr MsgPtr1 = POOLDEF_NEW(UpdateMarchMsg);
+		MsgPtr1->m_rMarch = m_AttackMarch;
+		SendMessage2User(rMarch.GetPlayerId(),MsgPtr1);
 		MarchRetFightMsgPtr MsgPtr = POOLDEF_NEW(MarchRetFightMsg);
 		MsgPtr->m_nMarchId = rMarch.GetMarchId();
 		MsgPtr->m_nResult  = 0;
@@ -565,6 +563,9 @@ void CopyScene::InitDefenceObj(const March& rMarch)
 	}
 	m_nCurPlayerCount++;
 	m_nStatus = STATUS_LINE;
+	UpdateMarchMsgPtr MsgPtr1 = POOLDEF_NEW(UpdateMarchMsg);
+	MsgPtr1->m_rMarch = m_DefenceMarch;
+	SendMessage2User(rMarch.GetPlayerId(),MsgPtr1);
 	MarchRetFightMsgPtr MsgPtr = POOLDEF_NEW(MarchRetFightMsg);
 	MsgPtr->m_nMarchId = rMarch.GetMarchId();
 	MsgPtr->m_nResult  = 0;
@@ -588,6 +589,7 @@ void CopyScene::InitMarchObj(const March& rMarch)
 			InitDefenceObj(rMarch);
 		}
 	}
+	
 	__LEAVE_FUNCTION
 }
 
@@ -800,6 +802,8 @@ void CopyScene::HandleMessage(const ReqObjListMsg &rMsg)
 				rObj.m_posX    = PtrRet->GetScenePos().m_nX;
 				rObj.m_posZ    = PtrRet->GetScenePos().m_nZ;
 				rObj.m_hp      = PtrRet->GetCurHp();
+				rObj.m_nState  = PtrRet->GetState();
+				MsgPtr->m_objList.push_back(rObj);
 			}
 		}
 

@@ -45,6 +45,7 @@
 #include"GC_OBJPREPAREFORATTACK_PAK.h"
 #include"GC_OBJGETHURT_PAK.h"
 #include"GC_BUILDING_LEVELUP_PAK.h"
+#include"GC_UPDATE_MARCH_PAK.h"
 PacketFactoryManager gPacketFactoryManager;
  PacketFactoryManager::PacketFactoryManager( )
  {
@@ -194,6 +195,7 @@ AddFactory(new Packets::GC_OBJCOMMANDPURSUE_PAKFactory());
 AddFactory(new Packets::GC_OBJPREPAREFORATTACK_PAKFactory());
 AddFactory(new Packets::GC_OBJGETHURT_PAKFactory());
 AddFactory(new Packets::GC_BUILDING_LEVELUP_PAKFactory());
+AddFactory(new Packets::GC_UPDATE_MARCH_PAKFactory());
        return true ;
  __LEAVE_FUNCTION
  return false ;

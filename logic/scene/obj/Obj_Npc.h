@@ -100,6 +100,7 @@ public:
 	bool InCombat(){return m_curAIType == AI_COMBAT;}
 	void EnterMarch();
 	void EnterTrace();
+	int  GetState() const {return m_curAIType;}
 	bool SwitchAI(int AIType);
 	void ProessTrace(Obj_Character& rUnit,float fAttackDis);//追踪
 	// 在战斗状态下选择一个技能

@@ -41,4 +41,5 @@ MESSAGE_IMPL(MarchOpenCopySceneMsg)
 
 MESSAGE_IMPL(ObjTrackTargetMsg);
 MESSAGE_IMPL(ObjAttackTargetMsg)
+MESSAGE_IMPL(UpdateMarchMsg);
 

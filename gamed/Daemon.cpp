@@ -15,6 +15,7 @@
 #include "Table/TableManager.h"
 #include "packet/Packet/PacketDefine.h"
 #include "ServerConfig.h"
+#include "GuidDefine.h"
 
 ServerConfig serverConfig("D:/project/RealmConquerors/src/Server/server/DebugPath/server.cfg");
 
@@ -54,11 +55,14 @@ void Daemon::RunServiceManager(void)
 	gServiceManager.Create(ServiceID::MAX,_GameConfig().m_nDBThreadCount);
 	gServiceManager.Register(new DBService());
 	gServiceManager.Register(new LoginService(_GameConfig().m_uPortForClient));
+	gServiceManager.Register(new WorldMapService());
+	gServiceManager.Register(new WorldUserService());
+	gServiceManager.Register(new SceneService());
 	gServiceManager.Register(new LogService());
 	//gServiceManager.Register(new DBTestService());
-	gServiceManager.Register(new SceneService());
-	gServiceManager.Register(new WorldUserService());
-	gServiceManager.Register(new WorldMapService());
+	
+	
+	
 	
 	gServiceManager.InitAllService();
 	gServiceManager.Run();
@@ -78,10 +82,14 @@ Daemon::~Daemon()
 
 void Daemon::start()
 {
-	//InitTable();
+	InitTable();
 	InitGameConfig();
 
 	Packets::InitPacketNameVector();
+
+	InitGuidModule();
+	DiskLog(LOGDEF_INST(ServerStatus), "init guid module ok");
+
 	InitStaticManager();
 	RunServiceManager();
 }

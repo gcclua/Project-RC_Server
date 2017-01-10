@@ -193,6 +193,9 @@ const ::google::protobuf::internal::GeneratedMessageReflection*
 const ::google::protobuf::Descriptor* GC_Building_LevelUp_descriptor_ = NULL;
 const ::google::protobuf::internal::GeneratedMessageReflection*
   GC_Building_LevelUp_reflection_ = NULL;
+const ::google::protobuf::Descriptor* GC_Update_March_descriptor_ = NULL;
+const ::google::protobuf::internal::GeneratedMessageReflection*
+  GC_Update_March_reflection_ = NULL;
 
 }  // namespace
 
@@ -945,7 +948,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_TroopData));
   GC_MarchData_descriptor_ = file->message_type(40);
-  static const int GC_MarchData_offsets_[10] = {
+  static const int GC_MarchData_offsets_[11] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MarchData, marchid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MarchData, begintime_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MarchData, playerid_),
@@ -956,6 +959,7 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MarchData, buildid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MarchData, hero_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MarchData, troop_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_MarchData, sceneid_),
   };
   GC_MarchData_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1215,9 +1219,10 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(CG_Building_LevelUp));
   GC_Building_LevelUp_descriptor_ = file->message_type(55);
-  static const int GC_Building_LevelUp_offsets_[2] = {
+  static const int GC_Building_LevelUp_offsets_[3] = {
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_Building_LevelUp, buildingid_),
     GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_Building_LevelUp, level_),
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_Building_LevelUp, ret_),
   };
   GC_Building_LevelUp_reflection_ =
     new ::google::protobuf::internal::GeneratedMessageReflection(
@@ -1230,6 +1235,21 @@ void protobuf_AssignDesc_PBMessage_2eproto() {
       ::google::protobuf::DescriptorPool::generated_pool(),
       ::google::protobuf::MessageFactory::generated_factory(),
       sizeof(GC_Building_LevelUp));
+  GC_Update_March_descriptor_ = file->message_type(56);
+  static const int GC_Update_March_offsets_[1] = {
+    GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_Update_March, data_),
+  };
+  GC_Update_March_reflection_ =
+    new ::google::protobuf::internal::GeneratedMessageReflection(
+      GC_Update_March_descriptor_,
+      GC_Update_March::default_instance_,
+      GC_Update_March_offsets_,
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_Update_March, _has_bits_[0]),
+      GOOGLE_PROTOBUF_GENERATED_MESSAGE_FIELD_OFFSET(GC_Update_March, _unknown_fields_),
+      -1,
+      ::google::protobuf::DescriptorPool::generated_pool(),
+      ::google::protobuf::MessageFactory::generated_factory(),
+      sizeof(GC_Update_March));
 }
 
 namespace {
@@ -1354,6 +1374,8 @@ void protobuf_RegisterTypes(const ::std::string&) {
     CG_Building_LevelUp_descriptor_, &CG_Building_LevelUp::default_instance());
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
     GC_Building_LevelUp_descriptor_, &GC_Building_LevelUp::default_instance());
+  ::google::protobuf::MessageFactory::InternalRegisterGeneratedMessage(
+    GC_Update_March_descriptor_, &GC_Update_March::default_instance());
 }
 
 }  // namespace
@@ -1471,6 +1493,8 @@ void protobuf_ShutdownFile_PBMessage_2eproto() {
   delete CG_Building_LevelUp_reflection_;
   delete GC_Building_LevelUp::default_instance_;
   delete GC_Building_LevelUp_reflection_;
+  delete GC_Update_March::default_instance_;
+  delete GC_Update_March_reflection_;
 }
 
 void protobuf_AddDesc_PBMessage_2eproto() {
@@ -1599,43 +1623,45 @@ void protobuf_AddDesc_PBMessage_2eproto() {
     "ata\022\014\n\004type\030\001 \002(\005\022\r\n\005level\030\002 \002(\005\022\n\n\002hp\030\003"
     " \002(\005\022\n\n\002mp\030\004 \002(\005\022\r\n\005skill\030\005 \003(\005\022\"\n\010coold"
     "own\030\006 \003(\0132\020.GC_CoolDownInfo\022\024\n\014arrangein"
-    "dex\030\007 \002(\005\022\017\n\007marchid\030\010 \002(\003\"\317\001\n\014GC_MarchD"
+    "dex\030\007 \002(\005\022\017\n\007marchid\030\010 \002(\003\"\340\001\n\014GC_MarchD"
     "ata\022\017\n\007marchid\030\001 \002(\003\022\021\n\tbegintime\030\002 \002(\005\022"
     "\020\n\010playerid\030\003 \002(\003\022\016\n\006cityId\030\004 \002(\003\022\016\n\006sta"
     "tus\030\005 \002(\005\022\r\n\005speed\030\006 \002(\005\022\017\n\007fightid\030\007 \001("
     "\003\022\017\n\007buildid\030\010 \001(\003\022\032\n\004hero\030\t \002(\0132\014.GC_He"
-    "roData\022\034\n\005troop\030\n \003(\0132\r.GC_TroopData\"%\n\022"
-    "GC_TargetMarchData\022\017\n\007marchid\030\001 \002(\003\"\256\001\n\013"
-    "GC_CityData\022\016\n\006tileId\030\001 \002(\005\022\016\n\006cityId\030\002 "
-    "\002(\003\022\r\n\005level\030\003 \002(\005\022\014\n\004food\030\004 \002(\003\022\r\n\005ston"
-    "e\030\005 \002(\003\022\014\n\004iron\030\006 \002(\003\022#\n\tbuildlist\030\007 \003(\013"
-    "2\020.GC_BuildingData\022 \n\ttrooplist\030\010 \003(\0132\r."
-    "GC_TroopData\"-\n\013GC_HeroList\022\036\n\010heroList\030"
-    "\001 \003(\0132\014.GC_HeroData\"0\n\014GC_MarchList\022 \n\tm"
-    "archlist\030\001 \003(\0132\r.GC_MarchData\"!\n\016CG_BATT"
-    "LEINFOR\022\017\n\007sceneId\030\001 \002(\005\"\354\001\n\013GC_OBJINFOR"
-    "\022\n\n\002id\030\001 \002(\005\022\022\n\nunitDataId\030\002 \002(\005\022\023\n\013skil"
-    "ldataid\030\003 \003(\005\022\014\n\004camp\030\004 \002(\005\022\021\n\tunitcount"
-    "\030\005 \002(\005\022\n\n\002hp\030\006 \002(\005\022\r\n\005maxhp\030\007 \002(\005\022\016\n\006att"
-    "ack\030\010 \002(\005\022\017\n\007defence\030\t \002(\005\022\n\n\002sp\030\n \002(\005\022\r"
-    "\n\005level\030\013 \002(\005\022\014\n\004posx\030\014 \002(\005\022\014\n\004posz\030\r \002("
-    "\005\022\024\n\014arrangeindex\030\016 \002(\005\"@\n\016GC_BATTLEINFO"
-    "R\022\017\n\007sceneId\030\001 \002(\005\022\035\n\007objList\030\002 \003(\0132\014.GC"
-    "_OBJINFOR\"f\n\tGC_OBJPOS\022\r\n\005objId\030\001 \002(\005\022\014\n"
-    "\004posX\030\002 \002(\005\022\014\n\004posZ\030\003 \002(\005\022\n\n\002hp\030\004 \002(\005\022\020\n"
-    "\010targetId\030\005 \002(\005\022\020\n\010objState\030\006 \002(\005\"@\n\rGC_"
-    "OBJPOSLIST\022\017\n\007sceneId\030\001 \002(\005\022\036\n\nobjPosLis"
-    "t\030\002 \003(\0132\n.GC_OBJPOS\" \n\rCG_OBJPOSLIST\022\017\n\007"
-    "sceneId\030\001 \002(\005\"G\n\023GC_OBJCOMMANDPURSUE\022\017\n\007"
-    "sceneId\030\001 \002(\005\022\r\n\005objId\030\002 \002(\005\022\020\n\010aimObjId"
-    "\030\003 \002(\005\"J\n\026GC_OBJPREPAREFORATTACK\022\017\n\007scen"
-    "eId\030\001 \002(\005\022\r\n\005objId\030\002 \002(\005\022\020\n\010aimObjId\030\003 \002"
-    "(\005\"z\n\rGC_OBJGETHURT\022\017\n\007sceneId\030\001 \002(\005\022\r\n\005"
-    "objId\030\002 \002(\005\022\023\n\013attackObjId\030\003 \002(\005\022\016\n\006dama"
-    "ge\030\004 \002(\005\022\017\n\007objDead\030\005 \002(\005\022\023\n\013deathNumber"
-    "\030\006 \002(\005\")\n\023CG_Building_LevelUp\022\022\n\nbuildin"
-    "gID\030\001 \002(\003\"8\n\023GC_Building_LevelUp\022\022\n\nbuil"
-    "dingID\030\001 \002(\003\022\r\n\005level\030\002 \002(\005", 6227);
+    "roData\022\034\n\005troop\030\n \003(\0132\r.GC_TroopData\022\017\n\007"
+    "sceneid\030\013 \001(\005\"%\n\022GC_TargetMarchData\022\017\n\007m"
+    "archid\030\001 \002(\003\"\256\001\n\013GC_CityData\022\016\n\006tileId\030\001"
+    " \002(\005\022\016\n\006cityId\030\002 \002(\003\022\r\n\005level\030\003 \002(\005\022\014\n\004f"
+    "ood\030\004 \002(\003\022\r\n\005stone\030\005 \002(\003\022\014\n\004iron\030\006 \002(\003\022#"
+    "\n\tbuildlist\030\007 \003(\0132\020.GC_BuildingData\022 \n\tt"
+    "rooplist\030\010 \003(\0132\r.GC_TroopData\"-\n\013GC_Hero"
+    "List\022\036\n\010heroList\030\001 \003(\0132\014.GC_HeroData\"0\n\014"
+    "GC_MarchList\022 \n\tmarchlist\030\001 \003(\0132\r.GC_Mar"
+    "chData\"!\n\016CG_BATTLEINFOR\022\017\n\007sceneId\030\001 \002("
+    "\005\"\354\001\n\013GC_OBJINFOR\022\n\n\002id\030\001 \002(\005\022\022\n\nunitDat"
+    "aId\030\002 \002(\005\022\023\n\013skilldataid\030\003 \003(\005\022\014\n\004camp\030\004"
+    " \002(\005\022\021\n\tunitcount\030\005 \002(\005\022\n\n\002hp\030\006 \002(\005\022\r\n\005m"
+    "axhp\030\007 \002(\005\022\016\n\006attack\030\010 \002(\005\022\017\n\007defence\030\t "
+    "\002(\005\022\n\n\002sp\030\n \002(\005\022\r\n\005level\030\013 \002(\005\022\014\n\004posx\030\014"
+    " \002(\005\022\014\n\004posz\030\r \002(\005\022\024\n\014arrangeindex\030\016 \002(\005"
+    "\"@\n\016GC_BATTLEINFOR\022\017\n\007sceneId\030\001 \002(\005\022\035\n\007o"
+    "bjList\030\002 \003(\0132\014.GC_OBJINFOR\"f\n\tGC_OBJPOS\022"
+    "\r\n\005objId\030\001 \002(\005\022\014\n\004posX\030\002 \002(\005\022\014\n\004posZ\030\003 \002"
+    "(\005\022\n\n\002hp\030\004 \002(\005\022\020\n\010targetId\030\005 \002(\005\022\020\n\010objS"
+    "tate\030\006 \002(\005\"@\n\rGC_OBJPOSLIST\022\017\n\007sceneId\030\001"
+    " \002(\005\022\036\n\nobjPosList\030\002 \003(\0132\n.GC_OBJPOS\" \n\r"
+    "CG_OBJPOSLIST\022\017\n\007sceneId\030\001 \002(\005\"G\n\023GC_OBJ"
+    "COMMANDPURSUE\022\017\n\007sceneId\030\001 \002(\005\022\r\n\005objId\030"
+    "\002 \002(\005\022\020\n\010aimObjId\030\003 \002(\005\"J\n\026GC_OBJPREPARE"
+    "FORATTACK\022\017\n\007sceneId\030\001 \002(\005\022\r\n\005objId\030\002 \002("
+    "\005\022\020\n\010aimObjId\030\003 \002(\005\"z\n\rGC_OBJGETHURT\022\017\n\007"
+    "sceneId\030\001 \002(\005\022\r\n\005objId\030\002 \002(\005\022\023\n\013attackOb"
+    "jId\030\003 \002(\005\022\016\n\006damage\030\004 \002(\005\022\017\n\007objDead\030\005 \002"
+    "(\005\022\023\n\013deathNumber\030\006 \002(\005\")\n\023CG_Building_L"
+    "evelUp\022\022\n\nbuildingID\030\001 \002(\003\"E\n\023GC_Buildin"
+    "g_LevelUp\022\022\n\nbuildingID\030\001 \002(\003\022\r\n\005level\030\002"
+    " \002(\005\022\013\n\003ret\030\003 \002(\005\".\n\017GC_Update_March\022\033\n\004"
+    "data\030\001 \002(\0132\r.GC_MarchData", 6305);
   ::google::protobuf::MessageFactory::InternalRegisterGeneratedFile(
     "PBMessage.proto", &protobuf_RegisterTypes);
   CG_LOGIN::default_instance_ = new CG_LOGIN();
@@ -1694,6 +1720,7 @@ void protobuf_AddDesc_PBMessage_2eproto() {
   GC_OBJGETHURT::default_instance_ = new GC_OBJGETHURT();
   CG_Building_LevelUp::default_instance_ = new CG_Building_LevelUp();
   GC_Building_LevelUp::default_instance_ = new GC_Building_LevelUp();
+  GC_Update_March::default_instance_ = new GC_Update_March();
   CG_LOGIN::default_instance_->InitAsDefaultInstance();
   GC_LOGIN_RET::default_instance_->InitAsDefaultInstance();
   CG_CONNECTED_HEARTBEAT::default_instance_->InitAsDefaultInstance();
@@ -1750,6 +1777,7 @@ void protobuf_AddDesc_PBMessage_2eproto() {
   GC_OBJGETHURT::default_instance_->InitAsDefaultInstance();
   CG_Building_LevelUp::default_instance_->InitAsDefaultInstance();
   GC_Building_LevelUp::default_instance_->InitAsDefaultInstance();
+  GC_Update_March::default_instance_->InitAsDefaultInstance();
   ::google::protobuf::internal::OnShutdown(&protobuf_ShutdownFile_PBMessage_2eproto);
 }
 
@@ -16221,6 +16249,7 @@ const int GC_MarchData::kFightidFieldNumber;
 const int GC_MarchData::kBuildidFieldNumber;
 const int GC_MarchData::kHeroFieldNumber;
 const int GC_MarchData::kTroopFieldNumber;
+const int GC_MarchData::kSceneidFieldNumber;
 #endif  // !_MSC_VER
 
 GC_MarchData::GC_MarchData()
@@ -16249,6 +16278,7 @@ void GC_MarchData::SharedCtor() {
   fightid_ = GOOGLE_LONGLONG(0);
   buildid_ = GOOGLE_LONGLONG(0);
   hero_ = NULL;
+  sceneid_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -16298,6 +16328,7 @@ void GC_MarchData::Clear() {
     if (has_hero()) {
       if (hero_ != NULL) hero_->::GC_HeroData::Clear();
     }
+    sceneid_ = 0;
   }
   troop_.Clear();
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
@@ -16462,6 +16493,22 @@ bool GC_MarchData::MergePartialFromCodedStream(
           goto handle_uninterpreted;
         }
         if (input->ExpectTag(82)) goto parse_troop;
+        if (input->ExpectTag(88)) goto parse_sceneid;
+        break;
+      }
+
+      // optional int32 sceneid = 11;
+      case 11: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_sceneid:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &sceneid_)));
+          set_has_sceneid();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -16536,6 +16583,11 @@ void GC_MarchData::SerializeWithCachedSizes(
       10, this->troop(i), output);
   }
 
+  // optional int32 sceneid = 11;
+  if (has_sceneid()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(11, this->sceneid(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -16596,6 +16648,11 @@ void GC_MarchData::SerializeWithCachedSizes(
     target = ::google::protobuf::internal::WireFormatLite::
       WriteMessageNoVirtualToArray(
         10, this->troop(i), target);
+  }
+
+  // optional int32 sceneid = 11;
+  if (has_sceneid()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(11, this->sceneid(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -16674,6 +16731,13 @@ int GC_MarchData::ByteSize() const {
           this->hero());
     }
 
+    // optional int32 sceneid = 11;
+    if (has_sceneid()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->sceneid());
+    }
+
   }
   // repeated .GC_TroopData troop = 10;
   total_size += 1 * this->troop_size();
@@ -16739,6 +16803,9 @@ void GC_MarchData::MergeFrom(const GC_MarchData& from) {
     if (from.has_hero()) {
       mutable_hero()->::GC_HeroData::MergeFrom(from.hero());
     }
+    if (from.has_sceneid()) {
+      set_sceneid(from.sceneid());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -16779,6 +16846,7 @@ void GC_MarchData::Swap(GC_MarchData* other) {
     std::swap(buildid_, other->buildid_);
     std::swap(hero_, other->hero_);
     troop_.Swap(&other->troop_);
+    std::swap(sceneid_, other->sceneid_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -21185,6 +21253,7 @@ void CG_Building_LevelUp::Swap(CG_Building_LevelUp* other) {
 #ifndef _MSC_VER
 const int GC_Building_LevelUp::kBuildingIDFieldNumber;
 const int GC_Building_LevelUp::kLevelFieldNumber;
+const int GC_Building_LevelUp::kRetFieldNumber;
 #endif  // !_MSC_VER
 
 GC_Building_LevelUp::GC_Building_LevelUp()
@@ -21205,6 +21274,7 @@ void GC_Building_LevelUp::SharedCtor() {
   _cached_size_ = 0;
   buildingid_ = GOOGLE_LONGLONG(0);
   level_ = 0;
+  ret_ = 0;
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
 }
 
@@ -21242,6 +21312,7 @@ void GC_Building_LevelUp::Clear() {
   if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
     buildingid_ = GOOGLE_LONGLONG(0);
     level_ = 0;
+    ret_ = 0;
   }
   ::memset(_has_bits_, 0, sizeof(_has_bits_));
   mutable_unknown_fields()->Clear();
@@ -21280,6 +21351,22 @@ bool GC_Building_LevelUp::MergePartialFromCodedStream(
         } else {
           goto handle_uninterpreted;
         }
+        if (input->ExpectTag(24)) goto parse_ret;
+        break;
+      }
+
+      // required int32 ret = 3;
+      case 3: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_VARINT) {
+         parse_ret:
+          DO_((::google::protobuf::internal::WireFormatLite::ReadPrimitive<
+                   ::google::protobuf::int32, ::google::protobuf::internal::WireFormatLite::TYPE_INT32>(
+                 input, &ret_)));
+          set_has_ret();
+        } else {
+          goto handle_uninterpreted;
+        }
         if (input->ExpectAtEnd()) return true;
         break;
       }
@@ -21312,6 +21399,11 @@ void GC_Building_LevelUp::SerializeWithCachedSizes(
     ::google::protobuf::internal::WireFormatLite::WriteInt32(2, this->level(), output);
   }
 
+  // required int32 ret = 3;
+  if (has_ret()) {
+    ::google::protobuf::internal::WireFormatLite::WriteInt32(3, this->ret(), output);
+  }
+
   if (!unknown_fields().empty()) {
     ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
         unknown_fields(), output);
@@ -21328,6 +21420,11 @@ void GC_Building_LevelUp::SerializeWithCachedSizes(
   // required int32 level = 2;
   if (has_level()) {
     target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(2, this->level(), target);
+  }
+
+  // required int32 ret = 3;
+  if (has_ret()) {
+    target = ::google::protobuf::internal::WireFormatLite::WriteInt32ToArray(3, this->ret(), target);
   }
 
   if (!unknown_fields().empty()) {
@@ -21353,6 +21450,13 @@ int GC_Building_LevelUp::ByteSize() const {
       total_size += 1 +
         ::google::protobuf::internal::WireFormatLite::Int32Size(
           this->level());
+    }
+
+    // required int32 ret = 3;
+    if (has_ret()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::Int32Size(
+          this->ret());
     }
 
   }
@@ -21388,6 +21492,9 @@ void GC_Building_LevelUp::MergeFrom(const GC_Building_LevelUp& from) {
     if (from.has_level()) {
       set_level(from.level());
     }
+    if (from.has_ret()) {
+      set_ret(from.ret());
+    }
   }
   mutable_unknown_fields()->MergeFrom(from.unknown_fields());
 }
@@ -21405,7 +21512,7 @@ void GC_Building_LevelUp::CopyFrom(const GC_Building_LevelUp& from) {
 }
 
 bool GC_Building_LevelUp::IsInitialized() const {
-  if ((_has_bits_[0] & 0x00000003) != 0x00000003) return false;
+  if ((_has_bits_[0] & 0x00000007) != 0x00000007) return false;
 
   return true;
 }
@@ -21414,6 +21521,7 @@ void GC_Building_LevelUp::Swap(GC_Building_LevelUp* other) {
   if (other != this) {
     std::swap(buildingid_, other->buildingid_);
     std::swap(level_, other->level_);
+    std::swap(ret_, other->ret_);
     std::swap(_has_bits_[0], other->_has_bits_[0]);
     _unknown_fields_.Swap(&other->_unknown_fields_);
     std::swap(_cached_size_, other->_cached_size_);
@@ -21425,6 +21533,223 @@ void GC_Building_LevelUp::Swap(GC_Building_LevelUp* other) {
   ::google::protobuf::Metadata metadata;
   metadata.descriptor = GC_Building_LevelUp_descriptor_;
   metadata.reflection = GC_Building_LevelUp_reflection_;
+  return metadata;
+}
+
+
+// ===================================================================
+
+#ifndef _MSC_VER
+const int GC_Update_March::kDataFieldNumber;
+#endif  // !_MSC_VER
+
+GC_Update_March::GC_Update_March()
+  : ::google::protobuf::Message() {
+  SharedCtor();
+}
+
+void GC_Update_March::InitAsDefaultInstance() {
+  data_ = const_cast< ::GC_MarchData*>(&::GC_MarchData::default_instance());
+}
+
+GC_Update_March::GC_Update_March(const GC_Update_March& from)
+  : ::google::protobuf::Message() {
+  SharedCtor();
+  MergeFrom(from);
+}
+
+void GC_Update_March::SharedCtor() {
+  _cached_size_ = 0;
+  data_ = NULL;
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+}
+
+GC_Update_March::~GC_Update_March() {
+  SharedDtor();
+}
+
+void GC_Update_March::SharedDtor() {
+  if (this != default_instance_) {
+    delete data_;
+  }
+}
+
+void GC_Update_March::SetCachedSize(int size) const {
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+}
+const ::google::protobuf::Descriptor* GC_Update_March::descriptor() {
+  protobuf_AssignDescriptorsOnce();
+  return GC_Update_March_descriptor_;
+}
+
+const GC_Update_March& GC_Update_March::default_instance() {
+  if (default_instance_ == NULL) protobuf_AddDesc_PBMessage_2eproto();
+  return *default_instance_;
+}
+
+GC_Update_March* GC_Update_March::default_instance_ = NULL;
+
+GC_Update_March* GC_Update_March::New() const {
+  return new GC_Update_March;
+}
+
+void GC_Update_March::Clear() {
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (has_data()) {
+      if (data_ != NULL) data_->::GC_MarchData::Clear();
+    }
+  }
+  ::memset(_has_bits_, 0, sizeof(_has_bits_));
+  mutable_unknown_fields()->Clear();
+}
+
+bool GC_Update_March::MergePartialFromCodedStream(
+    ::google::protobuf::io::CodedInputStream* input) {
+#define DO_(EXPRESSION) if (!(EXPRESSION)) return false
+  ::google::protobuf::uint32 tag;
+  while ((tag = input->ReadTag()) != 0) {
+    switch (::google::protobuf::internal::WireFormatLite::GetTagFieldNumber(tag)) {
+      // required .GC_MarchData data = 1;
+      case 1: {
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
+          DO_(::google::protobuf::internal::WireFormatLite::ReadMessageNoVirtual(
+               input, mutable_data()));
+        } else {
+          goto handle_uninterpreted;
+        }
+        if (input->ExpectAtEnd()) return true;
+        break;
+      }
+
+      default: {
+      handle_uninterpreted:
+        if (::google::protobuf::internal::WireFormatLite::GetTagWireType(tag) ==
+            ::google::protobuf::internal::WireFormatLite::WIRETYPE_END_GROUP) {
+          return true;
+        }
+        DO_(::google::protobuf::internal::WireFormat::SkipField(
+              input, tag, mutable_unknown_fields()));
+        break;
+      }
+    }
+  }
+  return true;
+#undef DO_
+}
+
+void GC_Update_March::SerializeWithCachedSizes(
+    ::google::protobuf::io::CodedOutputStream* output) const {
+  // required .GC_MarchData data = 1;
+  if (has_data()) {
+    ::google::protobuf::internal::WireFormatLite::WriteMessageMaybeToArray(
+      1, this->data(), output);
+  }
+
+  if (!unknown_fields().empty()) {
+    ::google::protobuf::internal::WireFormat::SerializeUnknownFields(
+        unknown_fields(), output);
+  }
+}
+
+::google::protobuf::uint8* GC_Update_March::SerializeWithCachedSizesToArray(
+    ::google::protobuf::uint8* target) const {
+  // required .GC_MarchData data = 1;
+  if (has_data()) {
+    target = ::google::protobuf::internal::WireFormatLite::
+      WriteMessageNoVirtualToArray(
+        1, this->data(), target);
+  }
+
+  if (!unknown_fields().empty()) {
+    target = ::google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+        unknown_fields(), target);
+  }
+  return target;
+}
+
+int GC_Update_March::ByteSize() const {
+  int total_size = 0;
+
+  if (_has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    // required .GC_MarchData data = 1;
+    if (has_data()) {
+      total_size += 1 +
+        ::google::protobuf::internal::WireFormatLite::MessageSizeNoVirtual(
+          this->data());
+    }
+
+  }
+  if (!unknown_fields().empty()) {
+    total_size +=
+      ::google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(
+        unknown_fields());
+  }
+  GOOGLE_SAFE_CONCURRENT_WRITES_BEGIN();
+  _cached_size_ = total_size;
+  GOOGLE_SAFE_CONCURRENT_WRITES_END();
+  return total_size;
+}
+
+void GC_Update_March::MergeFrom(const ::google::protobuf::Message& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  const GC_Update_March* source =
+    ::google::protobuf::internal::dynamic_cast_if_available<const GC_Update_March*>(
+      &from);
+  if (source == NULL) {
+    ::google::protobuf::internal::ReflectionOps::Merge(from, this);
+  } else {
+    MergeFrom(*source);
+  }
+}
+
+void GC_Update_March::MergeFrom(const GC_Update_March& from) {
+  GOOGLE_CHECK_NE(&from, this);
+  if (from._has_bits_[0 / 32] & (0xffu << (0 % 32))) {
+    if (from.has_data()) {
+      mutable_data()->::GC_MarchData::MergeFrom(from.data());
+    }
+  }
+  mutable_unknown_fields()->MergeFrom(from.unknown_fields());
+}
+
+void GC_Update_March::CopyFrom(const ::google::protobuf::Message& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+void GC_Update_March::CopyFrom(const GC_Update_March& from) {
+  if (&from == this) return;
+  Clear();
+  MergeFrom(from);
+}
+
+bool GC_Update_March::IsInitialized() const {
+  if ((_has_bits_[0] & 0x00000001) != 0x00000001) return false;
+
+  if (has_data()) {
+    if (!this->data().IsInitialized()) return false;
+  }
+  return true;
+}
+
+void GC_Update_March::Swap(GC_Update_March* other) {
+  if (other != this) {
+    std::swap(data_, other->data_);
+    std::swap(_has_bits_[0], other->_has_bits_[0]);
+    _unknown_fields_.Swap(&other->_unknown_fields_);
+    std::swap(_cached_size_, other->_cached_size_);
+  }
+}
+
+::google::protobuf::Metadata GC_Update_March::GetMetadata() const {
+  protobuf_AssignDescriptorsOnce();
+  ::google::protobuf::Metadata metadata;
+  metadata.descriptor = GC_Update_March_descriptor_;
+  metadata.reflection = GC_Update_March_reflection_;
   return metadata;
 }
 

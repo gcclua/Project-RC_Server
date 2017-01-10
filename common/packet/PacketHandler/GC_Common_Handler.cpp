@@ -375,3 +375,16 @@ tuint32 Packets::GC_BUILDING_LEVELUP_PAKHandler::Execute( Packets::GC_BUILDING_L
  __LEAVE_FUNCTION
  return PACKET_EXE_ERROR ; 
  }
+//This code create by CodeEngine
+
+#include "Packet/Packet/GC_UPDATE_MARCH_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::GC_UPDATE_MARCH_PAKHandler::Execute( Packets::GC_UPDATE_MARCH_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }

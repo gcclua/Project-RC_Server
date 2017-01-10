@@ -5,6 +5,7 @@
 #include "packet/Packet/PBMessage.pb.h"
 #include "Message/DBMsg.h"
 #include "service/MessageOp.h"
+#include "packet/Packet/GC_UPDATE_MARCH_PAK.h"
 
 /////////arrange function///////////////
 MarchManager::MarchManager(User &rUser)
@@ -61,6 +62,66 @@ bool   MarchManager::AddTroop(int64 nMarchId,int nType,int nHp)
 		return false;
 }
 
+void   MarchManager::FileSingMarch(MarchPtr Ptr, GC_MarchData * pMarchData)
+{
+	__ENTER_FUNCTION
+		AssertEx(pMarchData,"");
+	AssertEx(Ptr,"");
+	pMarchData->set_marchid(Ptr->GetMarchId());
+	pMarchData->set_begintime(Ptr->GetBeginTime());
+	pMarchData->set_buildid(Ptr->GetBuildId());
+	pMarchData->set_cityid(Ptr->GetCityId());
+	pMarchData->set_fightid(Ptr->GetFightId());
+	pMarchData->set_sceneid(Ptr->GetSceneInstId());
+	Hero rHero = Ptr->GetHero();
+	GC_HeroData* pGCHeroData = pMarchData->mutable_hero();
+	pGCHeroData->set_type(rHero.GetType());
+	pGCHeroData->set_level(rHero.GetLevel());
+	pGCHeroData->set_hp(rHero.GetHp());
+	pGCHeroData->set_mp(0);
+	pGCHeroData->set_arrangeindex(rHero.GetArrangeIndex());
+	pGCHeroData->set_marchid(Ptr->GetMarchId());
+	
+
+	CooldownList_T CoolDownT = rHero.GetCooldownList();
+	for (int j=0;j<CoolDownT.GetListSize();j++)
+	{
+		CoolDown_Info rCoolDown = CoolDownT.GetCooldownByIndex(j);
+		GC_CoolDownInfo* pCoolDown = pGCHeroData->add_cooldown();
+		pCoolDown->set_cdtime(rCoolDown.m_nCDTime);
+		pCoolDown->set_elapsed(rCoolDown.m_nCDTimeElapsed);
+		pCoolDown->set_id(rCoolDown.m_nID);
+	}
+
+	TroopList_T TroopListT = Ptr->GetTroopList();
+	for (int i=0;i< TroopListT.GetListSize();i++)
+	{
+		Troop rTroop = TroopListT.GetTroopByIndex(i);
+		if (rTroop.GetType()>0)
+		{
+			GC_TroopData* pTroopData =	pMarchData->add_troop();
+			pTroopData->set_type(rTroop.GetType());
+			pTroopData->set_level(rTroop.GetLevel());
+			pTroopData->set_hp(rTroop.GetHp());
+			pTroopData->set_mp(0);
+			pTroopData->set_arrangeindex(rTroop.GetArrangeIndex());
+			pTroopData->set_marchid(rTroop.GetMarchId());
+
+			CooldownList_T CoolDownT = rTroop.GetCooldownList();
+			for (int j=0;j<CoolDownT.GetListSize();j++)
+			{
+				CoolDown_Info rCoolDown = CoolDownT.GetCooldownByIndex(j);
+				GC_CoolDownInfo* pCoolDown = pTroopData->add_cooldown();
+				pCoolDown->set_cdtime(rCoolDown.m_nCDTime);
+				pCoolDown->set_elapsed(rCoolDown.m_nCDTimeElapsed);
+				pCoolDown->set_id(rCoolDown.m_nID);
+			}
+		}
+	}
+
+	__LEAVE_FUNCTION
+}
+
 void   MarchManager::FileData(GC_MarchList* pMarchList)
 {
 	__ENTER_FUNCTION
@@ -68,57 +129,7 @@ void   MarchManager::FileData(GC_MarchList* pMarchList)
 		{
 			MarchPtr Ptr = it->second;
 			GC_MarchData* pMarchData = pMarchList->add_marchlist();
-			AssertEx(pMarchData,"");
-			pMarchData->set_marchid(Ptr->GetMarchId());
-			pMarchData->set_begintime(Ptr->GetBeginTime());
-			pMarchData->set_buildid(Ptr->GetBuildId());
-			pMarchData->set_cityid(Ptr->GetCityId());
-			pMarchData->set_fightid(Ptr->GetFightId());
-			Hero rHero = Ptr->GetHero();
-			GC_HeroData* pGCHeroData = pMarchData->mutable_hero();
-			pGCHeroData->set_type(rHero.GetType());
-			pGCHeroData->set_level(rHero.GetLevel());
-			pGCHeroData->set_hp(rHero.GetHp());
-			pGCHeroData->set_mp(0);
-			pGCHeroData->set_arrangeindex(rHero.GetArrangeIndex());
-			pGCHeroData->set_marchid(Ptr->GetMarchId());
-
-			CooldownList_T CoolDownT = rHero.GetCooldownList();
-			for (int j=0;j<CoolDownT.GetListSize();j++)
-			{
-				CoolDown_Info rCoolDown = CoolDownT.GetCooldownByIndex(j);
-				GC_CoolDownInfo* pCoolDown = pGCHeroData->add_cooldown();
-				pCoolDown->set_cdtime(rCoolDown.m_nCDTime);
-				pCoolDown->set_elapsed(rCoolDown.m_nCDTimeElapsed);
-				pCoolDown->set_id(rCoolDown.m_nID);
-			}
-
-			TroopList_T TroopListT = Ptr->GetTroopList();
-			for (int i=0;i< TroopListT.GetListSize();i++)
-			{
-				Troop rTroop = TroopListT.GetTroopByIndex(i);
-				if (rTroop.GetType()>0)
-				{
-					GC_TroopData* pTroopData =	pMarchData->add_troop();
-					pTroopData->set_type(rTroop.GetType());
-					pTroopData->set_level(rTroop.GetLevel());
-					pTroopData->set_hp(rTroop.GetHp());
-					pTroopData->set_mp(0);
-					pTroopData->set_arrangeindex(rTroop.GetArrangeIndex());
-					pTroopData->set_marchid(rTroop.GetMarchId());
-
-					CooldownList_T CoolDownT = rTroop.GetCooldownList();
-					for (int j=0;j<CoolDownT.GetListSize();j++)
-					{
-						CoolDown_Info rCoolDown = CoolDownT.GetCooldownByIndex(j);
-						GC_CoolDownInfo* pCoolDown = pTroopData->add_cooldown();
-						pCoolDown->set_cdtime(rCoolDown.m_nCDTime);
-						pCoolDown->set_elapsed(rCoolDown.m_nCDTimeElapsed);
-						pCoolDown->set_id(rCoolDown.m_nID);
-					}
-				}
-			}
-			
+			FileSingMarch(Ptr,pMarchData);
 		}
 	__LEAVE_FUNCTION
 }
@@ -185,6 +196,31 @@ bool  MarchManager::InitMarchInfo(int64 nBuildId,const TroopList_T& rTroopList,c
 		return false;
 }
 
+bool  MarchManager::UpdateMarchData(const March &rMarch)
+{
+	__ENTER_FUNCTION
+	MarchPtrMap::iterator it = m_mapMarch.find(rMarch.GetMarchId());
+	if (it == m_mapMarch.end())
+	{
+		return false;
+	}
+
+	MarchPtr Ptr= it->second;
+	AssertEx(Ptr,"");
+	*Ptr = rMarch;
+	DBReqSaveMarchDataMsgPtr MsgPtr = POOLDEF_NEW(DBReqSaveMarchDataMsg);
+	Ptr->SerializeToDB(MsgPtr->m_March);
+	SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
+
+	Packets::GC_UPDATE_MARCH_PAK pak;
+	FileSingMarch(Ptr,pak.m_PacketData.mutable_data());
+	m_rUser.SendPacket(pak);
+
+	return true;
+	__LEAVE_FUNCTION
+		return false;
+}
+
 bool MarchManager::UpdateMarchState(int64 nMarchId,int nState)
 {
 	__ENTER_FUNCTION
@@ -202,6 +238,11 @@ bool MarchManager::UpdateMarchState(int64 nMarchId,int nState)
 		DBReqSaveMarchDataMsgPtr MsgPtr = POOLDEF_NEW(DBReqSaveMarchDataMsg);
 		Ptr->SerializeToDB(MsgPtr->m_March);
 		SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
+
+		Packets::GC_UPDATE_MARCH_PAK pak;
+		FileSingMarch(Ptr,pak.m_PacketData.mutable_data());
+		m_rUser.SendPacket(pak);
+
 		return true;
 	__LEAVE_FUNCTION
 		return false;

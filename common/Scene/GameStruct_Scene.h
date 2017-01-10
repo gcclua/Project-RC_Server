@@ -616,6 +616,7 @@ struct ObjInfo
 	int m_posX;
 	int m_posZ;
 	int m_hp;
+	int m_nState;
 };
 
 

@@ -8,6 +8,7 @@
 #include "march/GameStruct_March.h"
 
 class GC_MarchList;
+class GC_MarchData;
 
 class MarchManager : public BaseManager
 {
@@ -25,6 +26,10 @@ public:
 public:
 	void    FileData(GC_MarchList* pMarchList);
 
+
+private:
+	void    FileSingMarch(MarchPtr Ptr,GC_MarchData * pMarchData);
+
 public:
 
 	// 初始marchinfo
@@ -40,6 +45,9 @@ public:
 
 	// 从城市中派遣一队兵到大地图
 	bool       CheckSendMarchIntoMap(int64 nMarchId);
+
+	// 更新march数据
+	bool       UpdateMarchData(const March &rMarch);
 
 public:
 

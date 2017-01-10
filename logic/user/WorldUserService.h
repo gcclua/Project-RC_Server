@@ -58,6 +58,8 @@ public:
 	virtual void HandleMessage(const PlayerEnterWorldMsg &rMsg);
 	virtual void HandleMessage(const MarchRetFightMsg &rMsg);
 	virtual void HandleMessage(const RetBattleInfoMsg &rMsg);
+	virtual void HandleMessage(const RetObjListMsg &rMsg);
+	virtual void HandleMessage(const UpdateMarchMsg &rMsg);
 	
 private:
 	User*			GetUserByGuid(int64 guid);

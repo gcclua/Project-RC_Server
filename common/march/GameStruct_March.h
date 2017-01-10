@@ -64,6 +64,12 @@ public:
 	int64 GetBuildId() const {return m_nBuildId;}
 	void  SetBuildId(int64 val){m_nBuildId = val;}
 
+	int  GetSceneInstId() const {return m_nInstSceneId;}
+	void SetSceneInstId(int nSceneId) {m_nInstSceneId = nSceneId;}
+
+	int  GetSceneClass() const {return m_nSceneClass;}
+	void SetSceneClass(int nClassId){m_nSceneClass = nClassId;}
+
 	HERONAME GetName() const {return m_Hero.GetName();}
 
 public:
@@ -104,7 +110,7 @@ private:
 	TroopMarchMap m_TroopMarchMap;
 
 private:
-	ScenePos  m_pos;		//场景坐标
+	ScenePos  m_pos;		//大地图场景坐标
 	int    m_nBeginTime; // 出发时间
 	int    m_nEndTime;   // 返回时间
 	int64  m_nMarchId;   // 唯一标示
@@ -117,14 +123,8 @@ private:
 	int    m_nForce;     // 战斗势力，攻击方，防守方
 	int64  m_nBuildId;   // 对应的建筑ID
 
-	tint32  m_LastSceneId;		//上次登录场景
-	tint32  m_LastInstSceneId;  //上次登录场景实例ID
-	tfloat32  m_LastScenePosX;		//场景坐标
-	tfloat32  m_LastScenePosZ;		//场景坐标
-	tint32	m_LastNoneCopySceneId; //上次非副本场景
-	tint32  m_LastNoneCopySceneInstId;//上次非副本场景实例ID
-	tfloat32 m_LastNoneCopyScenePosX;//上次非副本场景坐标
-	tfloat32 m_LastNoneCopyScenePosZ;//上次非副本场景坐标
+	tint32  m_nSceneClass;	 //上次登录场景
+	tint32  m_nInstSceneId;  //上次登录场景实例ID
 };
 typedef boost::shared_ptr<March> MarchPtr;
 typedef std::map<int64,MarchPtr> MarchPtrMap;

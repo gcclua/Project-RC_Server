@@ -259,3 +259,12 @@ tuint32 Packets::GC_BUILDING_LEVELUP_PAK::Execute( Player* pPlayer )
  __LEAVE_FUNCTION
  return PACKET_EXE_ERROR;
  }
+//This code create by CodeEngine Author:Wendy ,don't modify
+#include "GC_UPDATE_MARCH_PAK.h"
+tuint32 Packets::GC_UPDATE_MARCH_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return GC_UPDATE_MARCH_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }

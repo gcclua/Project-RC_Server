@@ -21,7 +21,7 @@ private:
 	virtual void Tick_March(const TimeInfo &rTimeInfo);
 	virtual void Tick_Combat(const TimeInfo &rTimeInfo);
 
-	virtual void Tick_Close(const TimeInfo &rTimeInfo);
+	//virtual void Tick_Close(const TimeInfo &rTimeInfo);
 public:
 	virtual InvokerPtr InitMyself(void);
 

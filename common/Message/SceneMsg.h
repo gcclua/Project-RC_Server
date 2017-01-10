@@ -237,6 +237,10 @@ MESSAGE_DEF_BEGIN(ObjTrackTargetMsg)
 	int m_nTargetId;
 MESSAGE_DEF_END(ObjTrackTargetMsg)
 
+MESSAGE_DEF_BEGIN(UpdateMarchMsg)
+	March m_rMarch;
+MESSAGE_DEF_END(UpdateMarchMsg)
+
 MESSAGE_DEF_BEGIN(ObjAttackTargetMsg)
 	int m_nSceneId;
 	int m_nObjId;

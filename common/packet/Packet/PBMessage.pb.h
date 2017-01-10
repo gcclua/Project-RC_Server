@@ -88,6 +88,7 @@ class GC_OBJPREPAREFORATTACK;
 class GC_OBJGETHURT;
 class CG_Building_LevelUp;
 class GC_Building_LevelUp;
+class GC_Update_March;
 
 enum CG_LOGIN_VALIDATETYPE {
   CG_LOGIN_VALIDATETYPE_TEST = 0,
@@ -5360,6 +5361,13 @@ class GC_MarchData : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::GC_TroopData >*
       mutable_troop();
 
+  // optional int32 sceneid = 11;
+  inline bool has_sceneid() const;
+  inline void clear_sceneid();
+  static const int kSceneidFieldNumber = 11;
+  inline ::google::protobuf::int32 sceneid() const;
+  inline void set_sceneid(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:GC_MarchData)
  private:
   inline void set_has_marchid();
@@ -5380,6 +5388,8 @@ class GC_MarchData : public ::google::protobuf::Message {
   inline void clear_has_buildid();
   inline void set_has_hero();
   inline void clear_has_hero();
+  inline void set_has_sceneid();
+  inline void clear_has_sceneid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -5390,12 +5400,13 @@ class GC_MarchData : public ::google::protobuf::Message {
   ::google::protobuf::int64 cityid_;
   ::google::protobuf::int64 fightid_;
   ::google::protobuf::int64 buildid_;
+  ::google::protobuf::int32 speed_;
+  ::google::protobuf::int32 sceneid_;
   ::GC_HeroData* hero_;
   ::google::protobuf::RepeatedPtrField< ::GC_TroopData > troop_;
-  ::google::protobuf::int32 speed_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(11 + 31) / 32];
 
   friend void  protobuf_AddDesc_PBMessage_2eproto();
   friend void protobuf_AssignDesc_PBMessage_2eproto();
@@ -7003,20 +7014,30 @@ class GC_Building_LevelUp : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 level() const;
   inline void set_level(::google::protobuf::int32 value);
 
+  // required int32 ret = 3;
+  inline bool has_ret() const;
+  inline void clear_ret();
+  static const int kRetFieldNumber = 3;
+  inline ::google::protobuf::int32 ret() const;
+  inline void set_ret(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:GC_Building_LevelUp)
  private:
   inline void set_has_buildingid();
   inline void clear_has_buildingid();
   inline void set_has_level();
   inline void clear_has_level();
+  inline void set_has_ret();
+  inline void clear_has_ret();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 buildingid_;
   ::google::protobuf::int32 level_;
+  ::google::protobuf::int32 ret_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
 
   friend void  protobuf_AddDesc_PBMessage_2eproto();
   friend void protobuf_AssignDesc_PBMessage_2eproto();
@@ -7024,6 +7045,90 @@ class GC_Building_LevelUp : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static GC_Building_LevelUp* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GC_Update_March : public ::google::protobuf::Message {
+ public:
+  GC_Update_March();
+  virtual ~GC_Update_March();
+
+  GC_Update_March(const GC_Update_March& from);
+
+  inline GC_Update_March& operator=(const GC_Update_March& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GC_Update_March& default_instance();
+
+  void Swap(GC_Update_March* other);
+
+  // implements Message ----------------------------------------------
+
+  GC_Update_March* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GC_Update_March& from);
+  void MergeFrom(const GC_Update_March& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required .GC_MarchData data = 1;
+  inline bool has_data() const;
+  inline void clear_data();
+  static const int kDataFieldNumber = 1;
+  inline const ::GC_MarchData& data() const;
+  inline ::GC_MarchData* mutable_data();
+  inline ::GC_MarchData* release_data();
+  inline void set_allocated_data(::GC_MarchData* data);
+
+  // @@protoc_insertion_point(class_scope:GC_Update_March)
+ private:
+  inline void set_has_data();
+  inline void clear_has_data();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::GC_MarchData* data_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GC_Update_March* default_instance_;
 };
 // ===================================================================
 
@@ -12343,6 +12448,28 @@ GC_MarchData::mutable_troop() {
   return &troop_;
 }
 
+// optional int32 sceneid = 11;
+inline bool GC_MarchData::has_sceneid() const {
+  return (_has_bits_[0] & 0x00000400u) != 0;
+}
+inline void GC_MarchData::set_has_sceneid() {
+  _has_bits_[0] |= 0x00000400u;
+}
+inline void GC_MarchData::clear_has_sceneid() {
+  _has_bits_[0] &= ~0x00000400u;
+}
+inline void GC_MarchData::clear_sceneid() {
+  sceneid_ = 0;
+  clear_has_sceneid();
+}
+inline ::google::protobuf::int32 GC_MarchData::sceneid() const {
+  return sceneid_;
+}
+inline void GC_MarchData::set_sceneid(::google::protobuf::int32 value) {
+  set_has_sceneid();
+  sceneid_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // GC_TargetMarchData
@@ -13566,6 +13693,70 @@ inline ::google::protobuf::int32 GC_Building_LevelUp::level() const {
 inline void GC_Building_LevelUp::set_level(::google::protobuf::int32 value) {
   set_has_level();
   level_ = value;
+}
+
+// required int32 ret = 3;
+inline bool GC_Building_LevelUp::has_ret() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GC_Building_LevelUp::set_has_ret() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GC_Building_LevelUp::clear_has_ret() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GC_Building_LevelUp::clear_ret() {
+  ret_ = 0;
+  clear_has_ret();
+}
+inline ::google::protobuf::int32 GC_Building_LevelUp::ret() const {
+  return ret_;
+}
+inline void GC_Building_LevelUp::set_ret(::google::protobuf::int32 value) {
+  set_has_ret();
+  ret_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// GC_Update_March
+
+// required .GC_MarchData data = 1;
+inline bool GC_Update_March::has_data() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GC_Update_March::set_has_data() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GC_Update_March::clear_has_data() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GC_Update_March::clear_data() {
+  if (data_ != NULL) data_->::GC_MarchData::Clear();
+  clear_has_data();
+}
+inline const ::GC_MarchData& GC_Update_March::data() const {
+  return data_ != NULL ? *data_ : *default_instance_->data_;
+}
+inline ::GC_MarchData* GC_Update_March::mutable_data() {
+  set_has_data();
+  if (data_ == NULL) data_ = new ::GC_MarchData;
+  return data_;
+}
+inline ::GC_MarchData* GC_Update_March::release_data() {
+  clear_has_data();
+  ::GC_MarchData* temp = data_;
+  data_ = NULL;
+  return temp;
+}
+inline void GC_Update_March::set_allocated_data(::GC_MarchData* data) {
+  delete data_;
+  data_ = data;
+  if (data) {
+    set_has_data();
+  } else {
+    clear_has_data();
+  }
 }
 
 
