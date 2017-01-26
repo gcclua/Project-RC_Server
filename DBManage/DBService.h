@@ -91,7 +91,9 @@ public:
 
 	virtual void HandleMessage(const DBReqLoadMapMarchMsg &rMsg);
 	virtual void HandleMessage(const DBReqSaveMarchDataMsg &rMsg);
-
+	virtual void HandleMessage(const DBReqSaveTroopTrainMsg &rMsg);
+	virtual void HandleMessage(const DBReqSaveHeroMsg &rMsg);
+	
 	virtual void HandleMessage(const DBOpRetMsg &rMsg);
 
 public:

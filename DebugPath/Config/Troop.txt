@@ -5,5 +5,3 @@ INT	STRING	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	I
 #此行必须有!!客户端确定是否需要读到内存	规则																		
 1	步兵	1	0	1	1	0	107	1	1	1	1	1	1	1	1	1	1	1	18
 2	弓箭手	15	0	1	1	0	-1	-1	2	2	2	2	2	2	2	2	2	2	18
-																			
-																			

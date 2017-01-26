@@ -139,27 +139,27 @@ class Scan_AreaFilter_Ray
 public:
 	ScenePos m_OriginalPos;
 	ScenePos m_DestinationPos;
-	float m_fScope;
+	tfloat32 m_fScope;
 public:
 	bool operator()(ObjPtr &rPtr)
 	{
 		ScenePos VerifyPos = rPtr->GetScenePos();
-		int InPrd =
-			(m_DestinationPos.m_nX - m_OriginalPos.m_nX) * (VerifyPos.m_nX - m_OriginalPos.m_nX) +
-			(m_DestinationPos.m_nZ - m_OriginalPos.m_nZ) * (VerifyPos.m_nZ - m_OriginalPos.m_nZ);
-		if (InPrd >= 0)
+		tfloat32 fInPrd =
+			(m_DestinationPos.m_fX - m_OriginalPos.m_fX) * (VerifyPos.m_fX - m_OriginalPos.m_fX) +
+			(m_DestinationPos.m_fZ - m_OriginalPos.m_fZ) * (VerifyPos.m_fZ - m_OriginalPos.m_fZ);
+		if (fInPrd >= 0.0f)
 		{
-			int AbsValue =
-				(m_DestinationPos.m_nX - m_OriginalPos.m_nX) * (m_DestinationPos.m_nX - m_OriginalPos.m_nX) +
-				(m_DestinationPos.m_nZ - m_OriginalPos.m_nZ) * (m_DestinationPos.m_nZ - m_OriginalPos.m_nZ);
-			float fR = (float)InPrd / AbsValue;
+			tfloat32 fAbsValue =
+				(m_DestinationPos.m_fX - m_OriginalPos.m_fX) * (m_DestinationPos.m_fX - m_OriginalPos.m_fX) +
+				(m_DestinationPos.m_fZ - m_OriginalPos.m_fZ) * (m_DestinationPos.m_fZ - m_OriginalPos.m_fZ);
+			tfloat32 fR = fInPrd / fAbsValue;
 			if (fR <= 1.0f)
 			{
 				ScenePos ProjectionPos;
-				ProjectionPos.m_nX = (int)(m_OriginalPos.m_nX + (m_DestinationPos.m_nX - m_OriginalPos.m_nX) * fR);
-				ProjectionPos.m_nZ = (int)(m_OriginalPos.m_nZ + (m_DestinationPos.m_nZ - m_OriginalPos.m_nZ) * fR);
+				ProjectionPos.m_fX = m_OriginalPos.m_fX + (m_DestinationPos.m_fX - m_OriginalPos.m_fX) * fR;
+				ProjectionPos.m_fZ = m_OriginalPos.m_fZ + (m_DestinationPos.m_fZ - m_OriginalPos.m_fZ) * fR;
 
-				float fDistance = VerifyPos.Distance(ProjectionPos);
+				tfloat32 fDistance = VerifyPos.Distance(ProjectionPos);
 				if (fDistance <= m_fScope)
 				{
 					return true;
@@ -168,6 +168,22 @@ public:
 		}
 		return false;
 	}
+};
+
+class Scan_AreaFilter_Block
+{
+public:
+	int m_nBlock;
+public:
+	bool operator()(ObjPtr &rPtr)
+	{
+		if (rPtr->GetBlock() == m_nBlock)
+		{
+			return true;
+		}
+		return false;
+	}
+
 };
 
 //////////////////////////////////////////////////////////////////////////
@@ -212,6 +228,8 @@ typedef GeneralScanner<MarchRefCont, Scan_ObjFilter_March, Scan_AreaFilter_Ring>
 typedef GeneralScanner<MarchRefCont, Scan_ObjFilter_March, Scan_AreaFilter_Circle> ScannerMarchCircle;
 typedef GeneralScanner<MarchRefCont, Scan_ObjFilter_March, Scan_AreaFilter_Sector> ScannerMarchSector;
 typedef GeneralScanner<MarchRefCont, Scan_ObjFilter_March, Scan_AreaFilter_Ray> ScannerMarchRay;
+
+typedef GeneralScanner<MarchRefCont, Scan_ObjFilter_March, Scan_AreaFilter_Block> ScannerMarchBlock;
 
 typedef GeneralScanner<NpcRefCont, Scan_ObjFilter_Npc, Scan_AreaFilter_All> ScannerNpcAll;
 typedef GeneralScanner<NpcRefCont, Scan_ObjFilter_Npc, Scan_AreaFilter_Ring> ScannerNpcRing;

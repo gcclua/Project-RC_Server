@@ -62,6 +62,15 @@ tuint32 Packets::GC_MOVE_PAK::Execute( Player* pPlayer )
  return PACKET_EXE_ERROR;
  }
 //This code create by CodeEngine Author:Wendy ,don't modify
+#include "GC_MARCH_MOVE_PAK.h"
+tuint32 Packets::GC_MARCH_MOVE_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return GC_MARCH_MOVE_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
 #include "GC_STOP_PAK.h"
 tuint32 Packets::GC_STOP_PAK::Execute( Player* pPlayer )
  {
@@ -265,6 +274,51 @@ tuint32 Packets::GC_UPDATE_MARCH_PAK::Execute( Player* pPlayer )
  {
  __ENTER_FUNCTION
  return GC_UPDATE_MARCH_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
+#include "GC_TROOP_TRAIN_PAK.h"
+tuint32 Packets::GC_TROOP_TRAIN_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return GC_TROOP_TRAIN_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
+#include "GC_TROOPTRAIN_OVER_PAK.h"
+tuint32 Packets::GC_TROOPTRAIN_OVER_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return GC_TROOPTRAIN_OVER_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
+#include "GC_BATTLEPREPARE_PAK.h"
+tuint32 Packets::GC_BATTLEPREPARE_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return GC_BATTLEPREPARE_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
+#include "GC_BATTLEEND_PAK.h"
+tuint32 Packets::GC_BATTLEEND_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return GC_BATTLEEND_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
+#include "GC_BATTLESTART_PAK.h"
+tuint32 Packets::GC_BATTLESTART_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return GC_BATTLESTART_PAKHandler::Execute(this,pPlayer);
  __LEAVE_FUNCTION
  return PACKET_EXE_ERROR;
  }

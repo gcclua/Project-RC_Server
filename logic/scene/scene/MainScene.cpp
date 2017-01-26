@@ -122,10 +122,17 @@ void MainScene::OnObjDie(tint32 nID,tint32 nKillerId)
 void MainScene::InitMarchObj(const March& rMarch)
 {
 	__ENTER_FUNCTION
+
 	if (rMarch.GetMarchId() > 0)
 	{
 		Obj_MarchPtr pMarch = CreateMarch(rMarch,rMarch.GetPos());
 	}
+	
+	UpdateMarchMsgPtr MsgPtr1 = POOLDEF_NEW(UpdateMarchMsg);
+	MsgPtr1->m_rMarch = rMarch;
+	MsgPtr1->m_rMarch.SetSceneInstId(GetSceneInstID());
+	MsgPtr1->m_rMarch.SetSceneClass(GetSceneClassID());
+	SendMessage2User(rMarch.GetPlayerId(),MsgPtr1);
 
 	RetMarchStartMsgPtr MsgPtr = POOLDEF_NEW(RetMarchStartMsg);
 	MsgPtr->m_marchId = rMarch.GetMarchId();
@@ -141,6 +148,8 @@ void MainScene::HandleMessage(const MarchEnterSceneMsg &rMsg)
 	__ENTER_FUNCTION
 
 		InitMarchObj(rMsg.m_March);
+
+	
 
 	__LEAVE_FUNCTION
 }

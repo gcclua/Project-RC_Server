@@ -15,6 +15,7 @@ public:
 		HERO        = 3,    // 英雄
 		MARCH       = 4,    // March
 		TROOP       = 5,    // 军队
+		TROOPTRAIN  = 6,    // 训兵队列
 
 		MAX				//数量
 	};
@@ -27,6 +28,7 @@ GUIDDEF_DECL(Building);
 GUIDDEF_DECL(Hero);
 GUIDDEF_DECL(March);
 GUIDDEF_DECL(Troop);
+GUIDDEF_DECL(TroopTrain);
 void InitGuidModule();
 
 #endif

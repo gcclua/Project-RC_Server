@@ -37,8 +37,8 @@ void CityManager::OnLogin()
 ScenePos CityManager::GetPos()
 {
 	ScenePos rPos;
-	rPos.m_nX = m_CityPtr->GetPosX();
-	rPos.m_nZ = m_CityPtr->GetPosZ();
+	rPos.m_fX = m_CityPtr->GetPosX();
+	rPos.m_fZ = m_CityPtr->GetPosZ();
 	return rPos;
 }
 
@@ -71,6 +71,26 @@ bool  CityManager::CheckSendMarchIntoMap(int64 nBuildId)
 	__ENTER_FUNCTION
 		AssertEx(m_CityPtr,"");
 	return m_CityPtr->CheckSendMarchIntoMap(nBuildId);
+	__LEAVE_FUNCTION
+		return false;
+}
+
+bool  CityManager::BeginTrainTroop(int64 nBuildId,int nQueueIndex,int nType,int Count,GC_Troop_Train* pMessage)
+{
+	__ENTER_FUNCTION
+		AssertEx(m_CityPtr,"");
+	bool ret = m_CityPtr->BeginTrainTroop(nBuildId,nQueueIndex,nType,Count,pMessage->mutable_data());
+		if (ret)
+		{
+			
+			pMessage->set_ret(0);
+		}
+		else
+		{
+			pMessage->set_ret(1);
+		}
+		return ret;
+
 	__LEAVE_FUNCTION
 		return false;
 }

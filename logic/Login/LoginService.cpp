@@ -903,7 +903,7 @@ void LoginService::HandleMessage(const AccountOfflineMsg &rMsg)
 void LoginService::HandleMessage(const DBRetCreateCharMsg &rMsg)
 {
 	__ENTER_FUNCTION
-
+		
 		PlayerPtr Ptr = m_PlayerManager.GetPlayerByID(rMsg.m_nPlayerID);
 	if (Ptr)
 	{
@@ -949,7 +949,7 @@ void LoginService::HandleMessage(const DBRetReqLoadRandomNameMsg &rMsg)
 void LoginService::HandleMessage(const DBLoadUserMsg &rMsg)
 {
 	__ENTER_FUNCTION
-
+		CacheLog(LOGDEF_INST(CreateChar),"LoginService:: start  \1 userId=%d,\2 account=%d,\3 time=%d",rMsg.m_UserGuid,rMsg.m_AccName,gTimeManager.GetANSITime());
 		if (PCDIsHave(rMsg.m_UserGuid))
 		{
 			DBRetLoadUserMsgPtr MsgPtr = POOLDEF_NEW(DBRetLoadUserMsg);
@@ -977,6 +977,8 @@ void LoginService::HandleMessage(const DBLoadUserMsg &rMsg)
 				"pcd load player(%d) dbfulluserdata from dbagent",
 				rMsg.m_UserGuid);
 		}
+
+		CacheLog(LOGDEF_INST(CreateChar),"LoginService:: end  \1 userId=%d,\2 account=%d,\3 time=%d",rMsg.m_UserGuid,rMsg.m_AccName,gTimeManager.GetANSITime());
 
 		__LEAVE_FUNCTION
 }
@@ -1022,11 +1024,13 @@ void LoginService::HandleMessage(const RetIdleTileMsg &rMsg)
 void LoginService::HandleMessage(const DBRetCreateCityMsg &rMsg)
 {
 	__ENTER_FUNCTION
+		CacheLog(LOGDEF_INST(CreateChar),"DBRetCreateCityMsg:: start  \1 userId=%d,\2 cityid=%d,\3 time=%d",rMsg.m_Data.m_UserId,rMsg.m_Data.m_nCityID,gTimeManager.GetANSITime());
 		DBLoadUserMsgPtr MsgPtr = POOLDEF_NEW(DBLoadUserMsg);
 		AssertEx(MsgPtr, "");
 		MsgPtr->m_UserGuid	  = rMsg.m_Data.m_UserId;
 		MsgPtr->m_nPlayerID   = rMsg.m_nPlayerID;
 		//MsgPtr->m_AccName = m_szAccount;
 		SendMessage2Srv(ServiceID::LOGIN, MsgPtr);
+		CacheLog(LOGDEF_INST(CreateChar),"DBRetCreateCityMsg:: end  \1 userId=%d,\2 cityid=%d,\3 time=%d",rMsg.m_Data.m_UserId,rMsg.m_Data.m_nCityID,gTimeManager.GetANSITime());
 	__LEAVE_FUNCTION
 }

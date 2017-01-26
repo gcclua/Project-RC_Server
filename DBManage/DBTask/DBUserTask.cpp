@@ -24,6 +24,7 @@ bool DBUserTask::Load(ODBCInterface& rODBCInterface,LibMemInterface &rLibMemInte
 	MsgPtr->m_nPlayerID = m_nPlayerID;
 	__ENTER_PROTECT_EX
 	{
+		CacheLog(LOGDEF_INST(CreateChar),"DBUserTask:: start  \1 userId=%d,\2 account =%s,\3 time=%d",m_UserGuid,m_AccountName,gTimeManager.GetANSITime());
 		if (IsForLoad())
 		{
 			// 从memcached加载
@@ -51,6 +52,7 @@ bool DBUserTask::Load(ODBCInterface& rODBCInterface,LibMemInterface &rLibMemInte
 			MsgPtr->m_nResult = DBMsgResult::RESULT_SUCCESS;
 			MsgPtr->m_UserData.CopyFrom(m_UserData);
 			SendMessage2Srv(ServiceID::LOGIN,MsgPtr);
+			CacheLog(LOGDEF_INST(CreateChar),"DBUserTask:: end  \1 userId=%d,\2 account =%s,\3 time=%d",m_UserGuid,m_AccountName,gTimeManager.GetANSITime());
 
 			//返回结果
 			SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
@@ -75,14 +77,17 @@ bool DBUserTask::Load(ODBCInterface& rODBCInterface,LibMemInterface &rLibMemInte
 
 bool DBUserTask::Save(ODBCInterface& rODBCInterface,LibMemInterface &rLibMemInterface)
 {
+	
 	DBRetSaveUserMsgPtr MsgPtr = POOLDEF_NEW(DBRetSaveUserMsg);
 	AssertEx(MsgPtr,"");
 	MsgPtr->m_nResult        = DBMsgResult::RESULT_FAIL;
 	MsgPtr->m_UserGuid       = m_UserGuid;
 	MsgPtr->m_bImmediateSave = m_bImmediateSave;
 	MsgPtr->m_bFinalSave     = m_bFinalSave;
+
 	__ENTER_PROTECT_EX
 	{
+		
 		if (true == IsForSave())
 		{
 			// 数据存储到memcache
@@ -117,7 +122,9 @@ bool DBUserTask::Save(ODBCInterface& rODBCInterface,LibMemInterface &rLibMemInte
 		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);
 		return false;
 	}
+	
 	return true;
+	
 	__LEAVE_PROTECT_EX
 		return false;
 }
@@ -155,7 +162,7 @@ bool DBUserTask::DBLoad(ODBCInterface &rODBCInterface)
 
 			}
 		}
-
+		
 		return true;
 	
 		__LEAVE_FUNCTION
@@ -168,6 +175,7 @@ bool DBUserTask::DBSave(ODBCInterface &rODBCInterface)
 	__ENTER_FUNCTION
 		//存盘操作
 		ODBCCharFullData userData(&rODBCInterface);
+		userData.SetCharGuid(m_UserData.GetGuid());
 		if (false == userData.Save(&m_UserData))
 		{
 			CacheLog( LOGDEF_INST(DBAgentError), "[UserData]:Real Save user Error \1 guid=%08X \1 m_AccName=%s", \

@@ -15,8 +15,8 @@ ID_BUILDINGTYPE=2,
 ID_NAME,
 ID_LEVEL,
 ID_DESCRIPTION,
-ID_ICON,
-ID_RES,
+ID_ASSET,
+ID_BUNDLE,
 ID_PROSPERITY,
 ID_NEEDBUILDING1,
 ID_NEEDBUILDING2,
@@ -35,19 +35,24 @@ MAX_RECORD=1024
  bool __Load(DBC_Loader &loader);
 
 private:
+ const tchar* m_Asset;
+ public:
+ const tchar* GetAsset() const { return m_Asset; }
+
+private:
  tint32 m_BuildingType;
  public:
  tint32 GetBuildingType() const { return m_BuildingType; }
 
 private:
+ const tchar* m_Bundle;
+ public:
+ const tchar* GetBundle() const { return m_Bundle; }
+
+private:
  const tchar* m_Description;
  public:
  const tchar* GetDescription() const { return m_Description; }
-
-private:
- const tchar* m_Icon;
- public:
- const tchar* GetIcon() const { return m_Icon; }
 
 private:
  tint32 m_Id;
@@ -109,11 +114,6 @@ private:
  tint32 m_Prosperity;
  public:
  tint32 GetProsperity() const { return m_Prosperity; }
-
-private:
- const tchar* m_Res;
- public:
- const tchar* GetRes() const { return m_Res; }
 
 };
  

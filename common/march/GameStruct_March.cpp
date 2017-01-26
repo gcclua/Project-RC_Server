@@ -72,8 +72,8 @@ void March::CleanUp()
 	m_TroopList.CleanUp();
 	m_Hero.CleanUp();
 	m_TroopMarchMap.clear();
-	m_nInstSceneId = 0;
-	m_nSceneClass  = 0;
+	m_nInstSceneId = invalid_id;
+	m_nSceneClass  = invalid_id;
 }
 
 void March::SerializeToDB(DBMarch& rDest) const
@@ -91,6 +91,9 @@ void March::SerializeToDB(DBMarch& rDest) const
 	rDest.m_nPlayerId  = m_nPlayerId;
 	rDest.m_nCityId    = m_nCityId;
 	rDest.m_nStatus    = m_nStatus;
+	rDest.m_nInstSceneId = m_nInstSceneId;
+	rDest.m_nBuildId     = m_nBuildId;
+	rDest.m_nClassSceneId = m_nSceneClass;
 }
 void March::SerializeFromDB(const DBMarch& rSource)
 {
@@ -111,6 +114,8 @@ void March::SerializeFromDB(const DBMarch& rSource)
 	m_nCityId    = rSource.m_nCityId;
 	m_nStatus    = rSource.m_nStatus;
 	m_nBuildId   = rSource.m_nBuildId;
+	m_nInstSceneId = rSource.m_nInstSceneId;
+	m_nSceneClass  = rSource.m_nClassSceneId;
 }
 
 Troop March::GetQueueTroop(int nIndex)
@@ -135,38 +140,19 @@ bool  March::SwapQueueForArrange(int nArrange1,int nArrange2)
 		return false;
 }
 
-bool March::AddTroop(int64 nTroopId,int nTroopType,int nHp)
+bool March::CheckAddTroop(int QueueIndex,int nTroopType)
 {
 	__ENTER_FUNCTION
-		 Troop rTroop = m_TroopList.GetTroopById(nTroopId);
-		 if (rTroop.GetId() != nTroopId)
-		 {
-			 return false;
-		 }
-	    
-		 int nType = rTroop.GetType();
+		return m_TroopList.CheckAddTroop(QueueIndex,nTroopType);
 
-		 if (nType == TROOPTYPE_INVILID)
-		 {
-			 rTroop.SetType(nTroopType);
-			 nType = nTroopType;
-		 }
-		 else if (nTroopType != nType)
-		 {
-			 return false;
-		 }
+		__LEAVE_FUNCTION
+		return false;
+}
 
-		 Table_Troop const * pTroopTable = GetTable_TroopByID(nType);
-		 AssertEx(pTroopTable,"");
-		 int nLevel = rTroop.GetLevel();
-		 Table_RoleBaseAttr const * pRoleBase = GetTable_RoleBaseAttrByID(pTroopTable->GetDataIDbyIndex(nLevel));
-		 AssertEx(pRoleBase,"");
-		 if (TROOP_QUEUE_MAX_SIGCOUNT* pRoleBase->GetMaxHP() <rTroop.GetHp()+nHp)
-		 {
-			 return false;
-		 }
-
-		 rTroop.SetHp(nHp);
+bool March::AddTroop(int QueueIndex,int nTroopType,int nHp)
+{
+	__ENTER_FUNCTION
+		return m_TroopList.UpdateTroop(nTroopType,nHp,QueueIndex);
 
 		__LEAVE_FUNCTION
 		return false;

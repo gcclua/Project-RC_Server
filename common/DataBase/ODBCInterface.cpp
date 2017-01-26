@@ -268,6 +268,8 @@ bool ODBCInterface::LongExecute()
 			mResult=SQLExecDirect(hStmt,(SQLCHAR *)m_LongQuery.m_SqlStr,SQL_NTS);
 			if ((mResult != SQL_SUCCESS) && (mResult != SQL_SUCCESS_WITH_INFO) && (mResult != SQL_NO_DATA)) 
 			{
+				CacheLog(LOGDEF_INST(DBAgentError),"[ODBCHeroData::Save]:Fail \1 sql=%s",
+			(SQLCHAR *)m_LongQuery.m_SqlStr);
 				DiagStateEx();
 				if (bIsRecc)
 				{

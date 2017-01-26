@@ -36,7 +36,7 @@ public:
 	{
 		m_szLogName = szLogName;
 		m_nLogFormatType = nLogFormatType;
-		m_nWorldID = WORLDID_DEFAULT;
+		m_nWorldID = 1;
 		RebuildFilePath();
 	}
 	~LogSink<_BufSize>(void)
@@ -182,7 +182,7 @@ public:
 		case LogFormatType::AUDIT:
 			{
 				tsnprintf(szFilePath, sizeof(szFilePath),
-					"./../RuntimeData/%d/Log/%s.%.4d-%.2d-%.2d-%.2d.log",
+					"./RuntimeData/%d/Log/%s.%.4d-%.2d-%.2d-%.2d.log",
 					m_nWorldID,
 					m_szLogName.GetCText(),
 					ltm.tm_year+1900,
@@ -194,7 +194,7 @@ public:
 		case LogFormatType::CMBI:
 			{
 				tsnprintf(szFilePath, sizeof(szFilePath),
-					"./../RuntimeData/%d/Log/%s.log.%.4d-%.2d-%.2d-%.2d",
+					"./RuntimeData/%d/Log/%s.log.%.4d-%.2d-%.2d-%.2d",
 					m_nWorldID,
 					m_szLogName.GetCText(),
 					ltm.tm_year+1900,

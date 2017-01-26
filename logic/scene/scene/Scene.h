@@ -192,6 +192,8 @@ public:
 	void Scan_March_Sector(MarchRefCont &Cont, ScenePos OriginalPos, float fRadius, float fDirection, float fRadian);
 	void Scan_March_Ray(MarchRefCont &Cont, ScenePos OriginalPos, float fDirection, float fLength, float fScope);
 
+	void Scan_March_Block(MarchRefCont&Cont,int nBlockId);
+
 	void Scan_Npc_All(NpcRefCont &Cont);
 	void Scan_Npc_Ring(NpcRefCont &Cont, ScenePos OriginalPos, float fMinDistance, float fMaxDistance);
 	void Scan_Npc_Circle(NpcRefCont &Cont, ScenePos OriginalPos, float fRadius);
@@ -232,8 +234,10 @@ private:
 	////////////////////////////////////////////////////////////////////////////
 	virtual void HandleMessage(const MarchOpenCopySceneMsg &rMsg);
 	virtual void HandleMessage(const AskJoinCopySceneMsg &rMsg);
+	virtual void HandleMessage(const MarchReqNearListMsg &rMsg);
+	virtual void HandleMessage(const ReqMarchSetPosMsg &rMsg);
 	//需要场景转发给March的所有相关Message声明
-	MESSAGE_TRANSPORTTOMARCH_DECL(MarchReqNearListMsg);
+	//MESSAGE_TRANSPORTTOMARCH_DECL(MarchReqNearListMsg);
 	MESSAGE_TRANSPORTTOMARCH_DECL(MarchMoveMsg);
 	//MESSAGE_TRANSPORTTOMARCH_DECL(MarchOpenCopySceneMsg);
 	//MESSAGE_TRANSPORTTOMARCH_DECL(AskJoinCopySceneMsg);

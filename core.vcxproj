@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -25,25 +25,25 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <UseOfMfc>false</UseOfMfc>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
@@ -69,6 +69,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
     <IntDir>$(Configuration)\</IntDir>
+    <IncludePath>E:\ServerLibs\include\boost;E:\ServerLibs\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -144,15 +145,6 @@
     </Lib>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="common\AStarPathFinding\AStarHelper.h" />
-    <ClInclude Include="common\AStarPathFinding\Coord.h" />
-    <ClInclude Include="common\AStarPathFinding\MapAStarCompact.h" />
-    <ClInclude Include="common\AStarPathFinding\MapConst.h" />
-    <ClInclude Include="common\AStarPathFinding\MapLayout.h" />
-    <ClInclude Include="common\AStarPathFinding\MapProxy.h" />
-    <ClInclude Include="common\AStarPathFinding\MapTileVO.h" />
-    <ClInclude Include="common\AStarPathFinding\MinHeap.h" />
-    <ClInclude Include="common\AStarPathFinding\Utils.h" />
     <ClInclude Include="common\building\GameDefine_Building.h" />
     <ClInclude Include="common\building\GameStruct_Building.h" />
     <ClInclude Include="common\Chat\GameDefine_Chat.h" />
@@ -183,7 +175,6 @@
     <ClInclude Include="common\common\Pool.h" />
     <ClInclude Include="common\common\Random.h" />
     <ClInclude Include="common\common\ServerConfig.h" />
-    <ClInclude Include="common\common\string-util.h" />
     <ClInclude Include="common\common\TimeManager.h" />
     <ClInclude Include="common\DataBase\LibMemInterface.h" />
     <ClInclude Include="common\DataBase\ODBCBase.h" />
@@ -215,36 +206,55 @@
     <ClInclude Include="common\march\GameDefine_March.h" />
     <ClInclude Include="common\march\GameStruct_March.h" />
     <ClInclude Include="common\Message\ChatMsg.h" />
+    <ClInclude Include="common\Message\CityMsg.h" />
     <ClInclude Include="common\Message\DBMsg.h" />
     <ClInclude Include="common\Message\LoginMsg.h" />
     <ClInclude Include="common\Message\SceneMsg.h" />
     <ClInclude Include="common\Message\TransportMsg.h" />
     <ClInclude Include="common\Message\WorldUserMsg.h" />
     <ClInclude Include="common\packet\Packet\CG_ASSIGN_HERO_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_BATTLEINFOR_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_BATTLEPREPARE_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_BUILDING_LEVELUP_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_CHAT_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_CONNECTED_HEARTBEAT_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_CREATEROLE_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_FIGHT_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_LEAVE_COPYSCENE_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_LOGIN_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_MARCH_MOVE_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_MOVE_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_OBJPOSLIST_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_REQ_NEAR_LIST_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_ROBOT_OPEN_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_SEND_MARCH_PAK.h" />
     <ClInclude Include="common\packet\Packet\CG_SKILL_USE_PAK.h" />
+    <ClInclude Include="common\packet\Packet\CG_TROOP_TRAIN_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_ASSIGN_HERO_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_ATTACKFLY_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_BATTLEEND_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_BATTLEINFOR_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_BATTLEPREPARE_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_BATTLESTART_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_BUILDING_LEVELUP_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_CHAT_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_CONNECTED_HEARTBEAT_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_CREATEROLE_RET_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_DELETE_OBJ_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_FIGHT_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_FORCE_SETPOS_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_LOGIN_QUEUE_STATUS_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_LOGIN_RET_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_MARCH_MOVE_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_MOVE_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_NEAR_MARCHLIST_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_NOTICE_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_OBJCOMMANDPURSUE_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_OBJGETHURT_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_OBJINFOR_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_OBJPOSLIST_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_OBJPOS_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_OBJPREPAREFORATTACK_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_PLAY_EFFECT_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_REMOVEEFFECT_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_RET_USE_SKILL_PAK.h" />
@@ -253,7 +263,10 @@
     <ClInclude Include="common\packet\Packet\GC_SEND_MARCH_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_STOP_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_TELEMOVE_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_TROOPTRAIN_OVER_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_TROOP_TRAIN_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_UPDATE_ANIMATION_STATE_PAK.h" />
+    <ClInclude Include="common\packet\Packet\GC_UPDATE_MARCH_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_UPDATE_NEEDIMPACTINFO_PAK.h" />
     <ClInclude Include="common\packet\Packet\GC_UPDATE_SCENE_INSTACTIVATION_PAK.h" />
     <ClInclude Include="common\packet\Packet\PacketDefine.h" />
@@ -315,14 +328,6 @@
     <ClInclude Include="common\xml\tinyxml.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="common\AStarPathFinding\AStarHelper.cpp" />
-    <ClCompile Include="common\AStarPathFinding\Coord.cpp" />
-    <ClCompile Include="common\AStarPathFinding\MapAStarCompact.cpp" />
-    <ClCompile Include="common\AStarPathFinding\MapConst.cpp" />
-    <ClCompile Include="common\AStarPathFinding\MapLayout.cpp" />
-    <ClCompile Include="common\AStarPathFinding\MapProxy.cpp" />
-    <ClCompile Include="common\AStarPathFinding\MapTileVO.cpp" />
-    <ClCompile Include="common\AStarPathFinding\Utils.cpp" />
     <ClCompile Include="common\building\GameStruct_Building.cpp" />
     <ClCompile Include="common\Chat\GameStruct_TextChat.cpp" />
     <ClCompile Include="common\city\GameStruct_City.cpp" />
@@ -343,7 +348,6 @@
     <ClCompile Include="common\common\pool.cpp" />
     <ClCompile Include="common\common\Random.cpp" />
     <ClCompile Include="common\common\ServerConfig.cpp" />
-    <ClCompile Include="common\common\string-util.cpp" />
     <ClCompile Include="common\common\TimeManager.cpp" />
     <ClCompile Include="common\DataBase\LibMemInterface.cpp" />
     <ClCompile Include="common\DataBase\ODBCBase.cpp" />
@@ -371,6 +375,7 @@
     <ClCompile Include="common\LoudSpeaker\GameStruct_LoudSpeaker.cpp" />
     <ClCompile Include="common\march\GameStruct_March.cpp" />
     <ClCompile Include="common\Message\ChatMsg.cpp" />
+    <ClCompile Include="common\Message\CityMsg.cpp" />
     <ClCompile Include="common\Message\DBMsg.cpp" />
     <ClCompile Include="common\Message\LoginMsg.cpp" />
     <ClCompile Include="common\Message\SceneMsg.cpp" />

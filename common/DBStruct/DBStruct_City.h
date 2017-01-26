@@ -42,6 +42,27 @@ public:
 	int64  m_nCityID; // 所属城市
 };
 
+struct DBTroopTrain
+{
+public:
+	DBTroopTrain(){CleanUp();};
+	~DBTroopTrain(){};
+public:
+	void CleanUp( );
+	void CopyFrom(const DBTroopTrain& rSource);
+
+	void InitTrain(int64 nBuildId,int64 nCityId);
+public:
+	int64 m_ID; // ID
+	int   m_nType; // 兵种类型
+	int   m_nBeginTime; // 开始时间
+	int   m_nCompleteTime; // 完成时间
+	int64 m_nCityID; // 所属城市
+	int   m_nHp;   // 训兵血量
+	int64 m_nBuildId;
+	int   m_nQueueIndex;
+};
+
 struct DBBuilding
 {
 public:
@@ -95,12 +116,13 @@ public:
 	int64 m_nStone; //石料
 	int64 m_nIron;  // 铁矿
 	int64 m_nGold;
-	int   m_nPosX;
-	int   m_nPosZ;
-	DBBuilding m_BuildingList[BUIDINGTYPE_MAX]; // 所有的建筑列表
+	tfloat32   m_fPosX;
+	tfloat32   m_fPosZ;
+	DBBuilding m_BuildingList[BUILDING_MAX_SLOT]; // 所有的建筑列表
 	DBTechnology m_TechList[TECHNOLOGYTYPE_MAX];// 所有的科技列表
 	DBTechResearch m_TechResearchList[MAX_CITY_RESEARCH_COUNT]; // 正在研究的队列
 	DBBuildConstruct m_ConstructList[MAX_CITY_CONSTRUCT_COUNT]; // 正在建造的队列
+	DBTroopTrain  m_TrainList[BUILDING_BARRACK_MAX+BUILDING_WALL_MAX];// 训兵队列
 	//DBTroop          m_TroopList[MAX_TROOP_QUEUE];                // 兵种列表
 	
 

@@ -1,0 +1,653 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (core.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  DBService.cpp
+  DBServiceExec.cpp
+E:\RealmConquerors\src\Server\server\windows\include\libconfig.h++(51): warning C4275: non dll-interface class 'std::exception' used as base for dll-interface class 'libconfig::ConfigException'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_exception.h(43): note: see declaration of 'std::exception'
+  E:\RealmConquerors\src\Server\server\windows\include\libconfig.h++(51): note: see declaration of 'libconfig::ConfigException'
+  DBBaseTask.cpp
+  DBCharListTask.cpp
+  DBCreateCharTask.cpp
+  DBCreateCityTask.cpp
+  DBGuidTask.cpp
+  DBMarchTask.cpp
+  DBRandomNameTask.cpp
+  DBTroopTrainTask.cpp
+  DBUserTask.cpp
+  DBWorldMapTask.cpp
+  DBWorldMarchTask.cpp
+  ODBCBuildingData.cpp
+  ODBCCharFullData.cpp
+  ODBCCharList.cpp
+  ODBCCityData.cpp
+  ODBCCreateChar.cpp
+  ODBCCreateCity.cpp
+  ODBCGuid.cpp
+  Generating Code...
+  Compiling...
+  ODBCHeroData.cpp
+  ODBCMapMarchData.cpp
+  ODBCMarchData.cpp
+  ODBCRandomName.cpp
+  ODBCTileData.cpp
+  ODBCTroopData.cpp
+  ODBCTroopTrainData.cpp
+  Daemon.cpp
+E:\RealmConquerors\src\Server\server\windows\include\libconfig.h++(51): warning C4275: non dll-interface class 'std::exception' used as base for dll-interface class 'libconfig::ConfigException'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_exception.h(43): note: see declaration of 'std::exception'
+  E:\RealmConquerors\src\Server\server\windows\include\libconfig.h++(51): note: see declaration of 'libconfig::ConfigException'
+gamed\Daemon.cpp(143): warning C4311: 'type cast': pointer truncation from 'char *' to 'int'
+gamed\Daemon.cpp(143): warning C4302: 'type cast': truncation from 'char *' to 'int'
+  LogService.cpp
+  LoginService.cpp
+  Obj_Login.cpp
+  GamePlayerManager.cpp
+  LoginPlayerManager.cpp
+  Player.cpp
+  PlayerManager.cpp
+  SceneService.cpp
+  ImpactBaseLogic.cpp
+  ImpactLogic_000.cpp
+  ImpactLogic_001.cpp
+  ImpactLogic_002.cpp
+  Generating Code...
+  Compiling...
+  ImpactLogic_003.cpp
+  ImpactLogic_004.cpp
+  ImpactLogic_005.cpp
+  ImpactLogic_006.cpp
+  ImpactLogic_007.cpp
+  Obj.cpp
+  Obj_Action.cpp
+  Obj_Character.cpp
+  Obj_Character_Attr.cpp
+  Obj_Character_Combat.cpp
+  Obj_Character_Damage.cpp
+  Obj_Character_Impact.cpp
+  Obj_Character_Move.cpp
+  Obj_Character_Skill.cpp
+  Obj_Dynamic.cpp
+  Obj_Hero.cpp
+  Obj_March.cpp
+  Obj_March_ChangeScene.cpp
+  Obj_March_CopyScene.cpp
+  Obj_Npc.cpp
+E:\RealmConquerors\src\Server\server\windows\include\libconfig.h++(51): warning C4275: non dll-interface class 'std::exception' used as base for dll-interface class 'libconfig::ConfigException'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_exception.h(43): note: see declaration of 'std::exception'
+  E:\RealmConquerors\src\Server\server\windows\include\libconfig.h++(51): note: see declaration of 'libconfig::ConfigException'
+  Generating Code...
+  Compiling...
+  Obj_Npc_AI.cpp
+  Obj_Snare.cpp
+  Obj_Troop.cpp
+  CopySceneClass.cpp
+  MainSceneClass.cpp
+  SceneClass.cpp
+  CopyScene.cpp
+  MainScene.cpp
+  ScanOperator.cpp
+  Scene.cpp
+  Scene_BroadCast.cpp
+  Scene_Message.cpp
+  Scene_Obj.cpp
+  Scene_Scan.cpp
+  SL_AutoRepeat.cpp
+  SL_ChongFeng.cpp
+  SL_EffectToSelf.cpp
+  SL_ShunFa.cpp
+  SL_Snare.cpp
+  SL_TeleMove.cpp
+  Generating Code...
+  Compiling...
+  SL_ZhiXian.cpp
+  SkillBaseLogic.cpp
+  User.cpp
+  WorldUserService.cpp
+  CityManager.cpp
+  HeroManager.cpp
+  MarchManager.cpp
+  WorldMapService.cpp
+  Generating Code...
+e:\realmconquerors\src\server\server\logic\user\march\marchmanager.cpp(72): warning C4715: 'MarchManager::CheckTrainTroop': not all control paths return a value
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(1189,5): warning MSB8012: TargetPath(E:\RealmConquerors\src\Server\server\x64\Debug\gamed.exe) does not match the Linker's OutputFile property value (E:\RealmConquerors\src\Server\server\DebugPath\gamed.exe). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Link.OutputFile).
+libprotobuf.lib(generated_message_util.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(repeated_field.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(common.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(once.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(atomicops_internals_x86_msvc.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(message_lite.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(descriptor.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(message.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(unknown_field_set.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(coded_stream.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(wire_format_lite.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(generated_message_reflection.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(reflection_ops.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(wire_format.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(zero_copy_stream_impl_lite.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(descriptor_database.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(descriptor.pb.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(dynamic_message.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(text_format.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(tokenizer.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(strutil.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(substitute.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(zero_copy_stream_impl.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(extension_set_heavy.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(extension_set.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(structurally_valid.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(zero_copy_stream.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+libprotobuf.lib(stringprintf.obj) : error LNK2038: mismatch detected for '_MSC_VER': value '1700' doesn't match value '1900' in DBService.obj
+     Creating library E:\RealmConquerors\src\Server\server\x64\Debug\gamed.lib and object E:\RealmConquerors\src\Server\server\x64\Debug\gamed.exp
+libprotobuf.lib(extension_set.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(structurally_valid.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(zero_copy_stream.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(stringprintf.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(strutil.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(substitute.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(zero_copy_stream_impl.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(extension_set_heavy.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(descriptor.pb.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(dynamic_message.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(text_format.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(tokenizer.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(reflection_ops.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(wire_format.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(zero_copy_stream_impl_lite.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(descriptor_database.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(unknown_field_set.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(coded_stream.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(wire_format_lite.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(generated_message_reflection.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(atomicops_internals_x86_msvc.obj) : warning LNK4217: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported in function "public: __cdecl std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >(char const *)" (??0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@PEBD@Z)
+libprotobuf.lib(message_lite.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(descriptor.obj) : warning LNK4217: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported in function "public: bool __cdecl google::protobuf::DescriptorBuilder::OptionInterpreter::InterpretOptions(struct google::protobuf::`anonymous namespace'::OptionsToInterpret *)" (?InterpretOptions@OptionInterpreter@DescriptorBuilder@protobuf@google@@QEAA_NPEAUOptionsToInterpret@?A0xb4030587@34@@Z)
+libprotobuf.lib(message.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(generated_message_util.obj) : warning LNK4217: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported in function "public: __cdecl std::_String_val<struct std::_Simple_types<char> >::_String_val<struct std::_Simple_types<char> >(void)" (??0?$_String_val@U?$_Simple_types@D@std@@@std@@QEAA@XZ)
+libprotobuf.lib(repeated_field.obj) : warning LNK4217: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported in function "int `public: void __cdecl std::allocator<char>::construct<char *,char * &>(char * *,char * &)'::`1'::dtor$0" (?dtor$0@?0???$construct@PEADAEAPEAD@?$allocator@D@std@@QEAAXPEAPEADAEAPEAD@Z@4HA)
+libprotobuf.lib(common.obj) : warning LNK4049: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported
+libprotobuf.lib(once.obj) : warning LNK4217: locally defined symbol ??0_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::_Container_base12(void)) imported in function "public: __cdecl std::_String_alloc<0,struct std::_String_base_types<char,class std::allocator<char> > >::_String_alloc<0,struct std::_String_base_types<char,class std::allocator<char> > >(class std::allocator<char> const &)" (??0?$_String_alloc@$0A@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAA@AEBV?$allocator@D@1@@Z)
+libprotobuf.lib(extension_set.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(structurally_valid.obj) : warning LNK4217: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported in function "public: unsigned __int64 __cdecl std::_Wrap_alloc<class std::allocator<char> >::max_size(void)const " (?max_size@?$_Wrap_alloc@V?$allocator@D@std@@@std@@QEBA_KXZ)
+libprotobuf.lib(zero_copy_stream.obj) : warning LNK4217: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported in function "int `public: __cdecl std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >(char const *)'::`1'::dtor$0" (?dtor$0@?0???0?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAA@PEBD@Z@4HA)
+libprotobuf.lib(stringprintf.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(strutil.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(substitute.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(zero_copy_stream_impl.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(extension_set_heavy.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(descriptor.pb.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(dynamic_message.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(text_format.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(tokenizer.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(reflection_ops.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(wire_format.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(zero_copy_stream_impl_lite.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(descriptor_database.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(unknown_field_set.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(coded_stream.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(wire_format_lite.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(generated_message_reflection.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(atomicops_internals_x86_msvc.obj) : warning LNK4217: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported in function "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > & __cdecl std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::assign(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,unsigned __int64,unsigned __int64)" (?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV12@AEBV12@_K1@Z)
+libprotobuf.lib(message_lite.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(descriptor.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(message.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(generated_message_util.obj) : warning LNK4217: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported in function "public: __cdecl std::_String_val<struct std::_Simple_types<char> >::~_String_val<struct std::_Simple_types<char> >(void)" (??1?$_String_val@U?$_Simple_types@D@std@@@std@@QEAA@XZ)
+libprotobuf.lib(repeated_field.obj) : warning LNK4217: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported in function "protected: void __cdecl google::protobuf::internal::RepeatedPtrFieldBase::Reserve(int)" (?Reserve@RepeatedPtrFieldBase@internal@protobuf@google@@IEAAXH@Z)
+libprotobuf.lib(common.obj) : warning LNK4049: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported
+libprotobuf.lib(once.obj) : warning LNK4217: locally defined symbol ??1_Container_base12@std@@QEAA@XZ (public: __cdecl std::_Container_base12::~_Container_base12(void)) imported in function "public: void __cdecl std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::_Copy(unsigned __int64,unsigned __int64)" (?_Copy@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAX_K0@Z)
+libprotobuf.lib(extension_set.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(structurally_valid.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(zero_copy_stream.obj) : warning LNK4217: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported in function "public: __cdecl std::_String_alloc<0,struct std::_String_base_types<char,class std::allocator<char> > >::_String_alloc<0,struct std::_String_base_types<char,class std::allocator<char> > >(class std::allocator<char> const &)" (??0?$_String_alloc@$0A@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAA@AEBV?$allocator@D@1@@Z)
+libprotobuf.lib(stringprintf.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(strutil.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(substitute.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(zero_copy_stream_impl.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(extension_set_heavy.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(descriptor.pb.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(dynamic_message.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(text_format.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(tokenizer.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(reflection_ops.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(wire_format.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(zero_copy_stream_impl_lite.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(descriptor_database.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(unknown_field_set.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(coded_stream.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(wire_format_lite.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(generated_message_reflection.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(atomicops_internals_x86_msvc.obj) : warning LNK4217: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported in function "public: class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > & __cdecl std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >::assign(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &,unsigned __int64,unsigned __int64)" (?assign@?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@QEAAAEAV12@AEBV12@_K1@Z)
+libprotobuf.lib(message_lite.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(descriptor.obj) : warning LNK4217: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported in function "private: void __cdecl google::protobuf::DescriptorBuilder::OptionInterpreter::SetInt32(int,int,enum google::protobuf::FieldDescriptor::Type,class google::protobuf::UnknownFieldSet *)" (?SetInt32@OptionInterpreter@DescriptorBuilder@protobuf@google@@AEAAXHHW4Type@FieldDescriptor@34@PEAVUnknownFieldSet@34@@Z)
+libprotobuf.lib(message.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(generated_message_util.obj) : warning LNK4217: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported in function "public: void __cdecl std::_String_alloc<0,struct std::_String_base_types<char,class std::allocator<char> > >::_Free_proxy(void)" (?_Free_proxy@?$_String_alloc@$0A@U?$_String_base_types@DV?$allocator@D@std@@@std@@@std@@QEAAXXZ)
+libprotobuf.lib(repeated_field.obj) : warning LNK4217: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported in function "protected: void __cdecl google::protobuf::internal::RepeatedPtrFieldBase::Reserve(int)" (?Reserve@RepeatedPtrFieldBase@internal@protobuf@google@@IEAAXH@Z)
+libprotobuf.lib(common.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(once.obj) : warning LNK4049: locally defined symbol ?_Orphan_all@_Container_base12@std@@QEAAXXZ (public: void __cdecl std::_Container_base12::_Orphan_all(void)) imported
+libprotobuf.lib(common.obj) : warning LNK4217: locally defined symbol _snprintf imported in function "class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > __cdecl google::protobuf::internal::VersionString(int)" (?VersionString@internal@protobuf@google@@YA?AV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@H@Z)
+libprotobuf.lib(strutil.obj) : warning LNK4049: locally defined symbol _snprintf imported
+libprotobuf.lib(common.obj) : warning LNK4217: locally defined symbol ??0exception@std@@QEAA@XZ (public: __cdecl std::exception::exception(void)) imported in function "public: __cdecl google::protobuf::FatalException::FatalException(char const *,int,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > const &)" (??0FatalException@protobuf@google@@QEAA@PEBDHAEBV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
+libprotobuf.lib(common.obj) : warning LNK4217: locally defined symbol ??0exception@std@@QEAA@AEBV01@@Z (public: __cdecl std::exception::exception(class std::exception const &)) imported in function "public: __cdecl google::protobuf::FatalException::FatalException(class google::protobuf::FatalException const &)" (??0FatalException@protobuf@google@@QEAA@AEBV012@@Z)
+libprotobuf.lib(common.obj) : warning LNK4217: locally defined symbol ??1exception@std@@UEAA@XZ (public: virtual __cdecl std::exception::~exception(void)) imported in function "public: virtual __cdecl google::protobuf::FatalException::~FatalException(void)" (??1FatalException@protobuf@google@@UEAA@XZ)
+libprotobuf.lib(extension_set.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(text_format.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(tokenizer.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(strutil.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(extension_set_heavy.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(generated_message_reflection.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(reflection_ops.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(descriptor_database.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(dynamic_message.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(common.obj) : warning LNK4217: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported in function "protected: void __cdecl std::vector<void (__cdecl*)(void),class std::allocator<void (__cdecl*)(void)> >::_Orphan_range(void (__cdecl**)(void),void (__cdecl**)(void))const " (?_Orphan_range@?$vector@P6AXXZV?$allocator@P6AXXZ@std@@@std@@IEBAXPEAP6AXXZ0@Z)
+libprotobuf.lib(descriptor.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(message.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(unknown_field_set.obj) : warning LNK4049: locally defined symbol ?_Getpfirst@_Container_base12@std@@QEBAPEAPEAU_Iterator_base12@2@XZ (public: struct std::_Iterator_base12 * * __cdecl std::_Container_base12::_Getpfirst(void)const ) imported
+libprotobuf.lib(text_format.obj) : warning LNK4217: locally defined symbol printf imported in function "public: void __cdecl google::protobuf::Message::PrintDebugString(void)const " (?PrintDebugString@Message@protobuf@google@@QEBAXXZ)
+MSVCRTD.lib(vsnprintf.obj) : warning LNK4049: locally defined symbol _vsnprintf imported
+cored.lib(CityMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_LoudSpeaker.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(CG_Common_Handler.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBCTable.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GuidLoader.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GC_Common_Handler.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Building.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GuidGenerator.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_WorldMap.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(IniFile.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(CG_Common_PAK.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(TransportMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_City.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_TextChat.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ChatMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DictionaryFormat.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameInterface_SceneActivation.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Obstacle.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Troop.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Scene.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Skill.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Hero.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_March.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(BaseUtility.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Impact.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(SceneMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Random.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(WorldUserMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(LoginMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GC_Common_PAK.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameInterface_Login.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ServerConfig.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GuidDefine.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(LibNetwork.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameInterface_Scene.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SkillEx.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SnareObjBuffInfo.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SnareObjInfo.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_Troop.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SceneNpc.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_ServerConfigList.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SkillActive.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SkillBase.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_PatrolPoint.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_PublicConfig.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_RoleBaseAttr.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SceneClass.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_Hero.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_Impact.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_InitialCombatAttr.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_NameFilter.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CoolDownTime.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CopyScene.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CopySceneNpc.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CopySceneRule.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_Building.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CityBuildingDefault.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CityBuildingLevel.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CityBuildingSlot.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(PacketDefine.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_NpcSkillStrategy.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_NpcOptionalSkill.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_ArrangeSelectTarget.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_RandomName.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_WordMap.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(SqlTemplate.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(PacketFactoryManager.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_City.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_March.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_User.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_CityCreate.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_CharList.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ODBCBase.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_Troop.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_Hero.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(LibMemInterface.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ODBCInterface.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ServiceManager.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(pool.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Config.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(LogDefine.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ServiceCell.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(BaseService.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Invoker.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Service.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Log.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(TimeManager.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Message.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(TimeInfo.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+WorldMapService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(BaseLib.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Exception.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Misc.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+HeroManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+MarchManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+User.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+WorldUserService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_Snare.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_TeleMove.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_ZhiXian.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+CityManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_ChongFeng.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_EffectToSelf.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_GongSu.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_ShunFa.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Scene_Obj.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Scene_Scan.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SkillBaseLogic.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_AutoRepeat.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ScanOperator.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Scene.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Scene_BroadCast.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Scene_Message.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SceneClass.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+SceneService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+CopyScene.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+MainScene.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Snare.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Troop.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+CopySceneClass.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+MainSceneClass.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_March_ChangeScene.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_March_CopyScene.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Npc.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Npc_AI.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Skill.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Dynamic.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Hero.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_March.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Combat.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Damage.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Impact.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Move.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Action.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Attr.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_004.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_005.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_006.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_007.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_000.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_001.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_002.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_003.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+LoginPlayerManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Player.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+PlayerManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactBaseLogic.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+LoginService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Login.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+LogService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+GamePlayerManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCTileData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCTroopData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCTroopTrainData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+Daemon.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCHeroData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCMapMarchData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCMarchData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCRandomName.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCCityData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCCreateChar.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCCreateCity.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCGuid.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBWorldMarchTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCBuildingData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCCharFullData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCCharList.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBRandomNameTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBTroopTrainTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBUserTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBWorldMapTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBCreateCharTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBCreateCityTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBGuidTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBMarchTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBServiceExec.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBBaseTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBCharListTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::system_category(void)" (?system_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(CityMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_LoudSpeaker.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(CG_Common_Handler.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBCTable.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GuidLoader.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GC_Common_Handler.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Building.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GuidGenerator.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_WorldMap.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(IniFile.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(CG_Common_PAK.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(TransportMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_City.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_TextChat.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ChatMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DictionaryFormat.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameInterface_SceneActivation.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Obstacle.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Troop.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Scene.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Skill.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Hero.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_March.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(BaseUtility.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameStruct_Impact.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(SceneMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Random.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(WorldUserMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(LoginMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GC_Common_PAK.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameInterface_Login.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ServerConfig.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GuidDefine.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(LibNetwork.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(GameInterface_Scene.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SkillEx.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SnareObjBuffInfo.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SnareObjInfo.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_Troop.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SceneNpc.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_ServerConfigList.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SkillActive.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SkillBase.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_PatrolPoint.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_PublicConfig.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_RoleBaseAttr.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_SceneClass.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_Hero.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_Impact.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_InitialCombatAttr.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_NameFilter.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CoolDownTime.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CopyScene.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CopySceneNpc.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CopySceneRule.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_Building.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CityBuildingDefault.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CityBuildingLevel.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_CityBuildingSlot.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(PacketDefine.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_NpcSkillStrategy.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_NpcOptionalSkill.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Table_ArrangeSelectTarget.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_RandomName.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_WordMap.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(SqlTemplate.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(PacketFactoryManager.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_City.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_March.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_User.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_CityCreate.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_CharList.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ODBCBase.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_Troop.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct_Hero.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(LibMemInterface.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ODBCInterface.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ServiceManager.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(pool.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBMsg.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Config.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(LogDefine.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(ServiceCell.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(BaseService.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Invoker.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Service.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(DBStruct.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Log.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(TimeManager.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Message.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(TimeInfo.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+WorldMapService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(BaseLib.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Exception.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+cored.lib(Misc.obj) : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+HeroManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+MarchManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+User.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+WorldUserService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_Snare.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_TeleMove.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_ZhiXian.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+CityManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_ChongFeng.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_EffectToSelf.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_GongSu.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_ShunFa.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Scene_Obj.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Scene_Scan.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SkillBaseLogic.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SL_AutoRepeat.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ScanOperator.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Scene.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Scene_BroadCast.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Scene_Message.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SceneClass.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+SceneService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+CopyScene.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+MainScene.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Snare.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Troop.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+CopySceneClass.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+MainSceneClass.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_March_ChangeScene.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_March_CopyScene.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Npc.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Npc_AI.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Skill.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Dynamic.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Hero.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_March.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Combat.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Damage.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Impact.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Move.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Action.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Character_Attr.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_004.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_005.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_006.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_007.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_000.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_001.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_002.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactLogic_003.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+LoginPlayerManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Player.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+PlayerManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ImpactBaseLogic.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+LoginService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Obj_Login.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+LogService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+GamePlayerManager.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCTileData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCTroopData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCTroopTrainData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+Daemon.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCHeroData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCMapMarchData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCMarchData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCRandomName.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCCityData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCCreateChar.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCCreateCity.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCGuid.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBWorldMarchTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCBuildingData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCCharFullData.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+ODBCCharList.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBRandomNameTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBTroopTrainTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBUserTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBWorldMapTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBCreateCharTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBCreateCityTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBGuidTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBMarchTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBService.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBServiceExec.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBBaseTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+DBCharListTask.obj : error LNK2001: unresolved external symbol "class boost::system::error_category const & __cdecl boost::system::generic_category(void)" (?generic_category@system@boost@@YAAEBVerror_category@12@XZ)
+libprotobuf.lib(extension_set.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(structurally_valid.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(zero_copy_stream.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(stringprintf.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(strutil.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(substitute.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(zero_copy_stream_impl.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(extension_set_heavy.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(descriptor.pb.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(dynamic_message.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(text_format.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(tokenizer.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(reflection_ops.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(wire_format.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(zero_copy_stream_impl_lite.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(descriptor_database.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(unknown_field_set.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(coded_stream.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(wire_format_lite.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(generated_message_reflection.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(atomicops_internals_x86_msvc.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(message_lite.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(descriptor.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(message.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(generated_message_util.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(repeated_field.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(common.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(once.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) char const * __cdecl std::_Winerror_map(int)" (__imp_?_Winerror_map@std@@YAPEBDH@Z)
+libprotobuf.lib(common.obj) : error LNK2019: unresolved external symbol __imp___iob_func referenced in function "public: virtual char const * __cdecl google::protobuf::FatalException::what(void)const " (?what@FatalException@protobuf@google@@UEBAPEBDXZ)
+libprotobuf.lib(common.obj) : error LNK2019: unresolved external symbol __imp_fprintf referenced in function "public: virtual char const * __cdecl google::protobuf::FatalException::what(void)const " (?what@FatalException@protobuf@google@@UEBAPEBDXZ)
+libprotobuf.lib(text_format.obj) : error LNK2019: unresolved external symbol "__declspec(dllimport) public: void __cdecl std::_Container_base12::_Swap_all(struct std::_Container_base12 &)" (__imp_?_Swap_all@_Container_base12@std@@QEAAXAEAU12@@Z) referenced in function "public: void __cdecl std::vector<class google::protobuf::TextFormat::ParseInfoTree *,class std::allocator<class google::protobuf::TextFormat::ParseInfoTree *> >::_Assign_rv(class std::vector<class google::protobuf::TextFormat::ParseInfoTree *,class std::allocator<class google::protobuf::TextFormat::ParseInfoTree *> > &&)" (?_Assign_rv@?$vector@PEAVParseInfoTree@TextFormat@protobuf@google@@V?$allocator@PEAVParseInfoTree@TextFormat@protobuf@google@@@std@@@std@@QEAAX$$QEAV12@@Z)
+libprotobuf.lib(tokenizer.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) public: void __cdecl std::_Container_base12::_Swap_all(struct std::_Container_base12 &)" (__imp_?_Swap_all@_Container_base12@std@@QEAAXAEAU12@@Z)
+libprotobuf.lib(extension_set.obj) : error LNK2001: unresolved external symbol "__declspec(dllimport) public: void __cdecl std::_Container_base12::_Swap_all(struct std::_Container_base12 &)" (__imp_?_Swap_all@_Container_base12@std@@QEAAXAEAU12@@Z)
+libprotobuf.lib(strutil.obj) : error LNK2019: unresolved external symbol __imp_sprintf referenced in function "int __cdecl google::protobuf::CEscapeInternal(char const *,int,char *,int,bool,bool)" (?CEscapeInternal@protobuf@google@@YAHPEBDHPEADH_N2@Z)
+libprotobuf.lib(stringprintf.obj) : error LNK2019: unresolved external symbol __imp_vsnprintf referenced in function "void __cdecl google::protobuf::StringAppendV(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> > *,char const *,char *)" (?StringAppendV@protobuf@google@@YAXPEAV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@PEBDPEAD@Z)
+MSVCRTD.lib(vsnprintf.obj) : error LNK2001: unresolved external symbol __imp_vsnprintf
+windows\lib\pthreadVC2.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+windows\lib\bgd.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+windows\lib\libboost_thread-vc140-mt-gd-1_60.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+windows\lib\libboost_system-vc140-mt-gd-1_60.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+windows\lib\libboost_date_time-vc140-mt-gd-1_60.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+windows\lib\libboost_chrono-vc140-mt-gd-1_60.lib : warning LNK4272: library machine type 'X86' conflicts with target machine type 'x64'
+./DebugPath/gamed.exe : fatal error LNK1120: 8 unresolved externals

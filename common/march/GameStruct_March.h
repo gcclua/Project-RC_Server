@@ -88,7 +88,10 @@ private:
 
 public:
 	// 增加队伍队列
-	bool AddTroop(int64 nTroopId,int nTroopType,int nHp);
+	bool AddTroop(int QueueIndex,int nTroopType,int nHp);
+
+	// 检测是否可以增加军队
+	bool CheckAddTroop(int QueueIndex,int nTroopType);
 
 	// 获得整个队伍信息
 	TroopList_T GetTroopList() const {return m_TroopList;}

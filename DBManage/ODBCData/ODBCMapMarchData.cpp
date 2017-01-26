@@ -71,7 +71,8 @@ bool ODBCMapMarchData::ParseResult(DBMarchDataPtr* pResult)
 				DB_State,
 				DB_BeginTime,
 				DB_EndTime,
-				
+				DB_InstId,
+				DB_ClassID,
 
 			};
 			AssertEx(mResultCount>=0,"");
@@ -91,12 +92,15 @@ bool ODBCMapMarchData::ParseResult(DBMarchDataPtr* pResult)
 				pMapMarch->m_pData[i].m_Hero.m_nHeroId = mInterface->GetLongLong(DB_HeroId,ErrorCode);
 				pMapMarch->m_pData[i].m_nPlayerId      = mInterface->GetLongLong(DB_CharGuid,ErrorCode);
 				pMapMarch->m_pData[i].m_nBuildId       = mInterface->GetLongLong(DB_BuildId,ErrorCode);
-				pMapMarch->m_pData[i].m_pos.m_nX       = mInterface->GetInt(DB_PosX,ErrorCode);
-				pMapMarch->m_pData[i].m_pos.m_nZ       = mInterface->GetInt(DB_PosZ,ErrorCode);
+				pMapMarch->m_pData[i].m_pos.m_fX       = tfloat32(mInterface->GetInt(DB_PosX,ErrorCode))/100;
+				pMapMarch->m_pData[i].m_pos.m_fZ       = tfloat32(mInterface->GetInt(DB_PosZ,ErrorCode))/100; 
 				pMapMarch->m_pData[i].m_nBeginTime     = mInterface->GetInt(DB_BeginTime,ErrorCode);
 				pMapMarch->m_pData[i].m_nEndTime       = mInterface->GetInt(DB_EndTime,ErrorCode);
 				pMapMarch->m_pData[i].m_nStatus        = mInterface->GetBYTE(DB_State,ErrorCode);
 				pMapMarch->m_pData[i].m_nCityId        = mInterface->GetLongLong(DB_CityId,ErrorCode);
+				pMapMarch->m_pData[i].m_nInstSceneId   = mInterface->GetInt(DB_InstId,ErrorCode);
+				pMapMarch->m_pData[i].m_nClassSceneId  = mInterface->GetInt(DB_ClassID,ErrorCode);;
+				
 			}
 			mInterface->Clear();
 			int iSize = (int)pMapMarch->m_Count;

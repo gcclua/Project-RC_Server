@@ -195,13 +195,6 @@ void Obj_March::UpdateLastNoneCopySceneIDAndScenePos(void)
 //////////////////////////////////////////////////////////////////////////
 //处理附近玩家列表部分	-Begin
 //////////////////////////////////////////////////////////////////////////
-void Obj_March::HandleMessage(const MarchReqNearListMsg &rMsg)
-{
-	__ENTER_FUNCTION
-		SendSceneMarchListToClient(rMsg);
-
-	__LEAVE_FUNCTION
-}
 
 
 
@@ -213,7 +206,7 @@ void Obj_March::HandleMessage(const MarchMoveMsg &rMsg)
 		
 		for (tint32 i = 0; i < nCount; i++)
 		{
-			MoveAppend(ScenePos(rMsg.m_nPosX[i], rMsg.m_nPoxZ[i]));
+			MoveAppend(ScenePos(rMsg.m_fPosX[i], rMsg.m_fPoxZ[i]));
 		}
 		CleanUpAllTrackPointFlag();
 
@@ -256,55 +249,6 @@ void Obj_March::OnScenePosChanged(void)
 	
 
 	__LEAVE_FUNCTION
-}
-
-
-void Obj_March::SendSceneMarchListToClient(const MarchReqNearListMsg &rMsg)
-{
-	__ENTER_FUNCTION
-
-		if (!IsSceneValid())
-		{
-			return;
-		}
-		Scene &rScene = GetScene();
-
-		//扫描出当前场景所有玩家
-		MarchRefCont Cont;
-		rScene.Scan_March_All(Cont);
-
-		//剔除自己
-		Cont.RemoveByPred(Pred_ObjIDEqual(GetID()));
-
-		if (Cont.Size() > 0)
-		{
-			//最多发送20个玩家的信息
-			if (Cont.Size() > 20)
-			{
-				std::nth_element(Cont.begin(), Cont.begin() + 19, Cont.end(), Pred_ObjDistanceLess(GetScenePos()));	//【stl】
-				Cont.ReduceSize(20);
-			}
-
-			MarchRetNearListMsgPtr MsgPtr = POOLDEF_NEW(MarchRetNearListMsg);
-			AssertEx(MsgPtr,"");
-			MsgPtr->m_nObjId = GetID();
-			MsgPtr->m_ReceiverGuid = rMsg.m_ReceiverGuid;
-			MsgPtr->m_BaseMarchVec.resize(Cont.Size());
-			MsgPtr->m_nSceneId = GetSceneInstID();
-			tint32 nRealCount = 0;
-			for (tint32 i = 0; i < Cont.Size(); i++)
-			{
-				Obj_March &rMarch = Cont[i];
-				MsgPtr->m_BaseMarchVec[i].m_Guid = rMarch.GetMarchId();
-				MsgPtr->m_BaseMarchVec[i].m_szName = rMarch.GetName().GetCText();
-				MsgPtr->m_BaseMarchVec[i].m_nLevel = rMarch.GetLevel();
-				nRealCount ++;
-			}
-			
-			SendMessage2User(rMsg.m_ReceiverGuid,MsgPtr);
-		}
-
-		__LEAVE_FUNCTION
 }
 
 void Obj_March::Tick_View(const TimeInfo &rTimeInfo)

@@ -80,7 +80,7 @@ void Obj_Hero::CalculateInitalAttr(void)
 	m_InitialAttr.SetCombatAttrByIndex(COMBATATTR_T::HIT, pRoleBase->GetHit());
 	m_InitialAttr.SetCombatAttrByIndex(COMBATATTR_T::ATTACKSPEED, pRoleBase->GetAttackTime());
 	m_InitialAttr.SetCombatAttrByIndex(COMBATATTR_T::MOVESPEED, pRoleBase->GetMoveSpeed());
-
+	m_InitialAttr.SetCombatAttrByIndex(COMBATATTR_T::TOTALMAXHP, pRoleBase->GetMaxHP());
 	__LEAVE_FUNCTION
 }
 
@@ -116,7 +116,7 @@ void Obj_Hero::CalculateFinalyAttr()
 		m_FinalyAttr =m_InitialAttr*(m_SkillCombatRefix+m_BuffCombatRefix);
 
 		//当前血 蓝 XP 大于上限时 则修正当前值为上限值 
-		tint32 nMaxHp =GetCombatAttrByID((tint32)COMBATATTR_T::MAXHP);
+		tint32 nMaxHp =GetCombatAttrByID((tint32)COMBATATTR_T::TOTALMAXHP);
 		tint32 nMaxXp =GetCombatAttrByID((tint32)COMBATATTR_T::MAXXP);
 
 		if (GetCurHp() >nMaxHp)

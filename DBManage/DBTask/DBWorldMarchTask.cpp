@@ -31,7 +31,7 @@ bool DBWorldMarchTask::Load(ODBCInterface& rODBCInterface,LibMemInterface &rLibM
 	if (false == MapMarchObject.Load())
 	{
 		SendMessage2Srv(GetRetServiceID(),MsgPtr);
-		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
+		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);
 		return false;
 	}
 
@@ -41,7 +41,7 @@ bool DBWorldMarchTask::Load(ODBCInterface& rODBCInterface,LibMemInterface &rLibM
 	/*if (resultCount <= 0)
 	{
 		SendMessage2Srv(GetRetServiceID(),MsgPtr);
-		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
+		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);
 		return false;
 	}*/
 	

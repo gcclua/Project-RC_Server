@@ -1,0 +1,167 @@
+﻿C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(392,5): warning MSB8028: The intermediate directory (x64\Debug\) contains files shared from another project (gamed.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  GameStruct_TextChat.cpp
+  DBStruct.cpp
+  DBStruct_CharList.cpp
+  DBStruct_City.cpp
+  DBStruct_CityCreate.cpp
+  DBStruct_Hero.cpp
+  DBStruct_March.cpp
+  DBStruct_RandomName.cpp
+  DBStruct_Troop.cpp
+  DBStruct_User.cpp
+  DBStruct_WordMap.cpp
+  ODBCBase.cpp
+  ODBCInterface.cpp
+  GameInterface_Login.cpp
+  ChatMsg.cpp
+  CityMsg.cpp
+  DBMsg.cpp
+  LoginMsg.cpp
+  SceneMsg.cpp
+  TransportMsg.cpp
+  Generating Code...
+  Compiling...
+  WorldUserMsg.cpp
+  GameInterface_Scene.cpp
+  GameInterface_SceneActivation.cpp
+  GameStruct_Obstacle.cpp
+  GameStruct_Scene.cpp
+  Table_ArrangeSelectTarget.cpp
+  Table_CityBuildingLevel.cpp
+  Table_Hero.cpp
+  Table_SceneClass.cpp
+  Table_SkillEx.cpp
+  Table_Troop.cpp
+  GameStruct_Building.cpp
+  GameStruct_City.cpp
+  Config.cpp
+  GuidGenerator.cpp
+  GuidLoader.cpp
+E:\RealmConquerors\src\Server\server\windows\include\libconfig.h++(51): warning C4275: non dll-interface class 'std::exception' used as base for dll-interface class 'libconfig::ConfigException'
+  C:\Program Files (x86)\Microsoft Visual Studio 14.0\VC\include\vcruntime_exception.h(43): note: see declaration of 'std::exception'
+  E:\RealmConquerors\src\Server\server\windows\include\libconfig.h++(51): note: see declaration of 'libconfig::ConfigException'
+  GameStruct_Hero.cpp
+  LogDefine.cpp
+  GameStruct_March.cpp
+  CG_Common_Handler.cpp
+  Generating Code...
+  Compiling...
+  GC_Common_Handler.cpp
+  CG_Common_PAK.cpp
+  GC_Common_PAK.cpp
+  PBMessage.pb.cc
+E:\RealmConquerors\src\Server\server\windows\include\google/protobuf/io/coded_stream.h(902): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+E:\RealmConquerors\src\Server\server\windows\include\google/protobuf/io/coded_stream.h(1078): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+E:\RealmConquerors\src\Server\server\windows\include\google/protobuf/wire_format_lite_inl.h(663): warning C4267: 'argument': conversion from 'size_t' to 'google::protobuf::uint32', possible loss of data
+E:\RealmConquerors\src\Server\server\windows\include\google/protobuf/wire_format_lite_inl.h(670): warning C4267: 'argument': conversion from 'size_t' to 'google::protobuf::uint32', possible loss of data
+E:\RealmConquerors\src\Server\server\windows\include\google/protobuf/wire_format_lite_inl.h(738): warning C4267: 'argument': conversion from 'size_t' to 'google::protobuf::uint32', possible loss of data
+E:\RealmConquerors\src\Server\server\windows\include\google/protobuf/wire_format_lite_inl.h(739): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+E:\RealmConquerors\src\Server\server\windows\include\google/protobuf/wire_format_lite_inl.h(742): warning C4267: 'argument': conversion from 'size_t' to 'google::protobuf::uint32', possible loss of data
+E:\RealmConquerors\src\Server\server\windows\include\google/protobuf/wire_format_lite_inl.h(743): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2374): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2391): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2408): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2425): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2442): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2459): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2476): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2552): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2561): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2570): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2579): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2588): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2597): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2606): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2658): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2668): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2678): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2688): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2698): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2708): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(2718): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(3220): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(3237): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(3268): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(3357): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(3366): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(3381): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(3430): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(3440): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(3457): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(4462): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(4575): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(4620): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(4940): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(4973): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5024): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5038): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5065): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5080): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5385): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5418): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5467): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5502): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5516): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5535): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5557): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5572): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5592): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5840): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5886): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(5908): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(8942): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(9008): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(9050): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(14258): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(14293): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(14315): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(14570): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(14610): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(14637): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(15148): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(15188): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+common\packet\Packet\PBMessage.pb.cc(15215): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+  PacketDefine.cpp
+  PacketFactoryManager.cpp
+  BaseService.cpp
+  Service.cpp
+  ServiceCell.cpp
+  ServiceManager.cpp
+e:\realmconquerors\src\server\server\windows\include\threadpool\threadpool\./detail/pool_core.hpp(309): warning C4267: 'argument': conversion from 'size_t' to 'unsigned int', possible loss of data
+  e:\realmconquerors\src\server\server\windows\include\threadpool\threadpool\./detail/pool_core.hpp(299): note: while compiling class template member function 'void boost::threadpool::detail::pool_core<Task,SchedulingPolicy,SizePolicy,SizePolicyController,ShutdownPolicy>::terminate_all_workers(const bool) volatile'
+          with
+          [
+              Task=boost::threadpool::task_func,
+              SchedulingPolicy=boost::threadpool::fifo_scheduler,
+              SizePolicy=boost::threadpool::static_size,
+              SizePolicyController=boost::threadpool::resize_controller,
+              ShutdownPolicy=boost::threadpool::wait_for_all_tasks
+          ]
+  e:\realmconquerors\src\server\server\windows\include\threadpool\threadpool\shutdown_policies.hpp(41): note: see reference to function template instantiation 'void boost::threadpool::detail::pool_core<Task,SchedulingPolicy,SizePolicy,SizePolicyController,ShutdownPolicy>::terminate_all_workers(const bool) volatile' being compiled
+          with
+          [
+              Task=boost::threadpool::task_func,
+              SchedulingPolicy=boost::threadpool::fifo_scheduler,
+              SizePolicy=boost::threadpool::static_size,
+              SizePolicyController=boost::threadpool::resize_controller,
+              ShutdownPolicy=boost::threadpool::wait_for_all_tasks
+          ]
+  e:\realmconquerors\src\server\server\windows\include\threadpool\./threadpool/pool.hpp(191): note: see reference to class template instantiation 'boost::threadpool::detail::pool_core<Task,SchedulingPolicy,SizePolicy,SizePolicyController,ShutdownPolicy>' being compiled
+          with
+          [
+              Task=boost::threadpool::task_func,
+              SchedulingPolicy=boost::threadpool::fifo_scheduler,
+              SizePolicy=boost::threadpool::static_size,
+              SizePolicyController=boost::threadpool::resize_controller,
+              ShutdownPolicy=boost::threadpool::wait_for_all_tasks
+          ]
+  e:\realmconquerors\src\server\server\windows\include\threadpool\./threadpool/pool.hpp(190): note: while compiling class template member function 'bool boost::threadpool::thread_pool<boost::threadpool::task_func,boost::threadpool::fifo_scheduler,boost::threadpool::static_size,boost::threadpool::resize_controller,boost::threadpool::wait_for_all_tasks>::wait(const boost::xtime &,std::size_t) const'
+  common\service\ServiceManager.cpp(187): note: see reference to function template instantiation 'bool boost::threadpool::thread_pool<boost::threadpool::task_func,boost::threadpool::fifo_scheduler,boost::threadpool::static_size,boost::threadpool::resize_controller,boost::threadpool::wait_for_all_tasks>::wait(const boost::xtime &,std::size_t) const' being compiled
+  common\service\ServiceManager.cpp(29): note: see reference to class template instantiation 'boost::threadpool::thread_pool<boost::threadpool::task_func,boost::threadpool::fifo_scheduler,boost::threadpool::static_size,boost::threadpool::resize_controller,boost::threadpool::wait_for_all_tasks>' being compiled
+  GameStruct_Troop.cpp
+  GameStruct_WorldMap.cpp
+  Generating Code...
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(1357,5): warning MSB8012: TargetPath(E:\RealmConquerors\src\Server\server\x64\Debug\core.lib) does not match the Library's OutputFile property value (E:\RealmConquerors\src\Server\server\x64\Debug\cored.lib). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V140\Microsoft.CppBuild.targets(1359,5): warning MSB8012: TargetName(core) does not match the Library's OutputFile property value (cored). This may cause your project to build incorrectly. To correct this, please make sure that $(OutDir), $(TargetName) and $(TargetExt) property values match the value specified in %(Lib.OutputFile).
+GameStruct_CombatAttr.obj : warning LNK4221: This object file does not define any previously undefined public symbols, so it will not be used by any link operation that consumes this library
+  core.vcxproj -> E:\RealmConquerors\src\Server\server\x64\Debug\core.lib

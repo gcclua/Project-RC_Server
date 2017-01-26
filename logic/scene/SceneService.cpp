@@ -591,7 +591,7 @@ void SceneService::UpdateMarchInfo(const MarchInfo &rInfo)
 	}
 	else
 	{
-		VerifyEx(false, "");
+		AddMarchInfo(rInfo);
 	}
 
 	__LEAVE_FUNCTION
@@ -757,6 +757,21 @@ void SceneService::HandleMessage(const ReqMarchStartMsg &rMsg)
 		ui.m_MarchSceneInfo.m_SceneID = EnterToDefaultScene(rMarch);
 		AddMarchInfo(ui);
 
+
+	__LEAVE_FUNCTION
+}
+
+void SceneService::HandleMessage(const MarchLeaveBattleMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		March rMarch = rMsg.m_March;
+
+	MarchInfo ui;
+	rMarch.FillMarchBaseInfo(ui.m_MarchBaseInfo);
+	ui.m_MarchSceneInfo.m_nState = MarchSceneInfo::SCENEPLAYING;
+	//tempTile->SerializeFromDB(rData.m_pData[i]);
+	ui.m_MarchSceneInfo.m_SceneID = EnterToDefaultScene(rMarch);
+	UpdateMarchInfo(ui);
 
 	__LEAVE_FUNCTION
 }

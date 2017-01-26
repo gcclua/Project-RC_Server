@@ -68,7 +68,7 @@ void SceneObstacle::Load(const char *szObstacleFileName)
 		fread(&(ofitemvec[0]), sizeof(ObstacleFileItem), m_nScaleWidth * m_nScaleHeight, fp);
 		for (int i = 0; i < static_cast<int>(ofitemvec.size()); i++)
 		{
-			SetObstacleValue(ScenePos(ofitemvec[i].m_nX, ofitemvec[i].m_nZ),
+			SetObstacleValue(ScenePos(ofitemvec[i].m_fX, ofitemvec[i].m_fZ),
 				ofitemvec[i].m_nValue == 1 ? ObstacleValue::WALKABLE : ObstacleValue::WALKDISABLE);
 		}
 
@@ -121,42 +121,42 @@ void SceneObstacle::Record(int nSceneClassID)
 	__LEAVE_FUNCTION
 }
 
-void SceneObstacle::SetObstacleValue(const ScenePos &rPos, int nValue)
+void SceneObstacle::SetObstacleValue(const ScenePos &rPos, tint32 nValue)
 {
-	int nX = rPos.m_nX * OBSTACLESCALE;
-	int nZ = rPos.m_nZ * OBSTACLESCALE;
-	//int nX = _45FLOAT2INT(fX);
-	//int nZ = _45FLOAT2INT(fZ);
+	tfloat32 fX = rPos.m_fX * OBSTACLESCALE;
+	tfloat32 fZ = rPos.m_fZ * OBSTACLESCALE;
+	tint32 nX = _45FLOAT2INT(fX);
+	tint32 nZ = _45FLOAT2INT(fZ);
 	SetScaleObstacleValue(nX, nZ, nValue);
 }
 
-int SceneObstacle::GetObstacleValue(const ScenePos &rPos) const
+tint32 SceneObstacle::GetObstacleValue(const ScenePos &rPos) const
 {
-	int nX = rPos.m_nX * OBSTACLESCALE;
-	int nZ = rPos.m_nZ * OBSTACLESCALE;
-	//int nX = _45FLOAT2INT(fX);
-	//int nZ = _45FLOAT2INT(fZ);
+	tfloat32 fX = rPos.m_fX * OBSTACLESCALE;
+	tfloat32 fZ = rPos.m_fZ * OBSTACLESCALE;
+	tint32 nX = _45FLOAT2INT(fX);
+	tint32 nZ = _45FLOAT2INT(fZ);
 	return GetScaleObstacleValue(nX, nZ);
 }
 
-void SceneObstacle::SetScaleObstacleValue(int nX, int nZ, int nValue)
+void SceneObstacle::SetScaleObstacleValue(tint32 nX, tint32 nZ, tint32 nValue)
 {
 	if ((nX >= 0 && nX < m_nScaleWidth) &&
 		(nZ >= 0 && nZ < m_nScaleHeight))
 	{
-		int nIndex = m_nScaleWidth * nZ + nX;
-		AssertEx(nIndex >= 0 && nIndex < static_cast<int>(m_Data.size()), "");
+		tint32 nIndex = m_nScaleWidth * nZ + nX;
+		AssertEx(nIndex >= 0 && nIndex < static_cast<tint32>(m_Data.size()), "");
 		m_Data[nIndex] = nValue;
 	}
 }
 
-int SceneObstacle::GetScaleObstacleValue(int nX, int nZ) const
+tint32 SceneObstacle::GetScaleObstacleValue(tint32 nX, tint32 nZ) const
 {
 	if ((nX >= 0 && nX < m_nScaleWidth) &&
 		(nZ >= 0 && nZ < m_nScaleHeight))
 	{
-		int nIndex = m_nScaleWidth * nZ + nX;
-		AssertEx(nIndex >= 0 && nIndex < static_cast<int>(m_Data.size()), "");
+		tint32 nIndex = m_nScaleWidth * nZ + nX;
+		AssertEx(nIndex >= 0 && nIndex < static_cast<tint32>(m_Data.size()), "");
 		return m_Data[nIndex];
 	}
 	else

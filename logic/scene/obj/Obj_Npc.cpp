@@ -53,7 +53,7 @@ void Obj_Npc::OnEnterScene(void)
 	__ENTER_FUNCTION
 
 	Obj_Character::OnEnterScene();
-	SetCurHp(GetCombatAttrByID(static_cast<int>(COMBATATTR_T::MAXHP)));
+	//SetCurHp(GetCombatAttrByID(static_cast<int>(COMBATATTR_T::MAXHP)));
 
 	__LEAVE_FUNCTION
 }
@@ -67,12 +67,30 @@ void Obj_Npc::OnLeaveScene(void)
 	__LEAVE_FUNCTION
 }
 
+void Obj_Npc::OnEndMove(void)
+{
+	__ENTER_FUNCTION
+	Obj_Character::OnEndMove();
+	if (m_curAIType == AI_MARCH
+		|| m_curAIType == AI_COMBAT)
+	{
+		int nSelObj = SelectNearestTarget();
+		if (nSelObj != invalid_id)
+		{
+			m_nCurSelectObjId = nSelObj;
+			EnterTrace();
+		}
+	}
+	
+	__LEAVE_FUNCTION
+}
+
 void Obj_Npc::Tick_Moving(const TimeInfo &rTimeInfo)
 {
 	__ENTER_FUNCTION
 
-		Stopping();
-		Moving(rTimeInfo);
+		//Stopping();
+		//Moving(rTimeInfo);
 
 	__LEAVE_FUNCTION
 }
@@ -173,6 +191,7 @@ void Obj_Npc::CalculateInitalAttr(void)
  		m_InitialAttr.SetCombatAttrByIndex((int)(COMBATATTR_T::DEFENCE),rTable.GetDefense());
  		m_InitialAttr.SetCombatAttrByIndex((int)(COMBATATTR_T::HIT),rTable.GetHit());
  		m_InitialAttr.SetCombatAttrByIndex((int)(COMBATATTR_T::MOVESPEED),rTable.GetMoveSpeed());
+		m_InitialAttr.SetCombatAttrByIndex((int)(COMBATATTR_T::TOTALMAXHP),rTable.GetMaxHP());
 	__LEAVE_FUNCTION
 }
 
@@ -208,7 +227,7 @@ void Obj_Npc::CalculateFinalyAttr()
 	{
 		m_FinalyAttr =m_InitialAttr*(m_SkillCombatRefix+m_BuffCombatRefix);
 		//当前血 蓝 XP 大于上限时 则修正当前值为上限值 
-		int nMaxHp =GetCombatAttrByID((int)COMBATATTR_T::MAXHP);
+		int nMaxHp =GetCombatAttrByID((int)COMBATATTR_T::TOTALMAXHP);
 		int nMaxXp =GetCombatAttrByID((int)COMBATATTR_T::MAXXP);
 
 		if (GetCurHp() >nMaxHp)
@@ -322,9 +341,9 @@ void  Obj_Npc::SelectTargetForMarch(bool bAttack)
 	for (tint32 i=0;i<nMarchLine;i++)
 	{
 		ScenePos tmPos;
-		tmPos.m_nX = pCurTable->GetMarchLineXbyIndex(i);
-		tmPos.m_nZ = pCurTable->GetMarchLineZbyIndex(i);
-		if (tmPos.m_nX !=  invalid_id && tmPos.m_nZ != invalid_id)
+		tmPos.m_fX = pCurTable->GetMarchLineXbyIndex(i);
+		tmPos.m_fZ = pCurTable->GetMarchLineZbyIndex(i);
+		if (tmPos.m_fX >0.f  && tmPos.m_fZ >0.f)
 		{
 			MoveAppend(tmPos);
 		}

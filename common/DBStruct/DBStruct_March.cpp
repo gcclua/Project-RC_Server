@@ -17,6 +17,8 @@ void DBMarch::CleanUp( )
 		m_nCityId = 0;    // ³ÇÊÐID
 		m_nStatus = MARCHSTATUS_INVALID;    // ×´Ì¬
 		m_nBuildId = invalid_guid64;
+		m_nInstSceneId = invalid_id;
+		m_nClassSceneId = invalid_id;
 	__LEAVE_FUNCTION
 }
 void DBMarch::CopyFrom(const DBMarch& rSource)
@@ -38,6 +40,8 @@ void DBMarch::CopyFrom(const DBMarch& rSource)
 		m_nCityId    = rSource.m_nCityId;
 		m_nStatus    = rSource.m_nStatus;
 		m_nBuildId   = rSource.m_nBuildId;
+		m_nInstSceneId = rSource.m_nInstSceneId;
+		m_nClassSceneId= rSource.m_nClassSceneId;
 	__LEAVE_FUNCTION
 }
 

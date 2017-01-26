@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
       <Configuration>Debug</Configuration>
@@ -25,24 +25,24 @@
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>MultiByte</CharacterSet>
     <WholeProgramOptimization>true</WholeProgramOptimization>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
-    <PlatformToolset>v110</PlatformToolset>
+    <PlatformToolset>v140</PlatformToolset>
     <CharacterSet>NotSet</CharacterSet>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
@@ -68,6 +68,7 @@
     <OutDir>$(SolutionDir)$(Configuration)_$(ProjectName)\</OutDir>
     <IntDir>$(Configuration)_gamed\</IntDir>
     <LinkIncremental>true</LinkIncremental>
+    <IncludePath>E:\ServerLibs\include\boost;E:\ServerLibs\include;$(IncludePath)</IncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -177,8 +178,10 @@
     <ClCompile Include="DBManage\DBTask\DBCreateCharTask.cpp" />
     <ClCompile Include="DBManage\DBTask\DBCreateCityTask.cpp" />
     <ClCompile Include="DBManage\DBTask\DBGuidTask.cpp" />
+    <ClCompile Include="DBManage\DBTask\DBHeroTask.cpp" />
     <ClCompile Include="DBManage\DBTask\DBMarchTask.cpp" />
     <ClCompile Include="DBManage\DBTask\DBRandomNameTask.cpp" />
+    <ClCompile Include="DBManage\DBTask\DBTroopTrainTask.cpp" />
     <ClCompile Include="DBManage\DBTask\DBUserTask.cpp" />
     <ClCompile Include="DBManage\DBTask\DBWorldMapTask.cpp" />
     <ClCompile Include="DBManage\DBTask\DBWorldMarchTask.cpp" />
@@ -195,6 +198,7 @@
     <ClCompile Include="DBManage\ODBCData\ODBCRandomName.cpp" />
     <ClCompile Include="DBManage\ODBCData\ODBCTileData.cpp" />
     <ClCompile Include="DBManage\ODBCData\ODBCTroopData.cpp" />
+    <ClCompile Include="DBManage\ODBCData\ODBCTroopTrainData.cpp" />
     <ClCompile Include="gamed\Daemon.cpp" />
     <ClCompile Include="gamed\GameEventAutoCreate.cpp" />
     <ClCompile Include="logic\Login\LoginService.cpp" />
@@ -267,8 +271,10 @@
     <ClInclude Include="DBManage\DBTask\DBCreateCharTask.h" />
     <ClInclude Include="DBManage\DBTask\DBCreateCityTask.h" />
     <ClInclude Include="DBManage\DBTask\DBGuidTask.h" />
+    <ClInclude Include="DBManage\DBTask\DBHeroTask.h" />
     <ClInclude Include="DBManage\DBTask\DBMarchTask.h" />
     <ClInclude Include="DBManage\DBTask\DBRandomNameTask.h" />
+    <ClInclude Include="DBManage\DBTask\DBTroopTrainTask.h" />
     <ClInclude Include="DBManage\DBTask\DBUserTask.h" />
     <ClInclude Include="DBManage\DBTask\DBWorldMapTask.h" />
     <ClInclude Include="DBManage\DBTask\DBWorldMarchTask.h" />
@@ -285,6 +291,7 @@
     <ClInclude Include="DBManage\ODBCData\ODBCRandomName.h" />
     <ClInclude Include="DBManage\ODBCData\ODBCTileData.h" />
     <ClInclude Include="DBManage\ODBCData\ODBCTroopData.h" />
+    <ClInclude Include="DBManage\ODBCData\ODBCTroopTrainData.h" />
     <ClInclude Include="gamed\Daemon.h" />
     <ClInclude Include="logic\Login\LoginService.h" />
     <ClInclude Include="logic\Login\Obj_Login.h" />

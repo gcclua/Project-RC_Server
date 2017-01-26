@@ -68,9 +68,9 @@ private:
  tint32 GetModelSize() const { return m_ModelSize; }
 
 private:
- tint32 m_Portrait;
+ const tchar* m_Portrait;
  public:
- tint32 GetPortrait() const { return m_Portrait; }
+ const tchar* GetPortrait() const { return m_Portrait; }
 
 private:
  tint32 m_Size;

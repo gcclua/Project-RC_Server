@@ -92,9 +92,6 @@
     <Filter Include="Source Files\login">
       <UniqueIdentifier>{3d49470f-87f7-482b-8da9-34d2795f96f4}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\AStarPathFinding">
-      <UniqueIdentifier>{a2c04bf8-ef4d-496d-9a98-3f2df0e8e934}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="event\EventDefine.h">
@@ -185,9 +182,6 @@
       <Filter>Source Files\common</Filter>
     </ClInclude>
     <ClInclude Include="common\common\ServerConfig.h">
-      <Filter>Source Files\common</Filter>
-    </ClInclude>
-    <ClInclude Include="common\common\string-util.h">
       <Filter>Source Files\common</Filter>
     </ClInclude>
     <ClInclude Include="common\worldmap\GameDefine_WorldMap.h">
@@ -577,32 +571,71 @@
     <ClInclude Include="common\Table\TableManager.h">
       <Filter>Source Files\table</Filter>
     </ClInclude>
-    <ClInclude Include="common\AStarPathFinding\Coord.h">
-      <Filter>Source Files\AStarPathFinding</Filter>
+    <ClInclude Include="common\packet\Packet\CG_BUILDING_LEVELUP_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="common\AStarPathFinding\MapAStarCompact.h">
-      <Filter>Source Files\AStarPathFinding</Filter>
+    <ClInclude Include="common\packet\Packet\CG_TROOP_TRAIN_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="common\AStarPathFinding\MapConst.h">
-      <Filter>Source Files\AStarPathFinding</Filter>
+    <ClInclude Include="common\packet\Packet\GC_BUILDING_LEVELUP_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="common\AStarPathFinding\MapLayout.h">
-      <Filter>Source Files\AStarPathFinding</Filter>
+    <ClInclude Include="common\packet\Packet\GC_TROOP_TRAIN_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="common\AStarPathFinding\MapProxy.h">
-      <Filter>Source Files\AStarPathFinding</Filter>
+    <ClInclude Include="common\packet\Packet\GC_UPDATE_MARCH_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="common\AStarPathFinding\MapTileVO.h">
-      <Filter>Source Files\AStarPathFinding</Filter>
+    <ClInclude Include="common\Message\CityMsg.h">
+      <Filter>Source Files\Message</Filter>
     </ClInclude>
-    <ClInclude Include="common\AStarPathFinding\MinHeap.h">
-      <Filter>Source Files\AStarPathFinding</Filter>
+    <ClInclude Include="common\packet\Packet\CG_BATTLEPREPARE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="common\AStarPathFinding\Utils.h">
-      <Filter>Source Files\AStarPathFinding</Filter>
+    <ClInclude Include="common\packet\Packet\GC_BATTLEPREPARE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
-    <ClInclude Include="common\AStarPathFinding\AStarHelper.h">
-      <Filter>Source Files\AStarPathFinding</Filter>
+    <ClInclude Include="common\packet\Packet\GC_TROOPTRAIN_OVER_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_BATTLEEND_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_BATTLEINFOR_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_OBJPOSLIST_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_FIGHT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_OBJCOMMANDPURSUE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_OBJGETHURT_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_OBJINFOR_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_OBJPOS_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_OBJPOSLIST_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_OBJPREPAREFORATTACK_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\CG_MARCH_MOVE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_BATTLESTART_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="common\packet\Packet\GC_MARCH_MOVE_PAK.h">
+      <Filter>Source Files\packet\Packet</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -685,9 +718,6 @@
       <Filter>Source Files\common</Filter>
     </ClCompile>
     <ClCompile Include="common\common\ServerConfig.cpp">
-      <Filter>Source Files\common</Filter>
-    </ClCompile>
-    <ClCompile Include="common\common\string-util.cpp">
       <Filter>Source Files\common</Filter>
     </ClCompile>
     <ClCompile Include="common\worldmap\GameStruct_WorldMap.cpp">
@@ -927,29 +957,8 @@
     <ClCompile Include="common\Table\Table_Troop.cpp">
       <Filter>Source Files\table</Filter>
     </ClCompile>
-    <ClCompile Include="common\AStarPathFinding\Utils.cpp">
-      <Filter>Source Files\AStarPathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="common\AStarPathFinding\Coord.cpp">
-      <Filter>Source Files\AStarPathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="common\AStarPathFinding\MapAStarCompact.cpp">
-      <Filter>Source Files\AStarPathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="common\AStarPathFinding\MapConst.cpp">
-      <Filter>Source Files\AStarPathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="common\AStarPathFinding\MapLayout.cpp">
-      <Filter>Source Files\AStarPathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="common\AStarPathFinding\MapProxy.cpp">
-      <Filter>Source Files\AStarPathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="common\AStarPathFinding\MapTileVO.cpp">
-      <Filter>Source Files\AStarPathFinding</Filter>
-    </ClCompile>
-    <ClCompile Include="common\AStarPathFinding\AStarHelper.cpp">
-      <Filter>Source Files\AStarPathFinding</Filter>
+    <ClCompile Include="common\Message\CityMsg.cpp">
+      <Filter>Source Files\Message</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

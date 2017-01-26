@@ -9,6 +9,7 @@
 #include "ODBCBuildIngData.h"
 #include "ODBCMarchData.h"
 #include "ODBCHeroData.h"
+#include "ODBCTroopTrainData.h"
 
 ODBCCreateCity::ODBCCreateCity(ODBCInterface* pInterface)
 {
@@ -38,13 +39,13 @@ bool ODBCCreateCity::Save(DBCityCreate* pSource)
 
 	AssertEx(pSource != null_ptr,"");
 	DBCityCreate& rCityCreateData = *pSource;
-
+	CacheLog(LOGDEF_INST(CreateChar),"ODBCCreateCity:: CreateCity  \1 userId=%d,\2 cityid=%d,\3 time=%d",rCityCreateData.m_UserId,rCityCreateData.m_nCityID,gTimeManager.GetANSITime());
 	pQuery->Parse(CreateCity,
 		rCityCreateData.m_nCityID,
 		rCityCreateData.m_UserId,
 		rCityCreateData.m_tileID,
-		rCityCreateData.m_nPosX,
-		rCityCreateData.m_nPosZ,
+		(int)(rCityCreateData.m_fPosX*100),
+		(int)(rCityCreateData.m_fPosZ*100),
 		rCityCreateData.m_nLevel,
 		rCityCreateData.m_nFood,
 		rCityCreateData.m_nStone,
@@ -59,7 +60,7 @@ bool ODBCCreateCity::Save(DBCityCreate* pSource)
 	}  	   
 	
 	debug = 2;
-
+	CacheLog(LOGDEF_INST(CreateChar),"ODBCCreateCity:: CreateBuilding  \1 userId=%d,\2 cityid=%d,\3 time=%d",rCityCreateData.m_UserId,rCityCreateData.m_nCityID,gTimeManager.GetANSITime());
 	for (int i=0;i<rCityCreateData.m_lstBuilding.size();i++)
 	{
 		DBBuilding rBuilding = rCityCreateData.m_lstBuilding[i];
@@ -70,7 +71,7 @@ bool ODBCCreateCity::Save(DBCityCreate* pSource)
 			return false;
 		}
 	}
-
+	CacheLog(LOGDEF_INST(CreateChar),"ODBCCreateCity:: CreateMarch  \1 userId=%d,\2 cityid=%d,\3 time=%d",rCityCreateData.m_UserId,rCityCreateData.m_nCityID,gTimeManager.GetANSITime());
 	for (int i=0;i<rCityCreateData.m_lstMarch.size();i++)
 	{
 		DBMarch rMarch = rCityCreateData.m_lstMarch[i];
@@ -84,12 +85,25 @@ bool ODBCCreateCity::Save(DBCityCreate* pSource)
 	}
 
 	pQuery->Clear();
+	CacheLog(LOGDEF_INST(CreateChar),"ODBCCreateCity:: CreateHero  \1 userId=%d,\2 cityid=%d,\3 time=%d",rCityCreateData.m_UserId,rCityCreateData.m_nCityID,gTimeManager.GetANSITime());
 	ODBCHeroData ODBCHero(mInterface);
 	if (!ODBCHero.Save(&rCityCreateData.m_Hero))
 	{
 		return false;
 	}
 
+	pQuery->Clear();
+	CacheLog(LOGDEF_INST(CreateChar),"ODBCCreateCity:: CreateTrain  \1 userId=%d,\2 cityid=%d,\3 time=%d",rCityCreateData.m_UserId,rCityCreateData.m_nCityID,gTimeManager.GetANSITime());
+	for (int i=0; i<rCityCreateData.m_lstTrain.size();i++)
+	{
+		DBTroopTrain rTroopTrain = rCityCreateData.m_lstTrain[i];
+		pQuery->Clear();
+		ODBCTroopTrainData ODBCTroopTrain(mInterface);
+		if (!ODBCTroopTrain.Save(&rTroopTrain))
+		{
+			return false;
+		}
+	}
 
 	return true;
 

@@ -154,7 +154,7 @@ TileInfoPtr WorldMapService::GetPlainTile()
 			TileInfoPtr pTileInfo = it->second;
 			if ( pTileInfo->GetState() ==  TILE_STATE_IDLE)
 			{
-				pTileInfo->SetState(TILE_STATE_LOCK);
+				pTileInfo->SetState(TILE_STATE_TAKE);
 				PushSaveList(pTileInfo);
 				return pTileInfo;
 			}
@@ -209,6 +209,7 @@ void WorldMapService::HandleMessage(const ReqIdleTileMsg &rMsg)
 {
 	__ENTER_FUNCTION
 		RetIdleTileMsgPtr MsgPtr = POOLDEF_NEW(RetIdleTileMsg);
+		CacheLog(LOGDEF_INST(CreateChar),"ReqIdleTileMsg:: start \1 playerid=%d, \2 userId=%d,\3 time=%d",rMsg.m_nPlayerID,rMsg.m_userId,gTimeManager.GetANSITime());
 		TileInfoPtr Ptr = GetPlainTile();
 		int tileId = INVALID_ID;
 		int nX = INVALID_ID;
@@ -226,6 +227,6 @@ void WorldMapService::HandleMessage(const ReqIdleTileMsg &rMsg)
 		MsgPtr->m_nPlayerID = rMsg.m_nPlayerID;
 
 		SendMessage2Srv(ServiceID::LOGIN,MsgPtr);
-
+			CacheLog(LOGDEF_INST(CreateChar),"ReqIdleTileMsg:: start \1 playerid=%d, \2 userId=%d,\3 tileid =%d , \4 time=%d",rMsg.m_nPlayerID,rMsg.m_userId,tileId,gTimeManager.GetANSITime());
 	__LEAVE_FUNCTION
 }

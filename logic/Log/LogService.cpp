@@ -72,7 +72,9 @@ void LogService::FlushAll( void )
     LOGDEF_FLUSH(Scene);
 	LOGDEF_FLUSH(Player);
 	LOGDEF_FLUSH(CopyScene);
-	
+	LOGDEF_FLUSH(CreateChar);
+	LOGDEF_FLUSH(HeroData);
+	LOGDEF_FLUSH(DBTaskEffeciency);
 
     //统计日志
     LOGDEF_FLUSH(Audit_Item);
@@ -111,6 +113,10 @@ void LogService::RebuildAll( void )
         LOGDEF_REBUILDPATH(Scene);
 		LOGDEF_REBUILDPATH(Player);
 		LOGDEF_REBUILDPATH(CopyScene);
+		LOGDEF_REBUILDPATH(CreateChar);
+		LOGDEF_REBUILDPATH(HeroData);
+		LOGDEF_REBUILDPATH(DBTaskEffeciency);
+		
 
         //统计日志
         LOGDEF_REBUILDPATH(Audit_Item);

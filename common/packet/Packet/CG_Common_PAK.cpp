@@ -44,6 +44,15 @@ tuint32 Packets::CG_MOVE_PAK::Execute( Player* pPlayer )
  return PACKET_EXE_ERROR;
  }
 //This code create by CodeEngine Author:Wendy ,don't modify
+#include "CG_MARCH_MOVE_PAK.h"
+tuint32 Packets::CG_MARCH_MOVE_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return CG_MARCH_MOVE_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
 #include "CG_SKILL_USE_PAK.h"
 tuint32 Packets::CG_SKILL_USE_PAK::Execute( Player* pPlayer )
  {
@@ -130,6 +139,24 @@ tuint32 Packets::CG_BUILDING_LEVELUP_PAK::Execute( Player* pPlayer )
  {
  __ENTER_FUNCTION
  return CG_BUILDING_LEVELUP_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
+#include "CG_TROOP_TRAIN_PAK.h"
+tuint32 Packets::CG_TROOP_TRAIN_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return CG_TROOP_TRAIN_PAKHandler::Execute(this,pPlayer);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR;
+ }
+//This code create by CodeEngine Author:Wendy ,don't modify
+#include "CG_BATTLEPREPARE_PAK.h"
+tuint32 Packets::CG_BATTLEPREPARE_PAK::Execute( Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ return CG_BATTLEPREPARE_PAKHandler::Execute(this,pPlayer);
  __LEAVE_FUNCTION
  return PACKET_EXE_ERROR;
  }

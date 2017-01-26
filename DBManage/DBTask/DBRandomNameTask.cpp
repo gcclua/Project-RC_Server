@@ -31,7 +31,7 @@ bool DBRandomNameTask::Load(ODBCInterface &rODBCInterface, LibMemInterface &rLib
 	if(false==odbcObject.Load())
 	{ 	
 		SendMessage2Srv(GetRetServiceID(), MsgPtr);
-		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS); //数据没有加载成功交给上层逻辑处理，DBService将该加载任务认为处理完毕
+		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL); //数据没有加载成功交给上层逻辑处理，DBService将该加载任务认为处理完毕
 		return false;
 	}
 
@@ -41,14 +41,14 @@ bool DBRandomNameTask::Load(ODBCInterface &rODBCInterface, LibMemInterface &rLib
 	if (resultCount < 0)
 	{
 		SendMessage2Srv(GetRetServiceID(), MsgPtr);	
-		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
+		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);
 		return false;
 	}
 	else if(resultCount == 0)	
 	{
 		MsgPtr->m_Result = DBMsgResult::RESULT_SUCCESS;
 		SendMessage2Srv(GetRetServiceID(), MsgPtr);	
-		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
+		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);
 		return true;
 	} 
 

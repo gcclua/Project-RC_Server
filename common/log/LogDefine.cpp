@@ -25,6 +25,9 @@ LOGDEF_IMPL(Player, LogFormatType::NORMAL);
 LOGDEF_IMPL(CopyScene, LogFormatType::NORMAL);
 LOGDEF_IMPL(Efficiency, LogFormatType::NORMAL);
 LOGDEF_IMPL(Guid,LogFormatType::NORMAL);
+LOGDEF_IMPL(HeroData,LogFormatType::NORMAL);
+LOGDEF_IMPL(CreateChar,LogFormatType::NORMAL);
+LOGDEF_IMPL(DBTaskEffeciency,LogFormatType::NORMAL);
 
 //统计日志
 LOGDEF_IMPL(Audit_Item, LogFormatType::AUDIT);
@@ -64,6 +67,9 @@ void InitLogDefineModule( tint32 nWorldID )
 	LOGDEF_INIT(CopyScene, nWorldID);
 	LOGDEF_INIT(Efficiency, nWorldID);
 	LOGDEF_INIT(Guid,nWorldID);
+	LOGDEF_INIT(HeroData,nWorldID);
+	LOGDEF_INIT(CreateChar,nWorldID);
+	LOGDEF_INIT(DBTaskEffeciency,nWorldID);
 
 	//统计日志
 	LOGDEF_INIT(Audit_Item, nWorldID);

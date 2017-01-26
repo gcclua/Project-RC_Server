@@ -65,6 +65,19 @@ tuint32 Packets::CG_MOVE_PAKHandler::Execute( Packets::CG_MOVE_PAK* pPacket, Pla
  }
 //This code create by CodeEngine
 
+#include "Packet/Packet/CG_MARCH_MOVE_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::CG_MARCH_MOVE_PAKHandler::Execute( Packets::CG_MARCH_MOVE_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
 #include "Packet/Packet/CG_SKILL_USE_PAK.h"
  #include "Player/Player.h"
 tuint32 Packets::CG_SKILL_USE_PAKHandler::Execute( Packets::CG_SKILL_USE_PAK* pPacket, Player* pPlayer )
@@ -185,6 +198,32 @@ tuint32 Packets::CG_OBJPOSLIST_PAKHandler::Execute( Packets::CG_OBJPOSLIST_PAK* 
 #include "Packet/Packet/CG_BUILDING_LEVELUP_PAK.h"
  #include "Player/Player.h"
 tuint32 Packets::CG_BUILDING_LEVELUP_PAKHandler::Execute( Packets::CG_BUILDING_LEVELUP_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
+#include "Packet/Packet/CG_TROOP_TRAIN_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::CG_TROOP_TRAIN_PAKHandler::Execute( Packets::CG_TROOP_TRAIN_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
+#include "Packet/Packet/CG_BATTLEPREPARE_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::CG_BATTLEPREPARE_PAKHandler::Execute( Packets::CG_BATTLEPREPARE_PAK* pPacket, Player* pPlayer )
  {
  __ENTER_FUNCTION
  AssertEx(pPacket, "");

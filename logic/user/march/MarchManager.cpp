@@ -46,8 +46,49 @@ void  MarchManager::Tick(const TimeInfo& rTimeInfo)
 	__LEAVE_FUNCTION
 }
 
+bool  MarchManager::CheckTrainTroop(int64 nBuildId,int nType,int nQueueIndex)
+{
+	__ENTER_FUNCTION
+		BuildMarchMap::const_iterator it = m_mapBuildMarch.find(nBuildId);
+		if (it == m_mapBuildMarch.end())
+		{
+			return false;
+		}
+		int64 nMarchId = it->second;
+		MarchPtrMap::iterator itmarch = m_mapMarch.find(nMarchId);
+		if (itmarch == m_mapMarch.end())
+		{
+			return false;
+		}
 
-bool   MarchManager::AddTroop(int64 nMarchId,int nType,int nHp)
+		MarchPtr Ptr= itmarch->second;
+		bool ret = Ptr->CheckAddTroop(nQueueIndex,nType);
+		if (ret)
+		{
+			
+		}
+		return ret;
+	__LEAVE_FUNCTION
+		return false;
+}
+
+bool  MarchManager::AddTroopByBuildId(int64 nBuildId,int nType,int nHp,int nQueueIndex)
+{
+	__ENTER_FUNCTION
+		BuildMarchMap::const_iterator it = m_mapBuildMarch.find(nBuildId);
+		if (it == m_mapBuildMarch.end())
+		{
+			return false;
+		}
+		int64 nMarchId = it->second;
+		return AddTroop(nMarchId,nType,nHp,nQueueIndex);
+		 
+		__LEAVE_FUNCTION
+			return false;
+}
+
+
+bool   MarchManager::AddTroop(int64 nMarchId,int nType,int nHp,int nQueueIndex)
 {
 	__ENTER_FUNCTION
 		MarchPtrMap::iterator it = m_mapMarch.find(nMarchId);
@@ -57,7 +98,14 @@ bool   MarchManager::AddTroop(int64 nMarchId,int nType,int nHp)
 		}
 
 		MarchPtr Ptr= it->second;
-		Ptr->AddTroop(nMarchId,nType,nHp);
+		bool ret = Ptr->AddTroop(nQueueIndex,nType,nHp);
+		if (ret)
+		{
+			DBReqSaveMarchDataMsgPtr MsgPtr = POOLDEF_NEW(DBReqSaveMarchDataMsg);
+			Ptr->SerializeToDB(MsgPtr->m_March);
+			SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
+		}
+		return ret;
 	__LEAVE_FUNCTION
 		return false;
 }
@@ -81,6 +129,7 @@ void   MarchManager::FileSingMarch(MarchPtr Ptr, GC_MarchData * pMarchData)
 	pGCHeroData->set_mp(0);
 	pGCHeroData->set_arrangeindex(rHero.GetArrangeIndex());
 	pGCHeroData->set_marchid(Ptr->GetMarchId());
+	pGCHeroData->set_guid(rHero.GetUID());
 	
 
 	CooldownList_T CoolDownT = rHero.GetCooldownList();
@@ -106,6 +155,7 @@ void   MarchManager::FileSingMarch(MarchPtr Ptr, GC_MarchData * pMarchData)
 			pTroopData->set_mp(0);
 			pTroopData->set_arrangeindex(rTroop.GetArrangeIndex());
 			pTroopData->set_marchid(rTroop.GetMarchId());
+			pTroopData->set_queueindex(rTroop.GetQueueIndex());
 
 			CooldownList_T CoolDownT = rTroop.GetCooldownList();
 			for (int j=0;j<CoolDownT.GetListSize();j++)
@@ -196,6 +246,22 @@ bool  MarchManager::InitMarchInfo(int64 nBuildId,const TroopList_T& rTroopList,c
 		return false;
 }
 
+int64  MarchManager::GetHeroId(int64 nMarchId)
+{
+	__ENTER_FUNCTION
+		MarchPtrMap::iterator it = m_mapMarch.find(nMarchId);
+		if (it == m_mapMarch.end())
+		{
+			return 0;
+		}
+
+		MarchPtr Ptr = it->second;
+		return Ptr->GetHeroId();
+
+	__LEAVE_FUNCTION
+		return 0;
+}
+
 bool  MarchManager::UpdateMarchData(const March &rMarch)
 {
 	__ENTER_FUNCTION
@@ -239,9 +305,9 @@ bool MarchManager::UpdateMarchState(int64 nMarchId,int nState)
 		Ptr->SerializeToDB(MsgPtr->m_March);
 		SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
 
-		Packets::GC_UPDATE_MARCH_PAK pak;
-		FileSingMarch(Ptr,pak.m_PacketData.mutable_data());
-		m_rUser.SendPacket(pak);
+		//Packets::GC_UPDATE_MARCH_PAK pak;
+		//FileSingMarch(Ptr,pak.m_PacketData.mutable_data());
+		//m_rUser.SendPacket(pak);
 
 		return true;
 	__LEAVE_FUNCTION
@@ -280,10 +346,10 @@ bool  MarchManager::CheckSendMarchIntoMap(int64 nMarchId)
 		return false;
 	}
 	int64 nHeroId = Ptr->GetHeroId();
-	//if (nHeroId<=0)
-	//{
-		//return false;
-	//}
+	if (nHeroId<=0)
+	{
+		return false;
+	}
 	return true;
 	__LEAVE_FUNCTION
 		return false;
@@ -301,7 +367,9 @@ void  MarchManager::AssignHeroToMarch(int64 nMarchId,const Hero& rHero)
 
 		MarchPtr  ptr = it->second;
 		ptr->SetHero(rHero);
-
+		DBReqSaveMarchDataMsgPtr MsgPtr = POOLDEF_NEW(DBReqSaveMarchDataMsg);
+		ptr->SerializeToDB(MsgPtr->m_March);
+		SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
 	__LEAVE_FUNCTION
 }
 
@@ -315,8 +383,12 @@ bool  MarchManager::CheckAssignHero(int64 nMarchId)
 		}
 
 		MarchPtr  ptr = it->second;
-		if (ptr->GetHeroId()>0)
+		if (ptr->GetStatus() != MARCHSTATUS_IDLE)
+		{
 			return false;
+		}
+		//if (ptr->GetHeroId()>0)
+			//return false;
 		return true;
 	__LEAVE_FUNCTION
 		return false;

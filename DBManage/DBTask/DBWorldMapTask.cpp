@@ -31,7 +31,7 @@ bool DBWorldMapTask::Load(ODBCInterface& rODBCInterface,LibMemInterface &rLibMem
 	if (false == TileObject.Load())
 	{
 		SendMessage2Srv(GetRetServiceID(),MsgPtr);
-		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
+		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);
 		return false;
 	}
 
@@ -41,7 +41,7 @@ bool DBWorldMapTask::Load(ODBCInterface& rODBCInterface,LibMemInterface &rLibMem
 	if (resultCount <= 0)
 	{
 		SendMessage2Srv(GetRetServiceID(),MsgPtr);
-		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
+		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);
 		return false;
 	}
 	

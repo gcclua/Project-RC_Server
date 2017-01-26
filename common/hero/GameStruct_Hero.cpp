@@ -21,6 +21,9 @@ Hero& Hero::operator=(Hero const& rhs)
 	m_CoolDownList = rhs.m_CoolDownList;
 	m_nMarchId  = rhs.m_nMarchId;
 	m_nID       = rhs.m_nID;
+	m_nArrangeIndex = rhs.m_nArrangeIndex;
+	m_nHp       = rhs.m_nHp;
+	
 	return *this;
 }
 
@@ -36,6 +39,8 @@ void Hero::CleanUp()
 	m_CoolDownList.CleanUp();
 	m_nMarchId = 0;
 	m_nID      = 0;
+	m_nArrangeIndex = invalid_id;
+	m_nHp      = 0;
 }
 
 void Hero::SerializeToDB(DBHero& rDest) const
@@ -49,6 +54,8 @@ void Hero::SerializeToDB(DBHero& rDest) const
 		rDest.m_nStatus  = m_nStatus;
 		rDest.m_nMarchId = m_nMarchId;
 		rDest.m_nHeroId  = m_nID;
+		rDest.m_nArrangeIndex = m_nArrangeIndex;
+		rDest.m_nHp      = m_nHp;
 	__LEAVE_FUNCTION
 }
 void Hero::SerializeFromDB(const DBHero& rSource)
@@ -62,6 +69,8 @@ void Hero::SerializeFromDB(const DBHero& rSource)
 		m_nStatus  = rSource.m_nStatus;
 		m_nMarchId = rSource.m_nMarchId;
 		m_nID      = rSource.m_nHeroId;
+		m_nArrangeIndex = rSource.m_nArrangeIndex;
+		m_nHp      = rSource.m_nHp;
 	__LEAVE_FUNCTION
 }
 

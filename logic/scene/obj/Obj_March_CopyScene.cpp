@@ -54,6 +54,14 @@ void Obj_March::HandleMessage(const MarchOpenCopySceneMsg &rMsg)
 
 }
 
+void Obj_March::HandleMessage(const ReqMarchSetPosMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		SetScenePos(ScenePos(rMsg.m_fPosX,rMsg.m_fPosZ));
+			
+	__LEAVE_FUNCTION
+}
+
 void Obj_March::HandleMessage(const MarchLeaveFightMsg &rMsg)
 {
 	__ENTER_FUNCTION

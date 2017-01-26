@@ -103,6 +103,9 @@ LOGDEF_DECL(Scene);
 LOGDEF_DECL(Player);
 LOGDEF_DECL(CopyScene);
 LOGDEF_DECL(Efficiency);
+LOGDEF_DECL(HeroData);
+LOGDEF_DECL(CreateChar);
+LOGDEF_DECL(DBTaskEffeciency);
 
 LOGDEF_DECL(Guid);
 //统计日志

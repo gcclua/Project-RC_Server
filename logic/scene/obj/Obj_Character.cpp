@@ -47,6 +47,8 @@ Obj_Character::Obj_Character( void )
 	m_EscapeCountDown = 0;
 	m_bIsBreedingClick = false;
 	m_nPlayerId = invalid_guid64;
+
+	m_nTroopCount = 0;
 }
 
 Obj_Character::~Obj_Character( void )

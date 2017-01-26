@@ -25,7 +25,10 @@ class GC_LOGIN_RET;
 class CG_SKILL_USE;
 class CG_BATTLEINFOR;
 class CG_OBJPOSLIST;
+class CG_BATTLEPREPARE;
 class CG_Building_LevelUp;
+class CG_Troop_Train;
+class CG_MARCH_MOVE;
 
 
 class MarchRetNearListMsg;
@@ -51,7 +54,12 @@ class ObjHurtMsg;
 class KickPlayerByGuidMsg;
 class MarchRetFightMsg;
 class UpdateMarchMsg;
+class RetArrangChangeMsg;
+class RetBattleEndMsg;
+class RetBattleStartMsg;
 
+
+class TrainTroopOverMsg;
 
 
 class User
@@ -140,6 +148,9 @@ public:
 	tuint32 HandlePacket(::CG_BATTLEINFOR &rPacket);
 	tuint32 HandlePacket(::CG_OBJPOSLIST &rPacket);
 	tuint32 HandlePacket(::CG_Building_LevelUp &rPacket);
+	tuint32 HandlePacket(::CG_Troop_Train &rPacket);
+	tuint32 HandlePacket(::CG_BATTLEPREPARE &rPacket);
+	tuint32 HandlePacket(::CG_MARCH_MOVE &rPacket);
 	void    FillGCLogin(::GC_LOGIN_RET &rPacket);
 	bool	IsNoneInvalidText(CG_CHAT &rPacket);
 	void	HandleChatInfo(const TextChat& textchat, tint32 nVoiceIndex = invalid_id);
@@ -151,6 +162,7 @@ public:
 	void HandleMessage(const RetMarchMoveMsg &rMsg);
 	void HandleMessage(const RetMarchTeleMoveMsg &rMsg);
 	void HandleMessage(const RetUserSkillMsg &rMsg);
+	void HandleMessage(const RetArrangChangeMsg &rMsg);
 	void HandleMessage(const Update_Animation_State &rMsg);
 	void HandleMessage(const ObjTrackTargetMsg &rMsg);
 	void HandleMessage(const ObjAttackTargetMsg &rMsg);
@@ -169,6 +181,11 @@ public:
 	void HandleMessage(const KickPlayerByGuidMsg &rMsg);
 	void HandleMessage(const MarchRetFightMsg &rMsg);
 	void HandleMessage(const UpdateMarchMsg &rMsg);
+	void HandleMessage(const RetBattleEndMsg& rMsg);
+	void HandleMessage(const RetBattleStartMsg& rMsg);
+
+	void HandleMessage(const TrainTroopOverMsg& rMsg);
+
 	// ½ûÑÔ½â½ûÊ±¼ästart
 	//////////////////////////////////////////////////////////////////////////
 public:

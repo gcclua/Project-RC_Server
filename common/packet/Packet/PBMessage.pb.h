@@ -44,6 +44,8 @@ class GC_NOTICE;
 class GC_UPDATE_SCENE_INSTACTIVATION;
 class CG_MOVE;
 class GC_MOVE;
+class CG_MARCH_MOVE;
+class GC_MARCH_MOVE;
 class GC_STOP;
 class GC_TELEMOVE;
 class CG_SKILL_USE;
@@ -74,6 +76,7 @@ class GC_HeroData;
 class GC_TroopData;
 class GC_MarchData;
 class GC_TargetMarchData;
+class GC_TrainData;
 class GC_CityData;
 class GC_HeroList;
 class GC_MarchList;
@@ -89,6 +92,14 @@ class GC_OBJGETHURT;
 class CG_Building_LevelUp;
 class GC_Building_LevelUp;
 class GC_Update_March;
+class CG_Troop_Train;
+class GC_Troop_Train;
+class GC_TroopTrain_Over;
+class CG_OBJARRANGEINDEX;
+class CG_BATTLEPREPARE;
+class GC_BATTLEPREPARE;
+class GC_BATTLEEND;
+class GC_BattleStart;
 
 enum CG_LOGIN_VALIDATETYPE {
   CG_LOGIN_VALIDATETYPE_TEST = 0,
@@ -993,12 +1004,12 @@ class CG_REQ_NEAR_LIST : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // required int32 marchId = 1;
-  inline bool has_marchid() const;
-  inline void clear_marchid();
-  static const int kMarchIdFieldNumber = 1;
-  inline ::google::protobuf::int32 marchid() const;
-  inline void set_marchid(::google::protobuf::int32 value);
+  // required int32 blockid = 1;
+  inline bool has_blockid() const;
+  inline void clear_blockid();
+  static const int kBlockidFieldNumber = 1;
+  inline ::google::protobuf::int32 blockid() const;
+  inline void set_blockid(::google::protobuf::int32 value);
 
   // required int32 sceneId = 2;
   inline bool has_sceneid() const;
@@ -1009,14 +1020,14 @@ class CG_REQ_NEAR_LIST : public ::google::protobuf::Message {
 
   // @@protoc_insertion_point(class_scope:CG_REQ_NEAR_LIST)
  private:
-  inline void set_has_marchid();
-  inline void clear_has_marchid();
+  inline void set_has_blockid();
+  inline void clear_has_blockid();
   inline void set_has_sceneid();
   inline void clear_has_sceneid();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::int32 marchid_;
+  ::google::protobuf::int32 blockid_;
   ::google::protobuf::int32 sceneid_;
 
   mutable int _cached_size_;
@@ -1085,16 +1096,16 @@ class GC_NEAR_MARCHLIST : public ::google::protobuf::Message {
 
   // accessors -------------------------------------------------------
 
-  // repeated uint64 Guid = 1;
+  // repeated int64 Guid = 1;
   inline int guid_size() const;
   inline void clear_guid();
   static const int kGuidFieldNumber = 1;
-  inline ::google::protobuf::uint64 guid(int index) const;
-  inline void set_guid(int index, ::google::protobuf::uint64 value);
-  inline void add_guid(::google::protobuf::uint64 value);
-  inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+  inline ::google::protobuf::int64 guid(int index) const;
+  inline void set_guid(int index, ::google::protobuf::int64 value);
+  inline void add_guid(::google::protobuf::int64 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
       guid() const;
-  inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
       mutable_guid();
 
   // repeated string Name = 2;
@@ -1151,6 +1162,30 @@ class GC_NEAR_MARCHLIST : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 sceneid() const;
   inline void set_sceneid(::google::protobuf::int32 value);
 
+  // repeated int32 posX = 7;
+  inline int posx_size() const;
+  inline void clear_posx();
+  static const int kPosXFieldNumber = 7;
+  inline ::google::protobuf::int32 posx(int index) const;
+  inline void set_posx(int index, ::google::protobuf::int32 value);
+  inline void add_posx(::google::protobuf::int32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      posx() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_posx();
+
+  // repeated int32 posZ = 8;
+  inline int posz_size() const;
+  inline void clear_posz();
+  static const int kPosZFieldNumber = 8;
+  inline ::google::protobuf::int32 posz(int index) const;
+  inline void set_posz(int index, ::google::protobuf::int32 value);
+  inline void add_posz(::google::protobuf::int32 value);
+  inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+      posz() const;
+  inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+      mutable_posz();
+
   // @@protoc_insertion_point(class_scope:GC_NEAR_MARCHLIST)
  private:
   inline void set_has_marchid();
@@ -1160,15 +1195,17 @@ class GC_NEAR_MARCHLIST : public ::google::protobuf::Message {
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
-  ::google::protobuf::RepeatedField< ::google::protobuf::uint64 > guid_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int64 > guid_;
   ::google::protobuf::RepeatedPtrField< ::std::string> name_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > level_;
   ::google::protobuf::RepeatedField< ::google::protobuf::int32 > combatnum_;
   ::google::protobuf::int32 marchid_;
   ::google::protobuf::int32 sceneid_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > posx_;
+  ::google::protobuf::RepeatedField< ::google::protobuf::int32 > posz_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(6 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
 
   friend void  protobuf_AddDesc_PBMessage_2eproto();
   friend void protobuf_AssignDesc_PBMessage_2eproto();
@@ -2002,6 +2039,190 @@ class GC_MOVE : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static GC_MOVE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CG_MARCH_MOVE : public ::google::protobuf::Message {
+ public:
+  CG_MARCH_MOVE();
+  virtual ~CG_MARCH_MOVE();
+
+  CG_MARCH_MOVE(const CG_MARCH_MOVE& from);
+
+  inline CG_MARCH_MOVE& operator=(const CG_MARCH_MOVE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CG_MARCH_MOVE& default_instance();
+
+  void Swap(CG_MARCH_MOVE* other);
+
+  // implements Message ----------------------------------------------
+
+  CG_MARCH_MOVE* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CG_MARCH_MOVE& from);
+  void MergeFrom(const CG_MARCH_MOVE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int64 marchid = 1;
+  inline bool has_marchid() const;
+  inline void clear_marchid();
+  static const int kMarchidFieldNumber = 1;
+  inline ::google::protobuf::int64 marchid() const;
+  inline void set_marchid(::google::protobuf::int64 value);
+
+  // required int32 posx = 2;
+  inline bool has_posx() const;
+  inline void clear_posx();
+  static const int kPosxFieldNumber = 2;
+  inline ::google::protobuf::int32 posx() const;
+  inline void set_posx(::google::protobuf::int32 value);
+
+  // required int32 posz = 3;
+  inline bool has_posz() const;
+  inline void clear_posz();
+  static const int kPoszFieldNumber = 3;
+  inline ::google::protobuf::int32 posz() const;
+  inline void set_posz(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:CG_MARCH_MOVE)
+ private:
+  inline void set_has_marchid();
+  inline void clear_has_marchid();
+  inline void set_has_posx();
+  inline void clear_has_posx();
+  inline void set_has_posz();
+  inline void clear_has_posz();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int64 marchid_;
+  ::google::protobuf::int32 posx_;
+  ::google::protobuf::int32 posz_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static CG_MARCH_MOVE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GC_MARCH_MOVE : public ::google::protobuf::Message {
+ public:
+  GC_MARCH_MOVE();
+  virtual ~GC_MARCH_MOVE();
+
+  GC_MARCH_MOVE(const GC_MARCH_MOVE& from);
+
+  inline GC_MARCH_MOVE& operator=(const GC_MARCH_MOVE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GC_MARCH_MOVE& default_instance();
+
+  void Swap(GC_MARCH_MOVE* other);
+
+  // implements Message ----------------------------------------------
+
+  GC_MARCH_MOVE* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GC_MARCH_MOVE& from);
+  void MergeFrom(const GC_MARCH_MOVE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 ret = 1;
+  inline bool has_ret() const;
+  inline void clear_ret();
+  static const int kRetFieldNumber = 1;
+  inline ::google::protobuf::int32 ret() const;
+  inline void set_ret(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:GC_MARCH_MOVE)
+ private:
+  inline void set_has_ret();
+  inline void clear_has_ret();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 ret_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GC_MARCH_MOVE* default_instance_;
 };
 // -------------------------------------------------------------------
 
@@ -3554,6 +3775,13 @@ class GC_FIGHT : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 sceneid() const;
   inline void set_sceneid(::google::protobuf::int32 value);
 
+  // optional int32 sceneclass = 4;
+  inline bool has_sceneclass() const;
+  inline void clear_sceneclass();
+  static const int kSceneclassFieldNumber = 4;
+  inline ::google::protobuf::int32 sceneclass() const;
+  inline void set_sceneclass(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:GC_FIGHT)
  private:
   inline void set_has_ret();
@@ -3562,15 +3790,18 @@ class GC_FIGHT : public ::google::protobuf::Message {
   inline void clear_has_marchid();
   inline void set_has_sceneid();
   inline void clear_has_sceneid();
+  inline void set_has_sceneclass();
+  inline void clear_has_sceneclass();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 marchid_;
   ::google::protobuf::int32 ret_;
   ::google::protobuf::int32 sceneid_;
+  ::google::protobuf::int32 sceneclass_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(3 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_PBMessage_2eproto();
   friend void protobuf_AssignDesc_PBMessage_2eproto();
@@ -4201,20 +4432,40 @@ class GC_SEND_MARCH : public ::google::protobuf::Message {
   inline ::google::protobuf::int32 ret() const;
   inline void set_ret(::google::protobuf::int32 value);
 
+  // required int32 sceneId = 3;
+  inline bool has_sceneid() const;
+  inline void clear_sceneid();
+  static const int kSceneIdFieldNumber = 3;
+  inline ::google::protobuf::int32 sceneid() const;
+  inline void set_sceneid(::google::protobuf::int32 value);
+
+  // required int32 sceneClass = 4;
+  inline bool has_sceneclass() const;
+  inline void clear_sceneclass();
+  static const int kSceneClassFieldNumber = 4;
+  inline ::google::protobuf::int32 sceneclass() const;
+  inline void set_sceneclass(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:GC_SEND_MARCH)
  private:
   inline void set_has_marchid();
   inline void clear_has_marchid();
   inline void set_has_ret();
   inline void clear_has_ret();
+  inline void set_has_sceneid();
+  inline void clear_has_sceneid();
+  inline void set_has_sceneclass();
+  inline void clear_has_sceneclass();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::int64 marchid_;
   ::google::protobuf::int32 ret_;
+  ::google::protobuf::int32 sceneid_;
+  ::google::protobuf::int32 sceneclass_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_PBMessage_2eproto();
   friend void protobuf_AssignDesc_PBMessage_2eproto();
@@ -5192,6 +5443,13 @@ class GC_TroopData : public ::google::protobuf::Message {
   inline ::google::protobuf::int64 marchid() const;
   inline void set_marchid(::google::protobuf::int64 value);
 
+  // required int32 queueindex = 9;
+  inline bool has_queueindex() const;
+  inline void clear_queueindex();
+  static const int kQueueindexFieldNumber = 9;
+  inline ::google::protobuf::int32 queueindex() const;
+  inline void set_queueindex(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:GC_TroopData)
  private:
   inline void set_has_type();
@@ -5206,6 +5464,8 @@ class GC_TroopData : public ::google::protobuf::Message {
   inline void clear_has_arrangeindex();
   inline void set_has_marchid();
   inline void clear_has_marchid();
+  inline void set_has_queueindex();
+  inline void clear_has_queueindex();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -5217,9 +5477,10 @@ class GC_TroopData : public ::google::protobuf::Message {
   ::google::protobuf::RepeatedPtrField< ::GC_CoolDownInfo > cooldown_;
   ::google::protobuf::int64 marchid_;
   ::google::protobuf::int32 arrangeindex_;
+  ::google::protobuf::int32 queueindex_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(9 + 31) / 32];
 
   friend void  protobuf_AddDesc_PBMessage_2eproto();
   friend void protobuf_AssignDesc_PBMessage_2eproto();
@@ -5499,6 +5760,148 @@ class GC_TargetMarchData : public ::google::protobuf::Message {
 };
 // -------------------------------------------------------------------
 
+class GC_TrainData : public ::google::protobuf::Message {
+ public:
+  GC_TrainData();
+  virtual ~GC_TrainData();
+
+  GC_TrainData(const GC_TrainData& from);
+
+  inline GC_TrainData& operator=(const GC_TrainData& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GC_TrainData& default_instance();
+
+  void Swap(GC_TrainData* other);
+
+  // implements Message ----------------------------------------------
+
+  GC_TrainData* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GC_TrainData& from);
+  void MergeFrom(const GC_TrainData& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int64 queueid = 1;
+  inline bool has_queueid() const;
+  inline void clear_queueid();
+  static const int kQueueidFieldNumber = 1;
+  inline ::google::protobuf::int64 queueid() const;
+  inline void set_queueid(::google::protobuf::int64 value);
+
+  // required int64 buildid = 2;
+  inline bool has_buildid() const;
+  inline void clear_buildid();
+  static const int kBuildidFieldNumber = 2;
+  inline ::google::protobuf::int64 buildid() const;
+  inline void set_buildid(::google::protobuf::int64 value);
+
+  // required int32 trooptype = 3;
+  inline bool has_trooptype() const;
+  inline void clear_trooptype();
+  static const int kTrooptypeFieldNumber = 3;
+  inline ::google::protobuf::int32 trooptype() const;
+  inline void set_trooptype(::google::protobuf::int32 value);
+
+  // required int32 hp = 4;
+  inline bool has_hp() const;
+  inline void clear_hp();
+  static const int kHpFieldNumber = 4;
+  inline ::google::protobuf::int32 hp() const;
+  inline void set_hp(::google::protobuf::int32 value);
+
+  // required int32 begintime = 5;
+  inline bool has_begintime() const;
+  inline void clear_begintime();
+  static const int kBegintimeFieldNumber = 5;
+  inline ::google::protobuf::int32 begintime() const;
+  inline void set_begintime(::google::protobuf::int32 value);
+
+  // required int32 completime = 6;
+  inline bool has_completime() const;
+  inline void clear_completime();
+  static const int kCompletimeFieldNumber = 6;
+  inline ::google::protobuf::int32 completime() const;
+  inline void set_completime(::google::protobuf::int32 value);
+
+  // required int32 queueindex = 7;
+  inline bool has_queueindex() const;
+  inline void clear_queueindex();
+  static const int kQueueindexFieldNumber = 7;
+  inline ::google::protobuf::int32 queueindex() const;
+  inline void set_queueindex(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:GC_TrainData)
+ private:
+  inline void set_has_queueid();
+  inline void clear_has_queueid();
+  inline void set_has_buildid();
+  inline void clear_has_buildid();
+  inline void set_has_trooptype();
+  inline void clear_has_trooptype();
+  inline void set_has_hp();
+  inline void clear_has_hp();
+  inline void set_has_begintime();
+  inline void clear_has_begintime();
+  inline void set_has_completime();
+  inline void clear_has_completime();
+  inline void set_has_queueindex();
+  inline void clear_has_queueindex();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int64 queueid_;
+  ::google::protobuf::int64 buildid_;
+  ::google::protobuf::int32 trooptype_;
+  ::google::protobuf::int32 hp_;
+  ::google::protobuf::int32 begintime_;
+  ::google::protobuf::int32 completime_;
+  ::google::protobuf::int32 queueindex_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(7 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GC_TrainData* default_instance_;
+};
+// -------------------------------------------------------------------
+
 class GC_CityData : public ::google::protobuf::Message {
  public:
   GC_CityData();
@@ -5607,17 +6010,31 @@ class GC_CityData : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::GC_BuildingData >*
       mutable_buildlist();
 
-  // repeated .GC_TroopData trooplist = 8;
-  inline int trooplist_size() const;
-  inline void clear_trooplist();
-  static const int kTrooplistFieldNumber = 8;
-  inline const ::GC_TroopData& trooplist(int index) const;
-  inline ::GC_TroopData* mutable_trooplist(int index);
-  inline ::GC_TroopData* add_trooplist();
-  inline const ::google::protobuf::RepeatedPtrField< ::GC_TroopData >&
-      trooplist() const;
-  inline ::google::protobuf::RepeatedPtrField< ::GC_TroopData >*
-      mutable_trooplist();
+  // repeated .GC_TrainData trainList = 8;
+  inline int trainlist_size() const;
+  inline void clear_trainlist();
+  static const int kTrainListFieldNumber = 8;
+  inline const ::GC_TrainData& trainlist(int index) const;
+  inline ::GC_TrainData* mutable_trainlist(int index);
+  inline ::GC_TrainData* add_trainlist();
+  inline const ::google::protobuf::RepeatedPtrField< ::GC_TrainData >&
+      trainlist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::GC_TrainData >*
+      mutable_trainlist();
+
+  // required int32 posx = 9;
+  inline bool has_posx() const;
+  inline void clear_posx();
+  static const int kPosxFieldNumber = 9;
+  inline ::google::protobuf::int32 posx() const;
+  inline void set_posx(::google::protobuf::int32 value);
+
+  // required int32 posz = 10;
+  inline bool has_posz() const;
+  inline void clear_posz();
+  static const int kPoszFieldNumber = 10;
+  inline ::google::protobuf::int32 posz() const;
+  inline void set_posz(::google::protobuf::int32 value);
 
   // @@protoc_insertion_point(class_scope:GC_CityData)
  private:
@@ -5633,6 +6050,10 @@ class GC_CityData : public ::google::protobuf::Message {
   inline void clear_has_stone();
   inline void set_has_iron();
   inline void clear_has_iron();
+  inline void set_has_posx();
+  inline void clear_has_posx();
+  inline void set_has_posz();
+  inline void clear_has_posz();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
@@ -5643,10 +6064,12 @@ class GC_CityData : public ::google::protobuf::Message {
   ::google::protobuf::int64 stone_;
   ::google::protobuf::int64 iron_;
   ::google::protobuf::RepeatedPtrField< ::GC_BuildingData > buildlist_;
-  ::google::protobuf::RepeatedPtrField< ::GC_TroopData > trooplist_;
+  ::google::protobuf::RepeatedPtrField< ::GC_TrainData > trainlist_;
+  ::google::protobuf::int32 posx_;
+  ::google::protobuf::int32 posz_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(8 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(10 + 31) / 32];
 
   friend void  protobuf_AddDesc_PBMessage_2eproto();
   friend void protobuf_AssignDesc_PBMessage_2eproto();
@@ -6197,18 +6620,38 @@ class GC_BATTLEINFOR : public ::google::protobuf::Message {
   inline ::google::protobuf::RepeatedPtrField< ::GC_OBJINFOR >*
       mutable_objlist();
 
+  // optional int32 camp = 3;
+  inline bool has_camp() const;
+  inline void clear_camp();
+  static const int kCampFieldNumber = 3;
+  inline ::google::protobuf::int32 camp() const;
+  inline void set_camp(::google::protobuf::int32 value);
+
+  // optional int32 currentState = 4;
+  inline bool has_currentstate() const;
+  inline void clear_currentstate();
+  static const int kCurrentStateFieldNumber = 4;
+  inline ::google::protobuf::int32 currentstate() const;
+  inline void set_currentstate(::google::protobuf::int32 value);
+
   // @@protoc_insertion_point(class_scope:GC_BATTLEINFOR)
  private:
   inline void set_has_sceneid();
   inline void clear_has_sceneid();
+  inline void set_has_camp();
+  inline void clear_has_camp();
+  inline void set_has_currentstate();
+  inline void clear_has_currentstate();
 
   ::google::protobuf::UnknownFieldSet _unknown_fields_;
 
   ::google::protobuf::RepeatedPtrField< ::GC_OBJINFOR > objlist_;
   ::google::protobuf::int32 sceneid_;
+  ::google::protobuf::int32 camp_;
+  ::google::protobuf::int32 currentstate_;
 
   mutable int _cached_size_;
-  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
 
   friend void  protobuf_AddDesc_PBMessage_2eproto();
   friend void protobuf_AssignDesc_PBMessage_2eproto();
@@ -7129,6 +7572,777 @@ class GC_Update_March : public ::google::protobuf::Message {
 
   void InitAsDefaultInstance();
   static GC_Update_March* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CG_Troop_Train : public ::google::protobuf::Message {
+ public:
+  CG_Troop_Train();
+  virtual ~CG_Troop_Train();
+
+  CG_Troop_Train(const CG_Troop_Train& from);
+
+  inline CG_Troop_Train& operator=(const CG_Troop_Train& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CG_Troop_Train& default_instance();
+
+  void Swap(CG_Troop_Train* other);
+
+  // implements Message ----------------------------------------------
+
+  CG_Troop_Train* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CG_Troop_Train& from);
+  void MergeFrom(const CG_Troop_Train& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 queueindex = 1;
+  inline bool has_queueindex() const;
+  inline void clear_queueindex();
+  static const int kQueueindexFieldNumber = 1;
+  inline ::google::protobuf::int32 queueindex() const;
+  inline void set_queueindex(::google::protobuf::int32 value);
+
+  // optional int32 trooptype = 2;
+  inline bool has_trooptype() const;
+  inline void clear_trooptype();
+  static const int kTrooptypeFieldNumber = 2;
+  inline ::google::protobuf::int32 trooptype() const;
+  inline void set_trooptype(::google::protobuf::int32 value);
+
+  // required int32 count = 3;
+  inline bool has_count() const;
+  inline void clear_count();
+  static const int kCountFieldNumber = 3;
+  inline ::google::protobuf::int32 count() const;
+  inline void set_count(::google::protobuf::int32 value);
+
+  // required int64 buildid = 4;
+  inline bool has_buildid() const;
+  inline void clear_buildid();
+  static const int kBuildidFieldNumber = 4;
+  inline ::google::protobuf::int64 buildid() const;
+  inline void set_buildid(::google::protobuf::int64 value);
+
+  // @@protoc_insertion_point(class_scope:CG_Troop_Train)
+ private:
+  inline void set_has_queueindex();
+  inline void clear_has_queueindex();
+  inline void set_has_trooptype();
+  inline void clear_has_trooptype();
+  inline void set_has_count();
+  inline void clear_has_count();
+  inline void set_has_buildid();
+  inline void clear_has_buildid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 queueindex_;
+  ::google::protobuf::int32 trooptype_;
+  ::google::protobuf::int64 buildid_;
+  ::google::protobuf::int32 count_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(4 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static CG_Troop_Train* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GC_Troop_Train : public ::google::protobuf::Message {
+ public:
+  GC_Troop_Train();
+  virtual ~GC_Troop_Train();
+
+  GC_Troop_Train(const GC_Troop_Train& from);
+
+  inline GC_Troop_Train& operator=(const GC_Troop_Train& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GC_Troop_Train& default_instance();
+
+  void Swap(GC_Troop_Train* other);
+
+  // implements Message ----------------------------------------------
+
+  GC_Troop_Train* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GC_Troop_Train& from);
+  void MergeFrom(const GC_Troop_Train& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 ret = 1;
+  inline bool has_ret() const;
+  inline void clear_ret();
+  static const int kRetFieldNumber = 1;
+  inline ::google::protobuf::int32 ret() const;
+  inline void set_ret(::google::protobuf::int32 value);
+
+  // optional .GC_TrainData data = 2;
+  inline bool has_data() const;
+  inline void clear_data();
+  static const int kDataFieldNumber = 2;
+  inline const ::GC_TrainData& data() const;
+  inline ::GC_TrainData* mutable_data();
+  inline ::GC_TrainData* release_data();
+  inline void set_allocated_data(::GC_TrainData* data);
+
+  // @@protoc_insertion_point(class_scope:GC_Troop_Train)
+ private:
+  inline void set_has_ret();
+  inline void clear_has_ret();
+  inline void set_has_data();
+  inline void clear_has_data();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::GC_TrainData* data_;
+  ::google::protobuf::int32 ret_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GC_Troop_Train* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GC_TroopTrain_Over : public ::google::protobuf::Message {
+ public:
+  GC_TroopTrain_Over();
+  virtual ~GC_TroopTrain_Over();
+
+  GC_TroopTrain_Over(const GC_TroopTrain_Over& from);
+
+  inline GC_TroopTrain_Over& operator=(const GC_TroopTrain_Over& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GC_TroopTrain_Over& default_instance();
+
+  void Swap(GC_TroopTrain_Over* other);
+
+  // implements Message ----------------------------------------------
+
+  GC_TroopTrain_Over* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GC_TroopTrain_Over& from);
+  void MergeFrom(const GC_TroopTrain_Over& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 ret = 1;
+  inline bool has_ret() const;
+  inline void clear_ret();
+  static const int kRetFieldNumber = 1;
+  inline ::google::protobuf::int32 ret() const;
+  inline void set_ret(::google::protobuf::int32 value);
+
+  // required int64 buildid = 2;
+  inline bool has_buildid() const;
+  inline void clear_buildid();
+  static const int kBuildidFieldNumber = 2;
+  inline ::google::protobuf::int64 buildid() const;
+  inline void set_buildid(::google::protobuf::int64 value);
+
+  // required int32 queueid = 3;
+  inline bool has_queueid() const;
+  inline void clear_queueid();
+  static const int kQueueidFieldNumber = 3;
+  inline ::google::protobuf::int32 queueid() const;
+  inline void set_queueid(::google::protobuf::int32 value);
+
+  // required int32 trooptype = 4;
+  inline bool has_trooptype() const;
+  inline void clear_trooptype();
+  static const int kTrooptypeFieldNumber = 4;
+  inline ::google::protobuf::int32 trooptype() const;
+  inline void set_trooptype(::google::protobuf::int32 value);
+
+  // required int32 hp = 5;
+  inline bool has_hp() const;
+  inline void clear_hp();
+  static const int kHpFieldNumber = 5;
+  inline ::google::protobuf::int32 hp() const;
+  inline void set_hp(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:GC_TroopTrain_Over)
+ private:
+  inline void set_has_ret();
+  inline void clear_has_ret();
+  inline void set_has_buildid();
+  inline void clear_has_buildid();
+  inline void set_has_queueid();
+  inline void clear_has_queueid();
+  inline void set_has_trooptype();
+  inline void clear_has_trooptype();
+  inline void set_has_hp();
+  inline void clear_has_hp();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int64 buildid_;
+  ::google::protobuf::int32 ret_;
+  ::google::protobuf::int32 queueid_;
+  ::google::protobuf::int32 trooptype_;
+  ::google::protobuf::int32 hp_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(5 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GC_TroopTrain_Over* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CG_OBJARRANGEINDEX : public ::google::protobuf::Message {
+ public:
+  CG_OBJARRANGEINDEX();
+  virtual ~CG_OBJARRANGEINDEX();
+
+  CG_OBJARRANGEINDEX(const CG_OBJARRANGEINDEX& from);
+
+  inline CG_OBJARRANGEINDEX& operator=(const CG_OBJARRANGEINDEX& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CG_OBJARRANGEINDEX& default_instance();
+
+  void Swap(CG_OBJARRANGEINDEX* other);
+
+  // implements Message ----------------------------------------------
+
+  CG_OBJARRANGEINDEX* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CG_OBJARRANGEINDEX& from);
+  void MergeFrom(const CG_OBJARRANGEINDEX& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 objId = 1;
+  inline bool has_objid() const;
+  inline void clear_objid();
+  static const int kObjIdFieldNumber = 1;
+  inline ::google::protobuf::int32 objid() const;
+  inline void set_objid(::google::protobuf::int32 value);
+
+  // required int32 arrangeindex = 2;
+  inline bool has_arrangeindex() const;
+  inline void clear_arrangeindex();
+  static const int kArrangeindexFieldNumber = 2;
+  inline ::google::protobuf::int32 arrangeindex() const;
+  inline void set_arrangeindex(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:CG_OBJARRANGEINDEX)
+ private:
+  inline void set_has_objid();
+  inline void clear_has_objid();
+  inline void set_has_arrangeindex();
+  inline void clear_has_arrangeindex();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 objid_;
+  ::google::protobuf::int32 arrangeindex_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static CG_OBJARRANGEINDEX* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class CG_BATTLEPREPARE : public ::google::protobuf::Message {
+ public:
+  CG_BATTLEPREPARE();
+  virtual ~CG_BATTLEPREPARE();
+
+  CG_BATTLEPREPARE(const CG_BATTLEPREPARE& from);
+
+  inline CG_BATTLEPREPARE& operator=(const CG_BATTLEPREPARE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const CG_BATTLEPREPARE& default_instance();
+
+  void Swap(CG_BATTLEPREPARE* other);
+
+  // implements Message ----------------------------------------------
+
+  CG_BATTLEPREPARE* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const CG_BATTLEPREPARE& from);
+  void MergeFrom(const CG_BATTLEPREPARE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 sceneId = 1;
+  inline bool has_sceneid() const;
+  inline void clear_sceneid();
+  static const int kSceneIdFieldNumber = 1;
+  inline ::google::protobuf::int32 sceneid() const;
+  inline void set_sceneid(::google::protobuf::int32 value);
+
+  // repeated .CG_OBJARRANGEINDEX objList = 2;
+  inline int objlist_size() const;
+  inline void clear_objlist();
+  static const int kObjListFieldNumber = 2;
+  inline const ::CG_OBJARRANGEINDEX& objlist(int index) const;
+  inline ::CG_OBJARRANGEINDEX* mutable_objlist(int index);
+  inline ::CG_OBJARRANGEINDEX* add_objlist();
+  inline const ::google::protobuf::RepeatedPtrField< ::CG_OBJARRANGEINDEX >&
+      objlist() const;
+  inline ::google::protobuf::RepeatedPtrField< ::CG_OBJARRANGEINDEX >*
+      mutable_objlist();
+
+  // @@protoc_insertion_point(class_scope:CG_BATTLEPREPARE)
+ private:
+  inline void set_has_sceneid();
+  inline void clear_has_sceneid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::RepeatedPtrField< ::CG_OBJARRANGEINDEX > objlist_;
+  ::google::protobuf::int32 sceneid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static CG_BATTLEPREPARE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GC_BATTLEPREPARE : public ::google::protobuf::Message {
+ public:
+  GC_BATTLEPREPARE();
+  virtual ~GC_BATTLEPREPARE();
+
+  GC_BATTLEPREPARE(const GC_BATTLEPREPARE& from);
+
+  inline GC_BATTLEPREPARE& operator=(const GC_BATTLEPREPARE& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GC_BATTLEPREPARE& default_instance();
+
+  void Swap(GC_BATTLEPREPARE* other);
+
+  // implements Message ----------------------------------------------
+
+  GC_BATTLEPREPARE* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GC_BATTLEPREPARE& from);
+  void MergeFrom(const GC_BATTLEPREPARE& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 ret = 1;
+  inline bool has_ret() const;
+  inline void clear_ret();
+  static const int kRetFieldNumber = 1;
+  inline ::google::protobuf::int32 ret() const;
+  inline void set_ret(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:GC_BATTLEPREPARE)
+ private:
+  inline void set_has_ret();
+  inline void clear_has_ret();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 ret_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GC_BATTLEPREPARE* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GC_BATTLEEND : public ::google::protobuf::Message {
+ public:
+  GC_BATTLEEND();
+  virtual ~GC_BATTLEEND();
+
+  GC_BATTLEEND(const GC_BATTLEEND& from);
+
+  inline GC_BATTLEEND& operator=(const GC_BATTLEEND& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GC_BATTLEEND& default_instance();
+
+  void Swap(GC_BATTLEEND* other);
+
+  // implements Message ----------------------------------------------
+
+  GC_BATTLEEND* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GC_BATTLEEND& from);
+  void MergeFrom(const GC_BATTLEEND& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 sceneId = 1;
+  inline bool has_sceneid() const;
+  inline void clear_sceneid();
+  static const int kSceneIdFieldNumber = 1;
+  inline ::google::protobuf::int32 sceneid() const;
+  inline void set_sceneid(::google::protobuf::int32 value);
+
+  // required int32 camp = 2;
+  inline bool has_camp() const;
+  inline void clear_camp();
+  static const int kCampFieldNumber = 2;
+  inline ::google::protobuf::int32 camp() const;
+  inline void set_camp(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:GC_BATTLEEND)
+ private:
+  inline void set_has_sceneid();
+  inline void clear_has_sceneid();
+  inline void set_has_camp();
+  inline void clear_has_camp();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 sceneid_;
+  ::google::protobuf::int32 camp_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(2 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GC_BATTLEEND* default_instance_;
+};
+// -------------------------------------------------------------------
+
+class GC_BattleStart : public ::google::protobuf::Message {
+ public:
+  GC_BattleStart();
+  virtual ~GC_BattleStart();
+
+  GC_BattleStart(const GC_BattleStart& from);
+
+  inline GC_BattleStart& operator=(const GC_BattleStart& from) {
+    CopyFrom(from);
+    return *this;
+  }
+
+  inline const ::google::protobuf::UnknownFieldSet& unknown_fields() const {
+    return _unknown_fields_;
+  }
+
+  inline ::google::protobuf::UnknownFieldSet* mutable_unknown_fields() {
+    return &_unknown_fields_;
+  }
+
+  static const ::google::protobuf::Descriptor* descriptor();
+  static const GC_BattleStart& default_instance();
+
+  void Swap(GC_BattleStart* other);
+
+  // implements Message ----------------------------------------------
+
+  GC_BattleStart* New() const;
+  void CopyFrom(const ::google::protobuf::Message& from);
+  void MergeFrom(const ::google::protobuf::Message& from);
+  void CopyFrom(const GC_BattleStart& from);
+  void MergeFrom(const GC_BattleStart& from);
+  void Clear();
+  bool IsInitialized() const;
+
+  int ByteSize() const;
+  bool MergePartialFromCodedStream(
+      ::google::protobuf::io::CodedInputStream* input);
+  void SerializeWithCachedSizes(
+      ::google::protobuf::io::CodedOutputStream* output) const;
+  ::google::protobuf::uint8* SerializeWithCachedSizesToArray(::google::protobuf::uint8* output) const;
+  int GetCachedSize() const { return _cached_size_; }
+  private:
+  void SharedCtor();
+  void SharedDtor();
+  void SetCachedSize(int size) const;
+  public:
+
+  ::google::protobuf::Metadata GetMetadata() const;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  // required int32 sceneId = 1;
+  inline bool has_sceneid() const;
+  inline void clear_sceneid();
+  static const int kSceneIdFieldNumber = 1;
+  inline ::google::protobuf::int32 sceneid() const;
+  inline void set_sceneid(::google::protobuf::int32 value);
+
+  // @@protoc_insertion_point(class_scope:GC_BattleStart)
+ private:
+  inline void set_has_sceneid();
+  inline void clear_has_sceneid();
+
+  ::google::protobuf::UnknownFieldSet _unknown_fields_;
+
+  ::google::protobuf::int32 sceneid_;
+
+  mutable int _cached_size_;
+  ::google::protobuf::uint32 _has_bits_[(1 + 31) / 32];
+
+  friend void  protobuf_AddDesc_PBMessage_2eproto();
+  friend void protobuf_AssignDesc_PBMessage_2eproto();
+  friend void protobuf_ShutdownFile_PBMessage_2eproto();
+
+  void InitAsDefaultInstance();
+  static GC_BattleStart* default_instance_;
 };
 // ===================================================================
 
@@ -8253,26 +9467,26 @@ inline void GC_CONNECTED_HEARTBEAT::set_serveransitime(::google::protobuf::int32
 
 // CG_REQ_NEAR_LIST
 
-// required int32 marchId = 1;
-inline bool CG_REQ_NEAR_LIST::has_marchid() const {
+// required int32 blockid = 1;
+inline bool CG_REQ_NEAR_LIST::has_blockid() const {
   return (_has_bits_[0] & 0x00000001u) != 0;
 }
-inline void CG_REQ_NEAR_LIST::set_has_marchid() {
+inline void CG_REQ_NEAR_LIST::set_has_blockid() {
   _has_bits_[0] |= 0x00000001u;
 }
-inline void CG_REQ_NEAR_LIST::clear_has_marchid() {
+inline void CG_REQ_NEAR_LIST::clear_has_blockid() {
   _has_bits_[0] &= ~0x00000001u;
 }
-inline void CG_REQ_NEAR_LIST::clear_marchid() {
-  marchid_ = 0;
-  clear_has_marchid();
+inline void CG_REQ_NEAR_LIST::clear_blockid() {
+  blockid_ = 0;
+  clear_has_blockid();
 }
-inline ::google::protobuf::int32 CG_REQ_NEAR_LIST::marchid() const {
-  return marchid_;
+inline ::google::protobuf::int32 CG_REQ_NEAR_LIST::blockid() const {
+  return blockid_;
 }
-inline void CG_REQ_NEAR_LIST::set_marchid(::google::protobuf::int32 value) {
-  set_has_marchid();
-  marchid_ = value;
+inline void CG_REQ_NEAR_LIST::set_blockid(::google::protobuf::int32 value) {
+  set_has_blockid();
+  blockid_ = value;
 }
 
 // required int32 sceneId = 2;
@@ -8301,27 +9515,27 @@ inline void CG_REQ_NEAR_LIST::set_sceneid(::google::protobuf::int32 value) {
 
 // GC_NEAR_MARCHLIST
 
-// repeated uint64 Guid = 1;
+// repeated int64 Guid = 1;
 inline int GC_NEAR_MARCHLIST::guid_size() const {
   return guid_.size();
 }
 inline void GC_NEAR_MARCHLIST::clear_guid() {
   guid_.Clear();
 }
-inline ::google::protobuf::uint64 GC_NEAR_MARCHLIST::guid(int index) const {
+inline ::google::protobuf::int64 GC_NEAR_MARCHLIST::guid(int index) const {
   return guid_.Get(index);
 }
-inline void GC_NEAR_MARCHLIST::set_guid(int index, ::google::protobuf::uint64 value) {
+inline void GC_NEAR_MARCHLIST::set_guid(int index, ::google::protobuf::int64 value) {
   guid_.Set(index, value);
 }
-inline void GC_NEAR_MARCHLIST::add_guid(::google::protobuf::uint64 value) {
+inline void GC_NEAR_MARCHLIST::add_guid(::google::protobuf::int64 value) {
   guid_.Add(value);
 }
-inline const ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >&
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int64 >&
 GC_NEAR_MARCHLIST::guid() const {
   return guid_;
 }
-inline ::google::protobuf::RepeatedField< ::google::protobuf::uint64 >*
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int64 >*
 GC_NEAR_MARCHLIST::mutable_guid() {
   return &guid_;
 }
@@ -8462,6 +9676,56 @@ inline ::google::protobuf::int32 GC_NEAR_MARCHLIST::sceneid() const {
 inline void GC_NEAR_MARCHLIST::set_sceneid(::google::protobuf::int32 value) {
   set_has_sceneid();
   sceneid_ = value;
+}
+
+// repeated int32 posX = 7;
+inline int GC_NEAR_MARCHLIST::posx_size() const {
+  return posx_.size();
+}
+inline void GC_NEAR_MARCHLIST::clear_posx() {
+  posx_.Clear();
+}
+inline ::google::protobuf::int32 GC_NEAR_MARCHLIST::posx(int index) const {
+  return posx_.Get(index);
+}
+inline void GC_NEAR_MARCHLIST::set_posx(int index, ::google::protobuf::int32 value) {
+  posx_.Set(index, value);
+}
+inline void GC_NEAR_MARCHLIST::add_posx(::google::protobuf::int32 value) {
+  posx_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+GC_NEAR_MARCHLIST::posx() const {
+  return posx_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+GC_NEAR_MARCHLIST::mutable_posx() {
+  return &posx_;
+}
+
+// repeated int32 posZ = 8;
+inline int GC_NEAR_MARCHLIST::posz_size() const {
+  return posz_.size();
+}
+inline void GC_NEAR_MARCHLIST::clear_posz() {
+  posz_.Clear();
+}
+inline ::google::protobuf::int32 GC_NEAR_MARCHLIST::posz(int index) const {
+  return posz_.Get(index);
+}
+inline void GC_NEAR_MARCHLIST::set_posz(int index, ::google::protobuf::int32 value) {
+  posz_.Set(index, value);
+}
+inline void GC_NEAR_MARCHLIST::add_posz(::google::protobuf::int32 value) {
+  posz_.Add(value);
+}
+inline const ::google::protobuf::RepeatedField< ::google::protobuf::int32 >&
+GC_NEAR_MARCHLIST::posz() const {
+  return posz_;
+}
+inline ::google::protobuf::RepeatedField< ::google::protobuf::int32 >*
+GC_NEAR_MARCHLIST::mutable_posz() {
+  return &posz_;
 }
 
 // -------------------------------------------------------------------
@@ -9430,6 +10694,102 @@ inline ::google::protobuf::int32 GC_MOVE::sceneid() const {
 inline void GC_MOVE::set_sceneid(::google::protobuf::int32 value) {
   set_has_sceneid();
   sceneid_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// CG_MARCH_MOVE
+
+// required int64 marchid = 1;
+inline bool CG_MARCH_MOVE::has_marchid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CG_MARCH_MOVE::set_has_marchid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CG_MARCH_MOVE::clear_has_marchid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CG_MARCH_MOVE::clear_marchid() {
+  marchid_ = GOOGLE_LONGLONG(0);
+  clear_has_marchid();
+}
+inline ::google::protobuf::int64 CG_MARCH_MOVE::marchid() const {
+  return marchid_;
+}
+inline void CG_MARCH_MOVE::set_marchid(::google::protobuf::int64 value) {
+  set_has_marchid();
+  marchid_ = value;
+}
+
+// required int32 posx = 2;
+inline bool CG_MARCH_MOVE::has_posx() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void CG_MARCH_MOVE::set_has_posx() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void CG_MARCH_MOVE::clear_has_posx() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void CG_MARCH_MOVE::clear_posx() {
+  posx_ = 0;
+  clear_has_posx();
+}
+inline ::google::protobuf::int32 CG_MARCH_MOVE::posx() const {
+  return posx_;
+}
+inline void CG_MARCH_MOVE::set_posx(::google::protobuf::int32 value) {
+  set_has_posx();
+  posx_ = value;
+}
+
+// required int32 posz = 3;
+inline bool CG_MARCH_MOVE::has_posz() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void CG_MARCH_MOVE::set_has_posz() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void CG_MARCH_MOVE::clear_has_posz() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void CG_MARCH_MOVE::clear_posz() {
+  posz_ = 0;
+  clear_has_posz();
+}
+inline ::google::protobuf::int32 CG_MARCH_MOVE::posz() const {
+  return posz_;
+}
+inline void CG_MARCH_MOVE::set_posz(::google::protobuf::int32 value) {
+  set_has_posz();
+  posz_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// GC_MARCH_MOVE
+
+// required int32 ret = 1;
+inline bool GC_MARCH_MOVE::has_ret() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GC_MARCH_MOVE::set_has_ret() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GC_MARCH_MOVE::clear_has_ret() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GC_MARCH_MOVE::clear_ret() {
+  ret_ = 0;
+  clear_has_ret();
+}
+inline ::google::protobuf::int32 GC_MARCH_MOVE::ret() const {
+  return ret_;
+}
+inline void GC_MARCH_MOVE::set_ret(::google::protobuf::int32 value) {
+  set_has_ret();
+  ret_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -10911,6 +12271,28 @@ inline void GC_FIGHT::set_sceneid(::google::protobuf::int32 value) {
   sceneid_ = value;
 }
 
+// optional int32 sceneclass = 4;
+inline bool GC_FIGHT::has_sceneclass() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void GC_FIGHT::set_has_sceneclass() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void GC_FIGHT::clear_has_sceneclass() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void GC_FIGHT::clear_sceneclass() {
+  sceneclass_ = 0;
+  clear_has_sceneclass();
+}
+inline ::google::protobuf::int32 GC_FIGHT::sceneclass() const {
+  return sceneclass_;
+}
+inline void GC_FIGHT::set_sceneclass(::google::protobuf::int32 value) {
+  set_has_sceneclass();
+  sceneclass_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // CG_LEAVE_COPYSCENE
@@ -11245,6 +12627,50 @@ inline ::google::protobuf::int32 GC_SEND_MARCH::ret() const {
 inline void GC_SEND_MARCH::set_ret(::google::protobuf::int32 value) {
   set_has_ret();
   ret_ = value;
+}
+
+// required int32 sceneId = 3;
+inline bool GC_SEND_MARCH::has_sceneid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GC_SEND_MARCH::set_has_sceneid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GC_SEND_MARCH::clear_has_sceneid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GC_SEND_MARCH::clear_sceneid() {
+  sceneid_ = 0;
+  clear_has_sceneid();
+}
+inline ::google::protobuf::int32 GC_SEND_MARCH::sceneid() const {
+  return sceneid_;
+}
+inline void GC_SEND_MARCH::set_sceneid(::google::protobuf::int32 value) {
+  set_has_sceneid();
+  sceneid_ = value;
+}
+
+// required int32 sceneClass = 4;
+inline bool GC_SEND_MARCH::has_sceneclass() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void GC_SEND_MARCH::set_has_sceneclass() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void GC_SEND_MARCH::clear_has_sceneclass() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void GC_SEND_MARCH::clear_sceneclass() {
+  sceneclass_ = 0;
+  clear_has_sceneclass();
+}
+inline ::google::protobuf::int32 GC_SEND_MARCH::sceneclass() const {
+  return sceneclass_;
+}
+inline void GC_SEND_MARCH::set_sceneclass(::google::protobuf::int32 value) {
+  set_has_sceneclass();
+  sceneclass_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -12205,6 +13631,28 @@ inline void GC_TroopData::set_marchid(::google::protobuf::int64 value) {
   marchid_ = value;
 }
 
+// required int32 queueindex = 9;
+inline bool GC_TroopData::has_queueindex() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void GC_TroopData::set_has_queueindex() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void GC_TroopData::clear_has_queueindex() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void GC_TroopData::clear_queueindex() {
+  queueindex_ = 0;
+  clear_has_queueindex();
+}
+inline ::google::protobuf::int32 GC_TroopData::queueindex() const {
+  return queueindex_;
+}
+inline void GC_TroopData::set_queueindex(::google::protobuf::int32 value) {
+  set_has_queueindex();
+  queueindex_ = value;
+}
+
 // -------------------------------------------------------------------
 
 // GC_MarchData
@@ -12498,6 +13946,164 @@ inline void GC_TargetMarchData::set_marchid(::google::protobuf::int64 value) {
 
 // -------------------------------------------------------------------
 
+// GC_TrainData
+
+// required int64 queueid = 1;
+inline bool GC_TrainData::has_queueid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GC_TrainData::set_has_queueid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GC_TrainData::clear_has_queueid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GC_TrainData::clear_queueid() {
+  queueid_ = GOOGLE_LONGLONG(0);
+  clear_has_queueid();
+}
+inline ::google::protobuf::int64 GC_TrainData::queueid() const {
+  return queueid_;
+}
+inline void GC_TrainData::set_queueid(::google::protobuf::int64 value) {
+  set_has_queueid();
+  queueid_ = value;
+}
+
+// required int64 buildid = 2;
+inline bool GC_TrainData::has_buildid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GC_TrainData::set_has_buildid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GC_TrainData::clear_has_buildid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GC_TrainData::clear_buildid() {
+  buildid_ = GOOGLE_LONGLONG(0);
+  clear_has_buildid();
+}
+inline ::google::protobuf::int64 GC_TrainData::buildid() const {
+  return buildid_;
+}
+inline void GC_TrainData::set_buildid(::google::protobuf::int64 value) {
+  set_has_buildid();
+  buildid_ = value;
+}
+
+// required int32 trooptype = 3;
+inline bool GC_TrainData::has_trooptype() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GC_TrainData::set_has_trooptype() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GC_TrainData::clear_has_trooptype() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GC_TrainData::clear_trooptype() {
+  trooptype_ = 0;
+  clear_has_trooptype();
+}
+inline ::google::protobuf::int32 GC_TrainData::trooptype() const {
+  return trooptype_;
+}
+inline void GC_TrainData::set_trooptype(::google::protobuf::int32 value) {
+  set_has_trooptype();
+  trooptype_ = value;
+}
+
+// required int32 hp = 4;
+inline bool GC_TrainData::has_hp() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void GC_TrainData::set_has_hp() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void GC_TrainData::clear_has_hp() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void GC_TrainData::clear_hp() {
+  hp_ = 0;
+  clear_has_hp();
+}
+inline ::google::protobuf::int32 GC_TrainData::hp() const {
+  return hp_;
+}
+inline void GC_TrainData::set_hp(::google::protobuf::int32 value) {
+  set_has_hp();
+  hp_ = value;
+}
+
+// required int32 begintime = 5;
+inline bool GC_TrainData::has_begintime() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void GC_TrainData::set_has_begintime() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void GC_TrainData::clear_has_begintime() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void GC_TrainData::clear_begintime() {
+  begintime_ = 0;
+  clear_has_begintime();
+}
+inline ::google::protobuf::int32 GC_TrainData::begintime() const {
+  return begintime_;
+}
+inline void GC_TrainData::set_begintime(::google::protobuf::int32 value) {
+  set_has_begintime();
+  begintime_ = value;
+}
+
+// required int32 completime = 6;
+inline bool GC_TrainData::has_completime() const {
+  return (_has_bits_[0] & 0x00000020u) != 0;
+}
+inline void GC_TrainData::set_has_completime() {
+  _has_bits_[0] |= 0x00000020u;
+}
+inline void GC_TrainData::clear_has_completime() {
+  _has_bits_[0] &= ~0x00000020u;
+}
+inline void GC_TrainData::clear_completime() {
+  completime_ = 0;
+  clear_has_completime();
+}
+inline ::google::protobuf::int32 GC_TrainData::completime() const {
+  return completime_;
+}
+inline void GC_TrainData::set_completime(::google::protobuf::int32 value) {
+  set_has_completime();
+  completime_ = value;
+}
+
+// required int32 queueindex = 7;
+inline bool GC_TrainData::has_queueindex() const {
+  return (_has_bits_[0] & 0x00000040u) != 0;
+}
+inline void GC_TrainData::set_has_queueindex() {
+  _has_bits_[0] |= 0x00000040u;
+}
+inline void GC_TrainData::clear_has_queueindex() {
+  _has_bits_[0] &= ~0x00000040u;
+}
+inline void GC_TrainData::clear_queueindex() {
+  queueindex_ = 0;
+  clear_has_queueindex();
+}
+inline ::google::protobuf::int32 GC_TrainData::queueindex() const {
+  return queueindex_;
+}
+inline void GC_TrainData::set_queueindex(::google::protobuf::int32 value) {
+  set_has_queueindex();
+  queueindex_ = value;
+}
+
+// -------------------------------------------------------------------
+
 // GC_CityData
 
 // required int32 tileId = 1;
@@ -12657,29 +14263,73 @@ GC_CityData::mutable_buildlist() {
   return &buildlist_;
 }
 
-// repeated .GC_TroopData trooplist = 8;
-inline int GC_CityData::trooplist_size() const {
-  return trooplist_.size();
+// repeated .GC_TrainData trainList = 8;
+inline int GC_CityData::trainlist_size() const {
+  return trainlist_.size();
 }
-inline void GC_CityData::clear_trooplist() {
-  trooplist_.Clear();
+inline void GC_CityData::clear_trainlist() {
+  trainlist_.Clear();
 }
-inline const ::GC_TroopData& GC_CityData::trooplist(int index) const {
-  return trooplist_.Get(index);
+inline const ::GC_TrainData& GC_CityData::trainlist(int index) const {
+  return trainlist_.Get(index);
 }
-inline ::GC_TroopData* GC_CityData::mutable_trooplist(int index) {
-  return trooplist_.Mutable(index);
+inline ::GC_TrainData* GC_CityData::mutable_trainlist(int index) {
+  return trainlist_.Mutable(index);
 }
-inline ::GC_TroopData* GC_CityData::add_trooplist() {
-  return trooplist_.Add();
+inline ::GC_TrainData* GC_CityData::add_trainlist() {
+  return trainlist_.Add();
 }
-inline const ::google::protobuf::RepeatedPtrField< ::GC_TroopData >&
-GC_CityData::trooplist() const {
-  return trooplist_;
+inline const ::google::protobuf::RepeatedPtrField< ::GC_TrainData >&
+GC_CityData::trainlist() const {
+  return trainlist_;
 }
-inline ::google::protobuf::RepeatedPtrField< ::GC_TroopData >*
-GC_CityData::mutable_trooplist() {
-  return &trooplist_;
+inline ::google::protobuf::RepeatedPtrField< ::GC_TrainData >*
+GC_CityData::mutable_trainlist() {
+  return &trainlist_;
+}
+
+// required int32 posx = 9;
+inline bool GC_CityData::has_posx() const {
+  return (_has_bits_[0] & 0x00000100u) != 0;
+}
+inline void GC_CityData::set_has_posx() {
+  _has_bits_[0] |= 0x00000100u;
+}
+inline void GC_CityData::clear_has_posx() {
+  _has_bits_[0] &= ~0x00000100u;
+}
+inline void GC_CityData::clear_posx() {
+  posx_ = 0;
+  clear_has_posx();
+}
+inline ::google::protobuf::int32 GC_CityData::posx() const {
+  return posx_;
+}
+inline void GC_CityData::set_posx(::google::protobuf::int32 value) {
+  set_has_posx();
+  posx_ = value;
+}
+
+// required int32 posz = 10;
+inline bool GC_CityData::has_posz() const {
+  return (_has_bits_[0] & 0x00000200u) != 0;
+}
+inline void GC_CityData::set_has_posz() {
+  _has_bits_[0] |= 0x00000200u;
+}
+inline void GC_CityData::clear_has_posz() {
+  _has_bits_[0] &= ~0x00000200u;
+}
+inline void GC_CityData::clear_posz() {
+  posz_ = 0;
+  clear_has_posz();
+}
+inline ::google::protobuf::int32 GC_CityData::posz() const {
+  return posz_;
+}
+inline void GC_CityData::set_posz(::google::protobuf::int32 value) {
+  set_has_posz();
+  posz_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -13130,6 +14780,50 @@ GC_BATTLEINFOR::objlist() const {
 inline ::google::protobuf::RepeatedPtrField< ::GC_OBJINFOR >*
 GC_BATTLEINFOR::mutable_objlist() {
   return &objlist_;
+}
+
+// optional int32 camp = 3;
+inline bool GC_BATTLEINFOR::has_camp() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GC_BATTLEINFOR::set_has_camp() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GC_BATTLEINFOR::clear_has_camp() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GC_BATTLEINFOR::clear_camp() {
+  camp_ = 0;
+  clear_has_camp();
+}
+inline ::google::protobuf::int32 GC_BATTLEINFOR::camp() const {
+  return camp_;
+}
+inline void GC_BATTLEINFOR::set_camp(::google::protobuf::int32 value) {
+  set_has_camp();
+  camp_ = value;
+}
+
+// optional int32 currentState = 4;
+inline bool GC_BATTLEINFOR::has_currentstate() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void GC_BATTLEINFOR::set_has_currentstate() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void GC_BATTLEINFOR::clear_has_currentstate() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void GC_BATTLEINFOR::clear_currentstate() {
+  currentstate_ = 0;
+  clear_has_currentstate();
+}
+inline ::google::protobuf::int32 GC_BATTLEINFOR::currentstate() const {
+  return currentstate_;
+}
+inline void GC_BATTLEINFOR::set_currentstate(::google::protobuf::int32 value) {
+  set_has_currentstate();
+  currentstate_ = value;
 }
 
 // -------------------------------------------------------------------
@@ -13757,6 +15451,475 @@ inline void GC_Update_March::set_allocated_data(::GC_MarchData* data) {
   } else {
     clear_has_data();
   }
+}
+
+// -------------------------------------------------------------------
+
+// CG_Troop_Train
+
+// required int32 queueindex = 1;
+inline bool CG_Troop_Train::has_queueindex() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CG_Troop_Train::set_has_queueindex() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CG_Troop_Train::clear_has_queueindex() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CG_Troop_Train::clear_queueindex() {
+  queueindex_ = 0;
+  clear_has_queueindex();
+}
+inline ::google::protobuf::int32 CG_Troop_Train::queueindex() const {
+  return queueindex_;
+}
+inline void CG_Troop_Train::set_queueindex(::google::protobuf::int32 value) {
+  set_has_queueindex();
+  queueindex_ = value;
+}
+
+// optional int32 trooptype = 2;
+inline bool CG_Troop_Train::has_trooptype() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void CG_Troop_Train::set_has_trooptype() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void CG_Troop_Train::clear_has_trooptype() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void CG_Troop_Train::clear_trooptype() {
+  trooptype_ = 0;
+  clear_has_trooptype();
+}
+inline ::google::protobuf::int32 CG_Troop_Train::trooptype() const {
+  return trooptype_;
+}
+inline void CG_Troop_Train::set_trooptype(::google::protobuf::int32 value) {
+  set_has_trooptype();
+  trooptype_ = value;
+}
+
+// required int32 count = 3;
+inline bool CG_Troop_Train::has_count() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void CG_Troop_Train::set_has_count() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void CG_Troop_Train::clear_has_count() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void CG_Troop_Train::clear_count() {
+  count_ = 0;
+  clear_has_count();
+}
+inline ::google::protobuf::int32 CG_Troop_Train::count() const {
+  return count_;
+}
+inline void CG_Troop_Train::set_count(::google::protobuf::int32 value) {
+  set_has_count();
+  count_ = value;
+}
+
+// required int64 buildid = 4;
+inline bool CG_Troop_Train::has_buildid() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void CG_Troop_Train::set_has_buildid() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void CG_Troop_Train::clear_has_buildid() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void CG_Troop_Train::clear_buildid() {
+  buildid_ = GOOGLE_LONGLONG(0);
+  clear_has_buildid();
+}
+inline ::google::protobuf::int64 CG_Troop_Train::buildid() const {
+  return buildid_;
+}
+inline void CG_Troop_Train::set_buildid(::google::protobuf::int64 value) {
+  set_has_buildid();
+  buildid_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// GC_Troop_Train
+
+// required int32 ret = 1;
+inline bool GC_Troop_Train::has_ret() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GC_Troop_Train::set_has_ret() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GC_Troop_Train::clear_has_ret() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GC_Troop_Train::clear_ret() {
+  ret_ = 0;
+  clear_has_ret();
+}
+inline ::google::protobuf::int32 GC_Troop_Train::ret() const {
+  return ret_;
+}
+inline void GC_Troop_Train::set_ret(::google::protobuf::int32 value) {
+  set_has_ret();
+  ret_ = value;
+}
+
+// optional .GC_TrainData data = 2;
+inline bool GC_Troop_Train::has_data() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GC_Troop_Train::set_has_data() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GC_Troop_Train::clear_has_data() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GC_Troop_Train::clear_data() {
+  if (data_ != NULL) data_->::GC_TrainData::Clear();
+  clear_has_data();
+}
+inline const ::GC_TrainData& GC_Troop_Train::data() const {
+  return data_ != NULL ? *data_ : *default_instance_->data_;
+}
+inline ::GC_TrainData* GC_Troop_Train::mutable_data() {
+  set_has_data();
+  if (data_ == NULL) data_ = new ::GC_TrainData;
+  return data_;
+}
+inline ::GC_TrainData* GC_Troop_Train::release_data() {
+  clear_has_data();
+  ::GC_TrainData* temp = data_;
+  data_ = NULL;
+  return temp;
+}
+inline void GC_Troop_Train::set_allocated_data(::GC_TrainData* data) {
+  delete data_;
+  data_ = data;
+  if (data) {
+    set_has_data();
+  } else {
+    clear_has_data();
+  }
+}
+
+// -------------------------------------------------------------------
+
+// GC_TroopTrain_Over
+
+// required int32 ret = 1;
+inline bool GC_TroopTrain_Over::has_ret() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GC_TroopTrain_Over::set_has_ret() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GC_TroopTrain_Over::clear_has_ret() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GC_TroopTrain_Over::clear_ret() {
+  ret_ = 0;
+  clear_has_ret();
+}
+inline ::google::protobuf::int32 GC_TroopTrain_Over::ret() const {
+  return ret_;
+}
+inline void GC_TroopTrain_Over::set_ret(::google::protobuf::int32 value) {
+  set_has_ret();
+  ret_ = value;
+}
+
+// required int64 buildid = 2;
+inline bool GC_TroopTrain_Over::has_buildid() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GC_TroopTrain_Over::set_has_buildid() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GC_TroopTrain_Over::clear_has_buildid() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GC_TroopTrain_Over::clear_buildid() {
+  buildid_ = GOOGLE_LONGLONG(0);
+  clear_has_buildid();
+}
+inline ::google::protobuf::int64 GC_TroopTrain_Over::buildid() const {
+  return buildid_;
+}
+inline void GC_TroopTrain_Over::set_buildid(::google::protobuf::int64 value) {
+  set_has_buildid();
+  buildid_ = value;
+}
+
+// required int32 queueid = 3;
+inline bool GC_TroopTrain_Over::has_queueid() const {
+  return (_has_bits_[0] & 0x00000004u) != 0;
+}
+inline void GC_TroopTrain_Over::set_has_queueid() {
+  _has_bits_[0] |= 0x00000004u;
+}
+inline void GC_TroopTrain_Over::clear_has_queueid() {
+  _has_bits_[0] &= ~0x00000004u;
+}
+inline void GC_TroopTrain_Over::clear_queueid() {
+  queueid_ = 0;
+  clear_has_queueid();
+}
+inline ::google::protobuf::int32 GC_TroopTrain_Over::queueid() const {
+  return queueid_;
+}
+inline void GC_TroopTrain_Over::set_queueid(::google::protobuf::int32 value) {
+  set_has_queueid();
+  queueid_ = value;
+}
+
+// required int32 trooptype = 4;
+inline bool GC_TroopTrain_Over::has_trooptype() const {
+  return (_has_bits_[0] & 0x00000008u) != 0;
+}
+inline void GC_TroopTrain_Over::set_has_trooptype() {
+  _has_bits_[0] |= 0x00000008u;
+}
+inline void GC_TroopTrain_Over::clear_has_trooptype() {
+  _has_bits_[0] &= ~0x00000008u;
+}
+inline void GC_TroopTrain_Over::clear_trooptype() {
+  trooptype_ = 0;
+  clear_has_trooptype();
+}
+inline ::google::protobuf::int32 GC_TroopTrain_Over::trooptype() const {
+  return trooptype_;
+}
+inline void GC_TroopTrain_Over::set_trooptype(::google::protobuf::int32 value) {
+  set_has_trooptype();
+  trooptype_ = value;
+}
+
+// required int32 hp = 5;
+inline bool GC_TroopTrain_Over::has_hp() const {
+  return (_has_bits_[0] & 0x00000010u) != 0;
+}
+inline void GC_TroopTrain_Over::set_has_hp() {
+  _has_bits_[0] |= 0x00000010u;
+}
+inline void GC_TroopTrain_Over::clear_has_hp() {
+  _has_bits_[0] &= ~0x00000010u;
+}
+inline void GC_TroopTrain_Over::clear_hp() {
+  hp_ = 0;
+  clear_has_hp();
+}
+inline ::google::protobuf::int32 GC_TroopTrain_Over::hp() const {
+  return hp_;
+}
+inline void GC_TroopTrain_Over::set_hp(::google::protobuf::int32 value) {
+  set_has_hp();
+  hp_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// CG_OBJARRANGEINDEX
+
+// required int32 objId = 1;
+inline bool CG_OBJARRANGEINDEX::has_objid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CG_OBJARRANGEINDEX::set_has_objid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CG_OBJARRANGEINDEX::clear_has_objid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CG_OBJARRANGEINDEX::clear_objid() {
+  objid_ = 0;
+  clear_has_objid();
+}
+inline ::google::protobuf::int32 CG_OBJARRANGEINDEX::objid() const {
+  return objid_;
+}
+inline void CG_OBJARRANGEINDEX::set_objid(::google::protobuf::int32 value) {
+  set_has_objid();
+  objid_ = value;
+}
+
+// required int32 arrangeindex = 2;
+inline bool CG_OBJARRANGEINDEX::has_arrangeindex() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void CG_OBJARRANGEINDEX::set_has_arrangeindex() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void CG_OBJARRANGEINDEX::clear_has_arrangeindex() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void CG_OBJARRANGEINDEX::clear_arrangeindex() {
+  arrangeindex_ = 0;
+  clear_has_arrangeindex();
+}
+inline ::google::protobuf::int32 CG_OBJARRANGEINDEX::arrangeindex() const {
+  return arrangeindex_;
+}
+inline void CG_OBJARRANGEINDEX::set_arrangeindex(::google::protobuf::int32 value) {
+  set_has_arrangeindex();
+  arrangeindex_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// CG_BATTLEPREPARE
+
+// required int32 sceneId = 1;
+inline bool CG_BATTLEPREPARE::has_sceneid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void CG_BATTLEPREPARE::set_has_sceneid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void CG_BATTLEPREPARE::clear_has_sceneid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void CG_BATTLEPREPARE::clear_sceneid() {
+  sceneid_ = 0;
+  clear_has_sceneid();
+}
+inline ::google::protobuf::int32 CG_BATTLEPREPARE::sceneid() const {
+  return sceneid_;
+}
+inline void CG_BATTLEPREPARE::set_sceneid(::google::protobuf::int32 value) {
+  set_has_sceneid();
+  sceneid_ = value;
+}
+
+// repeated .CG_OBJARRANGEINDEX objList = 2;
+inline int CG_BATTLEPREPARE::objlist_size() const {
+  return objlist_.size();
+}
+inline void CG_BATTLEPREPARE::clear_objlist() {
+  objlist_.Clear();
+}
+inline const ::CG_OBJARRANGEINDEX& CG_BATTLEPREPARE::objlist(int index) const {
+  return objlist_.Get(index);
+}
+inline ::CG_OBJARRANGEINDEX* CG_BATTLEPREPARE::mutable_objlist(int index) {
+  return objlist_.Mutable(index);
+}
+inline ::CG_OBJARRANGEINDEX* CG_BATTLEPREPARE::add_objlist() {
+  return objlist_.Add();
+}
+inline const ::google::protobuf::RepeatedPtrField< ::CG_OBJARRANGEINDEX >&
+CG_BATTLEPREPARE::objlist() const {
+  return objlist_;
+}
+inline ::google::protobuf::RepeatedPtrField< ::CG_OBJARRANGEINDEX >*
+CG_BATTLEPREPARE::mutable_objlist() {
+  return &objlist_;
+}
+
+// -------------------------------------------------------------------
+
+// GC_BATTLEPREPARE
+
+// required int32 ret = 1;
+inline bool GC_BATTLEPREPARE::has_ret() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GC_BATTLEPREPARE::set_has_ret() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GC_BATTLEPREPARE::clear_has_ret() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GC_BATTLEPREPARE::clear_ret() {
+  ret_ = 0;
+  clear_has_ret();
+}
+inline ::google::protobuf::int32 GC_BATTLEPREPARE::ret() const {
+  return ret_;
+}
+inline void GC_BATTLEPREPARE::set_ret(::google::protobuf::int32 value) {
+  set_has_ret();
+  ret_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// GC_BATTLEEND
+
+// required int32 sceneId = 1;
+inline bool GC_BATTLEEND::has_sceneid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GC_BATTLEEND::set_has_sceneid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GC_BATTLEEND::clear_has_sceneid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GC_BATTLEEND::clear_sceneid() {
+  sceneid_ = 0;
+  clear_has_sceneid();
+}
+inline ::google::protobuf::int32 GC_BATTLEEND::sceneid() const {
+  return sceneid_;
+}
+inline void GC_BATTLEEND::set_sceneid(::google::protobuf::int32 value) {
+  set_has_sceneid();
+  sceneid_ = value;
+}
+
+// required int32 camp = 2;
+inline bool GC_BATTLEEND::has_camp() const {
+  return (_has_bits_[0] & 0x00000002u) != 0;
+}
+inline void GC_BATTLEEND::set_has_camp() {
+  _has_bits_[0] |= 0x00000002u;
+}
+inline void GC_BATTLEEND::clear_has_camp() {
+  _has_bits_[0] &= ~0x00000002u;
+}
+inline void GC_BATTLEEND::clear_camp() {
+  camp_ = 0;
+  clear_has_camp();
+}
+inline ::google::protobuf::int32 GC_BATTLEEND::camp() const {
+  return camp_;
+}
+inline void GC_BATTLEEND::set_camp(::google::protobuf::int32 value) {
+  set_has_camp();
+  camp_ = value;
+}
+
+// -------------------------------------------------------------------
+
+// GC_BattleStart
+
+// required int32 sceneId = 1;
+inline bool GC_BattleStart::has_sceneid() const {
+  return (_has_bits_[0] & 0x00000001u) != 0;
+}
+inline void GC_BattleStart::set_has_sceneid() {
+  _has_bits_[0] |= 0x00000001u;
+}
+inline void GC_BattleStart::clear_has_sceneid() {
+  _has_bits_[0] &= ~0x00000001u;
+}
+inline void GC_BattleStart::clear_sceneid() {
+  sceneid_ = 0;
+  clear_has_sceneid();
+}
+inline ::google::protobuf::int32 GC_BattleStart::sceneid() const {
+  return sceneid_;
+}
+inline void GC_BattleStart::set_sceneid(::google::protobuf::int32 value) {
+  set_has_sceneid();
+  sceneid_ = value;
 }
 
 

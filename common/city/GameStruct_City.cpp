@@ -1,5 +1,10 @@
 #include "GameStruct_City.h"
 #include "packet/Packet/PBMessage.pb.h"
+#include "Message/CityMsg.h"
+#include "Message/DBMsg.h"
+#include "Table/Table_Troop.h"
+#include "Table/Table_RoleBaseAttr.h"
+#include "service/MessageOp.h"
 
 City::City()
 {
@@ -19,12 +24,13 @@ void City::CleanUp()
 	m_nFood     = 0; // 粮食
 	m_nStone    = 0; // 石料
 	m_nIron     = 0; //铁矿
-	m_nPosX     = 0;
-	m_nPosZ     = 0;
+	m_fPosX     = 0.f;
+	m_fPosZ     = 0.f;
 	m_mapBuilding.clear();
 	m_mapTechnology.clear();
 	m_mapTechResearch.clear();
 	m_mapBuildConstruct.clear();
+	m_mapTrainMap.clear();
 }
 
 void City::SerializeToDB(DBCity& rDest) const
@@ -37,13 +43,13 @@ void City::SerializeToDB(DBCity& rDest) const
 		rDest.m_nStone    = m_nStone;  // 石料
 		rDest.m_nPlayerId = m_nPlayerId; // 玩家ID
 		rDest.m_nIron     = m_nIron; //铁矿
-		rDest.m_nPosZ     = m_nPosZ;
-		rDest.m_nPosX     = m_nPosX;
+		rDest.m_fPosZ     = m_fPosZ;
+		rDest.m_fPosX     = m_fPosX;
 		rDest.m_nGold     = m_nGold;
 		int nBuildingIndex = 0;
 		for (BuildingMap::const_iterator it = m_mapBuilding.begin();it != m_mapBuilding.end();it++)
 		{
-			AssertEx(nBuildingIndex>=0 && nBuildingIndex<BUIDINGTYPE_MAX,"");
+			AssertEx(nBuildingIndex>=0 && nBuildingIndex<BUILDING_MAX_SLOT,"");
 			it->second->SerializeToDB(rDest.m_BuildingList[nBuildingIndex]);
 			nBuildingIndex++;
 		}
@@ -71,6 +77,15 @@ void City::SerializeToDB(DBCity& rDest) const
 			it->second->SerializeToDB(rDest.m_ConstructList[nCounstruct]);
 			nCounstruct++;
 		}
+
+		int nTrainCount = 0;
+		for (TroopTrainMap::const_iterator it = m_mapTrainMap.begin(); it != m_mapTrainMap.end();it++)
+		{
+			AssertEx(nTrainCount>=0 && nTrainCount < BUILDING_BARRACK_MAX+BUILDING_WALL_MAX,"");
+			it->second->SerializeToDB(rDest.m_TrainList[nTrainCount]);
+			nCounstruct++;
+		}
+
 
 	__LEAVE_FUNCTION
 }
@@ -108,10 +123,10 @@ void City::SerializeFromDB(const DBCity& rSource)
 		m_nStone    = rSource.m_nStone;  // 石料
 		m_nIron     = rSource.m_nIron;   //铁矿
 		m_nPlayerId = rSource.m_nPlayerId;//玩家ID
-		m_nPosX     = rSource.m_nPosX;
-		m_nPosZ     = rSource.m_nPosX;
+		m_fPosX     = rSource.m_fPosX;
+		m_fPosZ     = rSource.m_fPosZ;
 		m_nGold     = rSource.m_nGold;
-		for (int i=0;i<BUIDINGTYPE_MAX;i++)
+		for (int i=0;i<BUILDING_MAX_SLOT;i++)
 		{
 			if (rSource.m_BuildingList[i].m_ID == 0)
 			{
@@ -160,6 +175,18 @@ void City::SerializeFromDB(const DBCity& rSource)
 			AddResearch(Ptr);
 		}
 
+		for (int i=0;i <  BUILDING_BARRACK_MAX+BUILDING_WALL_MAX;i++)
+		{
+			if (rSource.m_TrainList[i].m_ID == 0)
+			{
+				continue;;
+			}
+			TroopTrainPtr Ptr(new TroopTrain(*this));
+			AssertEx(Ptr,"");
+			Ptr->SerializeFromDB(rSource.m_TrainList[i]);
+			AddTroopTrain(Ptr);
+		}
+
 	__LEAVE_FUNCTION
 }
 
@@ -174,6 +201,22 @@ bool City::AddResearch(TechResearchPtr Ptr)
 	}
 
 	m_mapTechResearch.insert(std::make_pair(Ptr->GetID(),Ptr));
+	return true;
+	__LEAVE_FUNCTION
+		return false;
+}
+
+bool City::AddTroopTrain(TroopTrainPtr Ptr)
+{
+	__ENTER_FUNCTION
+		AssertEx(Ptr,"");
+	AssertEx(Ptr->GetID(),"");
+	if (m_mapTrainMap.find(Ptr->GetID()) != m_mapTrainMap.end())
+	{
+		return false;
+	}
+
+	m_mapTrainMap.insert(std::make_pair(Ptr->GetBuildId(),Ptr));
 	return true;
 	__LEAVE_FUNCTION
 		return false;
@@ -243,6 +286,77 @@ BuildingPtr City::GetBuilding(int64 Id)
 		return null_ptr;
 }
 
+bool City::FileTrainData(TroopTrainPtr Ptr,GC_TrainData* pTrainData)
+{
+	__ENTER_FUNCTION
+		AssertEx(Ptr,"");
+		AssertEx(pTrainData,"");
+		pTrainData->set_queueid(Ptr->GetID());
+		pTrainData->set_buildid(Ptr->GetBuildId());
+		pTrainData->set_trooptype(Ptr->GetType());
+		pTrainData->set_hp(Ptr->GetHp());
+		pTrainData->set_begintime(Ptr->GetBeginTime());
+		pTrainData->set_completime(Ptr->GetCompleteTime());
+		pTrainData->set_queueindex(Ptr->GetQueueIndex());
+		return true;
+	__LEAVE_FUNCTION
+	return false;
+}
+
+bool City::BeginTrainTroop(int64 nBuildId,int nQueueIndex,int nType,int Count,GC_TrainData* pTrainData)
+{
+	__ENTER_FUNCTION
+		BuildingPtr Ptr = GetBuilding(nBuildId);
+		if (Ptr == null_ptr)
+		{
+			return false;
+		}
+
+		TroopTrainPtr TrainPtr = GetTroopTrain(nBuildId);
+		if (TrainPtr==null_ptr)
+		{
+			return false;
+		}
+
+		if (TrainPtr->GetType() >0)
+		{
+			return false;
+		}
+
+		Table_Troop const* pTroop = GetTable_TroopByID(nType);
+		if (pTroop == null_ptr)
+		{
+			return false;
+		}
+
+		Table_RoleBaseAttr const * pRoleBase = GetTable_RoleBaseAttrByID(pTroop->GetDataIDbyIndex(0));
+		if (pRoleBase == null_ptr)
+		{
+			return false;
+		}
+
+		int nHp = pRoleBase->GetMaxHP()*Count;
+		
+		TrainPtr->SetType(nType);
+		TrainPtr->SetBeginTime((int)gTimeManager.GetANSITime());
+		TrainPtr->SetCompleteTime((int)gTimeManager.GetANSITime()+60);
+		TrainPtr->SetHp(nHp);
+		TrainPtr->SetQueueIndex(nQueueIndex);
+
+		FileTrainData(TrainPtr,pTrainData);
+
+		DBReqSaveTroopTrainMsgPtr MsgPtr= POOLDEF_NEW(DBReqSaveTroopTrainMsg);
+		AssertEx(MsgPtr,"");
+		TrainPtr->SerializeToDB(MsgPtr->m_Data);
+		SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
+
+		return true;
+
+
+	__LEAVE_FUNCTION
+	return false;
+}
+
 bool City::BuildingLevelUp(int64 nBuildingId)
 {
 	__ENTER_FUNCTION
@@ -273,6 +387,21 @@ TechnologyPtr City::GetTechnology(int nType)
 
 }
 
+TroopTrainPtr  City::GetTroopTrain(int64 nBuildId)
+{
+	__ENTER_FUNCTION
+		AssertEx(nBuildId>=0,"");
+
+	TroopTrainMap::iterator it = m_mapTrainMap.find(nBuildId);
+	if (it != m_mapTrainMap.end())
+	{
+		return it->second;
+	}
+	return null_ptr;
+	__LEAVE_FUNCTION
+		return null_ptr;
+}
+
 
 void  City::FileData(GC_CityData* pCityData)
 {
@@ -283,6 +412,8 @@ void  City::FileData(GC_CityData* pCityData)
 		pCityData->set_food(m_nFood);
 		pCityData->set_stone(m_nStone);
 		pCityData->set_iron(m_nIron);
+		pCityData->set_posx((int)(m_fPosX*100));
+		pCityData->set_posz((int)(m_fPosZ*100));
 
 	BuildingMap::iterator it = m_mapBuilding.begin();
 	for( ;it != m_mapBuilding.end();it++)
@@ -294,6 +425,15 @@ void  City::FileData(GC_CityData* pCityData)
 		pBuildData->set_type(ptr->GetGuildingType());
 		pBuildData->set_slot(ptr->GetSlot());
 		pBuildData->set_level(ptr->GetLevel());
+	}
+
+	TroopTrainMap::iterator itTrain = m_mapTrainMap.begin();
+	for (; itTrain != m_mapTrainMap.end();itTrain++)
+	{
+		TroopTrainPtr ptr = itTrain->second;
+		AssertEx(ptr,"");
+		GC_TrainData* pTrainData = pCityData->add_trainlist();
+		FileTrainData(ptr,pTrainData);
 	}
 
 	__LEAVE_FUNCTION
@@ -427,9 +567,56 @@ void City::FinishResearch(TechResearchPtr Ptr)
 	__LEAVE_FUNCTION
 }
 
+void City::FinishTroopTrain(TroopTrainPtr Ptr)
+{
+	__ENTER_FUNCTION
+		AssertEx(Ptr,"");
+	TroopTrainMap::iterator it = m_mapTrainMap.find(Ptr->GetBuildId());
+	if (it == m_mapTrainMap.end())
+	{
+		return;
+	}
+	TroopTrainPtr troopPtr = it->second;
+
+	TrainTroopOverMsgPtr MsgPtr = POOLDEF_NEW(TrainTroopOverMsg);
+	MsgPtr->m_ID = troopPtr->GetID();
+	MsgPtr->m_nBuildId = troopPtr->GetBuildId();
+	MsgPtr->m_nHp = troopPtr->GetHp();
+	MsgPtr->m_nType = troopPtr->GetType();
+	MsgPtr->m_nQueueIndex = troopPtr->GetQueueIndex();
+	SendMessage2User(m_nPlayerId,MsgPtr);
+
+	troopPtr->InitTrainQueue();
+
+	DBReqSaveTroopTrainMsgPtr MsgSavePtr= POOLDEF_NEW(DBReqSaveTroopTrainMsg);
+		AssertEx(MsgSavePtr,"");
+		troopPtr->SerializeToDB(MsgSavePtr->m_Data);
+		SendMessage2Srv(ServiceID::DBAGENT,MsgSavePtr);
+
+	
+
+	__LEAVE_FUNCTION
+}
+
 void City::Tick_Train(const TimeInfo& rTimeInfo)
 {
 	__ENTER_FUNCTION
+		for (TroopTrainMap::iterator it = m_mapTrainMap.begin();it != m_mapTrainMap.end();it++)
+		{
+			TroopTrainPtr Ptr = it->second;
+			if (Ptr->GetType()<=0)
+			{
+				continue;
+			}
+			AssertEx(Ptr,"");
+			Ptr->Tick(rTimeInfo);
+			if (Ptr->GetOverFlag())
+			{
+				FinishTroopTrain(Ptr);
+				
+			}
+		}
+		
 	__LEAVE_FUNCTION
 }
 
@@ -499,6 +686,73 @@ void TechResearch::SerializeFromDB(const DBTechResearch& rSource)
 	m_nLevel        = rSource.m_nLevel;
 	m_nCompleteTime = rSource.m_nCompleteTime;
 }
+
+void TroopTrain::InitTrainQueue()
+{
+	__ENTER_FUNCTION
+		m_nType  = 0;
+	m_nBeginTime  = 0;
+	m_nCompleteTime = 0;
+	m_nType = 0; // 兵种
+	m_nHp = 0;   // 训兵血量
+	m_bOverFlag = false;
+	m_nQueueIndex = 0;
+	__LEAVE_FUNCTION
+}
+
+void TroopTrain::CleanUp()
+{
+	m_nType  = 0;
+	m_nBeginTime  = 0;
+	m_ID = invalid_guid64;
+	m_nCompleteTime = 0;
+	m_nType = 0; // 兵种
+	m_nHp = 0;   // 训兵血量
+	m_nBuildId = invalid_guid64;
+	m_bOverFlag = false;
+	m_nQueueIndex = 0;
+}
+
+TroopTrain::TroopTrain(City &rCity)
+	: m_City(rCity)
+{
+	CleanUp();
+}
+
+TroopTrain::~TroopTrain()
+{
+
+}
+
+void TroopTrain::Tick(const TimeInfo& rTimeInfo)
+{
+	if ((int)rTimeInfo.m_nAnsiTime > m_nCompleteTime && !m_bOverFlag)
+	{
+		m_bOverFlag = true;
+	}
+}
+
+void TroopTrain::SerializeToDB(DBTroopTrain& rDest) const
+{
+	rDest.m_ID            = m_ID ; // ID
+	rDest.m_nType         = m_nType; // 兵种类型
+	rDest.m_nBeginTime    = m_nBeginTime; // 开始时间
+	rDest.m_nCompleteTime = m_nCompleteTime; // 完成时间
+	rDest.m_nHp           = m_nHp;   // 训兵血量 
+	rDest.m_nBuildId      = m_nBuildId;
+	rDest.m_nQueueIndex   = m_nQueueIndex;
+}
+void TroopTrain::SerializeFromDB(const DBTroopTrain& rSource)
+{
+	m_ID            = rSource.m_ID ; // ID
+	m_nType         = rSource.m_nType; // 兵种类型
+	m_nBeginTime    = rSource.m_nBeginTime; // 开始时间
+	m_nCompleteTime = rSource.m_nCompleteTime; // 完成时间
+	m_nHp           = rSource.m_nHp;   // 训兵血量 
+	m_nBuildId      = rSource.m_nBuildId;
+	m_nQueueIndex   = rSource.m_nQueueIndex;
+}
+
 
 BuildConstruct::BuildConstruct(City &rCity)
 	: m_City(rCity)

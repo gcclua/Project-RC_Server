@@ -42,4 +42,13 @@ MESSAGE_IMPL(MarchOpenCopySceneMsg)
 MESSAGE_IMPL(ObjTrackTargetMsg);
 MESSAGE_IMPL(ObjAttackTargetMsg)
 MESSAGE_IMPL(UpdateMarchMsg);
+MESSAGE_IMPL(ObjHurtMsg);
+
+MESSAGE_IMPL(ReqArrangChangeMsg)
+MESSAGE_IMPL(RetArrangChangeMsg)
+
+MESSAGE_IMPL(ReqMarchSetPosMsg)
+MESSAGE_IMPL(RetMarchSetPosMsg)
+MESSAGE_IMPL(RetBattleEndMsg)
+MESSAGE_IMPL(RetBattleStartMsg)
 

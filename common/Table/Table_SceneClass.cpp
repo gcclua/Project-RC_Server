@@ -19,6 +19,7 @@
 
 
 
+
 bool Table_SceneClass::__Load(DBC_Loader & loader)
  {
  __ENTER_FUNCTION
@@ -70,6 +71,7 @@ loader.ReadDirect(m_DefencePosZ[7],(tint32)ID_DEFENCEPOSZ8);
 loader.ReadDirect(m_DefencePosZ[8],(tint32)ID_DEFENCEPOSZ9);
 loader.ReadDirect(m_DefencePosZ[9],(tint32)ID_DEFENCEPOSZ10);
 loader.ReadDirect(m_DefencePosZ[10],(tint32)ID_DEFENCEPOSZ11);
+loader.ReadDirect(m_EdgeLength,(tint32)ID_EDGELENGTH);
 loader.ReadDirect(m_Length,(tint32)ID_LENGTH);
 loader.ReadDirect(m_Name,(tint32)ID_NAME);
 loader.ReadDirect(m_Obstacle,(tint32)ID_OBSTACLE);

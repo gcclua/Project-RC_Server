@@ -61,23 +61,23 @@ private:
 public:
  tint32 getMarchLineXCount() const { return 4; } 
  private:
- tint32 m_MarchLineX[4];
+ tfloat32 m_MarchLineX[4];
  public:
- tint32 GetMarchLineXbyIndex(tint32 idx) const 
+ tfloat32 GetMarchLineXbyIndex(tint32 idx) const 
  {
  if(idx>=0 && idx<4) return m_MarchLineX[idx];
- return -1;
+ return 0.0f;
  }
 
 public:
  tint32 getMarchLineZCount() const { return 4; } 
  private:
- tint32 m_MarchLineZ[4];
+ tfloat32 m_MarchLineZ[4];
  public:
- tint32 GetMarchLineZbyIndex(tint32 idx) const 
+ tfloat32 GetMarchLineZbyIndex(tint32 idx) const 
  {
  if(idx>=0 && idx<4) return m_MarchLineZ[idx];
- return -1;
+ return 0.0f;
  }
 
 private:

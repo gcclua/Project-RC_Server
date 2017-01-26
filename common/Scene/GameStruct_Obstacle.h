@@ -13,9 +13,9 @@ struct ObstacleFileHeader
 
 struct ObstacleFileItem
 {
-	int	m_nX;
-	int	m_nZ;
-	int		m_nValue;
+	tfloat32	m_fX;
+	tfloat32	m_fZ;
+	tint32		m_nValue;
 };
 
 class SceneObstacle

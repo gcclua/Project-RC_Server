@@ -1,9 +1,9 @@
-SkillExID	Desc	BaseId	SkillDesc	level	SkillLogic	LogicParam01	LogicParam02	LogicParam03	LogicParam04	RefixThreat	Radius	CDTimeId	SkillDelayTime	SkillContinueTime	DelType	DelNum	NextSkillId	Impact_01	Impact_2	Impact_03	Impact_04	Impact_05	Impact_06	SatrtMotionId	SecondMotionId	CameraRockId	CameraRockRate	SceneEffectId	BulletEffectID_01	BulletEffectID_02	BulletEffectID_03	RangeEffectType	RangeEffectTarType	RangeEffectSize01	RangeEffectSize02
-INT	STRING	INT	STRING	INT	INT	INT	INT	INT	INT	INT	FLOAT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT
-#MAX_ID=99999;MAX_RECORD=5000;TableType=Hash;																																			
-#程序不读 ID	描述	对应SkillBaseId	技能描述	技能等级	技能逻辑ID	逻辑参数1	逻辑参数2	逻辑参数3	逻辑参数4	仇恨值修正	范围半径	CDTimeId	技能延迟生效时间（毫秒）	技能持续时间（毫秒）	消耗1类型（101 血值 102 血百分比 201蓝值 202蓝百分比 301战意值 302战意百分比 401金币）	消耗1数值	下一个技能	效果1ID	效果2ID	效果3ID	效果4ID	效果5ID	效果6ID	起始动作ID	备用动作ID	震屏ID	震屏权重	技能全屏特效ID	子弹1特效ID	子弹2特效ID	子弹3特效ID	范围特效类型（-1 无需求 0 环形 1圆形 2矩形 3箭头）	范围特效的目标类型（-1 无需求 0自身 1目标对象）	范围特效大小1(圆的半径 环的外圆半径 矩形的长 箭头的朝向（180表示正前方） )	范围特效大小2（矩形的宽）
-#此行必须有!!客户端确定是否需要读到内存	规则为填写S则不读，否则就会读取到客户端				S	S	S	S	S	S			S				S	S	S	S	S	S	S												
-0	勿动	480	以下职业技能号段	1	0	-1	-1	-1	-1	0	10	1	0	1500	-1	20	-1	1	-1	-1	-1	-1	-1	217	-1	-1	0	-1	-1	-1	-1	-1	-1	-1	-1
-11000	近战普通攻击	100	攻击单个近身敌人，每击造成100%攻击力的伤害。自动连续攻击。	1	0	-1	-1	-1	-1	0	10	1	0	1500	-1	0	110	1	-1	-1	-1	-1	-1	173	173	-1	0	-1	-1	-1	-1	-1	-1	-1	-1
-11001	远程普通攻击	101	攻击单个远程敌人，每击造成100%攻击力的伤害。自动连续攻击。	1	0	-1	-1	-1	-1	0	20	1	500	1500	-1	0	110	1	-1	-1	-1	-1	-1	173	173	-1	0	-1	-1	-1	-1	-1	-1	-1	-1
-11002	英雄技能	102	向当前目标周围矩形区域进行重击，造成150%攻击力的伤害，特效为前方范围	1	5	100	10	20	-1	0	10	10	0	2000	301	100	-1	2	-1	-1	-1	-1	-1			-1	0	-1	-1	-1	-1	2	1	20	10
+SkillExID	Desc	BaseId	SkillDesc	level	SkillLogic	LogicParam01	LogicParam02	LogicParam03	LogicParam04	RefixThreat	Radius	CDTimeId	SkillDelayTime	SkillContinueTime	DelType	DelNum	NextSkillId	Impact_01	Impact_2	Impact_03	Impact_04	Impact_05	Impact_06	SatrtMotionId	SecondMotionId	CameraRockId	CameraRockRate	SceneEffectId	BulletEffectID_01	BulletEffectID_02	BulletEffectID_03	RangeEffectType	RangeEffectTarType	RangeEffectSize01	RangeEffectSize02	SkillDataID
+INT	STRING	INT	STRING	INT	INT	INT	INT	INT	INT	INT	FLOAT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT
+#MAX_ID=99999;MAX_RECORD=5000;TableType=Hash;																																				
+#程序不读 ID	描述	对应SkillBaseId	技能描述	技能等级	技能逻辑ID	逻辑参数1	逻辑参数2	逻辑参数3	逻辑参数4	仇恨值修正	范围半径	CDTimeId	技能延迟生效时间（毫秒）	技能持续时间（毫秒）	消耗1类型（101 血值 102 血百分比 201蓝值 202蓝百分比 301战意值 302战意百分比 401金币）	消耗1数值	下一个技能	效果1ID	效果2ID	效果3ID	效果4ID	效果5ID	效果6ID	起始动作ID	备用动作ID	震屏ID	震屏权重	技能全屏特效ID	子弹1特效ID	子弹2特效ID	子弹3特效ID	范围特效类型（-1 无需求 0 环形 1圆形 2矩形 3箭头）	范围特效的目标类型（-1 无需求 0自身 1目标对象）	范围特效大小1(圆的半径 环的外圆半径 矩形的长 箭头的朝向（180表示正前方） )	范围特效大小2（矩形的宽）	
+#此行必须有!!客户端确定是否需要读到内存	规则为填写S则不读，否则就会读取到客户端				S	S	S	S	S	S			S				S	S	S	S	S	S	S													
+0	勿动	480	以下职业技能号段	1	2	-1	-1	-1	-1	0	10	1	0	1500	-1	20	-1	1	-1	-1	-1	-1	-1	217	-1	-1	0	-1	-1	-1	-1	-1	-1	-1	-1	10001
+11000	近战普通攻击	100	攻击单个近身敌人，每击造成100%攻击力的伤害。自动连续攻击。	1	0	-1	-1	-1	-1	0	10	1	0	1500	-1	0	110	1	-1	-1	-1	-1	-1	173	173	-1	0	-1	-1	-1	-1	-1	-1	-1	-1	10001
+11001	远程普通攻击	101	攻击单个远程敌人，每击造成100%攻击力的伤害。自动连续攻击。	1	0	-1	-1	-1	-1	0	20	1	500	1500	-1	0	110	1	-1	-1	-1	-1	-1	173	173	-1	0	-1	-1	-1	-1	-1	-1	-1	-1	10001
+11002	英雄技能	102	向当前目标周围矩形区域进行重击，造成150%攻击力的伤害，特效为前方范围	1	0	100	10	20	-1	0	10	10	0	2000	301	100	-1	2	-1	-1	-1	-1	-1			-1	0	-1	-1	-1	-1	2	1	20	10	10001

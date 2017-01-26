@@ -54,7 +54,7 @@ void ImpactLogic_000::StartEffect(Obj_Character& rSelf)
 		int nAttackAdd =rImpactData.GetParamValuebyIndex(ATTACKADD);
 		float fHpPerRefix =rImpactData.GetParamValuebyIndex(HPPERREFIX)/100.0f;
 		int nHpValueRefix =rImpactData.GetParamValuebyIndex(HPVALUEREFIX);
-		int nMaxHP =rSelf.GetCombatAttrByID((int)(COMBATATTR_T::MAXHP));
+		int nMaxHP =rSelf.GetCombatAttrByID((int)(COMBATATTR_T::TOTALMAXHP));
 		int nHpDecValue =nHpValueRefix+(int)(nMaxHP*fHpPerRefix);
 		int nClientShowTimes =rImpactData.GetParamValuebyIndex(CLIENTSHOWTIMES);
 		int nClientShowInter =rImpactData.GetParamValuebyIndex(CLIENTSHOWINTER);

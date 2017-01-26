@@ -49,12 +49,18 @@ public:
 	// 更新march数据
 	bool       UpdateMarchData(const March &rMarch);
 
+	// 得到当前march的heroId
+	int64      GetHeroId(int64 nMarchId);
+
 public:
 
 	MarchPtr      GetMarchInfo(int64 nMarchId);
 
 public:
-	bool        AddTroop(int64 nMarchId,int nType,int nHp);
+	bool       AddTroopByBuildId(int64 nBuildId,int nType,int nHp,int nQueueIndex);
+	bool        AddTroop(int64 nMarchId,int nType,int nHp,int nQueueIndex);
+	bool       CheckTrainTroop(int64 nBuildId,int nType,int nQueueIndex);
+	
 
 protected:
 

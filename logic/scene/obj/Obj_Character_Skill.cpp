@@ -274,7 +274,20 @@ void Obj_Character::ActivateSkill(SkillInfo_T& skillInfo)
 			MsgPtr->m_nSceneId  = GetSceneInstID();
 			//广播
 			
-			rScene.BroadCast_InSight_Include(MsgPtr,GetID());		
+			SendMessage2User(GetPlayerId(),MsgPtr);	
+
+			Obj_CharacterPtr pTarget = GetScene().GetCharacterByID(skillInfo.m_nTargetId);
+			if (pTarget != null_ptr)
+			{
+				RetUserSkillMsgPtr TMsgPtr = POOLDEF_NEW(RetUserSkillMsg);
+				AssertEx(TMsgPtr,"");
+				TMsgPtr->m_nSkillId = skillInfo.m_nSkillId;
+				TMsgPtr->m_nSenderId = GetID();
+				TMsgPtr->m_nTargetId = skillInfo.m_nTargetId;
+				TMsgPtr->m_nSceneId  = GetSceneInstID();
+				SendMessage2User(pTarget->GetPlayerId(),TMsgPtr);	
+			}
+
 			
 			m_CurSkillLogicPtr->OnActivate(*this);
 		}
@@ -642,7 +655,7 @@ bool Obj_Character::IsDepleteEnough(int nSKillDelType,int nSkillDelValue)
 			break;
 		case SKILLDELANDGAINTYPE::HPPER ://HP的百分比
 			{
-				int nMaxHp =GetCombatAttrByID(COMBATATTR_T::MAXHP);
+				int nMaxHp =GetCombatAttrByID(COMBATATTR_T::TOTALMAXHP);
 				int nNewHp =(int)(m_nCurHp -nMaxHp*nSkillDelValue/100.0f);
 				if (nNewHp <=0)
 				{
@@ -702,7 +715,7 @@ bool Obj_Character::SkillDeplete(int nSKillDelType,int nSkillDelValue,Table_Skil
 			break;
 		case SKILLDELANDGAINTYPE::HPPER://HP的百分比
 			{
-				int nMaxHp =GetCombatAttrByID(COMBATATTR_T::MAXHP);
+				int nMaxHp =GetCombatAttrByID(COMBATATTR_T::TOTALMAXHP);
 				int nNeedHp =(int)(nMaxHp*nSkillDelValue/100.0f);
 				int nNewHp =m_nCurHp-nNeedHp;
 				if (nNewHp >=0)

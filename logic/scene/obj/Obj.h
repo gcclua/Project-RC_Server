@@ -63,7 +63,11 @@ protected:
 protected:
 	ScenePos m_ScenePos;
 
-
+public:
+	int  GetBlock() const {return m_nBlock;};
+	void Set_Block(int val) {m_nBlock = val;}
+private:
+	int m_nBlock;
 
 public:
 	SceneClassID GetSceneClassID(void) const;

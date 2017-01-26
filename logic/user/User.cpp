@@ -7,6 +7,7 @@
 #include "Message/LoginMsg.h"
 #include "Message/SceneMsg.h"
 #include "Message/DBMsg.h"
+#include "Message/CityMsg.h"
 #include "service/MessageOp.h"
 #include "packet/Packet/CG_REQ_NEAR_LIST_PAK.h"
 #include "DictionaryFormat/DictionaryFormat.h"
@@ -29,6 +30,8 @@
 #include "packet/Packet/GC_ROBOT_OPEN_PAK.h"
 #include "packet/Packet/GC_ASSIGN_HERO_PAK.h"
 #include "packet/Packet/CG_ASSIGN_HERO_PAK.h"
+#include "packet/Packet/CG_BATTLEPREPARE_PAK.h"
+#include "packet/Packet/CG_MARCH_MOVE_PAK.h"
 #include "packet/Packet/GC_SEND_MARCH_PAK.h"
 #include "packet/Packet/GC_LOGIN_RET_PAK.h"
 #include "packet/Packet/GC_BATTLEINFOR_PAK.h"
@@ -38,6 +41,11 @@
 #include "packet/Packet/GC_OBJGETHURT_PAK.h"
 #include "packet/Packet/GC_FIGHT_PAK.h"
 #include "packet/Packet/GC_BUILDING_LEVELUP_PAK.h"
+#include "packet/Packet/GC_TROOP_TRAIN_PAK.h"
+#include "packet/Packet/GC_BATTLEPREPARE_PAK.h"
+#include "packet/Packet/GC_BATTLEEND_PAK.h"
+#include "packet/Packet/GC_BATTLESTART_PAK.h"
+#include "packet/Packet/GC_TROOPTRAIN_OVER_PAK.h"
 #include "GuidDefine.h"
 #include "Table/Table_CityBuildingSlot.h"
 
@@ -119,13 +127,13 @@ void User::InitAsCreateNewChar(int nTileId,int nX,int nZ)
 {
 	__ENTER_FUNCTION
 
-
+		CacheLog(LOGDEF_INST(CreateChar),"InitAsCreateNewChar:: start  \1 userId=%d,\2 tileid=%d,\3 time=%d",m_guid,nTileId,gTimeManager.GetANSITime());
 		DBReqCreateCityMsgPtr MsgPtr = POOLDEF_NEW(DBReqCreateCityMsg);
 		AssertEx(MsgPtr,"");
 		MsgPtr->m_Data.m_UserId = m_guid;
 		MsgPtr->m_Data.m_tileID = nTileId;
-		MsgPtr->m_Data.m_nPosX  = nX;
-		MsgPtr->m_Data.m_nPosZ  = nZ;
+		MsgPtr->m_Data.m_fPosX  = (tfloat32)nX;
+		MsgPtr->m_Data.m_fPosZ  = (tfloat32)nZ;
 		int64 nCityId = GUIDDEF_GEN(City);
 		MsgPtr->m_Data.m_nCityID = nCityId;
 		MsgPtr->m_Data.m_nFood   = _GameConfig().m_nDefaultFood;
@@ -157,6 +165,9 @@ void User::InitAsCreateNewChar(int nTileId,int nX,int nZ)
 				DBMarch rMarch;
 				rMarch.InitMarch(m_guid,nCityId,nBuildId);
 				MsgPtr->m_Data.m_lstMarch.push_back(rMarch);
+				DBTroopTrain rTroopTrain;
+				rTroopTrain.InitTrain(nBuildId,nCityId);
+				MsgPtr->m_Data.m_lstTrain.push_back(rTroopTrain);
 			}
 		}
 
@@ -170,7 +181,7 @@ void User::InitAsCreateNewChar(int nTileId,int nX,int nZ)
 
 		SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
 
-		
+		CacheLog(LOGDEF_INST(CreateChar),"InitAsCreateNewChar:: end  \1 userId=%d,\2 tileid=%d,\3 time=%d",m_guid,nTileId,gTimeManager.GetANSITime());
 
 	__LEAVE_FUNCTION
 }
@@ -228,7 +239,7 @@ void  User::FillGCLogin(::GC_LOGIN_RET &rPacket)
 		pCityManager->FileData(rPacket.mutable_city());
 
 		HeroManager* pHeroManage = (HeroManager*)GetBaseManager(EMANAGERTYPE_HERO);
-		AssertEx(pCityManager,"");
+		AssertEx(pHeroManage,"");
 		pHeroManage->FileData(rPacket.mutable_herolist());
 
 		MarchManager* pMarchManage = (MarchManager*)GetBaseManager(EMANAGERTYPE_MARCH);
@@ -286,6 +297,7 @@ bool User::SendMarchIntoMap(int64 nMarchId)
 	 ReqMarchStartMsgPtr MsgPtr = POOLDEF_NEW(ReqMarchStartMsg);
 
 	 MsgPtr->m_Pos = pCityManager->GetPos();
+	 pMarch->SetPos(pCityManager->GetPos());
 	 MsgPtr->m_March = *pMarch;
 	 SendMessage2Srv(ServiceID::SCENE,MsgPtr);
 
@@ -308,10 +320,12 @@ bool User::AssignHeroToMarch(int64 nMarchId,int64 nHeroId)
 		MarchManager* pMarchManager = (MarchManager*)GetBaseManager(EMANAGERTYPE_MARCH);
 		AssertEx(pMarchManager,"");
 
-		if (!pMarchManager->CheckAssignHero(nHeroId))
+		if (!pMarchManager->CheckAssignHero(nMarchId))
 		{
 			return false;
 		}
+
+		int64 curHeroId = pMarchManager->GetHeroId(nMarchId);
 
 		HeroPtr pHero = pHeroManager->GetHero(nHeroId);
 
@@ -319,6 +333,12 @@ bool User::AssignHeroToMarch(int64 nMarchId,int64 nHeroId)
 
 		pMarchManager->AssignHeroToMarch(nMarchId,*pHero);
 		pHeroManager->AssignHeroToMarch(nHeroId,nMarchId);
+
+		if (curHeroId >0)
+		{
+			pHeroManager->UnAssignHero(curHeroId);
+		}
+
 
 		return true;
 	__LEAVE_FUNCTION
@@ -344,12 +364,72 @@ void User::Tick_Save(const TimeInfo& rTimeInfo)
 	__LEAVE_FUNCTION
 }
 
+tuint32 User::HandlePacket(::CG_Troop_Train &rPacket)
+{
+	__ENTER_FUNCTION
+
+	MarchManager* pMarchManager = (MarchManager*)GetBaseManager(EMANAGERTYPE_MARCH);
+	AssertEx(pMarchManager,"");
+	Packets::GC_TROOP_TRAIN_PAK pak;
+	if (!pMarchManager->CheckTrainTroop(rPacket.buildid(),rPacket.trooptype(),rPacket.queueindex()))
+	{
+		pak.m_PacketData.set_ret(2);
+		SendPacket(pak);
+		return false;
+	}
+
+
+		CityManager* pCityManager = (CityManager*)GetBaseManager(EMANAGERTYPE_CITY);
+	AssertEx(pCityManager,"");
+	
+	pCityManager->BeginTrainTroop(rPacket.buildid(),rPacket.queueindex(),rPacket.trooptype(),rPacket.count(),(GC_Troop_Train*)(&pak.m_PacketData));
+	SendPacket(pak);
+
+	return PACKET_EXE_CONTINUE;
+	__LEAVE_FUNCTION
+		return PACKET_EXE_CONTINUE;
+}
+
 tuint32 User::HandlePacket(::CG_OBJPOSLIST &rPacket)
 {
 	__ENTER_FUNCTION
 		ReqObjListMsgPtr MsgPtr = POOLDEF_NEW(ReqObjListMsg);
 	MsgPtr->m_nSceneId = rPacket.sceneid();
 	MsgPtr->m_ReceiverGuid = GetGuid();
+	SceneID rScene(1,rPacket.sceneid());
+	SendMessage2Scene(rScene,MsgPtr);
+	return PACKET_EXE_CONTINUE;
+	__LEAVE_FUNCTION
+		return PACKET_EXE_CONTINUE;
+}
+
+tuint32 User::HandlePacket(::CG_MARCH_MOVE &rPacket)
+{
+	__ENTER_FUNCTION
+		ReqMarchSetPosMsgPtr MsgPtr = POOLDEF_NEW(ReqMarchSetPosMsg);
+		MsgPtr->m_fPosX = (tfloat32)rPacket.posx();
+		MsgPtr->m_fPosZ = (tfloat32)rPacket.posz();
+		MsgPtr->m_ReceiverGuid = rPacket.marchid();
+		SceneID rScene(0,0);
+		SendMessage2Scene(rScene,MsgPtr);
+		return PACKET_EXE_CONTINUE;
+	__LEAVE_FUNCTION
+		return PACKET_EXE_CONTINUE;
+}
+
+tuint32 User::HandlePacket(::CG_BATTLEPREPARE &rPacket)
+{
+	__ENTER_FUNCTION
+		ReqArrangChangeMsgPtr MsgPtr = POOLDEF_NEW(ReqArrangChangeMsg);
+		MsgPtr->m_nSceneId = rPacket.sceneid();
+	MsgPtr->m_ReceiverGuid = GetGuid();
+	int nSize = rPacket.objlist_size();
+	for (int i=0;i<nSize;i++)
+	{
+		CG_OBJARRANGEINDEX* pIndex = rPacket.mutable_objlist(i);
+		MsgPtr->m_lstArrange.push_back(pIndex->arrangeindex());
+		MsgPtr->m_lstObj.push_back(pIndex->objid());
+	}
 	SceneID rScene(1,rPacket.sceneid());
 	SendMessage2Scene(rScene,MsgPtr);
 	return PACKET_EXE_CONTINUE;
@@ -415,7 +495,7 @@ tuint32 User::HandlePacket(::CG_SKILL_USE &rPacket)
 		{
 			nSkillId =rPacket.skillid();
 		}
-		if (rPacket.has_targetid())
+		if (rPacket.targetid() != -1)
 		{
 			nTargetId =rPacket.targetid();
 		}
@@ -488,9 +568,9 @@ tuint32 User::HandlePacket(::CG_REQ_NEAR_LIST& rPacket)
 	__ENTER_FUNCTION
 		MarchReqNearListMsgPtr MsgPtr = POOLDEF_NEW(MarchReqNearListMsg);
 		AssertEx(MsgPtr, "");
-		MsgPtr->m_nReceiveObjId = rPacket.marchid();
+		MsgPtr->m_nReceiveObjId = rPacket.blockid();
 		MsgPtr->m_ReceiverGuid = GetGuid();
-		SceneID rScene(invalid_id,rPacket.sceneid());
+		SceneID rScene(0,0);
 		SendMessage2Scene(rScene,MsgPtr);
 		return PACKET_EXE_CONTINUE;
 	__LEAVE_FUNCTION
@@ -512,8 +592,8 @@ tuint32 User::HandlePacket(::CG_MOVE &rPacket)
 		{
 			for (tint32 i = 0; i < nSize; i++)
 			{
-				MsgPtr->m_nPosX.push_back(rPacket.posx(i));
-				MsgPtr->m_nPoxZ.push_back(rPacket.posz(i));
+				MsgPtr->m_fPosX.push_back((tfloat32)rPacket.posx(i));
+				MsgPtr->m_fPoxZ.push_back((tfloat32)rPacket.posz(i));
 			}
 		}
 		SceneID rScene(invalid_id,rPacket.sceneid());
@@ -753,6 +833,27 @@ void User::HandleMessage(const RetMarchStartMsg& rMsg)
 	__LEAVE_FUNCTION
 }
 
+void User::HandleMessage(const RetBattleStartMsg& rMsg)
+{
+	__ENTER_FUNCTION
+		Packets::GC_BATTLESTART_PAK pak;
+
+	pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
+	SendPacket(pak);
+	__LEAVE_FUNCTION
+}
+
+void User::HandleMessage(const RetBattleEndMsg& rMsg)
+{
+	__ENTER_FUNCTION
+		Packets::GC_BATTLEEND_PAK pak;
+
+		pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
+		pak.m_PacketData.set_camp(rMsg.m_camp);
+	SendPacket(pak);
+	__LEAVE_FUNCTION
+}
+
 void User::HandleMessage(const MarchRetFightMsg &rMsg)
 {
 	__ENTER_FUNCTION
@@ -760,6 +861,7 @@ void User::HandleMessage(const MarchRetFightMsg &rMsg)
 		pak.m_PacketData.set_marchid(rMsg.m_nMarchId);
 		pak.m_PacketData.set_ret(rMsg.m_nResult);
 		pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
+		pak.m_PacketData.set_sceneclass(rMsg.m_nSceneClass);
 		SendPacket(pak);
 	__LEAVE_FUNCTION
 }
@@ -785,9 +887,10 @@ void User::HandleMessage(const RetObjListMsg &rMsg)
 		GC_OBJPOS * pObj = pak.m_PacketData.add_objposlist();
 		pObj->set_objid(rMsg.m_objList[i].m_objId);
 		pObj->set_hp(rMsg.m_objList[i].m_hp);;
-		pObj->set_posx(rMsg.m_objList[i].m_posX);
-		pObj->set_posz(rMsg.m_objList[i].m_posZ);
+		pObj->set_posx((int)(rMsg.m_objList[i].m_fPosX*100));
+		pObj->set_posz((int)(rMsg.m_objList[i].m_fPosZ*100));
 		pObj->set_objstate(rMsg.m_objList[i].m_nState);
+		pObj->set_targetid(rMsg.m_objList[i].m_nTargetId);
 	}
 
 	SendPacket(pak);
@@ -799,7 +902,8 @@ void User::HandleMessage(const RetBattleInfoMsg& rMsg)
 	__ENTER_FUNCTION
 		Packets::GC_BATTLEINFOR_PAK pak;
 		pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
-		
+		pak.m_PacketData.set_camp(rMsg.m_nCamp);
+		pak.m_PacketData.set_currentstate(rMsg.m_nState);
 		int nSize = (int)rMsg.m_objList.size();
 		for (int i=0;i<nSize;i++)
 		{
@@ -819,8 +923,8 @@ void User::HandleMessage(const RetBattleInfoMsg& rMsg)
 			pObjInfo->set_level(rMsg.m_objList[i].m_level);
 			pObjInfo->set_defence(rMsg.m_objList[i].m_defence);
 			pObjInfo->set_maxhp(rMsg.m_objList[i].m_maxHp);
-			pObjInfo->set_posx(rMsg.m_objList[i].m_posX);
-			pObjInfo->set_posz(rMsg.m_objList[i].m_posZ);
+			pObjInfo->set_posx((int)(rMsg.m_objList[i].m_fPosX*100));
+			pObjInfo->set_posz((int)(rMsg.m_objList[i].m_fPosZ*100));
 			pObjInfo->set_sp(rMsg.m_objList[i].m_xp);
 			pObjInfo->set_unitcount(rMsg.m_objList[i].m_unitCount);
 
@@ -908,8 +1012,8 @@ void User::HandleMessage(const Force_SetPosMsg& rMsg)
 	__ENTER_FUNCTION
 	Packets::GC_FORCE_SETPOS_PAK pak;
 	pak.m_PacketData.set_objid(rMsg.m_nObjId);
-	pak.m_PacketData.set_posx(rMsg.m_nPosX);
-	pak.m_PacketData.set_posz(rMsg.m_nPoxZ);
+	pak.m_PacketData.set_posx((int)(rMsg.m_fPosX*100));
+	pak.m_PacketData.set_posz((int)(rMsg.m_fPosZ*100));
 	pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
 	SendPacket(pak);
 	__LEAVE_FUNCTION
@@ -961,7 +1065,7 @@ void User::HandleMessage(const ObjAttackTargetMsg &rMsg)
 		Packets::GC_OBJPREPAREFORATTACK_PAK pak;
 		pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
 		pak.m_PacketData.set_aimobjid(rMsg.m_nTargetId);
-		pak.m_PacketData.set_aimobjid(rMsg.m_nObjId);
+		pak.m_PacketData.set_objid(rMsg.m_nObjId);
 		SendPacket(pak);
 
 	__LEAVE_FUNCTION
@@ -1003,6 +1107,17 @@ void User::HandleMessage(const Update_Animation_State &rMsg)
 	__LEAVE_FUNCTION
 }
 
+void User::HandleMessage(const RetArrangChangeMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		Packets::GC_BATTLEPREPARE_PAK pak;
+	    pak.m_PacketData.set_ret(rMsg.m_ret);
+		SendPacket(pak);
+		
+		
+	__LEAVE_FUNCTION
+}
+
 void User::HandleMessage(const RetUserSkillMsg &rMsg)
 {
 	__ENTER_FUNCTION
@@ -1027,8 +1142,8 @@ void User::HandleMessage(const RetMarchMoveMsg &rMsg)
 	{
 
 		pak.m_PacketData.add_posserial(rMsg.m_nSerial[i]);
-		pak.m_PacketData.add_posx(rMsg.m_nPosX[i]);
-		pak.m_PacketData.add_posz(rMsg.m_nPoxZ[i]);;
+		pak.m_PacketData.add_posx((int)(rMsg.m_fPosX[i]*100));
+		pak.m_PacketData.add_posz((int)(rMsg.m_fPoxZ[i]*100));;
 	}
 	SendPacket(pak);
 	__LEAVE_FUNCTION
@@ -1039,8 +1154,8 @@ void User::HandleMessage(const RetMarchTeleMoveMsg &rMsg)
 	__ENTER_FUNCTION
 	Packets::GC_TELEMOVE_PAK teleMovepak;
 	teleMovepak.m_PacketData.set_objid(rMsg.m_nObjId);
-	teleMovepak.m_PacketData.set_targetposx(rMsg.m_nPosX);
-	teleMovepak.m_PacketData.set_targetposz(rMsg.m_nPoxZ);
+	teleMovepak.m_PacketData.set_targetposx((int)(rMsg.m_fPosX*100));
+	teleMovepak.m_PacketData.set_targetposz((int)(rMsg.m_fPoxZ*100));
 	teleMovepak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
 	
 	SendPacket(teleMovepak);
@@ -1053,8 +1168,8 @@ void User::HandleMessage(const MarchStopMsg &rMsg)
 	Packets::GC_STOP_PAK pak;
 	pak.m_PacketData.set_objid(rMsg.m_nObjId);
 	pak.m_PacketData.set_posserial(rMsg.m_nSerial);
-	pak.m_PacketData.set_posx(rMsg.m_nX);
-	pak.m_PacketData.set_posz(rMsg.m_nZ);
+	pak.m_PacketData.set_posx((int)(rMsg.m_fX*100));
+	pak.m_PacketData.set_posz((int)(rMsg.m_fZ*100));
 	pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
 	SendPacket(pak);
 	__LEAVE_FUNCTION
@@ -1068,7 +1183,7 @@ void User::HandleMessage(const MarchRetNearListMsg& rMsg)
 	for (tint32 i = 0; i < nRealCount; i++)
 	{
 		MarchBaseInfo rMarch = rMsg.m_BaseMarchVec[i];
-		if (rMarch.m_Guid != invalid_id)
+		if (rMarch.m_Guid == invalid_id)
 		{
 			continue;
 		}
@@ -1076,15 +1191,33 @@ void User::HandleMessage(const MarchRetNearListMsg& rMsg)
 		pak.m_PacketData.add_guid(rMarch.m_Guid);
 		pak.m_PacketData.add_name(rMarch.m_szName.GetCText());
 		pak.m_PacketData.add_level(rMarch.m_nLevel);
-		nRealCount ++;
+		pak.m_PacketData.add_posx((int)rMarch.m_fPosX*100);
+		pak.m_PacketData.add_posz((int)rMarch.m_fPosZ*100);
 	}
 	pak.m_PacketData.set_sceneid(rMsg.m_nSceneId);
-	if (nRealCount > 0)
-	{
-		SendPacket(pak);
-	}
+
+	SendPacket(pak);
 
 	__LEAVE_FUNCTION
 
+}
+
+void User::HandleMessage(const TrainTroopOverMsg& rMsg)
+{
+	__ENTER_FUNCTION
+		MarchManager* pMarchManger = (MarchManager*)GetBaseManager(EMANAGERTYPE_MARCH);
+		AssertEx(pMarchManger,"");
+
+		pMarchManger->AddTroopByBuildId(rMsg.m_nBuildId,rMsg.m_nType,rMsg.m_nHp,rMsg.m_nQueueIndex);
+
+		Packets::GC_TROOPTRAIN_OVER_PAK pak;
+		pak.m_PacketData.set_ret(0);
+		pak.m_PacketData.set_buildid(rMsg.m_nBuildId);
+		pak.m_PacketData.set_queueid(rMsg.m_ID);
+		pak.m_PacketData.set_trooptype(rMsg.m_nType);
+		pak.m_PacketData.set_hp(rMsg.m_nHp);
+		SendPacket(pak);
+
+	__LEAVE_FUNCTION
 }
 

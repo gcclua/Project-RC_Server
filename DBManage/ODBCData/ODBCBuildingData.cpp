@@ -118,7 +118,7 @@ bool ODBCBuildIngData::ParseResult(DBCity* pResult)
 				DBCity& rCity = *pResult;	  			
 
 			tint32 ErrorCode;
-			for (tint32 i = 0; i < BUIDINGTYPE_MAX; ++i)
+			for (tint32 i = 0; i < BUILDING_MAX_SLOT; ++i)
 			{
 				DBBuilding &rBuild = rCity.m_BuildingList[i];
 				rBuild.CleanUp();

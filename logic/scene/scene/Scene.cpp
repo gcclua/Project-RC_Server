@@ -186,8 +186,8 @@ bool Scene::FindStraight(const ScenePos &rPosStart, const ScenePos &rPosEnd, Sce
 			if (nCurDistance < nTotalDistance)
 			{
 				ScenePos StepPos;
-				StepPos.m_nX = (int)(rPosStart.m_nX + nCurDistance * ::cos(fDirection));
-				StepPos.m_nZ = (int)(rPosStart.m_nZ + nCurDistance * ::sin(fDirection));
+				StepPos.m_fX = rPosStart.m_fX + nCurDistance * ::cos(fDirection);
+				StepPos.m_fZ = rPosStart.m_fZ + nCurDistance * ::sin(fDirection);
 				if (rSceneObstacle.GetObstacleValue(StepPos) == ObstacleValue::WALKABLE)
 				{
 					rPosEndRefixed = StepPos;
@@ -243,8 +243,8 @@ bool Scene::FindDest(const ScenePos& rPosStart, const ScenePos &rPosEnd, ScenePo
 		for (float fDis = fTotalDistance; fDis > 0.1f; fDis -= 0.5f)
 		{
 			ScenePos StepPos;
-			StepPos.m_nX = (int)(rPosStart.m_nX + fDis * ::cos(fDirection));
-			StepPos.m_nZ = (int)(rPosStart.m_nZ + fDis * ::sin(fDirection));
+			StepPos.m_fX = rPosStart.m_fX + fDis * ::cos(fDirection);
+			StepPos.m_fZ = rPosStart.m_fZ + fDis * ::sin(fDirection);
 			if (rSceneObstacle.GetObstacleValue(StepPos) == ObstacleValue::WALKABLE)
 			{
 				rPosEndRefixed = StepPos;

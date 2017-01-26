@@ -39,15 +39,17 @@ void DBTroop::InitTroop(int nArrangeIndex,int nQueueIndex,int64 nMarchId)
 		m_nMarchId   = nMarchId;
 		m_nArrangeIndex   = nArrangeIndex;
 		m_nQueueIndex  = nQueueIndex;
-		m_nType        = 1;
-		m_nCount       = 18;
+		if (nQueueIndex == 0)
+		{
+			m_nType        = nQueueIndex % 2+1;
+			m_nCount       = 1;
+			Table_Troop const * pTableTroop = GetTable_TroopByID(m_nType);
+			AssertEx(pTableTroop,"");
 
-		Table_Troop const * pTableTroop = GetTable_TroopByID(m_nType);
-		AssertEx(pTableTroop,"");
+			Table_RoleBaseAttr const * pRoleBase = GetTable_RoleBaseAttrByID(pTableTroop->GetDataIDbyIndex(m_nLevel-1));
 
-		Table_RoleBaseAttr const * pRoleBase = GetTable_RoleBaseAttrByID(pTableTroop->GetDataIDbyIndex(m_nLevel-1));
-
-		m_nHp = m_nCount* pRoleBase->GetMaxHP();
+			m_nHp = m_nCount* pRoleBase->GetMaxHP();
+		}
 
 		__LEAVE_FUNCTION
 }

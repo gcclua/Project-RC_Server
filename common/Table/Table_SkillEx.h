@@ -45,6 +45,7 @@ ID_RANGEEFFECTTYPE,
 ID_RANGEEFFECTTARTYPE,
 ID_RANGEEFFECTSIZE01,
 ID_RANGEEFFECTSIZE02,
+ID_SKILLDATAID,
 ID_TAB_CURCOL_COUNT,
 MAX_ID=99999,
 MAX_RECORD=5000
@@ -170,6 +171,11 @@ private:
  tint32 m_SkillContinueTime;
  public:
  tint32 GetSkillContinueTime() const { return m_SkillContinueTime; }
+
+private:
+ tint32 m_SkillDataID;
+ public:
+ tint32 GetSkillDataID() const { return m_SkillDataID; }
 
 private:
  tint32 m_SkillDelayTime;

@@ -14,6 +14,7 @@ class MarchMoveMsg;
 class MarchOpenCopySceneMsg;
 class MarchLeaveFightMsg;
 class AskJoinCopySceneMsg;
+class ReqMarchSetPosMsg;
 
 
 class Obj_March : public Obj_Character
@@ -164,6 +165,7 @@ public:
 	//tuint32 HandlePacket(::CG_OPEN_COPYSCENE &rPacket);
 	void HandleMessage(const MarchOpenCopySceneMsg &rMsg);
 	void HandleMessage(const MarchLeaveFightMsg &rMsg);
+	void HandleMessage(const ReqMarchSetPosMsg &rMsg);
 	
 	//tuint32 HandlePacket(::CG_LEAVE_COPYSCENE &rPacket);
 
@@ -228,10 +230,7 @@ private:
 	// 附近玩家列表相关 begin
 	//////////////////////////////////////////////////////////////////////////
 public:
-	void HandleMessage(const MarchReqNearListMsg &rMsg);
 	void HandleMessage(const MarchMoveMsg &rMsg);
-private:
-	void	SendSceneMarchListToClient(const MarchReqNearListMsg &rMsg);
 	//////////////////////////////////////////////////////////////////////////
 	// 附近玩家列表相关 end
 	//////////////////////////////////////////////////////////////////////////

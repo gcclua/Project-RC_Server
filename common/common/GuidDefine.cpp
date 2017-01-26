@@ -2,7 +2,7 @@
 #include "GuidLoader.h"
 
 //添加新的Guid生成器，需要修改数据库
-STATIC_ASSERT(GuidType::MAX == 6);
+STATIC_ASSERT(GuidType::MAX == 7);
 
 GUIDDEF_IMPL(Char);
 GUIDDEF_IMPL(City);
@@ -10,6 +10,7 @@ GUIDDEF_IMPL(Building);
 GUIDDEF_IMPL(Hero);
 GUIDDEF_IMPL(March);
 GUIDDEF_IMPL(Troop);
+GUIDDEF_IMPL(TroopTrain);
 
 void InitGuidModule(  )
 {
@@ -32,6 +33,7 @@ void InitGuidModule(  )
 	GUIDDEF_INIT(Hero,	    GuidType::HERO,		    guidinfo[GuidType::HERO].m_Serial);
 	GUIDDEF_INIT(March,	    GuidType::MARCH,		guidinfo[GuidType::MARCH].m_Serial);
 	GUIDDEF_INIT(Troop,	    GuidType::TROOP,		guidinfo[GuidType::TROOP].m_Serial);
+	GUIDDEF_INIT(TroopTrain,GuidType::TROOPTRAIN,	guidinfo[GuidType::TROOPTRAIN].m_Serial);
 
 	__LEAVE_FUNCTION
 }

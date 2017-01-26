@@ -42,11 +42,13 @@ bool ODBCMarchData::Save(DBMarch* pSource)
 		rMarchData.m_nPlayerId,
 		rMarchData.m_nCityId,
 		rMarchData.m_nBuildId,
-		rMarchData.m_pos.m_nX,
-		rMarchData.m_pos.m_nZ,
+		(tint32)(rMarchData.m_pos.m_fX*100),
+		(tint32)(rMarchData.m_pos.m_fZ*100),
 		rMarchData.m_nBeginTime,
 		rMarchData.m_nEndTime,
-		rMarchData.m_nStatus
+		rMarchData.m_nStatus,
+		rMarchData.m_nInstSceneId,
+		rMarchData.m_nClassSceneId
 		);
 	if(!ODBCBase::LongSave_Execute())
 	{
@@ -153,10 +155,11 @@ bool ODBCMarchData::ParseResult(DBFullUserData* pResult)
 				DB_State,
 				DB_BeginTime,
 				DB_EndTime,
-				
+				DB_InstId,
+				DB_ClassID,
 
 			};
-			AssertEx(mResultCount<=1,"");
+			AssertEx(mResultCount>=1,"");
 			AssertEx(mInterface,"");
 
 			tint32	   ErrorCode;
@@ -175,12 +178,14 @@ bool ODBCMarchData::ParseResult(DBFullUserData* pResult)
 				rMarch.m_Hero.m_nHeroId = mInterface->GetLongLong(DB_HeroId,ErrorCode);
 				rMarch.m_nPlayerId      = mInterface->GetLongLong(DB_CharGuid,ErrorCode);
 				rMarch.m_nBuildId       = mInterface->GetLongLong(DB_BuildId,ErrorCode);
-				rMarch.m_pos.m_nX       = mInterface->GetInt(DB_PosX,ErrorCode);
-				rMarch.m_pos.m_nZ       = mInterface->GetInt(DB_PosZ,ErrorCode);
+				rMarch.m_pos.m_fX       = tfloat32(mInterface->GetInt(DB_PosX,ErrorCode))/100;
+				rMarch.m_pos.m_fZ       = tfloat32(mInterface->GetInt(DB_PosZ,ErrorCode))/100;
 				rMarch.m_nBeginTime     = mInterface->GetInt(DB_BeginTime,ErrorCode);
 				rMarch.m_nEndTime       = mInterface->GetInt(DB_EndTime,ErrorCode);
 				rMarch.m_nStatus        = mInterface->GetBYTE(DB_State,ErrorCode);
 				rMarch.m_nCityId        = m_CityId;
+				rMarch.m_nInstSceneId   = mInterface->GetInt(DB_InstId,ErrorCode);
+				rMarch.m_nClassSceneId  = mInterface->GetInt(DB_ClassID,ErrorCode);;
 			}
 			mInterface->Clear();
 

@@ -27,3 +27,5 @@ MESSAGE_IMPL(DBReqCreateCityMsg);
 MESSAGE_IMPL(DBRetCreateCityMsg);
 MESSAGE_IMPL(DBRetLoadMapMarchMsg);
 MESSAGE_IMPL(DBReqLoadMapMarchMsg);
+MESSAGE_IMPL(DBReqSaveTroopTrainMsg);
+MESSAGE_IMPL(DBReqSaveHeroMsg);

@@ -11,6 +11,7 @@
 
 class GC_CityData;
 class GC_Building_LevelUp;
+class GC_Troop_Train;
 
 class CityManager : public BaseManager
 {
@@ -41,6 +42,11 @@ public:
 
 	// 建筑升级
 	bool       BuildLevelUp(int64 nBuildId,GC_Building_LevelUp* pMessage);
+
+	// 开始训练兵
+	bool       BeginTrainTroop(int64 nBuildId,int nQueueIndex,int nType,int Count,GC_Troop_Train* pMessage);
+
+
 
 public:
 	void    FileData(GC_CityData* pCityData);

@@ -97,6 +97,68 @@ private:
 typedef boost::shared_ptr<TechResearch> TechResearchPtr;
 typedef std::map<int64,TechResearchPtr> TechResearchMap;
 
+class TroopTrain
+{
+public:
+	TroopTrain(City &rCity);
+	~TroopTrain();
+
+public:
+	void Tick(const TimeInfo& rTimeInfo);
+
+	void SerializeToDB(DBTroopTrain& rDest) const;
+	void SerializeFromDB(const DBTroopTrain& rSource);
+
+	void CleanUp();
+
+	void InitTrainQueue();
+
+private:
+	City& m_City;
+
+public:
+
+	int64 GetID() const {return m_ID;}
+	void  SetID(int64 nVal){m_ID = nVal;}
+
+	int  GetType() const {return m_nType;}
+	void SetType(int nVal) {m_nType = nVal;}
+
+	int  GetBeginTime() const {return m_nBeginTime;}
+	void SetBeginTime(int nVal){m_nBeginTime=nVal;}
+
+	int  GetCompleteTime() const {return m_nCompleteTime;}
+	void SetCompleteTime(int nVal){m_nCompleteTime=nVal;}
+
+	int  GetHp() const {return m_nHp;}
+	void SetHp(int val) {m_nHp = val;}
+
+	int64 GetBuildId() const {return m_nBuildId;}
+	void  SetBuildId(int64 val) {m_nBuildId=val;}
+
+	bool GetOverFlag() const {return m_bOverFlag;}
+	void SetOverFlag(bool bVal){m_bOverFlag = bVal;}
+
+	int GetQueueIndex() const {return m_nQueueIndex;}
+	void SetQueueIndex(int val) {m_nQueueIndex=val;}
+
+private:
+	bool   m_bOverFlag;
+
+private:
+
+	int64 m_ID; // ID
+	int   m_nType; // 兵种
+	int   m_nHp;   // 训兵血量
+	int   m_nBeginTime; // 开始时间
+	int   m_nCompleteTime; // 时间
+	int64 m_nBuildId;
+	int   m_nQueueIndex;
+};
+
+typedef boost::shared_ptr<TroopTrain> TroopTrainPtr;
+typedef std::map<int64,TroopTrainPtr> TroopTrainMap;
+
 class BuildConstruct
 {
 public:
@@ -147,6 +209,7 @@ typedef boost::shared_ptr<BuildConstruct> BuildConstructPtr;
 typedef std::map<int64,BuildConstructPtr> BuildConstructMap;
 
 class GC_CityData;
+class GC_TrainData;
 
 class City
 {
@@ -184,6 +247,7 @@ private:
 	// 训兵
 	void Tick_Train(const TimeInfo& rTimeInfo);
 
+
 private:
 	BuildingPtr NewBuilding(int nBuildingType);
 
@@ -196,11 +260,15 @@ public:
 	bool AddTechnology(TechnologyPtr Ptr); // 增加一个科技
 	bool AddResearch(TechResearchPtr Ptr);
 	bool AddConstruct(BuildConstructPtr Ptr);
+	bool AddTroopTrain(TroopTrainPtr Ptr);
 	
 public:
 	// 建造一个建筑物
 	bool CreateBuilding(int nType,int nSlot);
 	bool BuildingLevelUp(int64 nBuildingId);
+	bool BeginTrainTroop(int64 nBuildId,int nQueueIndex,int nType,int Count,GC_TrainData* pTrainData);
+
+	bool FileTrainData(TroopTrainPtr Ptr,GC_TrainData* pTrainData);
 
 public:
 	BuildingPtr GetBuilding(int64 Id) ;
@@ -225,6 +293,14 @@ private:
 private:
 	BuildConstructMap m_mapBuildConstruct;
 
+public:
+	TroopTrainPtr  GetTroopTrain(int64 nBuildId);
+
+private:
+	void FinishTroopTrain(TroopTrainPtr Ptr);
+
+private:
+	TroopTrainMap    m_mapTrainMap;
 
 private:
 	//BarrackTroopMap   m_mapTroop;
@@ -260,11 +336,11 @@ public:
 	int64  GetIron() const {return m_nIron;}
 	void   SetIron(int64 val) {m_nIron = val;}
 
-	int   GetPosX() const {return m_nPosX;}
-	void  SetPosX(int val) {m_nPosX = val;}
+	tfloat32   GetPosX() const {return m_fPosX;}
+	void  SetPosX(tfloat32 val) {m_fPosX = val;}
 
-	int  GetPosZ() const {return m_nPosZ;}
-	void SetPosZ(int val) {m_nPosZ = val;}
+	tfloat32  GetPosZ() const {return m_fPosZ;}
+	void SetPosZ(tfloat32 val) {m_fPosZ = val;}
 
 	int64  GetGold() const {return m_nGold;}
 	void   SetGold(int64 val){m_nGold=val;}
@@ -279,8 +355,8 @@ private:
 	int64 m_nStone; //石料
 	int64 m_nIron;  // 铁矿
 	int64 m_nGold;
-	int m_nPosX;
-	int m_nPosZ;
+	tfloat32 m_fPosX;
+	tfloat32 m_fPosZ;
 };
 
 typedef boost::shared_ptr<City> CityPtr;

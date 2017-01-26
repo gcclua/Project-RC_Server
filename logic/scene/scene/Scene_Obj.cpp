@@ -29,7 +29,7 @@ Obj_NpcPtr Scene::CreateNpc(int nDataID, const ScenePos &rPos, bool bReliveable,
 	}
 	AssertEx(NpcPtr, "");
 
-	Table_RoleBaseAttr const* pTable =GetTable_RoleBaseAttrByID(nDataID);
+	Table_RoleBaseAttr const* pTable = GetTable_RoleBaseAttrByID(nDataID);
 	if (pTable ==null_ptr)
 	{
 		return Obj_NpcPtr();
@@ -61,9 +61,11 @@ Obj_NpcPtr Scene::CreateNpc(int nDataID, const ScenePos &rPos, bool bReliveable,
 	NpcPtr->SetAlertRadius(rTable.GetSelectRadius());
 	// 战意恢复速度
 	NpcPtr->SetXpSpeed(rTable.GetXpSpeed());
+	
 	//初始化战斗属性
 	NpcPtr->MarkInitalAttrCalcDirty();
-
+	NpcPtr->CalculateFinalyAttr();
+	NpcPtr->SetCurHp(pTable->GetMaxHP()*TROOP_QUEUE_MAX_SIGCOUNT);
 	//切换到待机AI
 	NpcPtr->SwitchAI(Obj_Npc::AI_IDLE);
 	//设置npc拥有的技能
@@ -172,7 +174,7 @@ Obj_TroopPtr  Scene::CreateTroopObj(const Troop& rTroop,const ScenePos &rPos,int
 	objTroopPtr->SetArrangeIndex(rTroop.GetArrangeIndex());
 	objTroopPtr->SetScenePos(rPos);
 	objTroopPtr->GetCooldownList() = rTroop.GetCooldownList();
-	objTroopPtr->SetCurHp(rTroop.GetHp());
+	//objTroopPtr->SetCurHp(rTroop.GetHp());
 	CreateNpc(pTroop->GetDataIDbyIndex(rTroop.GetLevel()-1),rPos,false,nForce,rTroop.GetLevel(),objTroopPtr);
 
 	//初始化战斗属性
@@ -204,7 +206,7 @@ Obj_HeroPtr  Scene::CreateHeroObj(const Hero& rHero,const ScenePos &rPos,int nFo
 		objHeroPtr->SetName(rHero.GetName());
 		objHeroPtr->SetArrangeIndex(rHero.GetArrangeIndex());
 		objHeroPtr->SetScenePos(rPos);
-		objHeroPtr->SetCurHp(rHero.GetHp());
+		
 
 		objHeroPtr->GetCooldownList() = rHero.GetCooldownList();
 		CreateNpc(pHero->GetDataIDbyIndex(rHero.GetLevel()-1),rPos,false,nForce,rHero.GetLevel(),objHeroPtr);
@@ -230,7 +232,7 @@ Obj_MarchPtr Scene::CreateMarch(const March& rMarchData,const ScenePos& rPos)
 		return Obj_MarchPtr();
 	}
 
-	MarchPtr->SetScenePos(rPos);
+	MarchPtr->SetChangeScenePos(rPos);
 
 	//坐标
 	MarchPtr->SetMarch(rMarchData);

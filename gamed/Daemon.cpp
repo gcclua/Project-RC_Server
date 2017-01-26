@@ -140,8 +140,8 @@ int main(int argn, char *argv[]) // here is the entrance of daemon
         return 1;
     }
 	srand((unsigned int)time(NULL));
-    int nid;
-    safe_atoi(argv[1], nid);
+    int nid = (int)argv[1];
+    //safe_atoi(argv[1], nid);
     Daemon daemon(nid);
     daemon.start();
 	printf("daemon quit ");

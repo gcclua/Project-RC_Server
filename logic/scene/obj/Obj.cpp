@@ -10,6 +10,7 @@ Obj::Obj( void )
 	m_pScene = null_ptr;
 	m_nStealthLev = 0;
 	m_nScout = 0;
+	m_nBlock  = 0;
 }
 
 Obj::~Obj( void )
@@ -70,8 +71,8 @@ void Obj::ForceSetScenePos(ScenePos Pos)
 
 		AssertEx(MsgPtr,"");
 		MsgPtr->m_nObjId = GetID();
-		MsgPtr->m_nPosX = m_ScenePos.m_nX ;
-		MsgPtr->m_nPoxZ = m_ScenePos.m_nZ;
+		MsgPtr->m_fPosX = m_ScenePos.m_fX ;
+		MsgPtr->m_fPosZ = m_ScenePos.m_fZ;
 		MsgPtr->m_nSceneId = GetSceneInstID();
 		GetScene().BroadCast(MsgPtr);
 	}

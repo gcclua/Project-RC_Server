@@ -1,5 +1,5 @@
 #include "DBStruct_City.h"
-
+#include "GuidDefine.h"
 void DBCity::CleanUp( )
 {
 	__ENTER_FUNCTION
@@ -10,8 +10,8 @@ void DBCity::CleanUp( )
 		m_nFood     = 0;
 		m_nStone    = 0;
 		m_nIron     = 0;
-		m_nPosX     = 0;
-		m_nPosZ     = 0;
+		m_fPosX     = 0.f;
+		m_fPosZ     = 0.f;
 		m_nGold     = 0;
 		for (int i=0;i<MAX_CITY_CONSTRUCT_COUNT;i++)
 		{
@@ -22,7 +22,7 @@ void DBCity::CleanUp( )
 			m_TechResearchList[i].CleanUp();
 		}
 
-		for (int i=0;i<BUIDINGTYPE_MAX;i++)
+		for (int i=0;i<BUILDING_MAX_SLOT;i++)
 		{
 			m_BuildingList[i].CleanUp();
 		}
@@ -30,6 +30,11 @@ void DBCity::CleanUp( )
 		for (int i=0;i<TECHNOLOGYTYPE_MAX;i++)
 		{
 			m_TechList[i].CleanUp();
+		}
+
+		for (int i=0;i<(BUILDING_BARRACK_MAX+BUILDING_WALL_MAX);i++)
+		{
+			m_TrainList[i].CleanUp();
 		}
 
 		//for (int i=0;i<TROOPTYPE_MAX;i++)
@@ -49,8 +54,8 @@ void DBCity::CopyFrom(const DBCity& rSource)
 		m_nFood     = rSource.m_nFood;
 		m_nStone    = rSource.m_nStone;
 		m_nIron     = rSource.m_nIron;
-		m_nPosX     = rSource.m_nPosX;
-		m_nPosZ     = rSource.m_nPosZ;
+		m_fPosX     = rSource.m_fPosX;
+		m_fPosZ     = rSource.m_fPosZ;
 		m_nGold     = rSource.m_nGold;
 		for (int i=0;i<MAX_CITY_CONSTRUCT_COUNT;i++)
 		{
@@ -61,7 +66,7 @@ void DBCity::CopyFrom(const DBCity& rSource)
 			m_TechResearchList[i].CopyFrom(rSource.m_TechResearchList[i]);
 		}
 
-		for (int i=0;i<BUIDINGTYPE_MAX;i++)
+		for (int i=0;i<BUILDING_MAX_SLOT;i++)
 		{
 			m_BuildingList[i].CopyFrom(rSource.m_BuildingList[i]);
 		}
@@ -69,6 +74,11 @@ void DBCity::CopyFrom(const DBCity& rSource)
 		for (int i=0;i<TECHNOLOGYTYPE_MAX;i++)
 		{
 			m_TechList[i].CopyFrom(rSource.m_TechList[i]);
+		}
+
+		for (int i=0;i<(BUILDING_BARRACK_MAX+BUILDING_WALL_MAX);i++)
+		{
+			m_TrainList[i].CopyFrom(rSource.m_TrainList[i]);
 		}
 
 		//for (int i=0;i<MAX_TROOP_QUEUE;i++)
@@ -94,6 +104,43 @@ void DBTechnology::CopyFrom(const DBTechnology& rSource)
 		m_nLevel  = rSource.m_nLevel;
 		m_nType   = rSource.m_nType;
 	
+	__LEAVE_FUNCTION
+}
+
+void DBTroopTrain::CleanUp( )
+{
+	__ENTER_FUNCTION
+		m_ID = 0 ; // ID
+		m_nType = 0; // 兵种类型
+		m_nBeginTime = 0; // 开始时间
+		m_nCompleteTime = 0; // 完成时间
+		m_nCityID = 0; // 所属城市
+		m_nHp = 0;   // 训兵血量 
+		m_nBuildId = invalid_guid64;
+		m_nQueueIndex = invalid_id;
+	__LEAVE_FUNCTION
+}
+void DBTroopTrain::CopyFrom(const DBTroopTrain& rSource)
+{
+	__ENTER_FUNCTION
+		m_ID            = rSource.m_ID ; // ID
+		m_nType         = rSource.m_nType; // 兵种类型
+		m_nBeginTime    = rSource.m_nBeginTime; // 开始时间
+		m_nCompleteTime = rSource.m_nCompleteTime; // 完成时间
+		m_nCityID       = rSource.m_nCityID; // 所属城市
+		m_nHp           = rSource.m_nHp;   // 训兵血量
+		m_nBuildId      = rSource.m_nBuildId;
+		m_nQueueIndex   = rSource.m_nQueueIndex;
+	__LEAVE_FUNCTION
+}
+
+void DBTroopTrain::InitTrain(int64 nBuildId,int64 nCityId)
+{
+	__ENTER_FUNCTION
+		CleanUp();
+		m_ID = GUIDDEF_GEN(TroopTrain);
+		m_nBuildId = nBuildId;
+		m_nCityID  = nCityId;
 	__LEAVE_FUNCTION
 }
 

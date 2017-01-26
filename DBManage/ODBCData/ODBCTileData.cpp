@@ -97,10 +97,12 @@ bool ODBCTileData::ParseResult(DBTileDataPtr* pSource)
 				enum 
 				{
 					DB_TileId	=	1,
+					DB_CharID,
+					DB_CityID,
 					DB_PosX,
 					DB_PosY,
-					DB_Block,
 					DB_Type,
+					DB_State,
 				};
 
 				AssertEx(pSource,"");
@@ -118,14 +120,13 @@ bool ODBCTileData::ParseResult(DBTileDataPtr* pSource)
 						break;
 
 					rTileDataPtr->m_pData[i].m_tileID = mInterface->GetInt(DB_TileId,ErrorCode);
+					rTileDataPtr->m_pData[i].m_nUserId = mInterface->GetInt(DB_CharID,ErrorCode);
+					rTileDataPtr->m_pData[i].m_nCityId = mInterface->GetInt(DB_CityID,ErrorCode);
 					rTileDataPtr->m_pData[i].m_nPosX  = mInterface->GetInt(DB_PosX,ErrorCode);
 					rTileDataPtr->m_pData[i].m_nPosY  = mInterface->GetInt(DB_PosY,ErrorCode);
-					rTileDataPtr->m_pData[i].m_nBlock = mInterface->GetInt(DB_Block,ErrorCode);
-					rTileDataPtr->m_pData[i].m_nType  = mInterface->GetInt(DB_Type,ErrorCode);
-					mInterface->Clear();
-
 					
-
+					rTileDataPtr->m_pData[i].m_nType  = mInterface->GetInt(DB_Type,ErrorCode);
+					rTileDataPtr->m_pData[i].m_nState = mInterface->GetInt(DB_State,ErrorCode);
 				}
 			}
 			break;

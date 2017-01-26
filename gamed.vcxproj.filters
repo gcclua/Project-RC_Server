@@ -337,6 +337,15 @@
     <ClCompile Include="DBManage\DBTask\DBMarchTask.cpp">
       <Filter>Source Files\data\DBTask</Filter>
     </ClCompile>
+    <ClCompile Include="DBManage\ODBCData\ODBCTroopTrainData.cpp">
+      <Filter>Source Files\data\database</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBTroopTrainTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
+    <ClCompile Include="DBManage\DBTask\DBHeroTask.cpp">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gamed\Daemon.h">
@@ -565,6 +574,15 @@
       <Filter>Source Files\data\DBTask</Filter>
     </ClInclude>
     <ClInclude Include="DBManage\DBTask\DBMarchTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\ODBCData\ODBCTroopTrainData.h">
+      <Filter>Source Files\data\database</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBTroopTrainTask.h">
+      <Filter>Source Files\data\DBTask</Filter>
+    </ClInclude>
+    <ClInclude Include="DBManage\DBTask\DBHeroTask.h">
       <Filter>Source Files\data\DBTask</Filter>
     </ClInclude>
   </ItemGroup>

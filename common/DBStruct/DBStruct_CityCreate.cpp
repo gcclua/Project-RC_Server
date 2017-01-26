@@ -7,11 +7,12 @@ void DBCityCreate::CleanUp( )
 		m_nCityID   = 0;
 		m_UserId = 0;
 		m_nLevel    = 0;
-		m_nPosX     = 0;
-		m_nPosZ     = 0;
+		m_fPosX     = 0;
+		m_fPosZ     = 0;
 		m_lstMarch.clear();
 		m_lstBuilding.clear();
 		m_Hero.CleanUp();
+		m_lstTrain.clear();
 	
 		
 	__LEAVE_FUNCTION
@@ -24,8 +25,8 @@ void DBCityCreate::CopyFrom(const DBCityCreate& rSource)
 		m_nCityID   = rSource.m_nCityID;
 		m_UserId    = rSource.m_UserId;
 		m_nLevel    = rSource.m_nLevel;
-		m_nPosX     = rSource.m_nPosX;
-		m_nPosZ     = rSource.m_nPosZ;
+		m_fPosX     = rSource.m_fPosX;
+		m_fPosZ     = rSource.m_fPosZ;
 		m_nFood     = rSource.m_nFood;
 		m_nStone    = rSource.m_nStone;
 		m_nIron     = rSource.m_nIron;
@@ -48,6 +49,13 @@ void DBCityCreate::CopyFrom(const DBCityCreate& rSource)
 		}
 
 		m_Hero.CopyFrom(rSource.m_Hero);
+
+		int nTrainSize = (int)rSource.m_lstTrain.size();
+		m_lstTrain.resize(nTrainSize);
+		for (int i=0;i<nTrainSize;i++)
+		{
+			m_lstTrain[i].CopyFrom(rSource.m_lstTrain[i]);
+		}
 
 	__LEAVE_FUNCTION
 }

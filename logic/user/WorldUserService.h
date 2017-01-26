@@ -9,9 +9,6 @@
 #include "user/GameDefine_User.h"
 #include "player/GamePlayerManager.h"
 
-class RetMarchMoveMsg;
-class RetMarchStartMsg;
-
 
 class WorldUserService :public Service
 {
@@ -50,7 +47,7 @@ protected:
 public:	
 	virtual void HandleMessage(const RetMarchStartMsg &rMsg);
 	//MESSAGE_TRANSPORTTOUSER_DECL(RetMarchStartMsg);
-	MESSAGE_TRANSPORTTOUSER_DECL(MarchRetNearListMsg);
+	//MESSAGE_TRANSPORTTOUSER_DECL(MarchRetNearListMsg);
 	MESSAGE_TRANSPORTTOUSER_DECL(RetMarchMoveMsg);
 	MESSAGE_TRANSPORTTOUSER_DECL(KickPlayerByGuidMsg); 
 	virtual void HandleMessage(const PlayerLeaveWorldMsg &rMsg);
@@ -60,7 +57,15 @@ public:
 	virtual void HandleMessage(const RetBattleInfoMsg &rMsg);
 	virtual void HandleMessage(const RetObjListMsg &rMsg);
 	virtual void HandleMessage(const UpdateMarchMsg &rMsg);
-	
+	virtual void HandleMessage(const ObjAttackTargetMsg &rMsg);
+	virtual void HandleMessage(const ObjHurtMsg &rMsg);
+	virtual void HandleMessage(const ObjTrackTargetMsg &rMsg);
+	virtual void HandleMessage(const RetBattleStartMsg &rMsg);
+	virtual void HandleMessage(const RetBattleEndMsg &rMsg);
+	virtual void HandleMessage(const TrainTroopOverMsg &rMsg);
+	virtual void HandleMessage(const RetUserSkillMsg &rMsg);
+	virtual void HandleMessage(const RetArrangChangeMsg &rMsg);
+	virtual void HandleMessage(const MarchRetNearListMsg &rMsg);
 private:
 	User*			GetUserByGuid(int64 guid);
 

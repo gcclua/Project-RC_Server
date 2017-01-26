@@ -139,7 +139,7 @@ int Obj_Npc::SelectNewTarget(int SelMethod)
 			nSeleObjId =SelectMethod_Sencond();
 			break;
 		case Obj_Npc::METHOD_NEAREST:
-			nSeleObjId =SelectMethod_Rand();
+			nSeleObjId =SelectNearestTarget();
 			break;
 		default:
 			break;
@@ -202,96 +202,37 @@ int Obj_Npc::SelectMethod_Sencond()
 		return invalid_id;
 
 }
-//随机仇恨目标选择 模式
-int Obj_Npc::SelectMethod_Rand()
+
+int Obj_Npc::SelectNearestTarget()
 {
 	__ENTER_FUNCTION
-		if (GetEnemyCount() <=0)
+		Scene& rScene = GetScene();
+		NpcRefCont cont;
+		rScene.Scan_Npc_All(cont);
+		float fMinDistance = 100000.f;
+		int   nSelObj = invalid_id;
+		ScenePos curPos = GetScenePos();
+		for (tint32 i = 0; i < cont.Size(); i++)
 		{
-			return invalid_id;
-		}
-		if (false ==IsSceneValid())
-		{
-			return invalid_id;
-		}
-		Scene& rScene =GetScene();
-		EnemyUnitList_T const& rEnemyList =m_enemyInfo.GetEnemyList();
+			Obj_Npc &rNPC = cont[i];
 
-		const int nListSize =rEnemyList.GetSize();
-		//先判断 有效的敌对目标的个数
-		int nVaildCount =0;
-		for (int i=0;i<nListSize;i++)
-		{
-			if (false ==rEnemyList.IsUnitVaild(i))
+			if (rNPC.GetForceType() != GetForceType())
 			{
-				continue;
-			}
-
-			EnemyUnit_T const& rEnemy =rEnemyList.GetUnitByIndex(i);
-			if (rEnemy.isValid())
-			{
-				int nEnemyId =rEnemy.GetObjID();
-				if (rEnemy.GetThreat()<=0)
+				float fDistance = curPos.Distance(rNPC.GetScenePos());
+				if (fDistance<fMinDistance)
 				{
-					continue;
-				}
-				Obj_CharacterPtr EnemyObjPtr =rScene.GetCharacterByID(nEnemyId);
-				if (EnemyObjPtr)
-				{
-					// 判断是否可见
-					if (EnemyObjPtr->GetActive() && 
-						EnemyObjPtr->IsAlive()&&
-						EnemyObjPtr->CanBeScout(*this))
-					{
-						nVaildCount++;
-					}
+					nSelObj = rNPC.GetID();
+					fMinDistance = fDistance;
 				}
 			}
 		}
-		//从有效的里面 随机一下
-		int nRandNum =Random::Gen(1,nVaildCount+1);
-		
-		//找到随机到的 有效的
-		int nNewVaildCount =0;
-		int nSelObjId =invalid_id;
-		for (int nIndex=0;nIndex<nListSize;nIndex++)
-		{
-			if (false ==rEnemyList.IsUnitVaild(nIndex))
-			{
-				continue;
-			}
 
-			EnemyUnit_T const& rEnemy =rEnemyList.GetUnitByIndex(nIndex);
-			if (rEnemy.isValid())
-			{
-				int nEnemyId =rEnemy.GetObjID();
-				if (rEnemy.GetThreat()<=0)
-				{
-					continue;
-				}
-				Obj_CharacterPtr EnemyObjPtr =rScene.GetCharacterByID(nEnemyId);
-				if (EnemyObjPtr)
-				{
-					// 判断是否可见
-					if (EnemyObjPtr->GetActive() && 
-						EnemyObjPtr->IsAlive() &&
-						EnemyObjPtr->CanBeScout(*this))
-					{
-						nNewVaildCount++;
-						if (nNewVaildCount ==nRandNum)
-						{
-							nSelObjId =nEnemyId;
-							break;
-						}
+		return nSelObj;
 
-					}
-				}
-			}
-		}
-		return nSelObjId;
 	__LEAVE_FUNCTION
 		return invalid_id;
 }
+
 
 int Obj_Npc::SelectMethod_March()
 {
@@ -438,12 +379,7 @@ bool Obj_Npc::SelectCanAttackObj()
 			{
 				OnThreat(objCharList[nSeleIndex],1);
 			}
-			SwitchAI(Obj_Npc::AI_COMBAT);
-			ObjAttackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjAttackTargetMsg);
-			MsgPtr->m_nSceneId = GetSceneInstID();
-			MsgPtr->m_nObjId   = GetID();
-			MsgPtr->m_nTargetId = m_nCurSelectObjId;
-			SendMessage2User(GetPlayerId(),MsgPtr);
+			EnterCombat();
 			return true;
 		}
 		return false;
@@ -472,8 +408,8 @@ void Obj_Npc::ProessTrace(Obj_Character& rUnit,float fAttackDis)
 		{
 			ScenePos targetPos;
 			float dis = fAttackDis-0.1f; //做个偏移
-			targetPos.m_nX = (int)(UnitfPos.m_nX + dis * cos(_PI * Pos[nPointIndex]/ 6));
-			targetPos.m_nZ = (int)(UnitfPos.m_nZ + dis * sin(_PI * Pos[nPointIndex]/ 6));
+			targetPos.m_fX = UnitfPos.m_fX + dis * cos(GetFaceDir()+_PI * Pos[nPointIndex]/ 6);
+			targetPos.m_fZ = UnitfPos.m_fZ + dis * sin(GetFaceDir()+_PI * Pos[nPointIndex]/ 6);
 			float fDis =GetScenePos().Distance(targetPos);
 			if ((fDis -fMinDis <0) && rUnit.IsTrackPointUsed(nPointIndex) ==false)
 			{
@@ -483,31 +419,33 @@ void Obj_Npc::ProessTrace(Obj_Character& rUnit,float fAttackDis)
 			}
 		}
 		//如果没有可用的点 点都被占光了 则选择离自己最近的点
-		if (nSelePointIndex ==-1)
+		/*if (nSelePointIndex ==-1)
 		{
 			for (int nPointIndex =0;nPointIndex<MAXTRACEPOINTNUM;nPointIndex++)
 			{
 				ScenePos targetPos;
 				float dis = fAttackDis-0.1f; //做个偏移
-				targetPos.m_nX = (int)(UnitfPos.m_nX + dis * cos(_PI * Pos[nPointIndex]/ 6));
-				targetPos.m_nZ = (int)(UnitfPos.m_nZ + dis * sin(_PI * Pos[nPointIndex]/ 6));
+				targetPos.m_fX = UnitfPos.m_fX + dis * cos(_PI * Pos[nPointIndex]/ 6);
+				targetPos.m_fZ = UnitfPos.m_fZ + dis * sin(_PI * Pos[nPointIndex]/ 6);
 				float fDis =GetScenePos().Distance(targetPos);
-				if (fDis -fMinDis <0)
+				if (fDis - fMinDis <0)
 				{
 					fMinDis =fDis;
 					MinDisPos =targetPos;
 					nSelePointIndex =nPointIndex;
 				}
 			}
-		}
-		if (rScene.IsScenePosWalkAble(MinDisPos)==false) //如果要去的点是不可以达到的点则向目标点移动
+		}*/
+
+		MoveTo(MinDisPos,fAttackDis-0.1f);
+		/*if (rScene.IsScenePosWalkAble(MinDisPos)==false) //如果要去的点是不可以达到的点则向目标点移动
 		{
 			MoveTo(rUnit.GetScenePos(),fAttackDis-0.1f);
 		}
 		else
 		{
 			MoveTo(MinDisPos);
-		}
+		}*/
 		rUnit.SetTrackPointFlag(nSelePointIndex,true);//被追踪的目标 该点已经被占用了
 	__LEAVE_FUNCTION
 }
@@ -525,8 +463,11 @@ void Obj_Npc::Tick_AI_Trace(TimeInfo const& rTimeInfo)
 			SwitchAI(Obj_Npc::AI_IDLE);
 			return;
 		}
+
+		Moving(rTimeInfo);
+
 		Scene& rScene =GetScene();
-	
+		
 		Obj_CharacterPtr CharPtr =rScene.GetCharacterByID(m_nCurSelectObjId);
 		if (!CharPtr)
 		{
@@ -537,12 +478,7 @@ void Obj_Npc::Tick_AI_Trace(TimeInfo const& rTimeInfo)
 		//目标隐身 切回战斗状态
 		if (CharPtr->CanBeScout(*this) ==false)
 		{
-			SwitchAI(Obj_Npc::AI_COMBAT);
-			ObjAttackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjAttackTargetMsg);
-			MsgPtr->m_nSceneId = GetSceneInstID();
-			MsgPtr->m_nObjId   = GetID();
-			MsgPtr->m_nTargetId = m_nCurSelectObjId;
-			SendMessage2User(GetPlayerId(),MsgPtr);
+			EnterCombat();
 			return;
 		}
 		//追踪时间超过 切换目标的时间 则切回战斗状态 看是否需要重新选择攻击目标 不要一直追着不放了
@@ -550,18 +486,17 @@ void Obj_Npc::Tick_AI_Trace(TimeInfo const& rTimeInfo)
 
 		float fDiffDis =GetScenePos().Distance(CharPtr->GetScenePos()); //距离追击目标的距离
 		float fDiffLastTraceDis =m_lastTracePos.Distance(CharPtr->GetScenePos());//距离上一次的追踪目标的距离
-		if (!IsMoving() && fDiffDis<=m_fTraceStopDis) //到达目的地 停下来 切回到战斗AI
+		if (fDiffDis<=m_fTraceStopDis) //到达目的地 停下来 切回到战斗AI
 		{
-			SwitchAI(Obj_Npc::AI_COMBAT);
-			ObjAttackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjAttackTargetMsg);
-			MsgPtr->m_nSceneId = GetSceneInstID();
-			MsgPtr->m_nObjId   = GetID();
-			MsgPtr->m_nTargetId = m_nCurSelectObjId;
-			SendMessage2User(GetPlayerId(),MsgPtr);
+			EnterCombat();
 			return;
 		}
+
 		if (!IsMoving() && fDiffDis>m_fTraceStopDis) //没在移动 且还没到目的点追击
 		{
+			//ProessTrace(*CharPtr,m_fTraceStopDis);
+			//m_lastTracePos =CharPtr->GetScenePos();
+			//MoveTo(CharPtr->GetScenePos(),m_fTraceStopDis);
 			ProessTrace(*CharPtr,m_fTraceStopDis);
 		}
 		else if(fDiffLastTraceDis>0.1f && fDiffDis>m_fTraceStopDis)//发现追击目标动了 修改追击方向
@@ -572,6 +507,8 @@ void Obj_Npc::Tick_AI_Trace(TimeInfo const& rTimeInfo)
 				{
 					StopMove(true,true);
 				}
+				//m_lastTracePos =CharPtr->GetScenePos();
+				//MoveTo(CharPtr->GetScenePos(),m_fTraceStopDis);
 				ProessTrace(*CharPtr,m_fTraceStopDis);
 			}
 		}
@@ -684,12 +621,31 @@ void Obj_Npc::EnterTrace()
 	m_fTraceStopDis =pSkillEx->GetRadius();
 	StopMove(false,true);
 	SwitchAI(Obj_Npc::AI_TRACE);
+	if (m_nCurSelectObjId>0)
+	{
+		if (GetPlayerId()>0)
+		{
+			ObjTrackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjTrackTargetMsg);
+			MsgPtr->m_nSceneId = GetSceneInstID();
+			MsgPtr->m_nObjId   = GetID();
+			MsgPtr->m_nTargetId = m_nCurSelectObjId;
+			SendMessage2User(GetPlayerId(),MsgPtr);
+		}
+		
 
-	ObjTrackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjTrackTargetMsg);
-	MsgPtr->m_nSceneId = GetSceneInstID();
-	MsgPtr->m_nObjId   = GetID();
-	MsgPtr->m_nTargetId = m_nCurSelectObjId;
-	SendMessage2User(GetPlayerId(),MsgPtr);
+
+		Obj_CharacterPtr pTarget = GetScene().GetCharacterByID(m_nCurSelectObjId);
+		if (pTarget != null_ptr && pTarget->GetPlayerId()>0)
+		{
+			ObjTrackTargetMsgPtr TMsgPtr = POOLDEF_NEW(ObjTrackTargetMsg);
+			TMsgPtr->m_nSceneId = GetSceneInstID();
+			TMsgPtr->m_nObjId   = GetID();
+			TMsgPtr->m_nTargetId = m_nCurSelectObjId;
+			SendMessage2User(pTarget->GetPlayerId(),TMsgPtr);
+		}
+	}
+	
+	
 	__LEAVE_FUNCTION
 }
 
@@ -703,6 +659,7 @@ void Obj_Npc::Tick_AI_March(TimeInfo const& rTimeInfo)
 
 	Moving(rTimeInfo);
 
+	// 近战反攻
 	tint32 nSeleObjId =SelectMethod_Sencond();
 	if (nSeleObjId != invalid_id)
 	{
@@ -728,11 +685,31 @@ void  Obj_Npc::EnterCombat(void)
 
 		//切换到战斗AI
 		SwitchAI(Obj_Npc::AI_COMBAT);
-		ObjAttackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjAttackTargetMsg);
-		MsgPtr->m_nSceneId = GetSceneInstID();
-		MsgPtr->m_nObjId   = GetID();
-		MsgPtr->m_nTargetId = m_nCurSelectObjId;
-		SendMessage2User(GetPlayerId(),MsgPtr);
+		if (m_nCurSelectObjId>0)
+		{
+			if (GetPlayerId()>0)
+			{
+				ObjAttackTargetMsgPtr MsgPtr = POOLDEF_NEW(ObjAttackTargetMsg);
+				MsgPtr->m_nSceneId = GetSceneInstID();
+				MsgPtr->m_nObjId   = GetID();
+				int n = MsgPtr->m_nObjId;
+				MsgPtr->m_nTargetId = m_nCurSelectObjId;
+				SendMessage2User(GetPlayerId(),MsgPtr);
+			}
+			
+
+			Obj_CharacterPtr pTarget = GetScene().GetCharacterByID(m_nCurSelectObjId);
+			if (pTarget != null_ptr && pTarget->GetPlayerId()>0)
+			{
+				ObjAttackTargetMsgPtr TMsgPtr = POOLDEF_NEW(ObjAttackTargetMsg);
+				TMsgPtr->m_nSceneId = GetSceneInstID();
+				TMsgPtr->m_nObjId   = GetID();
+				int n = TMsgPtr->m_nObjId;
+				TMsgPtr->m_nTargetId = m_nCurSelectObjId;
+				SendMessage2User(pTarget->GetPlayerId(),TMsgPtr);
+			}
+		}
+		
 
 		//最后调用基类的
 		Obj_Character::EnterCombat();

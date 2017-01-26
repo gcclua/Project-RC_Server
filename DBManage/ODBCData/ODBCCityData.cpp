@@ -76,8 +76,8 @@ bool ODBCCityData::Save(DBCity* pSource)
 	pQuery->Parse(UpdateCity,
 		rCityData.m_nCityID,
 		rCityData.m_tileID,
-		rCityData.m_nPosX,
-		rCityData.m_nPosZ,
+		(tint32)(rCityData.m_fPosX*100),
+		(tint32)(rCityData.m_fPosZ*100),
 		rCityData.m_nLevel,
 		rCityData.m_nFood,
 		rCityData.m_nStone,
@@ -134,8 +134,8 @@ bool ODBCCityData::ParseResult(DBCity* pResult)
 				rCity.m_nCityID   = mInterface->GetLongLong(DB_Cityid,ErrorCode);
 				rCity.m_nPlayerId = mInterface->GetLongLong(DB_ChargGuid,ErrorCode);
 				rCity.m_tileID    = mInterface->GetInt(DB_TileId,ErrorCode);
-				rCity.m_nPosX     = mInterface->GetInt(DB_PosX,ErrorCode);
-				rCity.m_nPosZ     = mInterface->GetInt(DB_PosZ,ErrorCode);
+				rCity.m_fPosX     = tfloat32(mInterface->GetInt(DB_PosX,ErrorCode))/100;
+				rCity.m_fPosZ     = tfloat32(mInterface->GetInt(DB_PosZ,ErrorCode))/100;
 				rCity.m_nLevel    = mInterface->GetInt(DB_Level,ErrorCode);
 
 				rCity.m_nFood     = mInterface->GetLongLong(DB_Food,ErrorCode);

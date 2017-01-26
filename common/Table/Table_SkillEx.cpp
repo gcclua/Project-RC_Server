@@ -25,6 +25,7 @@
 
 
 
+
 bool Table_SkillEx::__Load(DBC_Loader & loader)
  {
  __ENTER_FUNCTION
@@ -60,6 +61,7 @@ loader.ReadDirect(m_SatrtMotionId,(tint32)ID_SATRTMOTIONID);
 loader.ReadDirect(m_SceneEffectId,(tint32)ID_SCENEEFFECTID);
 loader.ReadDirect(m_SecondMotionId,(tint32)ID_SECONDMOTIONID);
 loader.ReadDirect(m_SkillContinueTime,(tint32)ID_SKILLCONTINUETIME);
+loader.ReadDirect(m_SkillDataID,(tint32)ID_SKILLDATAID);
 loader.ReadDirect(m_SkillDelayTime,(tint32)ID_SKILLDELAYTIME);
 loader.ReadDirect(m_SkillDesc,(tint32)ID_SKILLDESC);
 loader.ReadDirect(m_SkillExID,(tint32)ID_SKILLEXID);

@@ -68,6 +68,7 @@ ID_DEFENCEPOSX10,
 ID_DEFENCEPOSZ10,
 ID_DEFENCEPOSX11,
 ID_DEFENCEPOSZ11,
+ID_EDGELENGTH,
 ID_TAB_CURCOL_COUNT,
 MAX_ID=1023,
 MAX_RECORD=1024
@@ -78,23 +79,23 @@ MAX_RECORD=1024
 public:
  tint32 getAttackPosXCount() const { return 11; } 
  private:
- tint32 m_AttackPosX[11];
+ tfloat32 m_AttackPosX[11];
  public:
- tint32 GetAttackPosXbyIndex(tint32 idx) const 
+ tfloat32 GetAttackPosXbyIndex(tint32 idx) const 
  {
  if(idx>=0 && idx<11) return m_AttackPosX[idx];
- return -1;
+ return 0.0f;
  }
 
 public:
  tint32 getAttackPosZCount() const { return 11; } 
  private:
- tint32 m_AttackPosZ[11];
+ tfloat32 m_AttackPosZ[11];
  public:
- tint32 GetAttackPosZbyIndex(tint32 idx) const 
+ tfloat32 GetAttackPosZbyIndex(tint32 idx) const 
  {
  if(idx>=0 && idx<11) return m_AttackPosZ[idx];
- return -1;
+ return 0.0f;
  }
 
 private:
@@ -110,24 +111,29 @@ private:
 public:
  tint32 getDefencePosXCount() const { return 11; } 
  private:
- tint32 m_DefencePosX[11];
+ tfloat32 m_DefencePosX[11];
  public:
- tint32 GetDefencePosXbyIndex(tint32 idx) const 
+ tfloat32 GetDefencePosXbyIndex(tint32 idx) const 
  {
  if(idx>=0 && idx<11) return m_DefencePosX[idx];
- return -1;
+ return 0.0f;
  }
 
 public:
  tint32 getDefencePosZCount() const { return 11; } 
  private:
- tint32 m_DefencePosZ[11];
+ tfloat32 m_DefencePosZ[11];
  public:
- tint32 GetDefencePosZbyIndex(tint32 idx) const 
+ tfloat32 GetDefencePosZbyIndex(tint32 idx) const 
  {
  if(idx>=0 && idx<11) return m_DefencePosZ[idx];
- return -1;
+ return 0.0f;
  }
+
+private:
+ tint32 m_EdgeLength;
+ public:
+ tint32 GetEdgeLength() const { return m_EdgeLength; }
 
 private:
  tint32 m_Length;

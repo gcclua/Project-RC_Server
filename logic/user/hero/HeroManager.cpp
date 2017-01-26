@@ -3,6 +3,8 @@
 #include "HeroManager.h"
 #include "Table/Table_RoleBaseAttr.h"
 #include "packet/Packet/PBMessage.pb.h"
+#include "Message/DBMsg.h"
+#include "service/MessageOp.h"
 
 /////////arrange function///////////////
 HeroManager::HeroManager(User &rUser)
@@ -89,6 +91,7 @@ void  HeroManager::FileData(GC_HeroList* pHeroList)
 			pHeroData->set_mp(0);
 			pHeroData->set_arrangeindex(Ptr->GetArrangeIndex());
 			pHeroData->set_marchid(Ptr->GetMarchId());
+			pHeroData->set_guid(Ptr->GetUID());
 
 			CooldownList_T CoolDownT = Ptr->GetCooldownList();
 			for (int j=0;j<CoolDownT.GetListSize();j++)
@@ -104,6 +107,26 @@ void  HeroManager::FileData(GC_HeroList* pHeroList)
 	__LEAVE_FUNCTION
 }
 
+bool HeroManager::UnAssignHero(int64 nHeroId)
+{
+	__ENTER_FUNCTION
+	HeroPtr Ptr = GetHero(nHeroId);
+	if (Ptr == null_ptr)
+	{
+		return false;
+	}
+
+	Ptr->SetMarchId(0);
+	Ptr->SetStatus(HEROSTATUS_IDLE);
+
+	DBReqSaveHeroMsgPtr MsgPtr = POOLDEF_NEW(DBReqSaveHeroMsg);
+	Ptr->SerializeToDB(MsgPtr->m_Data);
+	SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
+	return true;
+	__LEAVE_FUNCTION
+		return false;
+}
+
 bool  HeroManager::AssignHeroToMarch(int64 nHeroId,int64 nMarchId)
 {
 	__ENTER_FUNCTION
@@ -115,6 +138,10 @@ bool  HeroManager::AssignHeroToMarch(int64 nHeroId,int64 nMarchId)
 
 	Ptr->SetMarchId(nMarchId);
 	Ptr->SetStatus(HEROSTATUS_ASSIGN);
+
+	DBReqSaveHeroMsgPtr MsgPtr = POOLDEF_NEW(DBReqSaveHeroMsg);
+	Ptr->SerializeToDB(MsgPtr->m_Data);
+	SendMessage2Srv(ServiceID::DBAGENT,MsgPtr);
 	return true;
 	__LEAVE_FUNCTION
 		return false;

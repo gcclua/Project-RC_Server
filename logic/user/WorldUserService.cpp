@@ -4,9 +4,10 @@
 #include "Message/DBMsg.h"
 #include "Message/WorldUserMsg.h"
 #include "Message/SceneMsg.h"
+#include "Message/CityMsg.h"
 
 
-MESSAGE_TRANSPORTTOUSER_IMPL(MarchRetNearListMsg);
+//MESSAGE_TRANSPORTTOUSER_IMPL(MarchRetNearListMsg);
 MESSAGE_TRANSPORTTOUSER_IMPL(RetMarchMoveMsg)
 MESSAGE_TRANSPORTTOUSER_IMPL(KickPlayerByGuidMsg);
 //MESSAGE_TRANSPORTTOUSER_IMPL(RetMarchStartMsg)
@@ -134,6 +135,27 @@ void WorldUserService::HandleMessage(const RetBattleInfoMsg &rMsg)
 	__LEAVE_FUNCTION
 }
 
+void WorldUserService::HandleMessage(const RetBattleStartMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+void WorldUserService::HandleMessage(const RetBattleEndMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+
 void WorldUserService::HandleMessage(const RetMarchStartMsg &rMsg)
 {
 	__ENTER_FUNCTION
@@ -143,6 +165,37 @@ void WorldUserService::HandleMessage(const RetMarchStartMsg &rMsg)
 			Ptr->HandleMessage(rMsg); 
 		}
 		__LEAVE_FUNCTION
+}
+
+void WorldUserService::HandleMessage(const ObjAttackTargetMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+void WorldUserService::HandleMessage(const ObjHurtMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+void WorldUserService::HandleMessage(const ObjTrackTargetMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
 }
 
 void WorldUserService::HandleMessage(const MarchRetFightMsg &rMsg)
@@ -175,6 +228,50 @@ void WorldUserService::HandleMessage( const PlayerEnterWorldMsg &rMsg )
 	__LEAVE_FUNCTION
 }
 
+void WorldUserService::HandleMessage(const TrainTroopOverMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+
+void WorldUserService::HandleMessage(const RetUserSkillMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+
+void WorldUserService::HandleMessage(const RetArrangChangeMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+
+void WorldUserService::HandleMessage(const MarchRetNearListMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		User* Ptr = GetUserByGuid(rMsg.m_ReceiverGuid); 
+	if (Ptr) 
+	{ 
+		Ptr->HandleMessage(rMsg); 
+	}
+	__LEAVE_FUNCTION
+}
+
 void WorldUserService::HandleMessage(const PlayerLeaveWorldMsg &rMsg)
 {
 	__ENTER_FUNCTION
@@ -195,7 +292,6 @@ void WorldUserService::HandleMessage(const PlayerLeaveWorldMsg &rMsg)
 	MsgPtr->m_nDelResult = rMsg.m_nDelResult;
 	SendMessage2Srv(ServiceID::LOGIN, MsgPtr);
 
-	
-
 	__LEAVE_FUNCTION
 }
+

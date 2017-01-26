@@ -1,6 +1,7 @@
 #include "Obj_Character.h"
 #include "Scene/Scene/Scene.h"
 #include "Message/SceneMsg.h"
+#include "service/MessageOp.h"
 
 void Obj_Character::SetForceType(int nType) 
 {
@@ -15,6 +16,21 @@ void Obj_Character::SetStealthLev(int val)
 		m_AttrBroadCastDirtyFlag.SetBit(BaseAttrBroadDirty_T::STEALTHLEV,true);
 	__LEAVE_FUNCTION
 }
+
+int Obj_Character::CalTroopCount(int nCurHp,int nMaxHp)
+{
+	__ENTER_FUNCTION
+		if (nCurHp % nMaxHp == 0)
+		{
+			return m_nCurHp/nMaxHp;
+		}
+
+		return m_nCurHp/nMaxHp + 1;
+
+	__LEAVE_FUNCTION
+		return 0;
+}
+
 void Obj_Character::SetCurHp(int nCurHp)
 {
 	__ENTER_FUNCTION
@@ -22,16 +38,24 @@ void Obj_Character::SetCurHp(int nCurHp)
 		{
 			nCurHp =0;
 		}
-		int nMaxHp =GetCombatAttrByID(static_cast<int>(COMBATATTR_T::MAXHP));
-		if (nCurHp >=nMaxHp)
+		int nTotalMaxHp =GetCombatAttrByID(static_cast<int>(COMBATATTR_T::TOTALMAXHP));
+		if (nCurHp >=nTotalMaxHp)
 		{
-			nCurHp =nMaxHp;
+			nCurHp =nTotalMaxHp;
 		}
 		if (m_nCurHp !=nCurHp)
 		{
 			m_AttrSyncDirtyFlag.SetBit(BaseAttrSyncDirty_T::CURHP, true);
 		}
 		m_nCurHp =nCurHp;
+		int nMaxHp = GetCombatAttrByID(static_cast<int>(COMBATATTR_T::MAXHP));
+		int nCount = CalTroopCount(m_nCurHp,nMaxHp);
+		if (nCount != m_nTroopCount)
+		{
+			m_nTroopCount = nCount;
+		}
+		
+
 	__LEAVE_FUNCTION
 }
 
@@ -43,7 +67,7 @@ void Obj_Character::SetMaxHp(int nMaxHp)
 			return ;
 		}
 
-		m_FinalyAttr.SetCombatAttrByIndex((int)COMBATATTR_T::MAXHP, nMaxHp);
+		m_FinalyAttr.SetCombatAttrByIndex((int)COMBATATTR_T::TOTALMAXHP, nMaxHp);
 
 	__LEAVE_FUNCTION
 }
@@ -59,15 +83,52 @@ int Obj_Character::IncreaseHp( int nHP, Obj_Character& rSourceObj)
 		{
 			return 0;
 		}
-
+		
+		
+		int nCurCount = m_nTroopCount;
 		int nNewHp = nCurHp + nHP;
 
 		SetCurHp(nNewHp);
 
+		int dieCount = nCurCount - m_nTroopCount;
+
 		nCurHp = GetCurHp();
+		int nDie = 0;
 		if (nCurHp <= 0 && IsDie() == false) 
 		{
 			OnDie(rSourceObj);
+			nDie = 1;
+		}
+
+		if (nHP<0)
+		{
+			if (m_nPlayerId>0)
+			{
+				ObjHurtMsgPtr MsgPtr = POOLDEF_NEW(ObjHurtMsg);
+				AssertEx(MsgPtr,"");
+				MsgPtr->m_damage = nHP*(-1);
+				MsgPtr->m_IsDie  = nDie;
+				MsgPtr->m_nAttackId = rSourceObj.GetID();
+				MsgPtr->m_nSceneId  = GetSceneInstID();
+				MsgPtr->m_nObjId    = GetID();
+				MsgPtr->m_DeadCount = dieCount;
+				SendMessage2User(m_nPlayerId,MsgPtr);
+			}
+			
+
+			Obj_CharacterPtr pTarget = GetScene().GetCharacterByID(rSourceObj.GetID());
+			if (pTarget != null_ptr && pTarget->GetPlayerId()>0)
+			{
+				ObjHurtMsgPtr sMsgPtr = POOLDEF_NEW(ObjHurtMsg);
+				AssertEx(sMsgPtr,"");
+				sMsgPtr->m_damage = nHP*(-1);
+				sMsgPtr->m_IsDie  = nDie;
+				sMsgPtr->m_nAttackId = rSourceObj.GetID();
+				sMsgPtr->m_nSceneId  = GetSceneInstID();
+				sMsgPtr->m_nObjId    = GetID();
+				sMsgPtr->m_DeadCount = dieCount;
+				SendMessage2User(pTarget->GetPlayerId(),sMsgPtr);	
+			}
 		}
 
 		return nCurHp;

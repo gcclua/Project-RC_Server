@@ -21,8 +21,8 @@ public:
 	int64 m_nCityID; //城市ID
 	int64 m_UserId; // 玩家Id
 	int   m_nLevel;  // 城市等级
-	int   m_nPosX;   // 
-	int   m_nPosZ;
+	tfloat32   m_fPosX;   // 
+	tfloat32   m_fPosZ;
 	int64 m_nFood;
 	int64 m_nStone;
 	int64 m_nIron;
@@ -30,6 +30,8 @@ public:
 	bsvector<DBBuilding> m_lstBuilding;
 	DBHero m_Hero;
 	bsvector<DBMarch> m_lstMarch;
+
+	bsvector<DBTroopTrain> m_lstTrain;
 	
 
 	

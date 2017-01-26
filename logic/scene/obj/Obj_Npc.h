@@ -18,6 +18,8 @@ public:
 	virtual void OnEnterScene(void);
 	virtual void OnLeaveScene(void);
 
+	virtual void OnEndMove(void);
+
 	virtual void Tick(const TimeInfo &rTimeInfo);
 
 	virtual void Tick_Moving(const TimeInfo &rTimeInfo);
@@ -149,8 +151,8 @@ protected:
 	//npc 选择目标方式
 	int SelectNewTarget(int SelMethod);
 	int SelectMethod_Sencond();
-	int SelectMethod_Rand();
 	int SelectMethod_March();
+	int SelectNearestTarget();
 	// 根据技能的目标和选择逻辑，以及距离选择
 	int SelectNewSkillTarget(Table_SkillBase const&  rSkillBase, Table_SkillEx const& rSkillEx);
 	

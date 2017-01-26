@@ -112,6 +112,9 @@ public:
 	void MarkCombatAttrCalcDirty(void);
 	//心跳中计算战斗属性
 	void Tick_CalculateCombatAttr();
+
+	// 计算兵的数量
+	int CalTroopCount(int nCurHp,int nMaxHp);
 	//!!!一般都是使用Increase接口去修正 当前血 蓝 XP能量
 	void SetCurHp(int nCurHp);
 	void SetCurXp(int nCurXp);
@@ -158,6 +161,9 @@ protected:
 	bool m_bDie;		//是否死亡 false：活，true：死
 	bool m_bIsBreedingClick;
 	uint32 m_nLastBroadcastHitTime;//上次广播受击状态的时间
+
+	// 上一次兵数量
+	int  m_nTroopCount;
 	//同步属性包的脏标的
 	BitSet<BaseAttrSyncDirty_T::TYPE_MAXNUM> m_AttrSyncDirtyFlag; //同步属性包的脏标记
 	//广播属性包的脏标的

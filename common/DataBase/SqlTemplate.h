@@ -32,4 +32,8 @@ extern const tchar* UpdateHero;
 
 extern const tchar* UpdateTroop;
 extern const tchar* LoadMarchTroop;
+
+extern const tchar* LoadTroopTrain;
+extern const tchar* UpdateTroopTrain;
+
 #endif

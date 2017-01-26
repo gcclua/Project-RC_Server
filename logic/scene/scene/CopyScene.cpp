@@ -14,7 +14,7 @@ POOLDEF_IMPL(CopyScene);
 BSARRAY_ASSIGN_IMPL(tint32,MAX_ARRANGE_COUNT);
 CopyScene::CopyScene( void )
 {
-
+	
 }
 
 CopyScene::~CopyScene( void )
@@ -61,6 +61,12 @@ void CopyScene::Tick_Line(const TimeInfo &rTimeInfo)
 		{
 			m_nStatus = STATUS_SELECTTARGET;
 		}
+
+		if (m_bAttackReady && m_bDefenceReady)
+		{
+			m_nStatus = STATUS_SELECTTARGET;
+		}
+
 	__LEAVE_FUNCTION
 }
 
@@ -73,6 +79,19 @@ void CopyScene::Tick_SelectTarget(const TimeInfo &rTimeInfo)
 	m_nStatus = STATUS_MARCH;
 	StartAttachMarch();
 	StartDefenceMarch();
+	RetBattleStartMsgPtr MsgPtr = POOLDEF_NEW(RetBattleStartMsg);
+	
+	MsgPtr->m_nSceneId = GetSceneInstID();
+	SendMessage2User(m_AttackMarch.GetPlayerId(),MsgPtr);
+
+	if (m_DefenceMarch.GetPlayerId()>0)
+	{
+		RetBattleStartMsgPtr DMsgPtr = POOLDEF_NEW(RetBattleStartMsg);
+		DMsgPtr->m_nSceneId = GetSceneInstID();
+
+		SendMessage2User(m_DefenceMarch.GetPlayerId(),DMsgPtr);
+	}
+	
 	__LEAVE_FUNCTION
 }
 
@@ -103,6 +122,32 @@ void CopyScene::Tick_Combat(const TimeInfo &rTimeInfo)
 	if (m_nWin > 0)
 	{
 		m_nStatus = STATUS_SETTLEMENT;
+		RetBattleEndMsgPtr MsgPtr = POOLDEF_NEW(RetBattleEndMsg);
+		if (m_nWin == 1)
+		{
+			MsgPtr->m_camp = 1; //π•ª˜∑Ω”≤
+		}
+		else
+		{
+			MsgPtr->m_camp = 2; // ∑¿ ÿ∑Ω”Æ
+		}
+		MsgPtr->m_nSceneId = GetSceneInstID();
+		SendMessage2User(m_AttackMarch.GetPlayerId(),MsgPtr);
+		if (m_DefenceMarch.GetPlayerId()>0)
+		{
+			RetBattleEndMsgPtr DMsgPtr = POOLDEF_NEW(RetBattleEndMsg);
+			if (m_nWin == 1)
+			{
+				DMsgPtr->m_camp = 1; //π•ª˜∑Ω”≤
+			}
+			else
+			{
+				DMsgPtr->m_camp = 2; // ∑¿ ÿ∑Ω”Æ
+			}
+			DMsgPtr->m_nSceneId = GetSceneInstID();
+			SendMessage2User(m_DefenceMarch.GetPlayerId(),DMsgPtr);
+		}
+		
 	}
 	__LEAVE_FUNCTION
 }
@@ -136,6 +181,7 @@ void CopyScene::Tick_Logic(const TimeInfo & rTimeInfo)
 		{
 			Tick_Combat(rTimeInfo);
 		}
+		break;
 	case STATUS_SETTLEMENT:
 		{
 			FightSettlement();
@@ -143,7 +189,12 @@ void CopyScene::Tick_Logic(const TimeInfo & rTimeInfo)
 		}
 		break;
 	case STATUS_CLOSED:
-		Close();
+		{
+			Close();
+			m_nStatus = STATUS_OVER;
+			break;
+		}
+	case STATUS_OVER:
 		break;
 	default:
 			break;
@@ -178,7 +229,6 @@ void CopyScene::Initialize(void)
 
 	Scene::Initialize();
 
-	m_nStatus = STATUS_CLOSED;
 	m_nTimeClose = 20000;
 	CleanUpObjList();
 	const Table_SceneClass *pSceneClass = GetTable_SceneClassByID(GetSceneClassID());
@@ -198,6 +248,8 @@ void CopyScene::Initialize(void)
 	m_nExistTime = 600 * 1000;
 	m_nCurPlayerCount = 0;
 	m_nWin = 0;
+	m_bAttackReady = false;
+	m_bDefenceReady = false;
 
 	__LEAVE_FUNCTION
 }
@@ -297,12 +349,12 @@ void CopyScene::InitAttackObj(const March& rMarch)
 			AssertEx(nArrangeIndex >= 0,"");
 
 			ScenePos rHeroPos;
-			rHeroPos.m_nX  = pSceneInfo->GetAttackPosXbyIndex(nArrangeIndex);
-			rHeroPos.m_nZ   = pSceneInfo->GetAttackPosZbyIndex(nArrangeIndex);
+			rHeroPos.m_fX  = pSceneInfo->GetAttackPosXbyIndex(nArrangeIndex);
+			rHeroPos.m_fZ   = pSceneInfo->GetAttackPosZbyIndex(nArrangeIndex);
 
 			Obj_HeroPtr pHero =	CreateHeroObj(rMarch.GetHero(),rHeroPos,FORCETYPE_T::NPC_ATTACK);
 			AssertEx(pHero,"");
-
+			pHero->SetPlayerId(rMarch.GetPlayerId());
 			m_lstAttack[nArrangeIndex] = pHero->GetID();
 
 		}
@@ -315,13 +367,18 @@ void CopyScene::InitAttackObj(const March& rMarch)
 		for (int i=0;i<nSize;i++)
 		{
 			Troop rTroop = rMarchTroopList.GetTroopByIndex(i);
+			if (rTroop.GetType()<=0)
+			{
+				continue;
+			}
 			int  nArrangeIndex = rTroop.GetArrangeIndex();
 			AssertEx(nArrangeIndex >= 0,"");
 			ScenePos rTroopPos;
-			rTroopPos.m_nX  = pSceneInfo->GetAttackPosXbyIndex(nArrangeIndex);
-			rTroopPos.m_nZ   = pSceneInfo->GetAttackPosZbyIndex(nArrangeIndex);
+			rTroopPos.m_fX  = pSceneInfo->GetAttackPosXbyIndex(nArrangeIndex);
+			rTroopPos.m_fZ   = pSceneInfo->GetAttackPosZbyIndex(nArrangeIndex);
 			Obj_TroopPtr pTroop = CreateTroopObj(rTroop,rTroopPos,FORCETYPE_T::NPC_ATTACK);
 			AssertEx(pTroop,"");
+			pTroop->SetPlayerId(rMarch.GetPlayerId());
 			m_lstAttack[nArrangeIndex] = pTroop->GetID();
 		}
 		if (rMarch.GetFightId()>0)
@@ -351,6 +408,7 @@ void CopyScene::InitAttackObj(const March& rMarch)
 		MsgPtr->m_nMarchId = rMarch.GetMarchId();
 		MsgPtr->m_nResult  = 0;
 		MsgPtr->m_nSceneId = GetSceneInstID();
+		MsgPtr->m_nSceneClass = GetSceneClassID();
 		SendMessage2User(rMarch.GetPlayerId(),MsgPtr);
 
 		m_nCurPlayerCount++;
@@ -443,6 +501,7 @@ void CopyScene::FightSettlement()
 				}
 			}
 		}
+
 	__LEAVE_FUNCTION
 }
 
@@ -536,11 +595,12 @@ void CopyScene::InitDefenceObj(const March& rMarch)
 		AssertEx(nArrangeIndex >= 0,"");
 
 		ScenePos rHeroPos;
-		rHeroPos.m_nX  = pSceneInfo->GetDefencePosXbyIndex(nArrangeIndex);
-		rHeroPos.m_nZ  = pSceneInfo->GetDefencePosZbyIndex(nArrangeIndex);
+		rHeroPos.m_fX  = pSceneInfo->GetDefencePosXbyIndex(nArrangeIndex);
+		rHeroPos.m_fZ  = pSceneInfo->GetDefencePosZbyIndex(nArrangeIndex);
 
 		Obj_HeroPtr pHero =	CreateHeroObj(rMarch.GetHero(),rHeroPos,FORCETYPE_T::NPC_DEFENCE);
 		AssertEx(pHero,"");
+		pHero->SetPlayerId(rMarch.GetPlayerId());
 		m_lstDefence[nArrangeIndex] = pHero->GetID();
 	}
 
@@ -552,13 +612,18 @@ void CopyScene::InitDefenceObj(const March& rMarch)
 	for (int i=0;i<nSize;i++)
 	{
 		Troop rTroop = rMarchTroopList.GetTroopByIndex(i);
+		if (rTroop.GetType()<=0)
+		{
+			continue;
+		}
 		int  nArrangeIndex = rTroop.GetArrangeIndex();
 		AssertEx(nArrangeIndex >= 0,"");
 		ScenePos rTroopPos;
-		rTroopPos.m_nX  = pSceneInfo->GetDefencePosXbyIndex(nArrangeIndex);
-		rTroopPos.m_nZ  = pSceneInfo->GetDefencePosZbyIndex(nArrangeIndex);
+		rTroopPos.m_fX  = pSceneInfo->GetDefencePosXbyIndex(nArrangeIndex);
+		rTroopPos.m_fZ  = pSceneInfo->GetDefencePosZbyIndex(nArrangeIndex);
 		Obj_TroopPtr pTroop = CreateTroopObj(rTroop,rTroopPos,FORCETYPE_T::NPC_DEFENCE);
 		AssertEx(pTroop,"");
+		pTroop->SetPlayerId(rMarch.GetPlayerId());
 		m_lstDefence[nArrangeIndex] = pTroop->GetID();
 	}
 	m_nCurPlayerCount++;
@@ -570,6 +635,7 @@ void CopyScene::InitDefenceObj(const March& rMarch)
 	MsgPtr->m_nMarchId = rMarch.GetMarchId();
 	MsgPtr->m_nResult  = 0;
 	MsgPtr->m_nSceneId = GetSceneInstID();
+	MsgPtr->m_nSceneClass = GetSceneClassID();
 	SendMessage2User(rMarch.GetPlayerId(),MsgPtr);
 		__LEAVE_FUNCTION
 }
@@ -681,12 +747,22 @@ void CopyScene::Open(int nPlayType, int nDifficulty, int nLevel)
 void CopyScene::Close(void)
 {
 	__ENTER_FUNCTION
-		MarchLeaveSceneMsgPtr dMsgPtr = POOLDEF_NEW(MarchLeaveSceneMsg);
+		
 	m_nStatus = STATUS_CLOSED;
 	CleanUpObjList();
 	DelAllNonUserObj();
 	Tick_DelObjs();
 	VerifyEx(m_ObjPtrMap.empty(), "");
+
+	MarchLeaveBattleMsgPtr dMsgPtr = POOLDEF_NEW(MarchLeaveBattleMsg);
+	dMsgPtr->m_March = m_DefenceMarch;
+
+	SendMessage2Srv(ServiceID::SCENE,dMsgPtr);
+
+	MarchLeaveBattleMsgPtr aMsgPtr = POOLDEF_NEW(MarchLeaveBattleMsg);
+	aMsgPtr->m_March = m_AttackMarch;
+
+	SendMessage2Srv(ServiceID::SCENE,aMsgPtr);
 
 	__LEAVE_FUNCTION
 }
@@ -740,6 +816,17 @@ void CopyScene::HandleMessage(const ReqBattleInfoMsg &rMsg)
 		RetBattleInfoMsgPtr MsgPtr = POOLDEF_NEW(RetBattleInfoMsg);
 		AssertEx(MsgPtr,"");
 		MsgPtr->m_nSceneId = rMsg.m_nSceneId;
+		if (m_AttackMarch.GetPlayerId() == rMsg.m_ReceiverGuid)
+		{
+			MsgPtr->m_nCamp = FORCETYPE_T::NPC_ATTACK;
+		}
+		else
+		{
+			MsgPtr->m_nCamp = FORCETYPE_T::NPC_DEFENCE;
+		}
+
+		MsgPtr->m_nState = m_nStatus;
+
 		for (ObjPtrMap::iterator it = m_ObjPtrMap.begin(); it != m_ObjPtrMap.end(); it++)
 		{
 			ObjPtr Ptr = it->second;
@@ -758,23 +845,132 @@ void CopyScene::HandleMessage(const ReqBattleInfoMsg &rMsg)
 						rObj.m_skillLst.push_back(SkillId);
 					}
 				}
-				rObj.m_camp = PtrRet->GetForceType();
+				rObj.m_camp    = PtrRet->GetForceType();
 				rObj.m_maxHp   = PtrRet->GetCombatAttrByID((int)(COMBATATTR_T::MAXHP));
 				rObj.m_attack  = PtrRet->GetCombatAttrByID(COMBATATTR_T::ATTACK);
 				rObj.m_defence = PtrRet->GetCombatAttrByID(COMBATATTR_T::DEFENCE);
 				rObj.m_level   = PtrRet->GetLevel();
-				rObj.m_posX    = PtrRet->GetScenePos().m_nX;
-				rObj.m_posZ    = PtrRet->GetScenePos().m_nZ;
+				rObj.m_fPosX    = PtrRet->GetScenePos().m_fX;
+				rObj.m_fPosZ    = PtrRet->GetScenePos().m_fZ;
 				rObj.m_arrangeIndex = PtrRet->GetArrangeIndex();
 				rObj.m_hp      = PtrRet->GetCurHp();
 				rObj.m_xp      = PtrRet->GetCurXP();
-				rObj.m_unitCount = (int)(ceil((tfloat32)PtrRet->GetCurHp()/rObj.m_maxHp));
+				if (PtrRet->IsHero())
+				{
+					rObj.m_unitCount = 1; 
+				}
+				else
+				{
+					rObj.m_unitCount = PtrRet->CalTroopCount(PtrRet->GetCurHp(),rObj.m_maxHp); 
+				}
+				
 				MsgPtr->m_objList.push_back(rObj);
 			}
 		}
 
 		SendMessage2User(rMsg.m_ReceiverGuid,MsgPtr);
 
+
+	__LEAVE_FUNCTION
+}
+
+void CopyScene::HandleMessage(const ReqArrangChangeMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		if (GetSceneInstID() != rMsg.m_nSceneId)
+		{
+			return;
+		}
+
+		// ºÏ≤‚ID «∑Ò∫œ∑®
+		RetArrangChangeMsgPtr MsgPtr = POOLDEF_NEW(RetArrangChangeMsg);
+		MsgPtr->m_nSceneId = rMsg.m_nSceneId;
+		if (m_nStatus != STATUS_LINE)
+		{
+			MsgPtr->m_ret      = 1;
+			SendMessage2User(MsgPtr->m_ReceiverGuid,MsgPtr);
+			return;
+		}
+
+		bsvector<int> reqObjList;
+		bsvector<int> reqArrangeList;
+		
+		int nSize = (int)rMsg.m_lstArrange.size();
+		for (int i=0;i<nSize;i++)
+		{
+			ObjPtrMap::iterator it = m_ObjPtrMap.find(rMsg.m_lstObj[i]);
+			if (it == m_ObjPtrMap.end())
+			{
+				MsgPtr->m_ret      = 3;
+				SendMessage2User(MsgPtr->m_ReceiverGuid,MsgPtr);
+				return;
+			}
+
+			ObjPtr Ptr  = it->second;
+			Obj_NpcPtr PtrRet = boost::static_pointer_cast<Obj_Npc, Obj>(Ptr);
+			if (PtrRet->GetPlayerId() != rMsg.m_ReceiverGuid)
+			{
+				MsgPtr->m_ret      = 4;
+				SendMessage2User(MsgPtr->m_ReceiverGuid,MsgPtr);
+				return;
+			}
+			// ºÏ≤‚obj «∑Ò÷ÿ∏¥
+			for (int j=0;j<reqObjList.size();j++)
+			{
+				if (rMsg.m_lstObj[i] == reqObjList[j])
+				{
+					MsgPtr->m_ret      = 2;
+					SendMessage2User(MsgPtr->m_ReceiverGuid,MsgPtr);
+					return;
+				}
+				else
+				{
+					
+				}
+			}
+
+			reqObjList.push_back(rMsg.m_lstObj[i]);
+
+			for (int j=0;j<reqArrangeList.size();j++)
+			{
+				AssertEx(rMsg.m_lstArrange[i]>=0 && rMsg.m_lstArrange[i]<TROOP_ARRANGE_MAX_POSITION,"");
+				if (rMsg.m_lstArrange[i] == reqArrangeList[j])
+				{
+					MsgPtr->m_ret      = 3;
+					SendMessage2User(MsgPtr->m_ReceiverGuid,MsgPtr);
+					return;
+				}
+				else
+				{
+					
+				}
+			}
+
+			reqArrangeList.push_back(rMsg.m_lstArrange[i]);
+
+		}
+		Table_SceneClass const* pSceneInfo =GetTable_SceneClassByID(GetSceneClassID());
+		for (int i=0;i<nSize;i++)
+		{
+			ObjPtrMap::iterator it = m_ObjPtrMap.find(rMsg.m_lstObj[i]);
+			ObjPtr Ptr  = it->second;
+			Obj_NpcPtr PtrNpc = boost::static_pointer_cast<Obj_Npc, Obj>(Ptr);
+			PtrNpc->SetArrangeIndex(rMsg.m_lstArrange[i]);
+			ScenePos rPos;
+			rPos.m_fX  = pSceneInfo->GetAttackPosXbyIndex(rMsg.m_lstArrange[i]);
+			rPos.m_fZ   = pSceneInfo->GetAttackPosZbyIndex(rMsg.m_lstArrange[i]);
+			PtrNpc->SetScenePos(rPos);
+		}
+		if (m_AttackMarch.GetPlayerId() == rMsg.m_ReceiverGuid)
+		{
+			m_bAttackReady = true;
+		}
+		else
+		{
+			m_bDefenceReady = true;
+		}
+		MsgPtr->m_ret      = 0;
+		SendMessage2User(MsgPtr->m_ReceiverGuid,MsgPtr);
 
 	__LEAVE_FUNCTION
 }
@@ -799,10 +995,11 @@ void CopyScene::HandleMessage(const ReqObjListMsg &rMsg)
 				Obj_NpcPtr PtrRet = boost::static_pointer_cast<Obj_Npc, Obj>(Ptr);
 				ObjInfo rObj ;
 				rObj.m_objId   = PtrRet->GetID();
-				rObj.m_posX    = PtrRet->GetScenePos().m_nX;
-				rObj.m_posZ    = PtrRet->GetScenePos().m_nZ;
+				rObj.m_fPosX    = PtrRet->GetScenePos().m_fX;
+				rObj.m_fPosZ    = PtrRet->GetScenePos().m_fZ;
 				rObj.m_hp      = PtrRet->GetCurHp();
 				rObj.m_nState  = PtrRet->GetState();
+				rObj.m_nTargetId = PtrRet->GetCurSelectObjId();
 				MsgPtr->m_objList.push_back(rObj);
 			}
 		}

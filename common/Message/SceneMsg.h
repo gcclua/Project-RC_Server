@@ -33,21 +33,22 @@ MESSAGE_DEF_END(RetMarchStartMsg)
 
 MESSAGE_DEF_BEGIN(MarchMoveMsg)
 	int   m_nPosCount;
-	bsvector<int> m_nPosX;
-	bsvector<int> m_nPoxZ;
+	bsvector<tfloat32> m_fPosX;
+	bsvector<tfloat32> m_fPoxZ;
 	bool   m_ismoving;
 MESSAGE_DEF_END(MarchMoveMsg)
 
 MESSAGE_DEF_BEGIN(RetMarchMoveMsg)
 	int m_nObjId;
 	int m_nPosCount;
-	bsvector<int> m_nPosX;
-	bsvector<int> m_nPoxZ;
+	bsvector<tfloat32> m_fPosX;
+	bsvector<tfloat32> m_fPoxZ;
 	bsvector<int> m_nSerial;
 	int m_nSceneId;
 MESSAGE_DEF_END(RetMarchMoveMsg)
 
 MESSAGE_DEF_BEGIN(MarchReqNearListMsg)
+	int m_nBlockId;
 	
 MESSAGE_DEF_END(MarchReqNearListMsg)
 
@@ -59,8 +60,8 @@ MESSAGE_DEF_END(MarchRetNearListMsg)
 
 MESSAGE_DEF_BEGIN(RetMarchTeleMoveMsg)
 	int m_nObjId;
-	int m_nPosX;
-	int m_nPoxZ;
+	tfloat32 m_fPosX;
+	tfloat32 m_fPoxZ;
 	int m_nSceneId;
 MESSAGE_DEF_END(RetMarchTeleMoveMsg)
 
@@ -76,6 +77,7 @@ MESSAGE_DEF_BEGIN(MarchRetFightMsg)
 int64 m_nMarchId;
 int   m_nSceneId;
 int   m_nResult;
+int   m_nSceneClass;
 MESSAGE_DEF_END(MarchRetFightMsg)
 
 MESSAGE_DEF_BEGIN(MarchOpenCopySceneMsg)
@@ -100,8 +102,8 @@ MESSAGE_DEF_BEGIN(AskJoinCopySceneMsg)
 MESSAGE_DEF_END(AskJoinCopySceneMsg)
 
 MESSAGE_DEF_BEGIN(MarchStopMsg)
-	int m_nX;
-	int m_nZ;
+	tfloat32 m_fX;
+	tfloat32 m_fZ;
 	int m_nSerial;
 	int m_nSceneId;
 	int m_nObjId;
@@ -152,6 +154,8 @@ MESSAGE_DEF_END(ReqBattleInfoMsg)
 MESSAGE_DEF_BEGIN(RetBattleInfoMsg)
 	int m_nSceneId;
 	bsvector<SceneObj> m_objList;
+	int m_nCamp;
+	int m_nState;
 MESSAGE_DEF_END(RetBattleInfoMsg)
 
 MESSAGE_DEF_BEGIN(ReqObjListMsg)
@@ -176,8 +180,8 @@ MESSAGE_DEF_BEGIN(Update_Animation_State)
 MESSAGE_DEF_END(Update_Animation_State)
 	
 MESSAGE_DEF_BEGIN(Force_SetPosMsg)
-int m_nPosX;
-int m_nPoxZ;
+tfloat32 m_fPosX;
+tfloat32 m_fPosZ;
 int m_nObjId;
 int m_nSceneId;
 MESSAGE_DEF_END(Force_SetPosMsg)
@@ -261,6 +265,39 @@ MESSAGE_DEF_BEGIN(NoticeMsg)
 	FLString<128> m_szNotice;
 	int m_nIsFilterRepeat;
 MESSAGE_DEF_END(NoticeMsg)
+
+MESSAGE_DEF_BEGIN(ReqArrangChangeMsg)
+	int m_nSceneId;
+	bsvector<int> m_lstObj;
+	bsvector<int> m_lstArrange;
+MESSAGE_DEF_END(ReqArrangChangeMsg)
+
+MESSAGE_DEF_BEGIN(RetArrangChangeMsg)
+	int m_nSceneId;
+	int m_ret;
+MESSAGE_DEF_END(RetArrangChangeMsg)
+
+MESSAGE_DEF_BEGIN(ReqMarchSetPosMsg)
+	int m_nSceneId;
+	int64 m_nMarchId;
+	tfloat32 m_fPosX;
+	tfloat32 m_fPosZ;
+MESSAGE_DEF_END(ReqMarchSetPosMsg)
+
+
+MESSAGE_DEF_BEGIN(RetMarchSetPosMsg)
+	int m_ret;
+MESSAGE_DEF_END(RetMarchSetPosMsg)
+
+
+MESSAGE_DEF_BEGIN(RetBattleEndMsg)
+	int m_camp;
+	int m_nSceneId;
+MESSAGE_DEF_END(RetBattleEndMsg)
+
+MESSAGE_DEF_BEGIN(RetBattleStartMsg)
+	int m_nSceneId;
+MESSAGE_DEF_END(RetBattleStartMsg)
 
 
 #endif

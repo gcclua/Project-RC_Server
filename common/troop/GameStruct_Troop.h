@@ -106,7 +106,7 @@ public:
 
 	bool IsTroopIdVaild(int  nType)const
 	{
-		if(0 <= nType)
+		if(0 < nType)
 		{
 			for(tint32 nId=0;m_TroopList.ElemSize()>nId;++nId)
 			{
@@ -119,9 +119,28 @@ public:
 		return false;
 	}
 
+	// 检测是否可以增加军队
+	bool CheckAddTroop(int nQueueIndex,int nTroopType)
+	{
+		if(0<nTroopType && nQueueIndex>=0)
+		{
+			if (m_TroopList[nQueueIndex].GetType() == 0)
+			{
+				return true;
+			}
+			if (m_TroopList[nQueueIndex].GetType() != nTroopType)
+			{
+				return false;
+			}
+			// 跳过检测最大值
+			return true;
+		}
+		return false;
+	}
+
 	bool UpdateTroop(int nType, tint32 hp,int nQueueIndex)//更新CDTime列表
 	{
-		if(0<=nType && nQueueIndex>=0)
+		if(0<nType && nQueueIndex>=0)
 		{
 			if (m_TroopList[nQueueIndex].GetType() != 0 && m_TroopList[nQueueIndex].GetType() != nType)
 			{
@@ -129,7 +148,8 @@ public:
 			}
 			m_TroopList[nQueueIndex].SetType(nType);
 			//AssertEx(m_TroopList[nQueueIndex].GetHp()+hp<TROOP_QUEUE_MAX_SIGCOUNT,"");
-			m_TroopList[nQueueIndex].SetCount(m_TroopList[nQueueIndex].GetHp()+hp);
+			m_TroopList[nQueueIndex].SetHp(m_TroopList[nQueueIndex].GetHp()+hp);
+			return true;
 		}
 		return false;
 	}

@@ -16,7 +16,7 @@ struct COMBATATTR_T
 {
 	enum TYPE 
 	{
-		MAXHP =0,//血上限
+		MAXHP =0,//单兵血上限
 		MAXXP,//战意上限
 		ATTACK,  //攻击
 		DEFENCE,//防御
@@ -24,6 +24,7 @@ struct COMBATATTR_T
 		MOVESPEED,//移动速度
 		ATTACKSPEED,//攻击速度
 		ATTACKARRANGE,// 攻击范围
+		TOTALMAXHP, // 所有兵的最大血
 		COMBATATTR_MAXNUM
 	};
 };

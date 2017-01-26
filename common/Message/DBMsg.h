@@ -218,4 +218,12 @@ MESSAGE_DEF_BEGIN(DBRetReqLoadRandomNameMsg)
 	DBRandomNameList	m_Data;
 MESSAGE_DEF_END(DBRetReqLoadRandomNameMsg)
 
+MESSAGE_DEF_BEGIN(DBReqSaveTroopTrainMsg)
+	DBTroopTrain m_Data;
+MESSAGE_DEF_END(DBReqSaveTroopTrainMsg)
+
+MESSAGE_DEF_BEGIN(DBReqSaveHeroMsg)
+	DBHero m_Data;
+MESSAGE_DEF_END(DBReqSaveHeroMsg)
+
 #endif

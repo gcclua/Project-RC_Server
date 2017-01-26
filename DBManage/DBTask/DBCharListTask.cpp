@@ -62,6 +62,7 @@ bool DBCharListTask::Load(ODBCInterface &rODBCInterface, LibMemInterface &rLibMe
 		MsgPtr->m_CharDataList.CopyFrom(m_CharDataList);
 		SendMessage2Srv(ServiceID::LOGIN, MsgPtr);
 		CacheLog( LOGDEF_INST(DBAgent),"[charlist]:load success \1 m_AccName=%s \1 resultCount=%d",m_AccName.GetCText(),resultCount);
+
 	}
 	return true;
 

@@ -1,8 +1,8 @@
-Id	Desc	BuildingType	Name	Level	Description	Icon	Res	Prosperity	NeedBuilding1	NeedBuilding2	NeedBuilding3	NeedProsperity	NeedTime	NeedStone	NeedGold	NeedIron	NeedFood
+Id	Desc	BuildingType	Name	Level	Description	Asset	Bundle	Prosperity	NeedBuilding1	NeedBuilding2	NeedBuilding3	NeedProsperity	NeedTime	NeedStone	NeedGold	NeedIron	NeedFood
 INT	STRING	INT	STRING	INT	STRING	STRING	STRING	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT
 #MAX_ID=99999;MAX_RECORD=1024;TableType=Hash;																	
-#ID	程序不读	建筑物类型(CityBuildingDefault-Id)	名称	等级	描述	图标	模型资源	提供繁荣度	前置建筑物Id列表1	前置建筑物Id列表2	前置建筑物Id列表3	所需繁荣度（升到当级）	所需时间(s）	所需石料	所需金币	所需铁矿	所需粮食
-1		1	城堡	1	城堡的描述	res\InGame\GUI\	\res\InGame\Models	100	0			0	0	0	0	0	0
+#ID	程序不读	标记	名称	等级	描述	Asset名	Bundle名	提供繁荣度	前置建筑物Id列表1	前置建筑物Id列表2	前置建筑物Id列表3	所需繁荣度（升到当级）	所需时间(s）	所需石料	所需金币	所需铁矿	所需粮食
+1		1	城堡	1	城堡的描述			100	0			0	0	0	0	0	0
 2		1	城堡	2	城堡的描述			200	0			0	60	1000	1000	0	0
 3		1	城堡	3	城堡的描述			300	0			0	70	1000	1000	0	0
 4		1	城堡	4	城堡的描述			400	0			0	80	1000	1000	0	0

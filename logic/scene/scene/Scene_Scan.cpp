@@ -68,8 +68,8 @@ void Scene::Scan_All_Ray(ObjRefCont &Cont, ScenePos OriginalPos, float fDirectio
 	fLength = _MAX(fLength, 0.1f);
 	fScope = _MAX(fScope, 0.1f);
 
-	Scanner.m_af.m_DestinationPos.m_nX = (int)(Scanner.m_af.m_OriginalPos.m_nX + fLength * ::cos(fDirection));
-	Scanner.m_af.m_DestinationPos.m_nZ = (int)(Scanner.m_af.m_OriginalPos.m_nZ + fLength * ::sin(fDirection));
+	Scanner.m_af.m_DestinationPos.m_fX = Scanner.m_af.m_OriginalPos.m_fX + fLength * ::cos(fDirection);
+	Scanner.m_af.m_DestinationPos.m_fZ = Scanner.m_af.m_OriginalPos.m_fZ + fLength * ::sin(fDirection);
 
 	Scanner.m_af.m_fScope = fScope;
 
@@ -146,12 +146,24 @@ void Scene::Scan_Character_Ray(CharacterRefCont &Cont, ScenePos OriginalPos, flo
 	fLength = _MAX(fLength, 0.1f);
 	fScope = _MAX(fScope, 0.1f);
 
-	Scanner.m_af.m_DestinationPos.m_nX = (int)(Scanner.m_af.m_OriginalPos.m_nX + fLength * ::cos(fDirection));
-	Scanner.m_af.m_DestinationPos.m_nZ = (int)(Scanner.m_af.m_OriginalPos.m_nZ + fLength * ::sin(fDirection));
+	Scanner.m_af.m_DestinationPos.m_fX = Scanner.m_af.m_OriginalPos.m_fX + fLength * ::cos(fDirection);
+	Scanner.m_af.m_DestinationPos.m_fZ = Scanner.m_af.m_OriginalPos.m_fZ + fLength * ::sin(fDirection);
 
 	Scanner.m_af.m_fScope = fScope;
 
 	Scan(Cont, Scanner);
+
+	__LEAVE_FUNCTION
+}
+
+void Scene::Scan_March_Block(MarchRefCont&Cont,int nBlockId)
+{
+	__ENTER_FUNCTION
+
+	ScannerMarchBlock Scanner;
+	Scanner.m_af.m_nBlock = nBlockId;
+	Scan(Cont, Scanner);
+
 
 	__LEAVE_FUNCTION
 }
@@ -224,8 +236,8 @@ void Scene::Scan_March_Ray(MarchRefCont &Cont, ScenePos OriginalPos, float fDire
 	fLength = _MAX(fLength, 0.1f);
 	fScope = _MAX(fScope, 0.1f);
 
-	Scanner.m_af.m_DestinationPos.m_nX = (int)(Scanner.m_af.m_OriginalPos.m_nX + fLength * ::cos(fDirection));
-	Scanner.m_af.m_DestinationPos.m_nZ = (int)(Scanner.m_af.m_OriginalPos.m_nZ + fLength * ::sin(fDirection));
+	Scanner.m_af.m_DestinationPos.m_fX = Scanner.m_af.m_OriginalPos.m_fX + fLength * ::cos(fDirection);
+	Scanner.m_af.m_DestinationPos.m_fZ = Scanner.m_af.m_OriginalPos.m_fZ + fLength * ::sin(fDirection);
 
 	Scanner.m_af.m_fScope = fScope;
 
@@ -302,8 +314,8 @@ void Scene::Scan_Npc_Ray(NpcRefCont &Cont, ScenePos OriginalPos, float fDirectio
 	fLength = _MAX(fLength, 0.1f);
 	fScope = _MAX(fScope, 0.1f);
 
-	Scanner.m_af.m_DestinationPos.m_nX = (int)(Scanner.m_af.m_OriginalPos.m_nX + fLength * ::cos(fDirection));
-	Scanner.m_af.m_DestinationPos.m_nZ = (int)(Scanner.m_af.m_OriginalPos.m_nZ + fLength * ::sin(fDirection));
+	Scanner.m_af.m_DestinationPos.m_fX = Scanner.m_af.m_OriginalPos.m_fX + fLength * ::cos(fDirection);
+	Scanner.m_af.m_DestinationPos.m_fZ = Scanner.m_af.m_OriginalPos.m_fZ + fLength * ::sin(fDirection);
 
 	Scanner.m_af.m_fScope = fScope;
 

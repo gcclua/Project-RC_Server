@@ -72,35 +72,43 @@ public:
 public:
 	MarchBaseInfo(const MarchBaseInfo &r)
 	{
-		m_Guid = r.m_Guid;
-		m_szName = r.m_szName;
-		m_nLevel = r.m_nLevel;
+		m_Guid    = r.m_Guid;
+		m_szName  = r.m_szName;
+		m_nLevel  = r.m_nLevel;
 		m_OwnGuid = r.m_OwnGuid;
+		m_fPosX   = r.m_fPosX;
+		m_fPosZ   = r.m_fPosZ;
 	}
 	MarchBaseInfo& operator = (const MarchBaseInfo &r)
 	{
 		if (this != &r)
 		{
-			m_Guid = r.m_Guid;
-			m_szName = r.m_szName;
-			m_nLevel = r.m_nLevel;
+			m_Guid    = r.m_Guid;
+			m_szName  = r.m_szName;
+			m_nLevel  = r.m_nLevel;
 			m_OwnGuid = r.m_OwnGuid;
+			m_fPosX   = r.m_fPosX;
+			m_fPosZ   = r.m_fPosZ;
 		}
 		return *this;
 	}
 public:
 	void CleanUp(void)
 	{
-		m_Guid = 0;
-		m_szName = "";
-		m_nLevel = 0;
+		m_Guid    = 0;
+		m_szName  = "";
+		m_nLevel  = 0;
 		m_OwnGuid = 0;
+		m_fPosX   = 0.f;
+		m_fPosZ   = 0.f;
 	}
 public:
 	int64		m_Guid;
 	CHARNAME	m_szName;
 	int		    m_nLevel;
 	int64		m_OwnGuid;
+	tfloat32    m_fPosX;
+	tfloat32    m_fPosZ;
 
 };
 
@@ -138,51 +146,53 @@ typedef std::map<int64, MarchInfo> MarchInfoMap;
 
 
 //////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
 class ScenePos
 {
 public:
-	int	m_nX;
-	int	m_nZ;
+	tfloat32	m_fX;
+	tfloat32	m_fZ;
 public:
-	ScenePos(void) : m_nX(0), m_nZ(0) {}
-	ScenePos(int fX, int fZ) : m_nX(fX), m_nZ(fZ) {}
-	ScenePos(const ScenePos &r) : m_nX(r.m_nX), m_nZ(r.m_nZ) {}
+	ScenePos(void) : m_fX(0.0f), m_fZ(0.0f) {}
+	ScenePos(tfloat32 fX, tfloat32 fZ) : m_fX(fX), m_fZ(fZ) {}
+	ScenePos(const ScenePos &r) : m_fX(r.m_fX), m_fZ(r.m_fZ) {}
 	ScenePos& operator=(const ScenePos &r)
 	{
-		m_nX = r.m_nX;
-		m_nZ = r.m_nZ;
+		m_fX = r.m_fX;
+		m_fZ = r.m_fZ;
 		return *this;
 	}
 public:
 	void CleanUp(void)
 	{
-		m_nX = 0;
-		m_nZ = 0;
+		m_fX = 0.0f;
+		m_fZ = 0.0f;
 	}
 	bool operator==(const ScenePos &r) const
 	{
-		return (abs(m_nX-r.m_nX)+abs(m_nZ-r.m_nZ)) == 0;
+		return (fabs(m_fX-r.m_fX)+fabs(m_fZ-r.m_fZ)) < 0.001f;
 	}
 	bool operator!=(const ScenePos &r) const
 	{
 		return !(*this == r);
 	}
-	int DistanceSquare(const ScenePos &r) const
+	tfloat32 DistanceSquare(const ScenePos &r) const
 	{
-		int DistX, DistZ;
-		DistX	= r.m_nX - m_nX;
-		DistZ	= r.m_nZ - m_nZ;
-		return (int)(DistX * DistX + DistZ * DistZ);
+		tfloat32 fDistX, fDistZ;
+		fDistX	= r.m_fX - m_fX;
+		fDistZ	= r.m_fZ - m_fZ;
+		return (tfloat32)(fDistX * fDistX + fDistZ * fDistZ);
 	}
-	float Distance(const ScenePos &r) const
+	tfloat32 Distance(const ScenePos &r) const
 	{
-		return (float)sqrt(DistanceSquare(r));
+		return (tfloat32)sqrt(DistanceSquare(r));
 	}
 };
 
+
 //////////////////////////////////////////////////////////////////////////
-float CalcDirection(const ScenePos &rPosStart, const ScenePos &rPosEnd);
-void NormaliseDirection(float &rDirection);
+tfloat32 CalcDirection(const ScenePos &rPosStart, const ScenePos &rPosEnd);
+void NormaliseDirection(tfloat32 &rDirection);
 
 //////////////////////////////////////////////////////////////////////////
 template<typename _ElemType, int _ElemSize>
@@ -605,18 +615,19 @@ public:
 	int m_defence;
 	int m_xp;
 	int m_level;
-	int m_posX;
-	int m_posZ;
+	tfloat32 m_fPosX;
+	tfloat32 m_fPosZ;
 	int m_arrangeIndex;
 };
 
 struct ObjInfo
 {
 	int m_objId;
-	int m_posX;
-	int m_posZ;
+	tfloat32 m_fPosX;
+	tfloat32 m_fPosZ;
 	int m_hp;
 	int m_nState;
+	int m_nTargetId;
 };
 
 

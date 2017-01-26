@@ -321,8 +321,10 @@ void Obj_Login::OnCharListRet(tint32 nResult, const DBCharDataList &rList)
 void Obj_Login::OnCreateCharRet(tint32 nResult, const DBFullUserData &rDBUser)
 {
 	__ENTER_FUNCTION
+		
 		if (nResult == DBMsgResult::RESULT_SUCCESS)
 		{
+			CacheLog(LOGDEF_INST(CreateChar),"OnCreateCharRet:: start \2 userId=%d,\3 account =%s, \4 time=%d",rDBUser.GetGuid(),rDBUser.m_User.m_AccName,gTimeManager.GetANSITime());
 			m_rPlayer.SetStatus(PlayerStatus::LOGIN_CREATE_CHAR_OK);
 
 			m_rPlayer.GetObjUser().SerializeFromDB(rDBUser);
@@ -340,7 +342,7 @@ void Obj_Login::OnCreateCharRet(tint32 nResult, const DBFullUserData &rDBUser)
 				MsgPtr->m_userId = rDBUser.m_User.m_Guid;
 				MsgPtr->m_nPlayerID = m_rPlayer.GetID();
 				SendMessage2Srv(ServiceID::WORLDMAP,MsgPtr);
-
+				CacheLog(LOGDEF_INST(CreateChar),"OnCreateCharRet:: end \2 userId=%d,\3 account =%s, \4 time=%d",rDBUser.GetGuid(),rDBUser.m_User.m_AccName,gTimeManager.GetANSITime());
 			//Packets::GC_CREATEROLE_RET_PAK pak;
 			//pak.m_PacketData.set_result(GC_CREATEROLE_RET::CREATEROLE_SUCCESS);
 			//pak.m_PacketData.set_playerguid(m_rPlayer.GetObjUser().GetGuid());
@@ -421,6 +423,7 @@ void Obj_Login::OnLoadCharRet(tint32 nResult, const DBFullUserData &rDBUser, boo
 
 		if (nResult == DBMsgResult::RESULT_SUCCESS)
 		{
+			CacheLog(LOGDEF_INST(CreateChar),"OnLoadCharRet:: start  \1 userId=%d,\2  time=%d",rDBUser.GetGuid(),gTimeManager.GetANSITime());
 			m_rPlayer.SetStatus(PlayerStatus::LOGIN_LOAD_CHAR_OK);
 
 			time_t nAnsiTime = _ansitime();
@@ -447,7 +450,7 @@ void Obj_Login::OnLoadCharRet(tint32 nResult, const DBFullUserData &rDBUser, boo
 			pak.m_PacketData.set_level(0);
 			m_rPlayer.GetObjUser().FillGCLogin(pak.m_PacketData);
 			SendPacket(pak);
-
+			CacheLog(LOGDEF_INST(CreateChar),"OnLoadCharRet:: end  \1 userId=%d,\2  time=%d",rDBUser.GetGuid(),gTimeManager.GetANSITime());
 			m_rPlayer.SetStatus(PlayerStatus::LOGIN_READYENTERWORLD);
 			//m_rPlayer.SetStatus(PlayerStatus::GAME_PLAYERING);
 		}
@@ -678,11 +681,15 @@ tuint32 Obj_Login::HandlePacket(::CG_CREATEROLE &rPacket)
 		MsgPtr->m_AccName   = m_szAccount;
 		MsgPtr->m_nPlayerID = m_rPlayer.GetID();
 		MsgPtr->m_UserData.InitAsCreateNewChar(szName.GetCText(), m_szAccount.GetCText(),gender);
+
+		CacheLog(LOGDEF_INST(CreateChar),"obj_login::\1 playerid=%d, \2 userId=%d,\3 account =%s,\4 time=5d",m_rPlayer.GetID(),MsgPtr->m_UserData.GetGuid(),m_szAccount.GetCText(),gTimeManager.GetANSITime());
 		SendMessage2Srv(ServiceID::DBAGENT, MsgPtr);
 
 		CacheLog(LOGDEF_INST(Login),
 			"player(%d) onpacket(CG_CREATEROLE)",
 			m_rPlayer.GetID());
+
+		
 
 		m_rPlayer.SetStatus(PlayerStatus::LOGIN_CREATING_CHAR);
 

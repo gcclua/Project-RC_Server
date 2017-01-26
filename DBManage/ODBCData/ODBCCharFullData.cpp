@@ -10,6 +10,7 @@
 #include "ODBCBuildingData.h"
 #include "ODBCHeroData.h"
 #include "ODBCMarchData.h"
+#include "ODBCTroopTrainData.h"
 
 ODBCCharFullData::ODBCCharFullData(ODBCInterface* pInterface)
 {
@@ -113,14 +114,11 @@ bool ODBCCharFullData::Save(DBFullUserData* pSource)
 		rUserFullData.GetGuid(),
 		rUserFullData.m_User.m_CharName,
 		rUserFullData.m_User.m_AccName,
-		rUserFullData.m_User.m_Level,
-		rUserFullData.m_User.m_Exp,
 		rUserFullData.m_User.m_IsValid,
 		COMMONDATA,
 		COMMONFLAG,
-		rUserFullData.m_User.m_CreateRoleTime,
-		rUserFullData.m_User.m_LastLogoutTime,
-		m_CRCValue
+		rUserFullData.m_User.m_CityId,
+		rUserFullData.m_User.m_LastLogoutTime
 		);
 	m_DebugStep = 50;
 	tint32 beforeSaveTime = gTimeManager.SysRunTime();
@@ -253,6 +251,15 @@ bool ODBCCharFullData::ParseResult(DBFullUserData* pResult)
 						return false;
 					}
 					MarchDataObject.ParseResult(&rUserFullData);
+
+					ODBCTroopTrainData TroopTrainObject(mInterface);
+					TroopTrainObject.SetCityId(rUserFullData.m_City.m_nCityID);
+
+					if(!TroopTrainObject.Load())
+					{
+						return false;
+					}
+					TroopTrainObject.ParseResult(&rUserFullData.m_City);
 				}
 				
 			}

@@ -91,6 +91,19 @@ tuint32 Packets::GC_MOVE_PAKHandler::Execute( Packets::GC_MOVE_PAK* pPacket, Pla
  }
 //This code create by CodeEngine
 
+#include "Packet/Packet/GC_MARCH_MOVE_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::GC_MARCH_MOVE_PAKHandler::Execute( Packets::GC_MARCH_MOVE_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
 #include "Packet/Packet/GC_STOP_PAK.h"
  #include "Player/Player.h"
 tuint32 Packets::GC_STOP_PAKHandler::Execute( Packets::GC_STOP_PAK* pPacket, Player* pPlayer )
@@ -380,6 +393,71 @@ tuint32 Packets::GC_BUILDING_LEVELUP_PAKHandler::Execute( Packets::GC_BUILDING_L
 #include "Packet/Packet/GC_UPDATE_MARCH_PAK.h"
  #include "Player/Player.h"
 tuint32 Packets::GC_UPDATE_MARCH_PAKHandler::Execute( Packets::GC_UPDATE_MARCH_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
+#include "Packet/Packet/GC_TROOP_TRAIN_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::GC_TROOP_TRAIN_PAKHandler::Execute( Packets::GC_TROOP_TRAIN_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
+#include "Packet/Packet/GC_TROOPTRAIN_OVER_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::GC_TROOPTRAIN_OVER_PAKHandler::Execute( Packets::GC_TROOPTRAIN_OVER_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
+#include "Packet/Packet/GC_BATTLEPREPARE_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::GC_BATTLEPREPARE_PAKHandler::Execute( Packets::GC_BATTLEPREPARE_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
+#include "Packet/Packet/GC_BATTLEEND_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::GC_BATTLEEND_PAKHandler::Execute( Packets::GC_BATTLEEND_PAK* pPacket, Player* pPlayer )
+ {
+ __ENTER_FUNCTION
+ AssertEx(pPacket, "");
+ AssertEx(pPlayer, "");
+ return pPlayer->HandlePacket(pPacket->m_PacketData);
+ __LEAVE_FUNCTION
+ return PACKET_EXE_ERROR ; 
+ }
+//This code create by CodeEngine
+
+#include "Packet/Packet/GC_BATTLESTART_PAK.h"
+ #include "Player/Player.h"
+tuint32 Packets::GC_BATTLESTART_PAKHandler::Execute( Packets::GC_BATTLESTART_PAK* pPacket, Player* pPlayer )
  {
  __ENTER_FUNCTION
  AssertEx(pPacket, "");

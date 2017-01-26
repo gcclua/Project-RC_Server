@@ -33,6 +33,8 @@ public:
 	int64  m_nCityId;    // 城市ID
 	int    m_nStatus;    // 状态
 	int64  m_nBuildId;   // 建筑ID
+	tint32  m_nInstSceneId;  //上次登录场景实例ID
+	tint32  m_nClassSceneId; // 上次登录的场景类型
 	
 };
 

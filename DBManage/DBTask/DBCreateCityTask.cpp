@@ -40,7 +40,7 @@ void DBCreateCityTask::DataCleanUp()
 bool DBCreateCityTask::Execute(ODBCInterface &rODBCInterface, LibMemInterface &rLibMemInterface)
 {
 	__ENTER_FUNCTION
-
+		CacheLog(LOGDEF_INST(CreateChar),"DBCreateCityTask:: start  \1 userId=%d,\2 cityid=%d,\3 time=%d",m_Data.m_UserId,m_Data.m_nCityID,gTimeManager.GetANSITime());
 	DBRetCreateCityMsgPtr MsgPtr = POOLDEF_NEW(DBRetCreateCityMsg);
 	AssertEx(MsgPtr, "");
 	MsgPtr->m_Result = DBMsgResult::RESULT_FAIL;
@@ -52,6 +52,7 @@ bool DBCreateCityTask::Execute(ODBCInterface &rODBCInterface, LibMemInterface &r
 	if(false==createCity.Save(&m_Data))
 	{ 	
 		SendMessage2Srv(GetRetServiceID(), MsgPtr);
+		SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_FAIL);
 		return false;
 	}
 	CacheLog( LOGDEF_INST(DBAgent), "[CreateTask]:user real save end.\1 cityId=%lld \1 guid=%lld \1 tileId=%d \1 time=%d",\
@@ -61,14 +62,14 @@ bool DBCreateCityTask::Execute(ODBCInterface &rODBCInterface, LibMemInterface &r
 	bool RetAddNew = createCity.ParseResult(&RetVal);
 	if(!RetAddNew)
 	{
-		MsgPtr->m_Result = RetVal;
-		SendMessage2Srv(GetRetServiceID(), MsgPtr);
+		//MsgPtr->m_Result = RetVal;
+		//SendMessage2Srv(GetRetServiceID(), MsgPtr);
 
-		CacheLog( LOGDEF_INST(DBAgentError), "[CreateTask]:user create error.\1 reason=%d \1 cityId=%lld \1 guid=%lld \1 tileId=%d \1 time=%d",\
-			m_Data.m_nCityID,GetUserGuid(),\
-			m_Data.m_tileID,gTimeManager.SysRunTime()-beforeSaveTime);
+		//CacheLog( LOGDEF_INST(DBAgentError), "[CreateTask]:user create error.\1 reason=%d \1 cityId=%lld \1 guid=%lld \1 tileId=%d \1 time=%d",\
+			//m_Data.m_nCityID,GetUserGuid(),\
+			//m_Data.m_tileID,gTimeManager.SysRunTime()-beforeSaveTime);
 
-		return false;
+		//return false;
 	}
 	
 	
@@ -77,7 +78,9 @@ bool DBCreateCityTask::Execute(ODBCInterface &rODBCInterface, LibMemInterface &r
 	MsgPtr->m_Data.CopyFrom(m_Data);
 	SendMessage2Srv(ServiceID::LOGIN, MsgPtr);
 
+	SendOpResult(ServiceID::DBAGENT,DBMsgResult::RESULT_SUCCESS);
 
+	CacheLog(LOGDEF_INST(CreateChar),"DBCreateCityTask:: end  \1 userId=%d,\2 cityid=%d,\3 time=%d",m_Data.m_UserId,m_Data.m_nCityID,gTimeManager.GetANSITime());
 	return true;
 	__LEAVE_FUNCTION
 	return false;

@@ -1,8 +1,8 @@
 t	Description	CharModelID	Name	Sex	Level	AttackDisType	SkillstrategyIndex	MaxHP	MaxXP	XpSpeed	Defense	Attack	Hit	AttackTime	MoveSpeed	Camp	SelectRadius	CorpseTime	Exp	IsAttackFly	DieEffectID	RampType	EnhanceID	UnitDataID
 INT	STRING	INT	STRING	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	INT	FLOAT	INT	INT	INT	INT	INT	INT	INT
 #MAX_ID=4096;MAX_RECORD=4096;TableType=Hash;																								
-#角色ID	描述（程序不读）	CharModel表ID	名称	性别	等级	近战或远程（0近战 1远程）	技能选择策略	生命值	战意	战意回复速度	防御	攻击	命中	攻击频率（毫秒）	移动速度	阵营 （0玩家1友好2中立3敌对）	选择的范围	尸体时间（单位：毫秒）	"怪物经验(NPC有属性自适应ID的话,走CopySceneRoleBaseAttrEnhance表掉落,且当前表格exp配置失效)"	是否死亡必击飞	死亡特效ID	渐变效果类型（1出生渐变 2死亡渐变 3出生死亡都渐变）	属性自适应ID	对应客户端小兵属性ID
+#角色ID	描述（程序不读）	CharModel表ID	名称	性别	等级	近战或远程（0近战 1远程）	技能选择策略	生命值	战意	战意回复速度	防御	攻击	命中	攻击频率（毫秒）	移动速度	阵营 （0玩家1友好2中立3敌对）	选择的范围	尸体时间（单位：毫秒）	怪物经验(NPC有属性自适应ID的话,走CopySceneRoleBaseAttrEnhance表掉落,且当前表格exp配置失效)	是否死亡必击飞	死亡特效ID	渐变效果类型（1出生渐变 2死亡渐变 3出生死亡都渐变）	属性自适应ID	对应客户端小兵属性ID
 #此行必须有!!客户端确定是否需要读到内存	规则为填写S则不读，否则就会读取到客户端																							
-1	1级步兵	0	步兵	0	1	0	1	200	100	1	10	14	10000	2000	3	0	6	3000	5	1	-1	-1	-1	100002
-2	1级弓箭手	1	弓兵	0	1	1	2	180	100	1	8	10	10000	2000	3	0	15	3000	5	1	-1	-1	-1	100001
+1	1级步兵	0	步兵	0	1	0	1	200	100	1	10	14	10000	2000	3	0	6	3000	5	1	-1	-1	-1	100001
+2	1级弓箭手	1	弓兵	0	1	1	2	180	100	1	8	10	10000	2000	3	0	15	3000	5	1	-1	-1	-1	100003
 3	1级英雄	2	英雄	1	1	0	3	1000	100	2	20	20	10000	2000	3	0	6	3000	20	1	-1	-1	-1	

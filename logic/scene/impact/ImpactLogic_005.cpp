@@ -44,7 +44,7 @@ void ImpactLogic_005::StartEffect(Obj_Character& rSelf)
 			{
 				return;
 			}
-			int nMaxHP =rSelf.GetCombatAttrByID((int)(COMBATATTR_T::MAXHP));
+			int nMaxHP =rSelf.GetCombatAttrByID((int)(COMBATATTR_T::TOTALMAXHP));
 			int nRefixCurHP = (int)(rSelf.GetCurHp() * fHPRefixCurPer); // 根据当前血量来做修正
 			int nIncHp =(int)(nHPRefixValue+nMaxHP*fHPRefixPer + nRefixCurHP);
 			rSelf.IncreaseHp(nIncHp,*SendPtr);

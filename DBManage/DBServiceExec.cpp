@@ -87,9 +87,11 @@ void DBServiceExec::Tick(const TimeInfo &rTimeInfo)
 void DBServiceExec::HandleMessage(const DBAssignTaskMsg &rMsg)
 {
 	__ENTER_FUNCTION
+		CacheLog(LOGDEF_INST(DBTaskEffeciency),"DBAssignTaskMsg:: start  \1 key=%d,\2 time=%d",rMsg.m_DBBaseTaskPtr->GetKey(),gTimeManager.GetANSITime());
 		DBBaseTaskPtr ptr = rMsg.m_DBBaseTaskPtr;
 	    AssertEx(ptr,"");
 		ptr->Execute(m_ODBCInterface,m_LibMemInterface);
+		CacheLog(LOGDEF_INST(DBTaskEffeciency),"DBAssignTaskMsg:: end  \1 key=%d,\2 time=%d",rMsg.m_DBBaseTaskPtr->GetKey(),gTimeManager.GetANSITime());
 	__LEAVE_FUNCTION
 }
 

@@ -40,6 +40,10 @@ class UpdateMarchBaseInfoMsg;
 class NoticeMsg;
 class MarchReqNearListMsg;
 class ReqSetTileOwerMsg;
+class ReqMarchSetPosMsg;
+class RetMarchSetPosMsg;
+class RetBattleEndMsg;
+class RetBattleStartMsg;
 
 class BroadcastChatMsg;
 class SendTellChatMsg;
@@ -84,6 +88,8 @@ class ReqSetRobotOpenMsg;
 class RetSetRobotOpenMsg;
 class ReqMarchStartMsg;
 class RetMarchStartMsg;
+
+
 class UserSkillMsg;
 class ReqBattleInfoMsg;
 class RetBattleInfoMsg;
@@ -92,6 +98,8 @@ class RetObjListMsg;
 class ObjTrackTargetMsg;
 class ObjAttackTargetMsg;
 class ObjHurtMsg;
+class ReqArrangChangeMsg;
+class RetArrangChangeMsg;
 
 
 // 玩家城市中的消息
@@ -110,6 +118,10 @@ class DBReqLoadRandomNameMsg;
 class DBRetReqLoadRandomNameMsg;
 class DBReqCreateCityMsg;
 class DBRetCreateCityMsg;
+
+class TrainTroopOverMsg;
+class DBReqSaveTroopTrainMsg;
+class DBReqSaveHeroMsg;
 
 class BaseService
 {
@@ -165,6 +177,8 @@ public:
 	virtual void HandleMessage(const UpdateMarchBaseInfoMsg &rMsg) {};
 	virtual void HandleMessage(const NoticeMsg &rMsg) {};
 	virtual void HandleMessage(const MarchReqNearListMsg &rMsg){};
+	virtual void HandleMessage(const RetBattleEndMsg &rMsg){};
+	virtual void HandleMessage(const RetBattleStartMsg &rMsg){};
 
 	virtual void HandleMessage(const BroadcastChatMsg &rMsg) {};
 	virtual void HandleMessage(const SendTellChatMsg &rMsg) {};
@@ -223,7 +237,9 @@ public:
 	virtual void HandleMessage(const DBReqCreateBuildMsg &rMsg){};
 	virtual void HandleMessage(const DBRetCreateBuildMsg &rMsg){};
 	virtual void HandleMessage(const DBReqSaveGuidMsg &rMsg){};
-
+	virtual void HandleMessage(const DBReqSaveTroopTrainMsg &rMsg){};
+	virtual void HandleMessage(const DBReqSaveHeroMsg &rMsg){};
+	
 	virtual void HandleMessage(const KickPlayerByAccountMsg &rMsg){};
 	virtual void HandleMessage(const AskModifyVipCostMsg &rMsg){};
 	virtual void HandleMessage(const AccountStateCheckMsg &rMsg){};
@@ -236,6 +252,13 @@ public:
 	virtual void HandleMessage(const DBRetReqLoadRandomNameMsg &rMsg){};
 	virtual void HandleMessage(const DBReqCreateCityMsg &rMsg){};
 	virtual void HandleMessage(const DBRetCreateCityMsg &rMsg){};
+
+
+	virtual void HandleMessage(const TrainTroopOverMsg &rMsg){};
+	virtual void HandleMessage(const ReqArrangChangeMsg &rMsg){};
+	virtual void HandleMessage(const RetArrangChangeMsg &rMsg){};
+	virtual void HandleMessage(const RetMarchSetPosMsg &rMsg){};
+	virtual void HandleMessage(const ReqMarchSetPosMsg &rMsg){};
 	
 	
 protected:

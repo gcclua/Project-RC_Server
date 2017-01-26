@@ -9,7 +9,7 @@
 
 float Obj_Character::GetMoveSpeed(void)
 {
-	return (static_cast<float>(GetCombatAttrByID(COMBATATTR_T::MOVESPEED)) / 100.0f);
+	return (static_cast<float>(GetCombatAttrByID(COMBATATTR_T::MOVESPEED)) /1.0f);
 }
 
 bool Obj_Character::IsMoving(void) const
@@ -131,8 +131,8 @@ void Obj_Character::StopMove(bool bNotifyClient, bool bNotifyEvent)
 		if (bNotifyClient && IsSceneValid())
 		{
 			MarchStopMsgPtr MsgPtr = POOLDEF_NEW(MarchStopMsg);
-			MsgPtr->m_nX = GetScenePos().m_nX;
-			MsgPtr->m_nZ = GetScenePos().m_nZ;
+			MsgPtr->m_fX = GetScenePos().m_fX;
+			MsgPtr->m_fZ = GetScenePos().m_fZ;
 			MsgPtr->m_nSerial = m_PathCont[0].m_nSerial;
 			MsgPtr->m_nObjId = GetID();
 			MsgPtr->m_nSceneId = GetSceneInstID();
@@ -159,6 +159,7 @@ void Obj_Character::OnStartMove(void)
 void Obj_Character::OnEndMove(void)
 {
 	m_fDistanceCompensate = 0.0f;
+	
 }
 
 void Obj_Character::SendMoveStatus(Obj_March &rMarch)
@@ -179,8 +180,8 @@ void Obj_Character::SendMoveStatus(Obj_March &rMarch)
 		{
 			const PathNode &rPathNode = m_PathCont[i];
 			MsgPtr->m_nSerial.push_back(rPathNode.m_nSerial);
-			MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nX );
-			MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nZ );
+			MsgPtr->m_fPosX.push_back(rPathNode.m_EndPos.m_fX );
+			MsgPtr->m_fPosX.push_back(rPathNode.m_EndPos.m_fZ );
 		}
 
 		AssertEx(MsgPtr->m_nPosCount == MsgPtr->m_nSerial.size(), "");
@@ -216,8 +217,8 @@ void Obj_Character::BroadcastMoveStatus(void)
 			const PathNode &rPathNode = m_PathCont[i];
 		
 			MsgPtr->m_nSerial.push_back(rPathNode.m_nSerial);
-			MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nX );
-			MsgPtr->m_nPosX.push_back(rPathNode.m_EndPos.m_nZ );
+			MsgPtr->m_fPosX.push_back(rPathNode.m_EndPos.m_fX );
+			MsgPtr->m_fPosX.push_back(rPathNode.m_EndPos.m_fZ );
 		}
 
 		AssertEx(MsgPtr->m_nPosCount == MsgPtr->m_nSerial.size(), "");
@@ -273,8 +274,8 @@ void Obj_Character::Moving(const TimeInfo &rTimeInfo)
 	else
 	{
 		ScenePos NewPos;
-		NewPos.m_nX = (int)(CurPos.m_nX + fMoveDistance * ::cos(fDirection));
-		NewPos.m_nZ = (int)(CurPos.m_nZ + fMoveDistance * ::sin(fDirection));
+		NewPos.m_fX = CurPos.m_fX + fMoveDistance * ::cos(fDirection);
+		NewPos.m_fZ = CurPos.m_fZ + fMoveDistance * ::sin(fDirection);
 		SetScenePos(NewPos);
 		m_fDistanceCompensate = 0.0f;
 	}
@@ -329,8 +330,8 @@ void Obj_Character::UpdateTeleMoveToClient(const ScenePos &targetrPos,bool isNee
 	RetMarchTeleMoveMsgPtr MsgPtr = POOLDEF_NEW(RetMarchTeleMoveMsg);
 	AssertEx(MsgPtr,"");
 	MsgPtr->m_nObjId = GetID();
-	MsgPtr->m_nPosX  = targetrPos.m_nX;
-	MsgPtr->m_nPoxZ  = targetrPos.m_nZ;
+	MsgPtr->m_fPosX  = targetrPos.m_fX;
+	MsgPtr->m_fPoxZ  = targetrPos.m_fZ;
 	MsgPtr->m_nSceneId = GetSceneInstID();
 	
 	rScene.BroadCast_InSight_Include(MsgPtr,GetID());

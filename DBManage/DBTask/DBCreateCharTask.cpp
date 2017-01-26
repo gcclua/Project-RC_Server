@@ -56,6 +56,7 @@ bool DBCreateCharTask::Execute(ODBCInterface &rODBCInterface, LibMemInterface &r
 	MsgPtr->m_Result = DBMsgResult::RESULT_FAIL;
 	tint32 RetVal = DBMsgResult::RESULT_FAIL;
 
+	CacheLog(LOGDEF_INST(CreateChar),"DBCreateCharTask:: start \1 playerid=%d, \2 userId=%d,\3 account =%s , \4 time=%d",m_nPlayerID,m_UserData.GetGuid(),m_AccName,gTimeManager.GetANSITime());
 	ODBCCreateChar createChar(&rODBCInterface);
     tint32 beforeSaveTime=gTimeManager.SysRunTime();
 	if(false==createChar.Save(&m_UserData))
@@ -85,7 +86,7 @@ bool DBCreateCharTask::Execute(ODBCInterface &rODBCInterface, LibMemInterface &r
 	MsgPtr->m_Result = DBMsgResult::RESULT_SUCCESS;
 	MsgPtr->m_UserData.CopyFrom(m_UserData);
 	SendMessage2Srv(ServiceID::LOGIN, MsgPtr);
-
+	CacheLog(LOGDEF_INST(CreateChar),"DBCreateCharTask:: end \1 playerid=%d, \2 userId=%d,\3 account =%s , \4 time=%d",m_nPlayerID,m_UserData.GetGuid(),m_AccName,gTimeManager.GetANSITime());
 
 	return true;
 	__LEAVE_FUNCTION

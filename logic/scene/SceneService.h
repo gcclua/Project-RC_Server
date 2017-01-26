@@ -50,6 +50,7 @@ public:
 	virtual void HandleMessage(const TransportToSceneInst &rMsg);
 	virtual void HandleMessage(const DBRetLoadMapMarchMsg &rMsg);
 	virtual void HandleMessage(const ReqMarchStartMsg &rMsg);
+	virtual void HandleMessage(const MarchLeaveBattleMsg &rMsg);
 public:
 	template<typename _MessagePtrT>
 	void SendMessage(SceneID sceneid, _MessagePtrT Ptr)

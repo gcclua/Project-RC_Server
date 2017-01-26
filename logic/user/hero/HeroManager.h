@@ -31,6 +31,9 @@ public:
 
 	bool       CheckAssignHero(int64 nMarchId,int64 nHeroId);
 
+	// È¡ÏûÓ¢ĞÛÈÎÃü
+	bool       UnAssignHero(int64 nHeroId);
+
 public:
 	void    FileData(GC_HeroList* pHeroList);
 

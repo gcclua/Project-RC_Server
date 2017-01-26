@@ -39,6 +39,7 @@ protected:
 		STATUS_COMBAT, // 战斗
 		STATUS_SETTLEMENT,    // 结束
 		STATUS_CLOSED,
+		STATUS_OVER,
 	};
 protected:
 	int m_nStatus;
@@ -129,6 +130,9 @@ private:
 	March m_AttackMarch;
 	March m_DefenceMarch;
 
+	bool  m_bAttackReady;
+	bool  m_bDefenceReady;
+
 	int  m_nWin;
 
 protected:
@@ -140,6 +144,8 @@ public:
 	virtual void HandleMessage(const UserSkillMsg &rMsg);
 	virtual void HandleMessage(const ReqBattleInfoMsg &rMsg);
 	virtual void HandleMessage(const ReqObjListMsg &rMsg);
+	virtual void HandleMessage(const ReqArrangChangeMsg &rMsg);
+	
 public:
 	// 战斗相关的消息包
 	virtual void HandleMessage(const ReqSetRobotOpenMsg& rMsg);

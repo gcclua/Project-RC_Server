@@ -11,6 +11,8 @@
 #include "DBTask/DBWorldMarchTask.h"
 #include "DBTask/DBRandomNameTask.h"
 #include "DBTask/DBMarchTask.h"
+#include "DBTask/DBTroopTrainTask.h"
+#include "DBTask/DBHeroTask.h"
 #include "Config.h"
 
 DBService::DBService(void)
@@ -176,7 +178,9 @@ void DBService::Tick_AssignTask(const TimeInfo& rTimeInfo)
 			if (IsCanDirectAssigned(nTaskType))
 			{
 				SendTaskByIndex((*itPos));
+				CacheLog(LOGDEF_INST(DBTaskEffeciency),"IsCanDirectAssigned:: start  \1 key=%d,\2 time=%d",(*itPos)->GetKey(),gTimeManager.GetANSITime());
 				itPos = m_DBBaseTaskPtrList.erase(itPos);
+				
 			}
 			else
 			{
@@ -184,7 +188,9 @@ void DBService::Tick_AssignTask(const TimeInfo& rTimeInfo)
 				{
 					SendTaskByIndex((*itPos));
 					m_CurProTaskPtrMap[nTaskType].insert(std::make_pair((*itPos)->GetKey(),(*itPos)));
+					CacheLog(LOGDEF_INST(DBTaskEffeciency),"IsCanAssigned:: start  \1 key=%d,\2 time=%d",(*itPos)->GetKey(),gTimeManager.GetANSITime());
 					itPos = m_DBBaseTaskPtrList.erase(itPos);
+					
 				}
 				else
 				{
@@ -222,7 +228,7 @@ void DBService::SendTaskByIndex(DBBaseTaskPtr baseTaskPtr)
 		AssertEx(m_DBServiceExecPtrVec[m_AssignTaskIndex],"");
 
 		SendMessage2Srv(*(m_DBServiceExecPtrVec[m_AssignTaskIndex]),MsgPtr);
-
+		CacheLog(LOGDEF_INST(DBTaskEffeciency),"SendTaskByIndex:: start  \1 key=%d,\2 AssignTaskIndex=%d,\3 size=%d \4, time=%d",m_AssignTaskIndex,baseTaskPtr->GetKey(),(int)m_DBServiceExecPtrVec.size(),gTimeManager.GetANSITime());
 		m_AssignTaskIndex = (m_AssignTaskIndex + 1) % (int)m_DBServiceExecPtrVec.size();
 
 	__LEAVE_FUNCTION
@@ -283,9 +289,46 @@ void DBService::HandleMessage(const DBReqLoadTileDataMsg &rMsg)
 	__LEAVE_FUNCTION
 }
 
+void DBService::HandleMessage(const DBReqSaveHeroMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		DBHeroTaskPtr TaskPtr = POOLDEF_NEW(DBHeroTask);
+	AssertEx(TaskPtr,"");
+	TaskPtr->SetKey(TaskPtr->GetTaskType());
+	TaskPtr->SetData(rMsg.m_Data);
+	DBBaseTaskPtr ptr = boost::static_pointer_cast<DBBaseTask,DBHeroTask>(TaskPtr);
+	AssertEx(ptr,"");
+
+	ptr->SetOperationType(DBBaseTask::OPERATION_TYPE_SAVE_DB);
+
+	ptr->SetRetServiceID(ServiceID::WORLDUSER);
+
+	AddTask(ptr);
+	__LEAVE_FUNCTION
+}
+
+void DBService::HandleMessage(const DBReqSaveTroopTrainMsg &rMsg)
+{
+	__ENTER_FUNCTION
+		DBTroopTrainTaskPtr TaskPtr = POOLDEF_NEW(DBTroopTrainTask);
+	AssertEx(TaskPtr,"");
+	TaskPtr->SetKey(TaskPtr->GetTaskType());
+	TaskPtr->SetData(rMsg.m_Data);
+	DBBaseTaskPtr ptr = boost::static_pointer_cast<DBBaseTask,DBTroopTrainTask>(TaskPtr);
+	AssertEx(ptr,"");
+
+	ptr->SetOperationType(DBBaseTask::OPERATION_TYPE_SAVE_DB);
+
+	ptr->SetRetServiceID(ServiceID::WORLDUSER);
+
+	AddTask(ptr);
+	__LEAVE_FUNCTION
+}
+
 void DBService::HandleMessage(const DBReqCreateCityMsg &rMsg)
 {
 	__ENTER_FUNCTION
+		CacheLog(LOGDEF_INST(CreateChar),"DBReqCreateCityMsg:: start  \1 userId=%d,\2 cityid=%d,\3 time=%d",rMsg.m_Data.m_UserId,rMsg.m_Data.m_nCityID,gTimeManager.GetANSITime());
 		DBCreateCityTaskPtr TaskPtr = POOLDEF_NEW(DBCreateCityTask);
 	AssertEx(TaskPtr,"");
 	TaskPtr->SetKey(TaskPtr->GetTaskType());
@@ -294,11 +337,12 @@ void DBService::HandleMessage(const DBReqCreateCityMsg &rMsg)
 	DBBaseTaskPtr ptr = boost::static_pointer_cast<DBBaseTask,DBCreateCityTask>(TaskPtr);
 	AssertEx(ptr,"");
 
-	ptr->SetOperationType(DBBaseTask::OPERATION_TYPE_LOAD);
+	ptr->SetOperationType(DBBaseTask::OPERATION_TYPE_SAVE_DB);
 
 	ptr->SetRetServiceID(ServiceID::WORLDMAP);
 
 	AddTask(ptr);
+	CacheLog(LOGDEF_INST(CreateChar),"DBReqCreateCityMsg:: end  \1 userId=%d,\2 cityid=%d,\3 time=%d",rMsg.m_Data.m_UserId,rMsg.m_Data.m_nCityID,gTimeManager.GetANSITime());
 	__LEAVE_FUNCTION
 }
 
@@ -400,7 +444,7 @@ void DBService::HandleMessage(const DBLoadUserMsg &rMsg)
 		{
 			return;
 		}
-
+		CacheLog(LOGDEF_INST(CreateChar),"DBService:: start  \1 userId=%d,\2 account=%d,\3 time=%d",rMsg.m_UserGuid,rMsg.m_AccName,gTimeManager.GetANSITime());
 		DBUserTaskPtr TaskPtr = POOLDEF_NEW(DBUserTask);
 		AssertEx(TaskPtr,"");
 		TaskPtr->SetKey(rMsg.m_UserGuid);
@@ -415,12 +459,14 @@ void DBService::HandleMessage(const DBLoadUserMsg &rMsg)
 		ptr->SetOperationType(DBBaseTask::OPERATION_TYPE_LOAD);
 
 		AddTask(ptr);
-
+		CacheLog(LOGDEF_INST(DBTaskEffeciency),"DBLoadUserMsg:: start  \1 key=%d,\2 time=%d",rMsg.m_UserGuid,gTimeManager.GetANSITime());
+		CacheLog(LOGDEF_INST(CreateChar),"DBService:: end  \1 userId=%d,\2 account=%d,\3 time=%d",rMsg.m_UserGuid,rMsg.m_AccName,gTimeManager.GetANSITime());
 	__LEAVE_FUNCTION
 }
 void DBService::HandleMessage(const DBCreateCharMsg &rMsg)
 {
 	__ENTER_FUNCTION
+		CacheLog(LOGDEF_INST(CreateChar),"DBCreateCharMsg:: start \1 playerid=%d, \2 userId=%d,\3 account =%s , \4 time=%d",rMsg.m_nPlayerID,rMsg.m_UserData.GetGuid(),rMsg.m_AccName,gTimeManager.GetANSITime());
 		DBCreateCharTaskPtr TaskPtr = POOLDEF_NEW(DBCreateCharTask);
 	AssertEx(TaskPtr, "");
 	TaskPtr->SetKey(rMsg.m_UserData.GetGuid());
@@ -436,6 +482,7 @@ void DBService::HandleMessage(const DBCreateCharMsg &rMsg)
 	ptr->SetRetServiceID(ServiceID::LOGIN);
 
 	AddTask(ptr);
+	CacheLog(LOGDEF_INST(CreateChar),"DBCreateCharMsg:: end \1 playerid=%d, \2 userId=%d,\3 account =%s , \4 time=%d",rMsg.m_nPlayerID,rMsg.m_UserData.GetGuid(),rMsg.m_AccName,gTimeManager.GetANSITime());
 	__LEAVE_FUNCTION
 }
 
@@ -637,7 +684,8 @@ bool DBService::IsCanDirectAssigned(int taskType)
 {
 	__ENTER_FUNCTION
 		// 逻辑上不怕并发阀盖存储的任务才可以直接分发
-		if (taskType == DB_TASK_CREATECHAR)
+		if (taskType == DB_TASK_CREATERCHAR ||
+			taskType == DB_TASK_CHARLIST)
 		{
 			return true;
 		}
